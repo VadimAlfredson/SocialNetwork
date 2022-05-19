@@ -1,0 +1,24 @@
+.app-wrapper {
+  margin: 0 auto;
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "nav content";
+  grid-template-rows: 50px 1fr;
+  grid-template-columns: 2fr 10fr;
+  grid-gap: 10px;
+  background-color: rgb(31, 31, 31);
+  font-family: sans-serif;
+  color: azure;
+  background-image: url("https://user-images.githubusercontent.com/58184565/106307254-cae39c80-6267-11eb-8190-da3f400932e4.jpg");
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+}
+
+app-wrapper-content {
+  grid-area: content;
+}

@@ -1,0 +1,19 @@
+import React from 'react'
+import Post from './Post/Post.jsx'
+import s from './MyPosts.module.css'
+const MyPosts = () => {
+    return (
+    <div>
+        <div>New post
+            <textarea></textarea>
+            <button>Add post</button>
+        </div>
+        <div>
+            <Post message='Hi, how are you?' like='23'/>
+            <Post message='My first post!' like='14'/>
+        </div>
+    </div>
+    )
+}
+
+export default MyPosts
