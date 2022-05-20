@@ -1,0 +1,10 @@
+.topImg {
+    height: 400px;
+    width: 98%;
+}
+
+.avatarImg {
+    height: 150px;
+    width: 150px;
+    border-radius: 5%;
+}

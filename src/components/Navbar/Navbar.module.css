@@ -1,6 +1,6 @@
 .nav {
     grid-area: nav;
-    margin-left: 0;
+    margin-left: 3%;
     background-color: rgb(92, 92, 92);
     filter: opacity(80%);
     border-radius: 25px;
@@ -8,17 +8,20 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-  .item {
-      color: white;
-      left: 20px;
-      filter: opacity(100%);
-      margin: 20px;
-      z-index: 2;
-      background: black;
-      border-radius: 5px;
-      border: solid 1px white;
-      padding: 5px 0 5px 0;
-      width: 90%;
-      position: center;
-  }
+}
+
+.item {
+    color: white;
+    margin: 20px;
+    background: black;
+    border-radius: 5px;
+    padding: 5px 0 5px 0;
+    width: 90%;
+    text-decoration: none;
+    text-align: center;
+}
+
+.active {
+    color: darkgoldenrod;
+    text-decoration: none;
+}
