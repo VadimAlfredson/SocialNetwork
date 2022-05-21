@@ -6,8 +6,8 @@ const Post = (props) => {
 
         <div className={s.item}><img className={s.img}
                                      src='https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'/>
-            <div>{props.message}</div>
-            <div>{props.like} like</div>
+            <div className={s.post}>{props.message}</div>
+            <div className={s.post}>{props.like} like</div>
         </div>
     )
 }
