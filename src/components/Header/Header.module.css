@@ -2,14 +2,16 @@
     height: 50px;
     width: 50px;
     float: left;
-  }
-  
-  .header {
+}
+
+.header {
     grid-area: header;
     background-color: rgb(145, 137, 137);
-  }
+}
 
-  .h2 {
+.h2 {
     position: relative;
     left: 20px;
-  }
+    bottom: 10px;
+    font-family: "Bookman Old Style";
+}

@@ -1,8 +1,13 @@
 import React from 'react'
 import Post from './Post/Post.jsx'
 import s from './MyPosts.module.css'
+import App from "../../../App";
 
-const MyPosts = () => {
+const MyPosts = (props) => {
+    let Posts = props.postData.map(
+        p => <Post message={p.message} like={p.likeCount} />
+    )
+
     return (
         <div>
             <div>New post
@@ -14,8 +19,7 @@ const MyPosts = () => {
                 </div>
             </div>
             <div className={s.post}>
-                <Post message='Hi, how are you?' like='23'/>
-                <Post message='My first post!' like='14'/>
+                {Posts}
             </div>
         </div>
     )

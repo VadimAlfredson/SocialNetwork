@@ -5,19 +5,19 @@ import {NavLink} from "react-router-dom";
 const Navbar = () => {
     return <nav className={s.nav}>
     <div className={s.item}>
-      <NavLink to="/Profile" className = { navData => navData.isActive ? s.active : s.item }>Profile</NavLink>
+      <NavLink to="/Profile" className = { navData => navData.isActive ? s.active : s.itemnav}>Profile</NavLink>
     </div>
     <div className={s.item}>
-      <NavLink to="/Dialogs" className = { navData => navData.isActive ? s.active : s.item }>Messages</NavLink>
+      <NavLink to="/Dialogs" className = { navData => navData.isActive ? s.active : s.itemnav }>Messages</NavLink>
     </div>
     <div className={s.item}>
-      <NavLink to="/News" className = { navData => navData.isActive ? s.active : s.item }>News</NavLink>
+      <NavLink to="/News" className = { navData => navData.isActive ? s.active : s.itemnav }>News</NavLink>
     </div>
     <div className={s.item}>
-      <NavLink to="/Music" className = { navData => navData.isActive ? s.active : s.item }>Music</NavLink>
+      <NavLink to="/Music" className = { navData => navData.isActive ? s.active : s.itemnav }>Music</NavLink>
     </div>
     <div className={s.item}>
-      <NavLink to="/Setting" className = { navData => navData.isActive ? s.active : s.item }>Settings</NavLink>
+      <NavLink to="/Setting" className = { navData => navData.isActive ? s.active : s.itemnav }>Settings</NavLink>
     </div>
   </nav>
 }

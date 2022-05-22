@@ -6,14 +6,15 @@
     grid-template-columns: 2fr 10fr;
     grid-gap: 10px;
     background-color: rgb(31, 31, 31);
-    font-family: sans-serif;
+    font-family: Comic Sans;
     color: azure;
-    background-image: url("https://krot.info/uploads/posts/2021-01/1610503797_2-p-belii-neitralnii-fon-2.jpg");
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
+    background-image: url("https://www.papierspeintsdirect.com/media/cache/produit/home/p/a/papier_peint_komar_x7_1003_misty_crowns_2000x1429.jpg");
+    /*background: linear-gradient( 45deg, #c1a63d, #bbaeb1, #d08888);*/
+    position: relative;
+    background-size: 100%;
+    min-height: 1000px;
+    height: 100%;
+    width: 100%;
 
 }
 

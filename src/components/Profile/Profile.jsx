@@ -1,12 +1,13 @@
 import React from 'react';
 import s from './Profile.module.css';
 import MyPosts from './MyPosts/MyPosts.jsx'
+import App from "../../App";
 
-const Profile = () => {
+const Profile = (props) => {
     return <div>
-        <div>
+        <div  className={s.topImgDiv}>
             <img className={s.topImg}
-                 src='https://s1.1zoom.ru/big0/821/Austria_Mountains_Lake_Scenery_Panorama_Tyrol_Alps_600571_1280x435.jpg'/>
+                 src='https://tech-touch.ru/wp-content/uploads/2013/06/skachat-panoramnye-oboi-dlya-ios-7-gory-1.jpg'/>
         </div>
         <div>
             <img className={s.avatarImg}
@@ -14,7 +15,7 @@ const Profile = () => {
             discription
         </div>
         Main Content;
-        <MyPosts/>
+        <MyPosts postData={props.postData} />
     </div>
 }
 
