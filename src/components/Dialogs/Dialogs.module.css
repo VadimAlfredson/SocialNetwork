@@ -13,7 +13,7 @@
 
 .dialogsUsers {
     border-radius: 25px;
-    border: solid 2px #000000;
+    border: solid 1px rgba(0, 0, 0, 0.28);
     margin-bottom: 5%;
     background: linear-gradient(to bottom right, rgba(29, 29, 29, 0.59), rgba(68, 94, 95, 0.53), rgba(18, 49, 7, 0.32));
 }
@@ -44,10 +44,14 @@
     text-align: center;
 }
 
+.titleMessages {
+    text-align: center;
+}
+
 .messages {
     padding: 10px;
     border-radius: 25px;
-    border: solid 2px #000000;
+    border: solid 1px rgba(0, 0, 0, 0.29);
     margin: 0 1% 1% 1%;
     background: linear-gradient(to bottom right, rgba(29, 29, 29, 0.59), rgba(68, 94, 95, 0.53), rgba(18, 49, 7, 0.32));
 }
