@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './Profile.module.css';
 import MyPosts from './MyPosts/MyPosts.jsx'
-import App from "../../App";
+import App from "../../App.js";
 
 const Profile = (props) => {
     return <div>
@@ -15,7 +15,7 @@ const Profile = (props) => {
             discription
         </div>
         Main Content;
-        <MyPosts postData={props.postData} />
+        <MyPosts posts={props.posts} />
     </div>
 }
 

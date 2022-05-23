@@ -4,7 +4,7 @@ import s from './MyPosts.module.css'
 import App from "../../../App";
 
 const MyPosts = (props) => {
-    let Posts = props.postData.map(
+    let Posts = props.posts.map(
         p => <Post message={p.message} like={p.likeCount} />
     )
 

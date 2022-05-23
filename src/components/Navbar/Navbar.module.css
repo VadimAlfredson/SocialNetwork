@@ -12,11 +12,12 @@
 
 .item {
     margin: 20px;
-    background: rgba(0, 0, 0, 0.36);
-    border-radius: 5px;
-    padding: 5px 0 5px 0;
+    background: linear-gradient(to bottom right, rgba(29, 29, 29, 0.59), rgba(68, 94, 95, 0.53), rgba(18, 49, 7, 0.32));
+    border-radius: 10px;
+    padding: 10px 0 10px 0;
     width: 90%;
     text-align: center;
+    border: solid 2px black;
 }
 
 .itemnav {
