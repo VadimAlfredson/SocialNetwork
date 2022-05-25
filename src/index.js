@@ -12,6 +12,7 @@ ReactDOM.render(
             dialogs={state.dialogsPage.dialogs}
             messages={state.dialogsPage.messages}
             posts={state.profilePage.posts}
+            friends={state.friendsList.friends}
         />
     </React.StrictMode>,
     document.getElementById('root')

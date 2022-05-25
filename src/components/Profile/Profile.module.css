@@ -3,6 +3,10 @@
     border-radius: 5px;
 }
 
+.topImgDiv {
+  /*  size: cover;*/
+}
+
 .avatarImg {
     height: 150px;
     width: 150px;

@@ -21,3 +21,7 @@
 app-wrapper-content {
     grid-area: content;
 }
+
+app-wrapper-friends {
+    grid-area: friends;
+}

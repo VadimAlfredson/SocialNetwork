@@ -11,3 +11,22 @@
 .h4 {
     text-align: center;
 }
+
+.iconFriend {
+    width: 50%;
+    height: auto;
+    border-radius: 50%;
+}
+
+.friendsList {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: auto;
+    column-gap: 5%;
+    row-gap: 5%;
+}
+
+.name {
+    text-decoration: none;
+    color: azure;
+}
