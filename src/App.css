@@ -1,7 +1,10 @@
 .app-wrapper {
     margin: auto;
     display: grid;
-    grid-template-areas: "header header" "nav content" "friends content" ;
+    grid-template-areas:
+            "header header"
+            "nav content"
+            "friends content";
     grid-template-rows: 50px minmax(200px, 35%) 1fr;
     grid-template-columns: minmax(200px, 2fr) 9fr;
     grid-gap: 10px;
