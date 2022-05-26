@@ -1,7 +1,7 @@
 import React from "react";
 import s from "../Dialogs.module.css";
 
-const AddMessage = () => {
+export const AddMessage = (props) => {
     let createMessage = React.createRef();
 
     let addMessageElement = () => {
@@ -10,7 +10,7 @@ const AddMessage = () => {
     }
 
     return <div>
-        <textarea ref={createMessage}></textarea>
+        <textarea ref={createMessage}>dfggdgf</textarea>
     </div>,
         <div>
             <button onClick={addMessageElement}>Sent</button>

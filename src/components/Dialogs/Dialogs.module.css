@@ -49,6 +49,8 @@
 }
 
 .messages {
+    display: grid;
+    grid-template-rows: 1fr 6fr 2fr;
     padding: 10px;
     border-radius: 25px;
     border: solid 1px rgba(0, 0, 0, 0.29);
@@ -58,4 +60,9 @@
 
 .message {
     padding: 10px;
+}
+
+.addMessage {
+    margin: 25px;
+    background-color: darkgoldenrod;
 }

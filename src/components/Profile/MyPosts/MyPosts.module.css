@@ -1,7 +1,7 @@
 .createText {
     width: 50%;
-    background: linear-gradient(to bottom right, rgba(226, 184, 184, 0.59), rgba(214, 254, 255, 0.53), rgba(130, 248, 77, 0.32));
-    color: azure;
+    background: linear-gradient(to bottom right, rgba(255, 241, 241, 0.59), rgba(255, 255, 255, 0.65), rgba(218, 255, 210, 0.54));
+    color: #0e2121;
     border-radius: 5px;
     overflow: hidden;
 }
