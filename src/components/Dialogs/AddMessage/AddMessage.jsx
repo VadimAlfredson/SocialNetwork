@@ -9,12 +9,12 @@ export const AddMessage = (props) => {
         alert(text);
     }
 
-    return <div>
-        <textarea ref={createMessage}>dfggdgf</textarea>
-    </div>,
+    return <div className={s.divAddMessage}>
         <div>
-            <button onClick={addMessageElement}>Sent</button>
+            <textarea placeholder={'Add message'} className={s.textareaAddMessage} ref={createMessage}></textarea>
         </div>
+        <div>
+            <button className={s.buttonAddMessage} onClick={addMessageElement}>Sent</button>
+        </div>
+    </div>
 }
-
-export default AddMessage
