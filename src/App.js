@@ -18,7 +18,7 @@ const App = (props) => {
                         <Routes>
                             <Route path='/dialogs/*'
                                    element={<Dialogs messages={props.messages} dialogs={props.dialogs}/>}/>
-                            <Route path='/profile' element={<Profile posts={props.posts}/>}/>
+                            <Route path='/profile' element={<Profile posts={props.posts} AddPost={props.AddPost}/>}/>
                         </Routes>
                     </div>
 

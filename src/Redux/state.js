@@ -1,3 +1,5 @@
+import {rerenderEntireTree} from "../rerender";
+
 let state = {
     dialogsPage: {
         dialogs: [
@@ -33,6 +35,17 @@ let state = {
             {id: 5, name: 'Danil', photo: document.img='https://st3.depositphotos.com/1027110/18677/v/450/depositphotos_186777156-stock-illustration-dog-collection-swedish-vallhund-geometric.jpg'},
         ]
     }
+};
+
+export let AddPost = (postMessage) => {
+    let newPost = {
+        id: 5,
+        message: postMessage,
+        likeCount: 0,
+    };
+
+    state.profilePage.posts.push(newPost);
+    rerenderEntireTree(state);
 }
 
 export default state

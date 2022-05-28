@@ -15,7 +15,7 @@ const Profile = (props) => {
             discription
         </div>
         Main Content;
-        <MyPosts posts={props.posts} />
+        <MyPosts posts={props.posts} AddPost={props.AddPost} />
     </div>
 }
 

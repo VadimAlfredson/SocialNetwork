@@ -1,0 +1,19 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import {AddPost} from "./Redux/state";
+
+export let rerenderEntireTree = (state) => {
+    ReactDOM.render(
+        <React.StrictMode>
+            <App
+                AddPost={AddPost}
+                dialogs={state.dialogsPage.dialogs}
+                messages={state.dialogsPage.messages}
+                posts={state.profilePage.posts}
+                friends={state.friendsList.friends}
+            />
+        </React.StrictMode>,
+        document.getElementById('root')
+    );
+}
