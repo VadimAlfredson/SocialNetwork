@@ -6,7 +6,8 @@ export const AddMessage = (props) => {
 
     let addMessageElement = () => {
         let text = createMessage.current.value;
-        alert(text);
+        props.AddMessageInDialogs(text)
+        createMessage.current.value=''
     }
 
     return <div className={s.divAddMessage}>

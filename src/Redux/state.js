@@ -48,4 +48,13 @@ export let AddPost = (postMessage) => {
     rerenderEntireTree(state);
 }
 
+export let AddMessageInDialogs = () => {
+    let newMessage = {
+    id: 5,
+    message: "",
+};
+state.dialogsPage.messages.push(newMessage);
+    rerenderEntireTree(state)
+}
+
 export default state
