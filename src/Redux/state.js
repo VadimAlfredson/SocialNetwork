@@ -46,15 +46,15 @@ export let AddPost = (postMessage) => {
 
     state.profilePage.posts.push(newPost);
     rerenderEntireTree(state);
-}
+};
 
-export let AddMessageInDialogs = () => {
+export let AddMessageInDialogs = (NewMessageInDialogs) => {
     let newMessage = {
     id: 5,
-    message: "",
+    message: NewMessageInDialogs,
 };
 state.dialogsPage.messages.push(newMessage);
     rerenderEntireTree(state)
-}
+};
 
 export default state

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import {AddPost} from "./Redux/state";
-import {AddMessageInDialogs} from "./Redax/state.js"
+import {AddMessageInDialogs} from "./Redux/state"
 
 export let rerenderEntireTree = (state) => {
     ReactDOM.render(
