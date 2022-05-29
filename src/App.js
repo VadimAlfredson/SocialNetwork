@@ -13,18 +13,19 @@ const App = (props) => {
             <div className='app-wrapper'>
                 <Header/>
                 <Navbar/>
-                <Friends friends={props.friends} />
-                    <div className='app-wrapper-content'>
-                        <Routes>
-                            <Route path='/dialogs/*'
-                                   element={<Dialogs messages={props.messages} dialogs={props.dialogs} AddMessageInDialogs={props.AddMessageInDialogs}/>}/>
-                            <Route path='/profile' element={<Profile posts={props.posts} AddPost={props.AddPost}/>}/>
-                        </Routes>
-                    </div>
-
+                <Friends friends={props.friends}/>
+                <div className='app-wrapper-content'>
+                    <Routes>
+                        <Route path='/dialogs/*'
+                               element={<Dialogs messages={props.messages} dialogs={props.dialogs}
+                                                 AddMessageInDialogs={props.AddMessageInDialogs}/>}/>
+                        <Route path='/profile' element={<Profile posts={props.posts} AddPost={props.AddPost}/>}/>
+                    </Routes>
                 </div>
+
+            </div>
         </BrowserRouter>
-);
+    );
 }
 
 export default App;
