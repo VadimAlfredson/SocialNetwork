@@ -1,5 +1,6 @@
 .dialogs {
     display: grid;
+    grid-area: content;
     grid-template-columns: 2fr 10fr;
     height: 100%;
     margin-bottom: 5%;

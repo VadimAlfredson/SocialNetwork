@@ -1,6 +1,6 @@
 import React from 'react';
-import s from './../Friends.module.css';
 import {NavLink} from "react-router-dom";
+import s from '../Friends.module.css';
 
 export const FriendItem = (props) => {
     return <div>

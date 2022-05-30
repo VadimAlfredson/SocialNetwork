@@ -3,9 +3,8 @@
     display: grid;
     grid-template-areas:
             "header header"
-            "nav content"
-            "friends content";
-    grid-template-rows: 50px minmax(40%, 40%) 1fr;
+            "nav content";
+    grid-template-rows: 50px auto;
     grid-template-columns: minmax(200px, 2fr) 9fr;
     grid-gap: 10px;
     background-color: rgb(31, 31, 31);
