@@ -1,7 +1,6 @@
 import React from 'react';
 import s from './Profile.module.css';
 import MyPosts from './MyPosts/MyPosts.jsx'
-import App from "../../App.js";
 
 const Profile = (props) => {
     return <div>
@@ -15,7 +14,7 @@ const Profile = (props) => {
             discription
         </div>
         Main Content;
-        <MyPosts posts={props.posts} AddPost={props.AddPost} />
+        <MyPosts posts={props.posts} AddPost={props.AddPost} newPostText={props.newPostText} updatePostText={props.updatePostText}/>
     </div>
 }
 
