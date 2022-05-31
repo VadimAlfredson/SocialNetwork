@@ -32,6 +32,7 @@ let state = {
                 icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
             },
         ],
+        addNewMessage: ''
     },
 
     profilePage: {
@@ -40,7 +41,7 @@ let state = {
             {id: 2, message: 'Yo', likeCount: 12},
             {id: 3, message: 'My first post!', likeCount: 32},
         ],
-        newPostText: ('21e'),
+        newPostText: '',
     },
 
     friendsList: {
@@ -93,6 +94,11 @@ export let updatePostText = (newText) => {
     rerenderEntireTree(state);
 };
 
+export let updateMessageInDialogs = (newMessage) => {
+    state.dialogsPage.addNewMessage = newMessage;
+    rerenderEntireTree(state);
+}
+
 export let AddMessageInDialogs = (NewMessageInDialogs) => {
     let newMessage = {
         id: 5,
@@ -100,6 +106,7 @@ export let AddMessageInDialogs = (NewMessageInDialogs) => {
         icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
     };
     state.dialogsPage.messages.push(newMessage);
+    state.dialogsPage.addNewMessage = '';
     rerenderEntireTree(state)
 };
 

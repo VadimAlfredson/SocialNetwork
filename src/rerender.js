@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import {AddPost} from "./Redux/state";
+import {AddPost, updateMessageInDialogs} from "./Redux/state";
 import {updatePostText} from "./Redux/state";
 import {AddMessageInDialogs} from "./Redux/state"
 
@@ -14,8 +14,10 @@ export let rerenderEntireTree = (state) => {
                 AddMessageInDialogs={AddMessageInDialogs}
                 dialogs={state.dialogsPage.dialogs}
                 messages={state.dialogsPage.messages}
+                addNewMessage={state.dialogsPage.addNewMessage}
                 newPostText={state.profilePage.newPostText}
                 updatePostText={updatePostText}
+                updateMessageInDialogs={updateMessageInDialogs}
                 friends={state.friendsList.friends}
             />
         </React.StrictMode>,

@@ -1,6 +1,5 @@
 import React from 'react';
 import s from './Friends.module.css';
-import {NavLink} from "react-router-dom";
 import {FriendItem} from "./FriendsItem/FriendsItem";
 
 const Friends = (props) => {

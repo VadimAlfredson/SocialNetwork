@@ -7,12 +7,22 @@ export const AddMessage = (props) => {
     let addMessageElement = () => {
         let text = createMessage.current.value;
         props.AddMessageInDialogs(text)
-        createMessage.current.value=''
+    };
+
+    let onMessageChange = () => {
+        let text = createMessage.current.value;
+        props.updateMessageInDialogs(text);
     }
 
     return <div className={s.divAddMessage}>
         <div>
-            <textarea placeholder={'Add message'} className={s.textareaAddMessage} ref={createMessage}></textarea>
+            <textarea
+                placeholder={'Add message'}
+                className={s.textareaAddMessage}
+                ref={createMessage}
+                onChange={onMessageChange}
+                value={props.addNewMessage}
+            />
         </div>
         <div>
             <button className={s.buttonAddMessage} onClick={addMessageElement}>Sent</button>
