@@ -13,17 +13,16 @@ const MyPosts = (props) => {
         props.AddPost();
     }
 
-    let onPostChange = (props) => {
+    let onPostChange = () => {
         let text = newPostElement.current.value;
-        props.updatePostText = (text);
+        props.updatePostText(text);
     }
-
     return (
         <div>
             <div>New post
                 <div>
                     <textarea onChange={onPostChange}
-                              /*placeholder='Add text'*/
+                              placeholder='Add text'
                               className={s.createText}
                               ref={newPostElement}
                               value={props.newPostText}

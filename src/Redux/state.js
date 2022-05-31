@@ -40,7 +40,7 @@ let state = {
             {id: 2, message: 'Yo', likeCount: 12},
             {id: 3, message: 'My first post!', likeCount: 32},
         ],
-        newPostText: "1"
+        newPostText: ('21e'),
     },
 
     friendsList: {
@@ -74,6 +74,8 @@ let state = {
     }
 };
 
+window.state = state;
+
 export let AddPost = () => {
     let newPost = {
         id: 5,
@@ -86,8 +88,8 @@ export let AddPost = () => {
     rerenderEntireTree(state);
 };
 
-export let updatePostText = (text) => {
-    state.profilePage.newPostText = text;
+export let updatePostText = (newText) => {
+    state.profilePage.newPostText = newText;
     rerenderEntireTree(state);
 };
 
