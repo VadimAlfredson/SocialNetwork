@@ -1,5 +1,3 @@
-import {rerenderEntireTree} from "../rerender";
-
 let state = {
     dialogsPage: {
         dialogs: [
@@ -109,5 +107,14 @@ export let AddMessageInDialogs = (NewMessageInDialogs) => {
     state.dialogsPage.addNewMessage = '';
     rerenderEntireTree(state)
 };
+
+let rerenderEntireTree = () => {
+
+}
+
+export let subscribe = (observer) => {
+    rerenderEntireTree = observer;
+}
+
 
 export default state
