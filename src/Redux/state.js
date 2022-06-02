@@ -1,120 +1,125 @@
-let state = {
-    dialogsPage: {
-        dialogs: [
-            {id: 1, name: 'Alex'},
-            {id: 2, name: 'Danil'},
-            {id: 3, name: 'Rail'},
-            {id: 4, name: 'Artur'},
-            {id: 5, name: 'Nikita'}
-        ],
+let store = {
 
-        messages: [
-            {
-                id: 1,
-                message: 'Hi',
-                icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
-            },
-            {
-                id: 2,
-                message: 'How are you?',
-                icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
-            },
-            {
-                id: 3,
-                message: 'message',
-                icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
-            },
-            {
-                id: 4,
-                message: 'message',
-                icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
-            },
-        ],
-        addNewMessage: ''
+    state: {
+        dialogsPage: {
+            dialogs: [
+                {id: 1, name: 'Alex'},
+                {id: 2, name: 'Danil'},
+                {id: 3, name: 'Rail'},
+                {id: 4, name: 'Artur'},
+                {id: 5, name: 'Nikita'}
+            ],
+
+            messages: [
+                {
+                    id: 1,
+                    message: 'Hi',
+                    icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
+                },
+                {
+                    id: 2,
+                    message: 'How are you?',
+                    icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
+                },
+                {
+                    id: 3,
+                    message: 'message',
+                    icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
+                },
+                {
+                    id: 4,
+                    message: 'message',
+                    icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
+                },
+            ],
+            addNewMessage: ''
+        },
+
+        profilePage: {
+            posts: [
+                {id: 1, message: 'Hi, how are you?', likeCount: 23},
+                {id: 2, message: 'Yo', likeCount: 12},
+                {id: 3, message: 'My first post!', likeCount: 32},
+            ],
+            newPostText: '',
+        },
+
+        friendsList: {
+            friends: [
+                {
+                    id: 1,
+                    name: 'Alex',
+                    photo: 'https://st3.depositphotos.com/1027110/18677/v/450/depositphotos_186777156-stock-illustration-dog-collection-swedish-vallhund-geometric.jpg'
+                },
+                {
+                    id: 2,
+                    name: 'Nikita',
+                    photo: document.img = 'https://st3.depositphotos.com/1027110/18677/v/450/depositphotos_186777156-stock-illustration-dog-collection-swedish-vallhund-geometric.jpg'
+                },
+                {
+                    id: 3,
+                    name: 'Kamila',
+                    photo: document.img = 'https://st3.depositphotos.com/1027110/18677/v/450/depositphotos_186777156-stock-illustration-dog-collection-swedish-vallhund-geometric.jpg'
+                },
+                {
+                    id: 4,
+                    name: 'Pavel',
+                    photo: document.img = 'https://st3.depositphotos.com/1027110/18677/v/450/depositphotos_186777156-stock-illustration-dog-collection-swedish-vallhund-geometric.jpg'
+                },
+                {
+                    id: 5,
+                    name: 'Danil',
+                    photo: document.img = 'https://st3.depositphotos.com/1027110/18677/v/450/depositphotos_186777156-stock-illustration-dog-collection-swedish-vallhund-geometric.jpg'
+                },
+            ]
+        }
     },
 
-    profilePage: {
-        posts: [
-            {id: 1, message: 'Hi, how are you?', likeCount: 23},
-            {id: 2, message: 'Yo', likeCount: 12},
-            {id: 3, message: 'My first post!', likeCount: 32},
-        ],
-        newPostText: '',
+    _callSubscriber() {
     },
 
-    friendsList: {
-        friends: [
-            {
-                id: 1,
-                name: 'Alex',
-                photo: 'https://st3.depositphotos.com/1027110/18677/v/450/depositphotos_186777156-stock-illustration-dog-collection-swedish-vallhund-geometric.jpg'
-            },
-            {
-                id: 2,
-                name: 'Nikita',
-                photo: document.img = 'https://st3.depositphotos.com/1027110/18677/v/450/depositphotos_186777156-stock-illustration-dog-collection-swedish-vallhund-geometric.jpg'
-            },
-            {
-                id: 3,
-                name: 'Kamila',
-                photo: document.img = 'https://st3.depositphotos.com/1027110/18677/v/450/depositphotos_186777156-stock-illustration-dog-collection-swedish-vallhund-geometric.jpg'
-            },
-            {
-                id: 4,
-                name: 'Pavel',
-                photo: document.img = 'https://st3.depositphotos.com/1027110/18677/v/450/depositphotos_186777156-stock-illustration-dog-collection-swedish-vallhund-geometric.jpg'
-            },
-            {
-                id: 5,
-                name: 'Danil',
-                photo: document.img = 'https://st3.depositphotos.com/1027110/18677/v/450/depositphotos_186777156-stock-illustration-dog-collection-swedish-vallhund-geometric.jpg'
-            },
-        ]
-    }
-};
+    getState() {
+        return this.state
+    },
 
-window.state = state;
+    AddPost() {
+        let newPost = {
+            id: 5,
+            message: this.state.profilePage.newPostText,
+            likeCount: 0,
+        };
 
-export let AddPost = () => {
-    let newPost = {
-        id: 5,
-        message: state.profilePage.newPostText,
-        likeCount: 0,
-    };
+        this.state.profilePage.posts.push(newPost);
+        this.state.profilePage.newPostText = '';
+        this._callSubscriber(this.state);
+    },
 
-    state.profilePage.posts.push(newPost);
-    state.profilePage.newPostText = ('');
-    rerenderEntireTree(state);
-};
+    updatePostText(newText) {
+        this.state.profilePage.newPostText = newText;
+        this._callSubscriber(this.state);
+    },
 
-export let updatePostText = (newText) => {
-    state.profilePage.newPostText = newText;
-    rerenderEntireTree(state);
-};
+    updateMessageInDialogs(newMessage) {
+        this.state.dialogsPage.addNewMessage = newMessage;
+        this._callSubscriber(this.state);
+    },
 
-export let updateMessageInDialogs = (newMessage) => {
-    state.dialogsPage.addNewMessage = newMessage;
-    rerenderEntireTree(state);
-}
+    AddMessageInDialogs(NewMessageInDialogs) {
+        let newMessage = {
+            id: 5,
+            message: NewMessageInDialogs,
+            icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
+        };
+        this.state.dialogsPage.messages.push(newMessage);
+        this.state.dialogsPage.addNewMessage = '';
+        this._callSubscriber(this.state)
+    },
 
-export let AddMessageInDialogs = (NewMessageInDialogs) => {
-    let newMessage = {
-        id: 5,
-        message: NewMessageInDialogs,
-        icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
-    };
-    state.dialogsPage.messages.push(newMessage);
-    state.dialogsPage.addNewMessage = '';
-    rerenderEntireTree(state)
-};
+    subscribe(observer) {
+        this._callSubscriber = observer;
+    },
 
-let rerenderEntireTree = () => {
 
 }
 
-export let subscribe = (observer) => {
-    rerenderEntireTree = observer;
-}
-
-
-export default state
+export default store
