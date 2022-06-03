@@ -6,12 +6,12 @@ export const AddMessage = (props) => {
 
     let addMessageElement = () => {
         let text = createMessage.current.value;
-        props.AddMessageInDialogs(text)
+        props.dispatch({type: 'ADD_MESSAGE-IN-DIALLOGS', NewMessageInDialogs: text})
     };
 
     let onMessageChange = () => {
         let text = createMessage.current.value;
-        props.updateMessageInDialogs(text);
+        props.dispatch({type: 'UPDATE-MESSAGE-IN-DIALLOGS', newMessage: text});
     }
 
     return <div className={s.divAddMessage}>

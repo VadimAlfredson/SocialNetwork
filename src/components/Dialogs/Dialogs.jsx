@@ -10,7 +10,7 @@ const Dialogs = (props) => {
     );
 
     let messagesItem = props.messages.map(
-        m => <MessagesItem message={m.message} icon={m.icon} AddMessageInDialogs={props.AddMessageInDialogs}/>
+        m => <MessagesItem message={m.message} icon={m.icon}/>
     );
 
     return (
@@ -27,9 +27,8 @@ const Dialogs = (props) => {
                 </div>
                 <div className={s.addMessage}>
                     <AddMessage
-                        AddMessageInDialogs={props.AddMessageInDialogs}
+                        dispatch={props.dispatch}
                         addNewMessage={props.addNewMessage}
-                        updateMessageInDialogs={props.updateMessageInDialogs}
                     />
                 </div>
             </div>

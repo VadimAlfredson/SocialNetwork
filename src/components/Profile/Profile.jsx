@@ -4,7 +4,7 @@ import MyPosts from './MyPosts/MyPosts.jsx'
 
 const Profile = (props) => {
     return <div>
-        <div  className={s.topImgDiv}>
+        <div className={s.topImgDiv}>
             <img className={s.topImg}
                  src='https://tech-touch.ru/wp-content/uploads/2013/06/skachat-panoramnye-oboi-dlya-ios-7-gory-1.jpg'/>
         </div>
@@ -16,9 +16,8 @@ const Profile = (props) => {
         Main Content;
         <MyPosts
             posts={props.posts}
-            AddPost={props.AddPost}
+            dispatch={props.dispatch}
             newPostText={props.newPostText}
-            updatePostText={props.updatePostText}
         />
     </div>
 }

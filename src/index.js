@@ -13,10 +13,7 @@ export let rerenderEntireTree = (state) => {
                 dialogs={state.dialogsPage.dialogs}
                 messages={state.dialogsPage.messages}
                 friends={state.friendsList.friends}
-                AddPost={store.AddPost.bind(store)}
-                AddMessageInDialogs={store.AddMessageInDialogs.bind(store)}
-                updatePostText={store.updatePostText.bind(store)}
-                updateMessageInDialogs={store.updateMessageInDialogs.bind(store)}
+                dispatch={store.dispatch.bind(store)}
                 addNewMessage={state.dialogsPage.addNewMessage}
                 newPostText={state.profilePage.newPostText}
             />

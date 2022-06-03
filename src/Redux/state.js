@@ -77,49 +77,42 @@ let store = {
 
     _callSubscriber() {
     },
+    subscribe(observer) {
+        this._callSubscriber = observer;
+    },
 
     getState() {
         return this.state
     },
 
-    AddPost() {
-        let newPost = {
-            id: 5,
-            message: this.state.profilePage.newPostText,
-            likeCount: 0,
-        };
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            let newPost = {
+                id: 5,
+                message: this.state.profilePage.newPostText,
+                likeCount: 0,
+            };
 
-        this.state.profilePage.posts.push(newPost);
-        this.state.profilePage.newPostText = '';
-        this._callSubscriber(this.state);
-    },
-
-    updatePostText(newText) {
-        this.state.profilePage.newPostText = newText;
-        this._callSubscriber(this.state);
-    },
-
-    updateMessageInDialogs(newMessage) {
-        this.state.dialogsPage.addNewMessage = newMessage;
-        this._callSubscriber(this.state);
-    },
-
-    AddMessageInDialogs(NewMessageInDialogs) {
-        let newMessage = {
-            id: 5,
-            message: NewMessageInDialogs,
-            icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
-        };
-        this.state.dialogsPage.messages.push(newMessage);
-        this.state.dialogsPage.addNewMessage = '';
-        this._callSubscriber(this.state)
-    },
-
-    subscribe(observer) {
-        this._callSubscriber = observer;
-    },
-
-
+            this.state.profilePage.posts.push(newPost);
+            this.state.profilePage.newPostText = '';
+            this._callSubscriber(this.state);
+        } else if (action.type === 'UPDATE-POST-TEXT') {
+            this.state.profilePage.newPostText = action.newText;
+            this._callSubscriber(this.state);
+        } else if (action.type === 'UPDATE-MESSAGE-IN-DIALLOGS') {
+            this.state.dialogsPage.addNewMessage = action.newMessage;
+            this._callSubscriber(this.state);
+        } else if (action.type === 'ADD_MESSAGE-IN-DIALLOGS') {
+            let newMessage = {
+                id: 5,
+                message: action.NewMessageInDialogs,
+                icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
+            };
+            this.state.dialogsPage.messages.push(newMessage);
+            this.state.dialogsPage.addNewMessage = '';
+            this._callSubscriber(this.state)
+        }
+    }
 }
 
 export default store
