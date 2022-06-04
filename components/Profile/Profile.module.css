@@ -1,0 +1,14 @@
+.topImg {
+    height: 300px;
+    border-radius: 5px;
+}
+
+.topImgDiv {
+  height: 10%;
+}
+
+.avatarImg {
+    height: 150px;
+    width: 150px;
+    border-radius: 5%;
+}
