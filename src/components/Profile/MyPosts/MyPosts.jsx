@@ -19,7 +19,7 @@ const MyPosts = (props) => {
     }
     return (
         <div>
-            <div>New post
+            <div className={s.addpost}>
                 <div>
                     <textarea onChange={onPostChange}
                               placeholder='Add text'
