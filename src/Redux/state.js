@@ -1,3 +1,6 @@
+import dialogsReducer from "./dialogs_reduser";
+import profileReducer from "./profile_reducer";
+
 let store = {
 
     state: {
@@ -86,41 +89,13 @@ let store = {
     },
 
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            let newPost = {
-                id: 5,
-                message: this.state.profilePage.newPostText,
-                likeCount: 0,
-            };
-
-            this.state.profilePage.posts.push(newPost);
-            this.state.profilePage.newPostText = '';
-            this._callSubscriber(this.state);
-        } else if (action.type === 'UPDATE-POST-TEXT') {
-            this.state.profilePage.newPostText = action.newText;
-            this._callSubscriber(this.state);
-        } else if (action.type === 'UPDATE-MESSAGE-IN-DIALLOGS') {
-            this.state.dialogsPage.addNewMessage = action.newMessage;
-            this._callSubscriber(this.state);
-        } else if (action.type === 'ADD_MESSAGE-IN-DIALLOGS') {
-            let newMessage = {
-                id: 5,
-                message: action.NewMessageInDialogs,
-                icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
-            };
-            this.state.dialogsPage.messages.push(newMessage);
-            this.state.dialogsPage.addNewMessage = '';
-            this._callSubscriber(this.state)
+      this.state.dialogsPage = dialogsReducer(this.state.dialogsPage, action);
+      this.state.profilePage = profileReducer(this.state.profilePage, action);
+      this._callSubscriber(this.state);
         }
-    }
 }
 
-export const AddPostActionCreator = ({type: 'ADD-POST'})
 
-export const UpdatePostTextActionCreator = (text) => ({type: 'UPDATE-POST-TEXT', newText: text})
 
-export const AddMessageIDialogsActoinCreator = (text) => ({type: 'ADD_MESSAGE-IN-DIALLOGS', NewMessageInDialogs: text})
-
-export const UpdateMessageInDialogsActionCreator = () => ({type: 'UPDATE-MESSAGE-IN-DIALLOGS'})
 
 export default store

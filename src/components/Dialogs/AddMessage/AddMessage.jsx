@@ -1,6 +1,6 @@
 import React from "react";
 import s from "../Dialogs.module.css";
-import {AddMessageIDialogsActoinCreator, UpdateMessageInDialogsActionCreator} from "../../../Redux/state";
+import {AddMessageIDialogsActionCreator, UpdateMessageInDialogsActionCreator} from "../../../Redux/dialogs_reduser";
 
 
 export const AddMessage = (props) => {
@@ -8,11 +8,11 @@ export const AddMessage = (props) => {
 
     let addMessageElement = () => {
         let text = createMessage.current.value;
-        props.dispatch(AddMessageIDialogsActoinCreator(text))
+        props.dispatch(UpdateMessageInDialogsActionCreator(text))
     };
 
     let onMessageChange = () => {
-        props.dispatch(UpdateMessageInDialogsActionCreator());
+        props.dispatch(AddMessageIDialogsActionCreator());
     }
 
     return <div className={s.divAddMessage}>
