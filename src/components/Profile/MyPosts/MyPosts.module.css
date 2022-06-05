@@ -18,5 +18,5 @@
 .addpost {
     display: grid;
     grid-template-area: 'textarea button';
-    grid-template-columns: 12fr 1fr;
+    grid-template-columns: 1fr 1fr;
 }

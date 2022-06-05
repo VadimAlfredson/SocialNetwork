@@ -115,4 +115,12 @@ let store = {
     }
 }
 
+export const AddPostActionCreator = ({type: 'ADD-POST'})
+
+export const UpdatePostTextActionCreator = (text) => ({type: 'UPDATE-POST-TEXT', newText: text})
+
+export const AddMessageIDialogsActoinCreator = (text) => ({type: 'ADD_MESSAGE-IN-DIALLOGS', NewMessageInDialogs: text})
+
+export const UpdateMessageInDialogsActionCreator = () => ({type: 'UPDATE-MESSAGE-IN-DIALLOGS'})
+
 export default store
