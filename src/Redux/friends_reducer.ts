@@ -34,7 +34,7 @@ let initialState = {
     ] as Array<friendsType>
 };
 
-let friendsReducer = (state = initialState, action) => {
+let friendsReducer = (state = initialState, action: any) => {
     return state
 }
 

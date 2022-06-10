@@ -1,8 +1,9 @@
+/*
 import dialogsReducer from "./dialogs_reduser";
 import profileReducer from "./profile_reducer";
 
 let store = {
-/*
+
     state: {
         dialogsPage: {
             dialogs: [
@@ -77,7 +78,7 @@ let store = {
             ]
         }
     },
-*/
+
 
     _callSubscriber() {
     },
@@ -99,4 +100,4 @@ let store = {
 
 
 
-export default store
+export default store*/

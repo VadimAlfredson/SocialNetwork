@@ -43,7 +43,7 @@ let initialState = {
     addNewMessage: '' as string
 };
 
-const dialogsReducer = (state = initialState, action) => {
+const dialogsReducer = (state = initialState, action: any) => {
     switch (action.type) {
         case 'UPDATE-MESSAGE-IN-DIALOGS': {
             let newMessage = {
@@ -63,7 +63,7 @@ const dialogsReducer = (state = initialState, action) => {
             return state;
     }
 }
-export const UpdateMessageInDialogsActionCreator = (text) => ({
+export const UpdateMessageInDialogsActionCreator = (text: string) => ({
     type: 'UPDATE-MESSAGE-IN-DIALOGS',
     NewMessageInDialogs: text
 })
