@@ -1,8 +1,8 @@
 import React from "react";
 import s from './Dialogs.module.css';
-import {DialogItem} from "./DialogItem/DialogItem";
+import {DialogItem} from "./DialogItem/DialogItem.tsx";
 import {MessagesItem} from "./MessagesItem/MessagesItem";
-import {AddMessage} from "./AddMessage/AddMessage";
+import {AddMessage} from "./AddMessage/AddMessage.tsx";
 
 const Dialogs = (props) => {
     let dialogUsers = props.dialogs.map(
