@@ -1,9 +1,9 @@
-type dialogsType = {
+export type dialogsType = {
     id: number,
     name: string
 }
 
-type messagesType = {
+export type messagesType = {
     id: number,
     message: string,
     icon: string,

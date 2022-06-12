@@ -7,7 +7,7 @@ type AddMessageType = {
     massage: string,
 }
 
-export const AddMessage: React.FC<string> = (props) => {
+export const AddMessage: React.FC<AddMessageType> = (props) => {
     let createMessage = React.createRef();
 
     let addMessageElement: React.FC<string> = () => {
