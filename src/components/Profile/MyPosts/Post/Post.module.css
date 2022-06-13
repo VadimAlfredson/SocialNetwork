@@ -1,0 +1,29 @@
+.post {
+    display: grid;
+    grid-template-columns: 1fr 15fr;
+    grid-template-rows: 1fr 1fr;
+    color: azure;
+}
+.img {
+    float: left;
+/*    grid-column: span 1;*/
+    margin-top: 5px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.message {
+    width: 50%;
+    color: azure;
+/*    grid-column: span 2;
+    grid-row: span 1;*/
+    background-color: rgba(11, 17, 11, 0.74);
+    border-radius: 10px;
+    border: solid 2px rgba(255, 255, 255, 0.48);
+    padding: 20px;
+}
+
+.like {
+    grid-column: span 2;
+    grid-row: span 2;
+}
