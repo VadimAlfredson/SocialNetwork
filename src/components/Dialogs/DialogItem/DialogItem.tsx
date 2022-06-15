@@ -8,7 +8,7 @@ type messagesType = {
     icon: string,
 }
 
-export const DialogItem: React.FC<messagesType> = (props) => {
+export const DialogItem: React.FC = (props) => {
     return <div className={s.dialogDiv}>
         <NavLink to={"/dialogs/" + props.id}
                  className={dialogsData => dialogsData.isActive ? s.active : s.dialogItem}>{props.name}</NavLink>

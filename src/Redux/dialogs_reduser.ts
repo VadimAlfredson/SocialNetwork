@@ -43,7 +43,7 @@ let initialState = {
     addNewMessage: '' as string
 };
 
-const dialogsReducer = (state = initialState, action: any) => {
+const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'UPDATE-MESSAGE-IN-DIALOGS': {
             let newMessage = {

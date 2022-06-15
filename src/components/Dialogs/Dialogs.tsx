@@ -3,15 +3,16 @@ import s from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem.tsx";
 import {MessagesItem} from "./MessagesItem/MessagesItem.tsx";
 import {AddMessage} from "./AddMessage/AddMessage.tsx";
+import {dialogsType, messagesType} from "../../Redux/dialogs_reduser";
 
 
 
 const Dialogs: React.FC = (props) => {
-    let dialogUsers = props.dialogs.map(
+    let dialogUsers: dialogsType = props.dialogs.map(
         d => <DialogItem name={d.name} id={d.id}/>
     );
 
-    let messagesItem = props.messages.map(
+    let messagesItem: messagesType = props.messages.map(
         m => <MessagesItem message={m.message} icon={m.icon}/>
     );
 
