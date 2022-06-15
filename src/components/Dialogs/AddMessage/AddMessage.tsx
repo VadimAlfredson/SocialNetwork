@@ -2,20 +2,15 @@ import React from "react";
 import s from "../Dialogs.module.css";
 import {AddMessageIDialogsActionCreator, UpdateMessageInDialogsActionCreator} from "../../../Redux/dialogs_reduser.ts";
 
-type AddMessageType = {
-    id: number,
-    massage: string,
-}
-
-export const AddMessage: React.FC<AddMessageType> = (props) => {
+export const AddMessage: React.FC = (props) => {
     let createMessage = React.createRef();
 
-    let addMessageElement: React.FC<string> = () => {
+    let addMessageElement: React.FC = () => {
         let text: string = createMessage.current.value;
         props.dispatch(UpdateMessageInDialogsActionCreator(text))
     };
 
-    let onMessageChange: React.FC<string> = () => {
+    let onMessageChange: React.FC = () => {
         props.dispatch(AddMessageIDialogsActionCreator());
     }
 

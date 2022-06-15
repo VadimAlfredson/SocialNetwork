@@ -1,11 +1,11 @@
 import React from 'react'
 import Post from './Post/Post.tsx'
 import s from './MyPosts.module.css'
-import {AddPostActionCreator, UpdatePostTextActionCreator} from "../../../Redux/profile_reducer.ts";
+import {AddPostActionCreator, UpdatePostTextActionCreator} from "./MyPostsContainer";
 
 
 const MyPosts = (props) => {
-    let Posts = props.posts.map(
+    let postElements = props.posts.map(
         p => <Post message={p.message} like={p.likeCount}/>
     );
 
@@ -13,12 +13,12 @@ const MyPosts = (props) => {
 
     let createNewPost = () =>
     {
-        props.dispatch(AddPostActionCreator());
+        props.createNewPost();
     }
 
     let onPostChange = () => {
         let text = newPostElement.current.value;
-        props.dispatch(UpdatePostTextActionCreator(text));
+        props.updateNewPostText(text);
     }
     return (
         <div>
@@ -36,7 +36,7 @@ const MyPosts = (props) => {
                 </div>
             </div>
             <div className={s.post}>
-                {Posts}
+                {postElements}
             </div>
         </div>
     )

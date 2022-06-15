@@ -40,7 +40,7 @@ let initialState = {
             icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
         },
     ] as Array<messagesType>,
-    addNewMessage: '' as string
+    addNewMessage: '' as string,
 };
 
 const dialogsReducer = (state = initialState, action) => {

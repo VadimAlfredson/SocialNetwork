@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './Profile.module.css';
-import MyPosts from './MyPosts/MyPosts.tsx'
+import MyPostsContainer from './MyPosts/MyPostsContainer.tsx'
 
 const Profile = (props) => {
     return <div>
@@ -14,8 +14,8 @@ const Profile = (props) => {
             discription
         </div>
         Main Content;
-        <MyPosts
-            posts={props.posts}
+        <MyPostsContainer
+           posts={props.posts}
             dispatch={props.dispatch}
             newPostText={props.newPostText}
         />
