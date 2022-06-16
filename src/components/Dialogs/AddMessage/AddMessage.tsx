@@ -11,7 +11,7 @@ export const AddMessage: React.FC = (props) => {
     };
 
     let addMessageElement: React.FC = () => {
-        props.AddMessageIDialogs();
+        props.addMessageElement();
     }
 
     return <div className={s.divAddMessage}>

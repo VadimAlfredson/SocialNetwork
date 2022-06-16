@@ -45,17 +45,17 @@ let initialState = {
 
 const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'UPDATE-MESSAGE-IN-DIALOGS': {
+        case 'ADD_MESSAGE-IN-DIALOGS': {
             let newMessage = {
                 id: 5,
-                message: action.NewMessageInDialogs,
+                message: state.addNewMessage,
                 icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
             };
             state.messages.push(newMessage);
             state.addNewMessage = '';
             return state;
         }
-        case 'ADD_MESSAGE-IN-DIALOGS': {
+        case 'UPDATE-MESSAGE-IN-DIALOGS': {
             state.addNewMessage = action.newMessage;
             return state;
         }
@@ -67,7 +67,30 @@ const dialogsReducer = (state = initialState, action) => {
 export const AddMessageIDialogsActionCreator = () => ({type: 'ADD_MESSAGE-IN-DIALOGS'})
 export const UpdateMessageInDialogsActionCreator = (text: string) => ({
     type: 'UPDATE-MESSAGE-IN-DIALOGS',
-    NewMessageInDialogs: text
+    newMessage: text
 })
 
 export default dialogsReducer;
+
+/*const profileReducer = (state = initialState, action: any) => {
+    switch (action.type) {
+        case 'ADD-POST':
+            let newPost: postsType = {
+                id: 5,
+                message: state.newPostText,
+                likeCount: 0,
+            };
+            state.posts.push(newPost);
+            state.newPostText = '';
+            return state;
+
+        case 'UPDATE-POST-TEXT':
+            state.newPostText = action.newText;
+            return state;
+
+        default:
+            return state;
+    }
+}
+export const AddPostActionCreator = () => ({type: 'ADD-POST'})
+export const UpdatePostTextActionCreator = (text: string) => ({type: 'UPDATE-POST-TEXT', newText: text})*/

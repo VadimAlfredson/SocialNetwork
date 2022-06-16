@@ -17,8 +17,8 @@ export const AddMessageContainer: React.FC = (props) => {
 
     return <AddMessage UpdateMessageInDialogs={onMessageChange}
                        addMessageElement={addMessageElement}
-addNewMessage={props.addNewMessage}
-/>
+                       addNewMessage={props.addNewMessage}
+    />
 }
 
 /*
