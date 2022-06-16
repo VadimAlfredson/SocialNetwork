@@ -2,7 +2,7 @@ import React from "react";
 import s from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem.tsx";
 import {MessagesItem} from "./MessagesItem/MessagesItem.tsx";
-import {AddMessage} from "./AddMessage/AddMessage.tsx";
+import {AddMessageContainer} from "./AddMessage/AddMessageContainer.tsx";
 import {dialogsType, messagesType} from "../../Redux/dialogs_reduser";
 
 
@@ -29,7 +29,7 @@ const Dialogs: React.FC = (props) => {
                     {messagesItem}
                 </div>
                 <div className={s.addMessage}>
-                    <AddMessage
+                    <AddMessageContainer
                         dispatch={props.dispatch}
                         addNewMessage={props.addNewMessage}
                     />
