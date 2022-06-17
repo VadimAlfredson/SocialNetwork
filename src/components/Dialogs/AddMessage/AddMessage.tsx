@@ -29,34 +29,3 @@ export const AddMessage: React.FC = (props) => {
         </div>
     </div>
 }
-//const MyPosts = (props) => {
-//     let postElements = props.posts.map(
-//         p => <Post message={p.message} like={p.likeCount}/>
-//     );
-//
-//     let newPostElement = React.createRef();
-//
-//     let createNewPost = () =>
-//     {
-//         props.createNewPost();
-//     }
-//
-//     let onPostChange = () => {
-//         let text = newPostElement.current.value;
-//         props.updateNewPostText(text);
-//     }
-//     return (
-//         <div>
-//             <div className={s.addpost}>
-//                 <div>
-//                     <textarea onChange={onPostChange}
-//                               placeholder='Add text'
-//                               className={s.createText}
-//                               ref={newPostElement}
-//                               value={props.newPostText}
-//                     />
-//                 </div>
-//                 <div>
-//                     <button className={s.buttonAddPost} onClick={createNewPost}>Add post</button>
-//                 </div>
-//             </div>

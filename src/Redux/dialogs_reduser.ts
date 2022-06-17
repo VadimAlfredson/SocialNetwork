@@ -71,26 +71,3 @@ export const UpdateMessageInDialogsActionCreator = (text: string) => ({
 })
 
 export default dialogsReducer;
-
-/*const profileReducer = (state = initialState, action: any) => {
-    switch (action.type) {
-        case 'ADD-POST':
-            let newPost: postsType = {
-                id: 5,
-                message: state.newPostText,
-                likeCount: 0,
-            };
-            state.posts.push(newPost);
-            state.newPostText = '';
-            return state;
-
-        case 'UPDATE-POST-TEXT':
-            state.newPostText = action.newText;
-            return state;
-
-        default:
-            return state;
-    }
-}
-export const AddPostActionCreator = () => ({type: 'ADD-POST'})
-export const UpdatePostTextActionCreator = (text: string) => ({type: 'UPDATE-POST-TEXT', newText: text})*/
