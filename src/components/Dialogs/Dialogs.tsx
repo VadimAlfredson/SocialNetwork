@@ -9,11 +9,11 @@ import {dialogsType, messagesType} from "../../Redux/dialogs_reduser";
 
 const Dialogs: React.FC = (props) => {
     let dialogUsers: dialogsType = props.dialogs.map(
-        d => <DialogItem name={d.name} id={d.id}/>
+        d => <DialogItem name={d.name} id={d.id} key={d.id}/>
     );
 
     let messagesItem: messagesType = props.messages.map(
-        m => <MessagesItem message={m.message} icon={m.icon}/>
+        m => <MessagesItem message={m.message} icon={m.icon} key={m.id}/>
     );
 
     return (

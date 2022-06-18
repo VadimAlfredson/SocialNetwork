@@ -3,10 +3,9 @@ import Post from './Post/Post.tsx'
 import s from './MyPosts.module.css'
 import {AddPostActionCreator, UpdatePostTextActionCreator} from "./MyPostsContainer";
 
-
 const MyPosts = (props) => {
     let postElements = props.posts.map(
-        p => <Post message={p.message} like={p.likeCount}/>
+        (p) => <Post message={p.message} like={p.likeCount}  key={p.id}/>
     );
 
     let newPostElement = React.createRef();
