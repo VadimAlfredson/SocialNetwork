@@ -1,6 +1,5 @@
 import React from "react";
 import s from "../Dialogs.module.css";
-import {AddMessageIDialogsActionCreator, UpdateMessageInDialogsActionCreator} from "../../../Redux/dialogs_reduser.ts";
 
 export const AddMessage: React.FC = (props) => {
     let createMessage = React.createRef();

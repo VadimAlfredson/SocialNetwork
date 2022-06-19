@@ -1,15 +1,15 @@
 import React from 'react';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import store from "./Redux/reduxStore.ts";
+import store from "./Redux/reduxStore";
 import ReactDOM from "react-dom";
-import App from "./App.tsx";
+import App from "./App";
 
-export let rerenderEntireTree = (state) => {
+export let rerenderEntireTree = (state: any) => {
     ReactDOM.render(
         <React.StrictMode>
             <App
-                posts={state.profilePage.posts}
+                posts = {state.profilePage.posts}
                 dialogs={state.dialogsPage.dialogs}
                 messages={state.dialogsPage.messages}
                 friends={state.friendsList.friends}

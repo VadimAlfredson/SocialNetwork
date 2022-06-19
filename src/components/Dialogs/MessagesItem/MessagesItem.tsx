@@ -1,6 +1,6 @@
 import React from "react";
 import s from "../Dialogs.module.css";
-import {messagesType} from "../../../Redux/dialogs_reduser";
+import {messagesType} from "../../../Redux/dialogs_reducer";
 
 export const MessagesItem: React.FC = (props: messagesType) => {
     return <div className={s.divMessage}>

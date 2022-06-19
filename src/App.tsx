@@ -1,9 +1,9 @@
 import './App.css';
 import React from 'react';
-import Header from './components/Header/Header.jsx';
-import Navbar from './components/Navbar/Navbar.tsx';
-import Dialogs from './components/Dialogs/Dialogs.tsx';
-import Profile from './components/Profile/Profile.tsx';
+import Header from './components/Header/Header';
+import Navbar from './components/Navbar/Navbar';
+import Dialogs from './components/Dialogs/Dialogs';
+import Profile from './components/Profile/Profile';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 const App: React.FC = (props) => {

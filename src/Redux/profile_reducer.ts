@@ -13,8 +13,12 @@ let initialState = {
     newPostText: '' as string,
 }
 
+type ProfileReducerAction = {
+   type: 'ADD-POST' | 'UPDATE-POST-TEXT'
+    newText: string
+}
 
-const profileReducer = (state = initialState, action: any) => {
+const profileReducer = (state = initialState, action: ProfileReducerAction) => {
     switch (action.type) {
         case 'ADD-POST':
             let newPost: postsType = {
@@ -35,7 +39,7 @@ const profileReducer = (state = initialState, action: any) => {
     }
 }
 export const AddPostActionCreator = () => ({type: 'ADD-POST'})
-export const UpdatePostTextActionCreator = (text: string) => ({type: 'UPDATE-POST-TEXT', newText: text})
+export const UpdatePostTextActionCreator = (text: string):ProfileReducerAction => ({type: 'UPDATE-POST-TEXT', newText: text})
 
 
 export default profileReducer;

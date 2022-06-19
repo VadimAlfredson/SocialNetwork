@@ -1,8 +1,6 @@
 import React from "react";
-import {AddMessageIDialogsActionCreator, UpdateMessageInDialogsActionCreator} from "../../../Redux/dialogs_reduser.ts";
-import {AddMessage} from "./AddMessage.tsx";
-import {AddPostActionCreator, UpdatePostTextActionCreator} from "../../../Redux/profile_reducer";
-import MyPosts from "../../Profile/MyPosts/MyPosts";
+import {AddMessageIDialogsActionCreator, UpdateMessageInDialogsActionCreator} from "../../../Redux/dialogs_reducer";
+import {AddMessage} from "./AddMessage";
 
 export const AddMessageContainer: React.FC = (props) => {
 

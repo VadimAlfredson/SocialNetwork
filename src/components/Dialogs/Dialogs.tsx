@@ -3,7 +3,7 @@ import s from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem.tsx";
 import {MessagesItem} from "./MessagesItem/MessagesItem.tsx";
 import {AddMessageContainer} from "./AddMessage/AddMessageContainer.tsx";
-import {dialogsType, messagesType} from "../../Redux/dialogs_reduser";
+import {dialogsType, messagesType} from "../../Redux/dialogs_reducer";
 
 
 
