@@ -1,15 +1,19 @@
 import React from "react";
 import s from "../Dialogs.module.css";
+import {dialogsReducerAction} from "../../../Redux/dialogs_reducer";
 
-export const AddMessage: React.FC = (props) => {
-    let createMessage = React.createRef();
+export const AddMessage = (props: {addNewMessage: string,
+    UpdateMessageInDialogs: (text: string) => dialogsReducerAction,
+addMessageElement: () => void
+}) => {
+    let createMessage: React.RefObject<any> = React.createRef();
 
-    let onMessageChange: React.FC = () => {
+    let onMessageChange = () => {
         let text: string = createMessage.current.value;
         props.UpdateMessageInDialogs(text)
     };
 
-    let addMessageElement: React.FC = () => {
+    let addMessageElement = () => {
         props.addMessageElement();
     }
 

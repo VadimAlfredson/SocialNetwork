@@ -1,15 +1,24 @@
 import React from "react";
-import {AddMessageIDialogsActionCreator, UpdateMessageInDialogsActionCreator} from "../../../Redux/dialogs_reducer";
+import {
+    AddMessageIDialogsActionCreator, dialogsReducerAction,
+    dialogsType, messagesType,
+    UpdateMessageInDialogsActionCreator
+} from "../../../Redux/dialogs_reducer";
 import {AddMessage} from "./AddMessage";
 
-export const AddMessageContainer: React.FC = (props) => {
+export const AddMessageContainer = (props: {dialogs: dialogsType[],
+    messages: messagesType[],
+    dispatch: (props: { type: string }) => void,
+    addNewMessage: string
+    AddMessageIDialogsActionCreator: dialogsReducerAction
+}) => {
 
-    let onMessageChange: React.FC = (text:string) => {
+    let onMessageChange = (text:string) => {
         let action = UpdateMessageInDialogsActionCreator(text);
         props.dispatch(action)
     };
 
-    let addMessageElement: React.FC = () => {
+    let addMessageElement = () => {
         props.dispatch(AddMessageIDialogsActionCreator());
     }
 

@@ -1,8 +1,9 @@
 import React from 'react';
 import s from './Profile.module.css';
 import MyPostsContainer from './MyPosts/MyPostsContainer'
+import {postsType} from "../../Redux/profile_reducer";
 
-const Profile = (props) => {
+const Profile = (props: {posts: postsType, dispatch: () => void, newPostText: string}) => {
     return <div>
         <div className={s.topImgDiv}>
             <img className={s.topImg}

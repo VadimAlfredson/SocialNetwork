@@ -1,15 +1,18 @@
 import React from 'react'
-import {AddPostActionCreator, UpdatePostTextActionCreator} from "../../../Redux/profile_reducer";
+import {AddPostActionCreator, postsType, UpdatePostTextActionCreator, ProfileReducerAction} from "../../../Redux/profile_reducer";
 import MyPosts from "./MyPosts";
 
-const MyPostsContainer = (props) => {
+const MyPostsContainer = (props: {posts: postsType[],
+    dispatch: (AddPostActionCreator: ProfileReducerAction) => void,
+    newPostText: string, createNewPost: () => any,
+    updateNewPostText: (text: string) => void}) => {
 
     let createNewPost = () =>
     {
         props.dispatch(AddPostActionCreator());
     }
 
-    let onPostChange = (text) => {
+    let onPostChange = (text: string) => {
         let action = UpdatePostTextActionCreator(text);
         props.dispatch(action);
     }

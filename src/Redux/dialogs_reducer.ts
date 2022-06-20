@@ -43,16 +43,18 @@ let initialState = {
     addNewMessage: '' as string,
 };
 
-type dialogsReducerAction = {
+export type dialogsReducerAction = {
     type: 'ADD-MESSAGE-IN-DIALOGS' | 'UPDATE-MESSAGE-IN-DIALOGS'
-    newMessage: string
+    newMessage?: string
 }
+
+let j: number = 5
 
 const dialogsReducer = (state = initialState, action: dialogsReducerAction) => {
     switch (action.type) {
         case 'ADD-MESSAGE-IN-DIALOGS': {
             let newMessage = {
-                id: 5,
+                id: j++,
                 message: state.addNewMessage,
                 icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
             };
@@ -61,7 +63,9 @@ const dialogsReducer = (state = initialState, action: dialogsReducerAction) => {
             return state;
         }
         case 'UPDATE-MESSAGE-IN-DIALOGS': {
-            state.addNewMessage = action.newMessage;
+            if (action.newMessage != null) {
+                state.addNewMessage = action.newMessage;
+            }
             return state;
         }
         default:

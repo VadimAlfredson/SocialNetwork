@@ -13,17 +13,20 @@ let initialState = {
     newPostText: ' ' as string,
 }
 
-type ProfileReducerAction = {
+export type ProfileReducerAction = {
    type: 'ADD-POST' | 'UPDATE-POST-TEXT'
     newText?: string
 
 }
 
+let i:number = 5
+
+
 const profileReducer = (state = initialState, action: ProfileReducerAction) => {
     switch (action.type) {
         case 'ADD-POST':
             let newPost: postsType = {
-                id: 5,
+                id: i++,
                 message: state.newPostText,
                 likeCount: 0,
             };

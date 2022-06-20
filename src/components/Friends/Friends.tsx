@@ -3,11 +3,11 @@ import s from './Friends.module.css';
 import {FriendItem} from "./FriendsItem/FriendsItem";
 import {friendsType} from "../../Redux/friends_reducer";
 
-const Friends: React.FC<friendsType> = (props: friendsType) => {
-    let friendsItem: friendsType = props.friends.map<friendsType[]>(
+const Friends = (props: {friends: friendsType[]}) => {
+    let friendsItem = props.friends.map(
         f => <FriendItem name={f.name} id={f.id} photo={f.photo} key={f.id}/>
     )
-    return <div className={s.friends} key={props.id}>
+    return <div className={s.friends}>
         <h4>Friends</h4>
         <div className={s.friendsList}>
             <>{friendsItem}</>
