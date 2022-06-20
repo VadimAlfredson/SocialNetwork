@@ -4,7 +4,7 @@ import {AddMessage} from "./AddMessage";
 
 export const AddMessageContainer: React.FC = (props) => {
 
-    let onMessageChange: React.FC = (text) => {
+    let onMessageChange: React.FC = (text:string) => {
         let action = UpdateMessageInDialogsActionCreator(text);
         props.dispatch(action)
     };

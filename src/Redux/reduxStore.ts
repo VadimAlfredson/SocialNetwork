@@ -9,6 +9,9 @@ let reducers = combineReducers({
     friendsList: friendsReducer
 });
 
-let store = createStore(reducers);
+type reducersType = typeof reducers;
+export type AddStateType = ReturnType<reducersType>
+
+let store:AddStateType = createStore(reducers);
 
 export default store

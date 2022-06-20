@@ -10,12 +10,13 @@ let initialState = {
         {id: 2, message: 'Yo', likeCount: 12},
         {id: 3, message: 'My first post!', likeCount: 32},
     ] as Array<postsType>,
-    newPostText: '' as string,
+    newPostText: ' ' as string,
 }
 
 type ProfileReducerAction = {
    type: 'ADD-POST' | 'UPDATE-POST-TEXT'
-    newText: string
+    newText?: string
+
 }
 
 const profileReducer = (state = initialState, action: ProfileReducerAction) => {
@@ -31,14 +32,16 @@ const profileReducer = (state = initialState, action: ProfileReducerAction) => {
             return state;
 
         case 'UPDATE-POST-TEXT':
-            state.newPostText = action.newText;
+            if (action.newText != null) {
+                state.newPostText = action.newText;
+            }
             return state;
 
         default:
             return state;
     }
 }
-export const AddPostActionCreator = () => ({type: 'ADD-POST'})
+export const AddPostActionCreator = ():ProfileReducerAction => ({ type: 'ADD-POST' })
 export const UpdatePostTextActionCreator = (text: string):ProfileReducerAction => ({type: 'UPDATE-POST-TEXT', newText: text})
 
 
