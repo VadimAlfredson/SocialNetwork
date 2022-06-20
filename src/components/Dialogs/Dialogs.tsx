@@ -1,13 +1,19 @@
-import React from "react";
+import React, {FC} from "react";
 import s from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {MessagesItem} from "./MessagesItem/MessagesItem";
 import {AddMessageContainer} from "./AddMessage/AddMessageContainer";
 import {dialogsType, messagesType} from "../../Redux/dialogs_reducer";
 
+type DialogsType = {
+    dialogs: Array<dialogsType>
+    messages: Array<messagesType>
+    dispatch: () => void
+    addNewMessage: string
+}
 
 
-const Dialogs = (props: {dialogs: dialogsType[], messages: messagesType[], dispatch: () => void, addNewMessage: string}) => {
+const Dialogs: FC<DialogsType> = (props) => {
     let dialogUsers = props.dialogs.map(
         d => <DialogItem name={d.name} id={d.id} key={d.id}/>
     );

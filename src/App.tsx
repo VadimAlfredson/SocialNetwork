@@ -5,8 +5,11 @@ import Navbar from './components/Navbar/Navbar';
 import Dialogs from './components/Dialogs/Dialogs';
 import Profile from './components/Profile/Profile';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {friendsType} from "./Redux/friends_reducer";
+import {dialogsType, messagesType} from "./Redux/dialogs_reducer";
+import {postsType} from "./Redux/profile_reducer";
 
-const App: React.FC = (props) => {
+const App: (props: { friends: friendsType; messages: messagesType[]; dialogs: dialogsType[]; dispatch: () => void; addNewMessage: string; posts: postsType[]; newPostText: string }) => any = (props) => {
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
