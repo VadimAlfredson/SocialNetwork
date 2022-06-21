@@ -1,6 +1,6 @@
 import React from "react";
 import {
-    AddMessageIDialogsActionCreator, dialogsReducerAction,
+    AddMessageIDialogsActionCreator,
     dialogsType, messagesType,
     UpdateMessageInDialogsActionCreator
 } from "../../../Redux/dialogs_reducer";
@@ -10,10 +10,9 @@ export const AddMessageContainer = (props: {dialogs: dialogsType[],
     messages: messagesType[],
     dispatch: (props: { type: string }) => void,
     addNewMessage: string
-    AddMessageIDialogsActionCreator: dialogsReducerAction
 }) => {
 
-    let onMessageChange = (text:string) => {
+    let onMessageChange:(text: string) => void = (text:string) => {
         let action = UpdateMessageInDialogsActionCreator(text);
         props.dispatch(action)
     };

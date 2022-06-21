@@ -1,14 +1,19 @@
 import React from 'react'
-import {AddPostActionCreator, postsType, UpdatePostTextActionCreator, ProfileReducerAction} from "../../../Redux/profile_reducer";
+import {
+    AddPostActionCreator,
+    postsType,
+    UpdatePostTextActionCreator,
+    ProfileReducerAction
+} from "../../../Redux/profile_reducer";
 import MyPosts from "./MyPosts";
 
-const MyPostsContainer = (props: {posts: postsType[],
+const MyPostsContainer = (props: {
+    posts: postsType[],
     dispatch: (AddPostActionCreator: ProfileReducerAction) => void,
-    newPostText: string, createNewPost: () => any,
-    updateNewPostText: (text: string) => void}) => {
+    newPostText: string,
+}) => {
 
-    let createNewPost = () =>
-    {
+    let createNewPost = () => {
         props.dispatch(AddPostActionCreator());
     }
 

@@ -2,8 +2,9 @@ import React from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from "react-router-dom";
 import Friends from "../Friends/Friends";
+import {friendsType} from "../../Redux/friends_reducer";
 
-const Navbar = (props) => {
+const Navbar = (props: {friends: friendsType[]}) => {
     return <nav className={s.nav}>
     <div className={s.item}>
       <NavLink to="/Profile" className = { navData => navData.isActive ? s.active : s.itemnav}>Profile</NavLink>

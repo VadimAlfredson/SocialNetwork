@@ -6,7 +6,13 @@ import {AddMessageContainer} from "./AddMessage/AddMessageContainer";
 import {dialogsType, messagesType} from "../../Redux/dialogs_reducer";
 
 
-const Dialogs = (props: {dialogs: dialogsType[], messages: messagesType[], dispatch: (props: { type: string }) => void, addNewMessage: string}) => {
+const Dialogs = (props:
+                     {
+                         dialogs: dialogsType[],
+                         messages: messagesType[],
+                         dispatch: (props: { type: string }) => void,
+                         addNewMessage: string
+                     }) => {
     let dialogUsers = props.dialogs.map(
         d => <DialogItem name={d.name} id={d.id} key={d.id}/>
     );
@@ -31,6 +37,8 @@ const Dialogs = (props: {dialogs: dialogsType[], messages: messagesType[], dispa
                     <AddMessageContainer
                         dispatch={props.dispatch}
                         addNewMessage={props.addNewMessage}
+                        dialogs={props.dialogs}
+                        messages={props.messages}
                     />
                 </div>
             </div>
