@@ -10,13 +10,13 @@ import store from "../../Redux/reduxStore";
 
 const Dialogs = () => {
     return (
-                    <StoreContext.Consumer> {
-                        (store) => {
-                            let dialogUsers = store.dialogs.map(
+                    <StoreContext.Consumer>
+                        { (store) => {
+                            let dialogUsers = store.dialogsPage.dialogs.map(
                                 d => <DialogItem name={d.name} id={d.id} key={d.id}/>
                             );
 
-                            let messagesItem = store.messages.map(
+                            let messagesItem = store.dialogsPage.messages.map(
                                 m => <MessagesItem message={m.message} icon={m.icon} key={m.id}/>
                             );
 
@@ -33,11 +33,12 @@ const Dialogs = () => {
                                             {messagesItem}
                                         </div>
                                         <div className={s.addMessage}>
+
                                 <AddMessageContainer
-                                    dispatch={store.dispatch}
+                                    dispatch={store.dispatch()}
                                     addNewMessage={store.addNewMessage}
-                                    dialogs={store.dialogs}
-                                    messages={store.messages}
+                                    dialogs={store.dialogsPage.dialogs}
+                                    messages={store.dialogsPage.messages}
                                 />
                                         </div>
                                     </div>

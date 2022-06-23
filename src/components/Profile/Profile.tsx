@@ -3,11 +3,7 @@ import s from './Profile.module.css';
 import MyPostsContainer from './MyPosts/MyPostsContainer'
 import {postsType} from "../../Redux/profile_reducer";
 
-const Profile = (props: {
-    posts: postsType[],
-    dispatch: (props: { type: string }) => void,
-    newPostText: string
-}) => {
+const Profile = () => {
     return <div>
         <div className={s.topImgDiv}>
             <img className={s.topImg}
@@ -19,11 +15,7 @@ const Profile = (props: {
             discription
         </div>
         Main Content;
-        <MyPostsContainer
-            posts={props.posts}
-            dispatch={props.dispatch}
-            newPostText={props.newPostText}
-        />
+        <MyPostsContainer />
     </div>
 }
 

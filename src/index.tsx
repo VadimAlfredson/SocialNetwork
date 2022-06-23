@@ -6,7 +6,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import StoreContext from "./StoreContext";
 
-export let rerenderEntireTree = (state: AddStateType) => {
+export let rerenderEntireTree = () => {
     ReactDOM.render(
         <React.StrictMode>
             <StoreContext.Provider value={store}>

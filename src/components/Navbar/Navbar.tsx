@@ -25,8 +25,11 @@ const Navbar = () => {
     </div>
         <div>
             <StoreContext.Consumer>
-                {(store) =>
-                    <Friends friends={store.friends}/>
+                {(store) => {
+                    return (
+                        <Friends friends={store.friendsList.friends}/>
+                    )
+                }
                 }
             </StoreContext.Consumer>
         </div>

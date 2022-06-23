@@ -14,15 +14,15 @@ export const AddMessageContainer = (store: {dialogs: dialogsType[],
 
     let onMessageChange:(text: string) => void = (text:string) => {
         let action = UpdateMessageInDialogsActionCreator(text);
-        props.dispatch(action)
+        store.dispatch(action)
     };
 
     let addMessageElement = () => {
-        props.dispatch(AddMessageIDialogsActionCreator());
+        store.dispatch(AddMessageIDialogsActionCreator());
     }
 
     return <AddMessage UpdateMessageInDialogs={onMessageChange}
                        addMessageElement={addMessageElement}
-                       addNewMessage={props.addNewMessage}
+                       addNewMessage={store.addNewMessage}
     />
 }

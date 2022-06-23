@@ -3,25 +3,25 @@ import Post from './Post/Post'
 import s from './MyPosts.module.css'
 import {postsType} from "../../../Redux/profile_reducer";
 
-const MyPosts = (props: {
+const MyPosts = (store: {
     posts: postsType[],
     newPostText: string,
     createNewPost: () => void,
     updateNewPostText: (text: string) => void
 }) => {
-    let postElements = props.posts.map(
+    let postElements = store.posts.map(
         (p) => <Post message={p.message} likeCount={p.likeCount} key={p.id}/>
     );
 
     let newPostElement: React.RefObject<any> = React.createRef();
 
     let createNewPost = () => {
-        props.createNewPost();
+        store.createNewPost();
     }
 
     let onPostChange = () => {
         let text = newPostElement.current.value;
-        props.updateNewPostText(text);
+        store.updateNewPostText(text);
     }
     return (
         <div>
@@ -31,7 +31,7 @@ const MyPosts = (props: {
                               placeholder='Add text'
                               className={s.createText}
                               ref={newPostElement}
-                              value={props.newPostText}
+                              value={store.newPostText}
                     />
                 </div>
                 <div>
