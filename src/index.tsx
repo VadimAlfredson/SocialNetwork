@@ -4,18 +4,14 @@ import reportWebVitals from './reportWebVitals';
 import store, {AddStateType} from "./Redux/reduxStore";
 import ReactDOM from "react-dom";
 import App from "./App";
+import StoreContext from "./StoreContext";
 
 export let rerenderEntireTree = (state: AddStateType) => {
     ReactDOM.render(
         <React.StrictMode>
-            <App posts={state.profilePage.posts}
-                 dialogs={state.dialogsPage.dialogs}
-                 messages={state.dialogsPage.messages}
-                 friends={state.friendsList.friends}
-                 dispatch={store.dispatch.bind(store)}
-                 addNewMessage={state.dialogsPage.addNewMessage}
-                 newPostText={state.profilePage.newPostText}
-            />
+            <StoreContext.Provider value={store}>
+            <App />
+            </StoreContext.Provider>
         </React.StrictMode>,
         document.getElementById('root')
     );
@@ -23,11 +19,12 @@ export let rerenderEntireTree = (state: AddStateType) => {
 
 rerenderEntireTree(store.getState());
 
-store.subscribe(() => {
-        let state: AddStateType = store.getState();
+store.subscribe(
+    () => {
+    let state: AddStateType = store.getState();
         rerenderEntireTree(state);
     }
-);
+)
 
 reportWebVitals();
 

@@ -9,33 +9,20 @@ import {friendsType} from "./Redux/friends_reducer";
 import {dialogsType, messagesType} from "./Redux/dialogs_reducer";
 import {postsType} from "./Redux/profile_reducer";
 
-const App: (props: {
-    friends: friendsType[];
-    messages: messagesType[];
-    dialogs: dialogsType[];
-    dispatch: (props: { type: string }) => void;
-    addNewMessage: string;
-    posts: postsType[];
-    newPostText: string
-}) => void = (props) => {
+const App = () => {
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
                 <Header/>
-                <Navbar friends={props.friends}/>
+                <Navbar />
                 <div className='app-wrapper-content'>
                     <Routes>
                         <Route path='/dialogs/*'
-                               element={<Dialogs messages={props.messages}
-                                                 dialogs={props.dialogs}
-                                                 dispatch={props.dispatch}
-                                                 addNewMessage={props.addNewMessage}
-                               />}/>
+                               element={<Dialogs />}
+                        />
                         <Route path='/profile'
-                               element={<Profile posts={props.posts}
-                                                 dispatch={props.dispatch}
-                                                 newPostText={props.newPostText}
-                               />}/>
+                               element={<Profile />}
+                        />
                     </Routes>
                 </div>
 

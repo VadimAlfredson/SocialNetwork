@@ -6,7 +6,7 @@ import {
 } from "../../../Redux/dialogs_reducer";
 import {AddMessage} from "./AddMessage";
 
-export const AddMessageContainer = (props: {dialogs: dialogsType[],
+export const AddMessageContainer = (store: {dialogs: dialogsType[],
     messages: messagesType[],
     dispatch: (props: { type: string }) => void,
     addNewMessage: string
