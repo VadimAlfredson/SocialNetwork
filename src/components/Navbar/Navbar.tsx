@@ -24,14 +24,7 @@ const Navbar = () => {
       <NavLink to="/Setting" className = { navData => navData.isActive ? s.active : s.itemnav }>Settings</NavLink>
     </div>
         <div>
-            <StoreContext.Consumer>
-                {(store) => {
-                    return (
-                        <Friends friends={store.friendsList.friends}/>
-                    )
-                }
-                }
-            </StoreContext.Consumer>
+                        {/*<Friends friends={props.friendsList.friends}/>*/}
         </div>
   </nav>
 }
