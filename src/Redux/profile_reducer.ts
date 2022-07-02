@@ -1,3 +1,8 @@
+export type profilePageType = {
+    posts: postsType[],
+    newPostText: string
+}
+
 export type postsType = {
     id: number,
     message: string,

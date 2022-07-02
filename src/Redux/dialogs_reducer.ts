@@ -1,3 +1,9 @@
+export type dialogsPageType = {
+    dialogs: dialogsType[],
+    messages: messagesType[],
+    addNewMessage: string,
+}
+
 export type dialogsType = {
     id: number,
     name: string

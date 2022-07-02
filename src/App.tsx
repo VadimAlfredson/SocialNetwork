@@ -6,8 +6,9 @@ import Dialogs from './components/Dialogs/Dialogs';
 import Profile from './components/Profile/Profile';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {friendsType} from "./Redux/friends_reducer";
-import {dialogsType, messagesType} from "./Redux/dialogs_reducer";
+import {dialogsPageType} from "./Redux/dialogs_reducer";
 import {postsType} from "./Redux/profile_reducer";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 const App = () => {
     return (
@@ -18,11 +19,9 @@ const App = () => {
                 <div className='app-wrapper-content'>
                     <Routes>
                         <Route path='/dialogs/*'
-                               element={<Dialogs />}
-                        />
+                               element={<DialogsContainer />}/>
                         <Route path='/profile'
-                               element={<Profile />}
-                        />
+                               element={<Profile />}/>
                     </Routes>
                 </div>
 

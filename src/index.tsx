@@ -6,27 +6,24 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import {Provider} from "react-redux";
 
-export let rerenderEntireTree = () => {
     ReactDOM.render(
         <React.StrictMode>
-            <Provider value={store}>
+            <Provider store={store}>
             <App />
             </Provider>
         </React.StrictMode>,
         document.getElementById('root')
     );
-};
 
-rerenderEntireTree(store.getState());
-
-store.subscribe(
-    () => {
-    let state: AddStateType = store.getState();
-        rerenderEntireTree(state);
-    }
-)
 
 reportWebVitals();
 
 
 
+// <App posts={state.profilePage.posts}
+//      dialogsPage={state.dialogsPage}
+//      friends={state.friendsList.friends}
+//      dispatch={store.dispatch.bind(store)}
+//      addNewMessage={state.dialogsPage.addNewMessage}
+//      newPostText={state.profilePage.newPostText}
+// />
