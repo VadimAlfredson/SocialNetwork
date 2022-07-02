@@ -1,11 +1,11 @@
 import React from "react";
 import {
-    dialogsPageType
+    dialogsPageType, dialogsReducerAction
 } from "../../../Redux/dialogs_reducer";
 import s from "../Dialogs.module.css";
 
 export const AddMessage = (props: {dialogsPage: dialogsPageType,
-    dispatch: (props: { type: string }) => void,
+    dispatch:  (props: dialogsReducerAction) =>  dialogsReducerAction,
     AddMessageIDialogs: () => void
     UpdateMessageInDialogs: (text: string) => void
 }) => {
