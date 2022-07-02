@@ -8,28 +8,7 @@ import {
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import {AddStateType} from "../../../Redux/reduxStore";
-
-/*const MyPostsContainer = (props: {
-    posts: postsType[],
-    dispatch: (props: { type: string }) => void,
-    newPostText: string
-}) => {
-
-    let createNewPost = () => {
-        props.dispatch(AddPostActionCreator());
-    }
-
-    let onPostChange = (text: string) => {
-        let action = UpdatePostTextActionCreator(text);
-        props.dispatch(action);
-    }
-    return <MyPosts
-        posts={props.posts}
-        createNewPost={createNewPost}
-        updateNewPostText={onPostChange}
-        newPostText={props.newPostText}
-    />
-}*/
+import {DispatchType} from "../../../Redux/Types";
 
 let mapStateToProps = (state: AddStateType) => {
     return {
@@ -37,7 +16,7 @@ let mapStateToProps = (state: AddStateType) => {
     }
 };
 
-let mapDispatchToProps = (dispatch: any) => {
+let mapDispatchToProps = (dispatch: DispatchType) => {
     return {
         createNewPost: () => {
             dispatch(AddPostActionCreator())

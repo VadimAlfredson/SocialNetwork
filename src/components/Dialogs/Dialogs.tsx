@@ -3,11 +3,10 @@ import s from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {MessagesItem} from "./MessagesItem/MessagesItem";
 import {AddMessage} from "./AddMessage/AddMessage";
-import {dialogsPageType, dialogsReducerAction} from "../../Redux/dialogs_reducer";
+import {dialogsPageType} from "../../Redux/dialogs_reducer";
 
 
 const Dialogs = (props: {dialogsPage: dialogsPageType,
-    dispatch:  (props: dialogsReducerAction) =>  dialogsReducerAction,
     AddMessageIDialogs: () => void
     UpdateMessageInDialogs: (text: string) => void}
 ) => {
@@ -35,7 +34,6 @@ const Dialogs = (props: {dialogsPage: dialogsPageType,
                     <AddMessage
                         AddMessageIDialogs={props.AddMessageIDialogs}
                         dialogsPage={props.dialogsPage}
-                        dispatch={props.dispatch}
                         UpdateMessageInDialogs={props.UpdateMessageInDialogs}
                     />
                 </div>

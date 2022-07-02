@@ -3,14 +3,9 @@ import Friends from "./Friends";
 import {connect} from "react-redux";
 import {AddStateType} from "../../Redux/reduxStore";
 
-/*const FriendsContainer = (props: {friendsList: friendsType}) => {
-    friendsList = state.friendsList
-    return <Friends/>
-}*/
-
 let mapStateToProps = (state: AddStateType) => {
     return {
-        friendsList: state.friendsList
+        friends: state.friendsList.friends
     }
 }
 

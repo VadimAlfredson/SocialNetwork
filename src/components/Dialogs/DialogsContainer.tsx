@@ -1,12 +1,12 @@
 import React from "react";
 import {
     AddMessageIDialogsActionCreator,
-    dialogsPageType, dialogsReducerAction,
     UpdateMessageInDialogsActionCreator
 } from "../../Redux/dialogs_reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {AddStateType} from "../../Redux/reduxStore";
+import {DispatchType} from "../../Redux/Types";
 
 let mapStateToProps = (state: AddStateType) => {
     return {
@@ -14,7 +14,7 @@ let mapStateToProps = (state: AddStateType) => {
     }
 }
 
-let mapDispatchToProps = (dispatch: (props: dialogsReducerAction) =>  dialogsReducerAction) => {
+let mapDispatchToProps = (dispatch: DispatchType) => {
     return {
 
         AddMessageIDialogs: () => {
