@@ -1,9 +1,3 @@
-export type dialogsPageType = {
-    dialogs: dialogsType[],
-    messages: messagesType[],
-    addNewMessage: string,
-}
-
 export type dialogsType = {
     id: number,
     name: string
@@ -64,28 +58,22 @@ const dialogsReducer = (state = initialState, action: dialogsReducerAction) => {
                 message: state.addNewMessage,
                 icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
             };
-            return {
-                ...state,
-                messages: [...state.messages, newMessage],
-                addNewMessage: ''
-            };
+            state.messages.push(newMessage);
+            state.addNewMessage = '';
+            return state;
         }
         case 'UPDATE-MESSAGE-IN-DIALOGS': {
             if (action.newMessage != null) {
                 state.addNewMessage = action.newMessage;
             }
-            return {
-                ...state,
-                messages: [...state.messages]
-            }
+            return state;
         }
-
         default:
             return state;
     }
 }
 
-export const AddMessageIDialogsActionCreator = (): dialogsReducerAction => ({type: 'ADD-MESSAGE-IN-DIALOGS'})
+export const AddMessageIDialogsActionCreator = () => ({type: 'ADD-MESSAGE-IN-DIALOGS'})
 export const UpdateMessageInDialogsActionCreator = (text: string): dialogsReducerAction => ({
     type: 'UPDATE-MESSAGE-IN-DIALOGS',
     newMessage: text

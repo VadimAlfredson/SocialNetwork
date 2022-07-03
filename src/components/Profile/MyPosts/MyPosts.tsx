@@ -1,26 +1,27 @@
 import React from 'react'
 import Post from './Post/Post'
 import s from './MyPosts.module.css'
-import {profilePageType} from "../../../Redux/profile_reducer";
+import {postsType} from "../../../Redux/profile_reducer";
 
-const MyPosts = (props: {
-    profilePage: profilePageType,
+const MyPosts = (store: {
+    posts: postsType[],
+    newPostText: string,
     createNewPost: () => void,
-    updateNewPostText: (text: string) => void}) => {
-    let postElements = props.profilePage.posts.map(
-        (p) => <Post message={p.message} likeCount={p.likeCount}  key={p.id}/>
+    updateNewPostText: (text: string) => void
+}) => {
+    let postElements = store.posts.map(
+        (p) => <Post message={p.message} likeCount={p.likeCount} key={p.id}/>
     );
 
     let newPostElement: React.RefObject<any> = React.createRef();
 
-    let createNewPost = () =>
-    {
-        props.createNewPost();
+    let createNewPost = () => {
+        store.createNewPost();
     }
 
     let onPostChange = () => {
         let text = newPostElement.current.value;
-        props.updateNewPostText(text);
+        store.updateNewPostText(text);
     }
     return (
         <div>
@@ -30,7 +31,7 @@ const MyPosts = (props: {
                               placeholder='Add text'
                               className={s.createText}
                               ref={newPostElement}
-                              value={props.profilePage.newPostText}
+                              value={store.newPostText}
                     />
                 </div>
                 <div>

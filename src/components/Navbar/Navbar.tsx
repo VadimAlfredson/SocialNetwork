@@ -1,7 +1,10 @@
 import React from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from "react-router-dom";
-import FriendsContainer from "../Friends/FriendsContainer";
+import Friends from "../Friends/Friends";
+import {friendsType} from "../../Redux/friends_reducer";
+import StoreContext from "../../StoreContext";
+import {AddStateType} from "../../Redux/reduxStore";
 
 const Navbar = () => {
     return <nav className={s.nav}>
@@ -21,7 +24,7 @@ const Navbar = () => {
       <NavLink to="/Setting" className = { navData => navData.isActive ? s.active : s.itemnav }>Settings</NavLink>
     </div>
         <div>
-            <FriendsContainer />
+                        {/*<Friends friends={props.friendsList.friends}/>*/}
         </div>
   </nav>
 }
