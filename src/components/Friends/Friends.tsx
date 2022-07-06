@@ -3,8 +3,8 @@ import s from './Friends.module.css';
 import {FriendItem} from "./FriendsItem/FriendsItem";
 import {friendsType} from "../../Redux/friends_reducer";
 
-const Friends = (friends: friendsType[]) => {
-    let friendsItem = friends.map(
+const Friends = (props: {friends: friendsType[]}) => {
+    let friendsItem = props.friends.map(
         f => <FriendItem name={f.name} id={f.id} photo={f.photo} key={f.id}/>
     )
     return <div className={s.friends}>
