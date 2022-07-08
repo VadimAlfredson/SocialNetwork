@@ -18,7 +18,7 @@ export type UserActionType = {
 let initialState = {
     users: [
         {id: 1, followed: false, firstName: 'Dmitry', lastName: 'K', photo: 'https://st3.depositphotos.com/1027110/18677/v/450/depositphotos_186777156-stock-illustration-dog-collection-swedish-vallhund-geometric.jpg', location: {country: 'Belorus', city: 'Minsk'}},
-        {id: 2, followed: false, firstName: 'Masha', lastName: 'A',photo: 'https://st3.depositphotos.com/1027110/18677/v/450/depositphotos_186777156-stock-illustration-dog-collection-swedish-vallhund-geometric.jpg', location: {country: 'Russia', city: 'Ufa'}},
+        {id: 2, followed: true, firstName: 'Masha', lastName: 'A',photo: 'https://st3.depositphotos.com/1027110/18677/v/450/depositphotos_186777156-stock-illustration-dog-collection-swedish-vallhund-geometric.jpg', location: {country: 'Russia', city: 'Ufa'}},
         {id: 3, followed: false, firstName: 'Kamilla', lastName: 'F',photo: 'https://st3.depositphotos.com/1027110/18677/v/450/depositphotos_186777156-stock-illustration-dog-collection-swedish-vallhund-geometric.jpg', location: {country: 'Belorus', city: 'Ufa'}}
     ] as UserType[]
 }
