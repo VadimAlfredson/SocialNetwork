@@ -1,6 +1,7 @@
 export type UserType = {
     id: number,
     followed: boolean,
+    status: string
     firstName: string,
     lastName: string
     photo: string
@@ -10,16 +11,47 @@ export type UserType = {
     }
 }
 
-export type UserActionType = {
-    type: 'FOLLOWED' | 'SETUSERS'
-    userId?: any
+export type UserActionType = FollowedActionType | SetUsersActionType
+
+type FollowedActionType = {
+    type: 'FOLLOWED'
+    userId: number
+}
+
+type SetUsersActionType = {
+    type: 'SET_USERS'
+    users: UserType[]
 }
 
 let initialState = {
     users: [
-        {id: 1, followed: false, firstName: 'Dmitry', lastName: 'K', photo: 'https://st3.depositphotos.com/1027110/18677/v/450/depositphotos_186777156-stock-illustration-dog-collection-swedish-vallhund-geometric.jpg', location: {country: 'Belorus', city: 'Minsk'}},
-        {id: 2, followed: true, firstName: 'Masha', lastName: 'A',photo: 'https://st3.depositphotos.com/1027110/18677/v/450/depositphotos_186777156-stock-illustration-dog-collection-swedish-vallhund-geometric.jpg', location: {country: 'Russia', city: 'Ufa'}},
-        {id: 3, followed: false, firstName: 'Kamilla', lastName: 'F',photo: 'https://st3.depositphotos.com/1027110/18677/v/450/depositphotos_186777156-stock-illustration-dog-collection-swedish-vallhund-geometric.jpg', location: {country: 'Belorus', city: 'Ufa'}}
+        /*        {
+                    id: 1,
+                    followed: false,
+                    status: 'Hi',
+                    firstName: 'Dmitry',
+                    lastName: 'K',
+                    photo: 'https://st3.depositphotos.com/1027110/18677/v/450/depositphotos_186777156-stock-illustration-dog-collection-swedish-vallhund-geometric.jpg',
+                    location: {country: 'Belorus', city: 'Minsk'}
+                },
+                {
+                    id: 2,
+                    followed: true,
+                    status: 'Hello',
+                    firstName: 'Masha',
+                    lastName: 'A',
+                    photo: 'https://st3.depositphotos.com/1027110/18677/v/450/depositphotos_186777156-stock-illustration-dog-collection-swedish-vallhund-geometric.jpg',
+                    location: {country: 'Russia', city: 'Ufa'}
+                },
+                {
+                    id: 3,
+                    followed: false,
+                    status: 'Hi',
+                    firstName: 'Kamilla',
+                    lastName: 'F',
+                    photo: 'https://st3.depositphotos.com/1027110/18677/v/450/depositphotos_186777156-stock-illustration-dog-collection-swedish-vallhund-geometric.jpg',
+                    location: {country: 'Belorus', city: 'Ufa'}
+                }*/
     ] as UserType[]
 }
 
@@ -32,14 +64,15 @@ const usersReducer = (state = initialState, action: UserActionType) => {
                         if (u.id === action.userId) {
                             return {...u, followed: !u.followed}
                         }
+                        return u
                     }
                 )
             }
         }
-        case "SETUSERS": {
+        case "SET_USERS": {
             return {
                 ...state,
-                users: [...state.users, ...action.users]
+                users: [...action.users]
             }
         }
         default:
@@ -48,7 +81,7 @@ const usersReducer = (state = initialState, action: UserActionType) => {
     }
 }
 
-export const FollowedActionCreator: () => UserActionType = () => ({type: 'FOLLOWED', userId})
-export const SetUsersActionCreator: () => UserActionType = () => ({type: 'SETUSERS', users})
+export const FollowedActionCreator = (userId: number): UserActionType => ({type: 'FOLLOWED', userId})
+export const SetUsersActionCreator = (users: UserType[]): UserActionType => ({type: 'SET_USERS', users})
 
 export default usersReducer

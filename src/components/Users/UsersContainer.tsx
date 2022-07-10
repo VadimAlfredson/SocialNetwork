@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import Users from "./Users";
 import {AddStateType} from "../../Redux/reduxStore";
 import {DispatchType} from "../../Redux/Types";
-import {FollowedActionCreator, SetUsersActionCreator} from "../../Redux/users_reducers";
+import {FollowedActionCreator, SetUsersActionCreator, UserType} from "../../Redux/users_reducers";
 
 let mapStateToProps = (state: AddStateType) => {
     return {
@@ -13,8 +13,8 @@ let mapStateToProps = (state: AddStateType) => {
 
 let mapDispatchToProps = (dispatch: DispatchType) => {
     return {
-        followed: (userId) => {dispatch(FollowedActionCreator(userId))},
-        setusers: (users) => {dispatch(SetUsersActionCreator(users))}
+        followed: (userId: number) => {dispatch(FollowedActionCreator(userId))},
+        setUsers: (users: UserType[]) => {dispatch(SetUsersActionCreator(users))}
     }
 }
 

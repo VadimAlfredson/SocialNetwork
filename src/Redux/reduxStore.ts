@@ -16,6 +16,6 @@ type reducersType = typeof reducers;
 
 export type AddStateType = ReturnType<reducersType>
 
-let store:AddStateType = createStore(reducers);
+let store: AddStateType = createStore(reducers);
 
 export default store
