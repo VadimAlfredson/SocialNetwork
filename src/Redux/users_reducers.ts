@@ -1,14 +1,13 @@
 export type UserType = {
+    name: string,
     id: number,
-    followed: boolean,
-    status: string
-    firstName: string,
-    lastName: string
-    photo: string
-    location: {
-        country: string
-        city: string
+    uniqueUrlName: string | null;
+    photos: {
+        small: string
+        large: string
     }
+    status: string
+    followed: boolean,
 }
 
 export type UserActionType = FollowedActionType | SetUsersActionType
