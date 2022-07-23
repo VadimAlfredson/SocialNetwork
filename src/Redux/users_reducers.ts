@@ -10,7 +10,7 @@ export type UserType = {
     followed: boolean,
 }
 
-export type UserActionType = FollowedActionType | SetUsersActionType
+export type UserActionType = FollowedActionType | SetUsersActionType | SetCurrentPageActionType | SetTotalUsersCountActionType
 
 type FollowedActionType = {
     type: 'FOLLOWED'
@@ -22,7 +22,24 @@ type SetUsersActionType = {
     users: UserType[]
 }
 
-let initialState = {
+type SetCurrentPageActionType = {
+    type: "SET_CURRENT_PAGE"
+    currentPage: number
+}
+
+type SetTotalUsersCountActionType = {
+    type: "SET_TOTAL_USERS_COUNT",
+    totalUsersCount: number
+}
+
+type usersStateType = {
+    users: UserType[]
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+}
+
+let initialState: usersStateType = {
     users: [
         /*        {
                     id: 1,
@@ -51,7 +68,10 @@ let initialState = {
                     photo: 'https://st3.depositphotos.com/1027110/18677/v/450/depositphotos_186777156-stock-illustration-dog-collection-swedish-vallhund-geometric.jpg',
                     location: {country: 'Belorus', city: 'Ufa'}
                 }*/
-    ] as UserType[]
+    ],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1
 }
 
 const usersReducer = (state = initialState, action: UserActionType) => {
@@ -74,6 +94,18 @@ const usersReducer = (state = initialState, action: UserActionType) => {
                 users: [...action.users]
             }
         }
+        case "SET_CURRENT_PAGE": {
+            return {
+                ...state,
+                currentPage: action.currentPage
+            }
+        }
+        case "SET_TOTAL_USERS_COUNT": {
+            return {
+                ...state,
+                totalUsersCount: action.totalUsersCount
+            }
+        }
         default:
             return state
 
@@ -82,5 +114,7 @@ const usersReducer = (state = initialState, action: UserActionType) => {
 
 export const FollowedActionCreator = (userId: number): UserActionType => ({type: 'FOLLOWED', userId})
 export const SetUsersActionCreator = (users: UserType[]): UserActionType => ({type: 'SET_USERS', users})
+export const SetCurrentPageAC = (currentPage: number) => ({type: "SET_CURRENT_PAGE", currentPage})
+export const SetTotalUsersCountAC = (totalUsersCount: number) => ({type: "SET_TOTAL_USERS_COUNT", totalUsersCount})
 
 export default usersReducer

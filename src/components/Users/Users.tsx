@@ -7,26 +7,38 @@ import * as axios from "axios";
 class Users extends React.Component {
 
    componentDidMount(): void {
-       axios.get('https://social-network.samuraijs.com/api/1.0/users')
+       axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
            .then(responce => {
                this.props.setUsers(responce.data.items)
+               this.props.setTotalUsersCount(responce.data.totalCount)
            })
    }
 
+   onPageChange = (pageNumber) => {
+       this.props.setCurrentPage(pageNumber),
+           axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+               .then(responce => {
+                   this.props.setUsers(responce.data.items)
+                   this.props.setTotalUsersCount(responce.data.totalCount)
+               })
+   }
 
-
-    /*    getUsers = () => {
-            if (this.props.users.length === 0) {
-                axios.get('https://social-network.samuraijs.com/api/1.0/users')
-                    .then(responce => {
-                        this.props.setUsers(responce.data.items)
-                    })
-            }
-        }*/
     render(): React.ReactNode {
-        return (
+       let pageCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
+       let pages = [];
+       for (let i = 1; i <= pageCount; i++) {
+           pages.push(i);
+        }
+        return (<div>
             <div>
-                {/*<button onClick={this.getUsers}>Get Users</button>*/}
+                { pages.map( p => {
+                        return <span className={this.props.currentPage === p && s.activePage}
+                        onClick={ () => {this.onPageChange(p)} }
+                        >{p}</span>
+                    }
+                )}
+            </div>
+            <div>
                 {
                     this.props.users.map((u: UserType) => <div key={u.id}>
         <span>
@@ -43,6 +55,7 @@ class Users extends React.Component {
 </span>
         </span>
                     </div>)}
+            </div>
             </div>
         );
     }

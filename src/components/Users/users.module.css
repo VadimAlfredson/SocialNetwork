@@ -3,3 +3,9 @@
     height: 100px;
     border-radius: 50px;
 }
+
+.activePage {
+    height: 110%;
+    width: 110%;
+    color: darkgoldenrod;
+}
