@@ -10,7 +10,7 @@ export type UserType = {
     followed: boolean,
 }
 
-export type UserActionType = FollowedActionType | SetUsersActionType | SetCurrentPageActionType | SetTotalUsersCountActionType
+export type UserActionType = FollowedActionType | SetUsersActionType | SetCurrentPageActionType | SetTotalUsersCountActionType | SetIsFetchingAC
 
 type FollowedActionType = {
     type: 'FOLLOWED'
@@ -32,46 +32,25 @@ type SetTotalUsersCountActionType = {
     totalUsersCount: number
 }
 
+type SetIsFetchingAC ={
+    type: "SET_IS_FETCHING"
+    isFetching: boolean
+}
+
 type usersStateType = {
     users: UserType[]
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 
 let initialState: usersStateType = {
-    users: [
-        /*        {
-                    id: 1,
-                    followed: false,
-                    status: 'Hi',
-                    firstName: 'Dmitry',
-                    lastName: 'K',
-                    photo: 'https://st3.depositphotos.com/1027110/18677/v/450/depositphotos_186777156-stock-illustration-dog-collection-swedish-vallhund-geometric.jpg',
-                    location: {country: 'Belorus', city: 'Minsk'}
-                },
-                {
-                    id: 2,
-                    followed: true,
-                    status: 'Hello',
-                    firstName: 'Masha',
-                    lastName: 'A',
-                    photo: 'https://st3.depositphotos.com/1027110/18677/v/450/depositphotos_186777156-stock-illustration-dog-collection-swedish-vallhund-geometric.jpg',
-                    location: {country: 'Russia', city: 'Ufa'}
-                },
-                {
-                    id: 3,
-                    followed: false,
-                    status: 'Hi',
-                    firstName: 'Kamilla',
-                    lastName: 'F',
-                    photo: 'https://st3.depositphotos.com/1027110/18677/v/450/depositphotos_186777156-stock-illustration-dog-collection-swedish-vallhund-geometric.jpg',
-                    location: {country: 'Belorus', city: 'Ufa'}
-                }*/
-    ],
+    users: [],
     pageSize: 5,
     totalUsersCount: 0,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: false
 }
 
 const usersReducer = (state = initialState, action: UserActionType) => {
@@ -106,6 +85,12 @@ const usersReducer = (state = initialState, action: UserActionType) => {
                 totalUsersCount: action.totalUsersCount
             }
         }
+        case "SET_IS_FETCHING": {
+            return {
+                ...state,
+                isFetching: action.isFetching
+            }
+        }
         default:
             return state
 
@@ -116,5 +101,6 @@ export const FollowedActionCreator = (userId: number): UserActionType => ({type:
 export const SetUsersActionCreator = (users: UserType[]): UserActionType => ({type: 'SET_USERS', users})
 export const SetCurrentPageAC = (currentPage: number) => ({type: "SET_CURRENT_PAGE", currentPage})
 export const SetTotalUsersCountAC = (totalUsersCount: number) => ({type: "SET_TOTAL_USERS_COUNT", totalUsersCount})
+export const ToggleIsFetchingAC = (isFetching: boolean) => ({type: "SET_IS_FETCHING", isFetching})
 
 export default usersReducer

@@ -6,30 +6,36 @@ import {DispatchType} from "../../Redux/Types";
 import {
     FollowedActionCreator,
     SetCurrentPageAC,
+    ToggleIsFetchingAC,
     SetTotalUsersCountAC,
     SetUsersActionCreator,
     UserType
 } from "../../Redux/users_reducers";
 import * as axios from "axios";
 import s from "./users.module.css";
+import Preloader from "../common/Preloader/Preloader";
 
 
 export class UsersContainer extends React.Component {
 
     componentDidMount(): void {
+        this.props.ToggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then(responce => {
                 this.props.setUsers(responce.data.items)
                 this.props.setTotalUsersCount(responce.data.totalCount)
+                this.props.ToggleIsFetching(false)
             })
     }
 
     onPageChange = (pageNumber) => {
         this.props.setCurrentPage(pageNumber),
+            this.props.ToggleIsFetching(true)
             axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
                 .then(responce => {
                     this.props.setUsers(responce.data.items)
                     this.props.setTotalUsersCount(responce.data.totalCount)
+                    this.props.ToggleIsFetching(false)
                 })
     }
 
@@ -39,17 +45,20 @@ export class UsersContainer extends React.Component {
         for (let i = 1; i <= pageCount; i++) {
             pages.push(i);
         }
-        return <Users
+        return <>
+            {this.props.isFitching ? <Preloader/> : null}
+        <Users
             users={this.props.users}
-            setUsers={this.props.setUsers}
-            setTotalUsersCount={this.props.setTotalUsersCount}
-            setCurrentPage={this.props.setCurrentPage}
+            // setUsers={this.props.setUsers}
+            // setTotalUsersCount={this.props.setTotalUsersCount}
+            // setCurrentPage={this.props.setCurrentPage}
             pageSize={this.props.pageSize}
             currentPage={this.props.currentPage}
             followed={this.props.followed}
             totalUsersCount={this.props.totalUsersCount}
             onPageChange={this.onPageChange}
         />;
+            </>
     }
 
 }
@@ -77,6 +86,9 @@ let mapDispatchToProps = (dispatch: DispatchType) => {
         setTotalUsersCount: (totalCount: number) => {
             dispatch(SetTotalUsersCountAC(totalCount))
         },
+        ToggleIsFetching: (isFetching: boolean) => {
+            dispatch(ToggleIsFetchingAC(isFetching))
+        }
     }
 }
 
