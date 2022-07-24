@@ -1,3 +1,5 @@
+import {Dispatch} from "react";
+
 export type UserType = {
     name: string,
     id: number,
@@ -97,10 +99,10 @@ const usersReducer = (state = initialState, action: UserActionType) => {
     }
 }
 
-export const FollowedActionCreator = (userId: number): UserActionType => ({type: 'FOLLOWED', userId})
-export const SetUsersActionCreator = (users: UserType[]): UserActionType => ({type: 'SET_USERS', users})
-export const SetCurrentPageAC = (currentPage: number) => ({type: "SET_CURRENT_PAGE", currentPage})
-export const SetTotalUsersCountAC = (totalUsersCount: number) => ({type: "SET_TOTAL_USERS_COUNT", totalUsersCount})
-export const ToggleIsFetchingAC = (isFetching: boolean) => ({type: "SET_IS_FETCHING", isFetching})
+export const followed: Dispatch<number> = (userId: number): UserActionType => ({type: 'FOLLOWED', userId})
+export const setUsers: Dispatch<UserType[]> = (users: UserType[]): UserActionType => ({type: 'SET_USERS', users})
+export const setCurrentPage: Dispatch<number> = (currentPage: number) => ({type: "SET_CURRENT_PAGE", currentPage})
+export const setTotalUsersCount: Dispatch<number> = (totalUsersCount: number) => ({type: "SET_TOTAL_USERS_COUNT", totalUsersCount})
+export const ToggleIsFetching: Dispatch<boolean> = (isFetching: boolean) => ({type: "SET_IS_FETCHING", isFetching})
 
 export default usersReducer
