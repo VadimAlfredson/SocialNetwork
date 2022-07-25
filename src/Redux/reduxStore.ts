@@ -18,4 +18,7 @@ export type AddStateType = ReturnType<reducersType>
 
 let store: AddStateType = createStore(reducers);
 
+// @ts-ignore
+window.store = store;
+
 export default store

@@ -1,6 +1,7 @@
 export type profilePageType = {
     posts: postsType[],
     newPostText: string
+    profile: null | string
 }
 
 export type postsType = {
@@ -16,18 +17,26 @@ let initialState = {
         {id: 3, message: 'My first post!', likeCount: 32},
     ] as Array<postsType>,
     newPostText: ' ' as string,
+    profile: null
 }
+
+export type ProfileType = ProfileReducerAction | setUserProfile
 
 export type ProfileReducerAction = {
     type: 'ADD-POST' | 'UPDATE-POST-TEXT'
     newText?: string
 
 }
+export type setUserProfile = {
+    type: 'SET_USER_PROFILE'
+    profile: null | any
+
+}
 
 let i: number = 5
 
 
-const profileReducer = (state = initialState, action: ProfileReducerAction) => {
+const profileReducer = (state = initialState, action: ProfileType) => {
     switch (action.type) {
         case 'ADD-POST': {
             let newPost: postsType = {
@@ -50,15 +59,22 @@ const profileReducer = (state = initialState, action: ProfileReducerAction) => {
                 posts: [...state.posts]
             }
         }
+        case 'SET_USER_PROFILE': {
+            return {
+                ...state,
+                profile: action.profile
+            }
+        }
         default:
             return state;
     }
 }
-export const AddPostActionCreator = (): ProfileReducerAction => ({type: 'ADD-POST'})
-export const UpdatePostTextActionCreator = (text: string): ProfileReducerAction => ({
+export const AddPostActionCreator = (): ProfileType => ({type: 'ADD-POST'})
+export const UpdatePostTextActionCreator = (text: string): ProfileType => ({
     type: 'UPDATE-POST-TEXT',
     newText: text
 })
+export const setUserProfile = (profile: any): ProfileType => ({type: 'SET_USER_PROFILE', profile})
 
 
 export default profileReducer;

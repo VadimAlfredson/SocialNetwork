@@ -1,6 +1,7 @@
 import React from "react";
 import {UserType} from "../../Redux/users_reducers";
 import s from "../Users/users.module.css"
+import {NavLink} from "react-router-dom";
 
 let Users = (props) => {
     let pageCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -13,10 +14,10 @@ let Users = (props) => {
         <div>
             <div>
                 {pages.map(p => {
-                        return <span className={props.currentPage === p && s.activePage}
+                        return <span className={props.currentPage === p ? s.activePage : null}
                                      onClick={() => {
                                          props.onPageChange(p)
-                                     }}
+                                     }} key={p}
                         >{p}</span>
                     }
                 )}
@@ -26,9 +27,12 @@ let Users = (props) => {
                     props.users.map((u: UserType) => <div key={u.id}>
         <span>
             <div>
+                <NavLink to={'/profile/' + u.id}>
                 <img src={u.photos.small !== null ? u.photos.small :
                     'https://st3.depositphotos.com/1027110/18677/v/450/depositphotos_186777156-stock-illustration-dog-collection-swedish-vallhund-geometric.jpg'
-                } className={s.avatar}/>{
+                } className={s.avatar}/>
+                </NavLink>
+                {
                 <button
                     onClick={() => (props.followed(u.id))}>{u.followed ? 'Unfollew' : 'Follow'}
                 </button>
