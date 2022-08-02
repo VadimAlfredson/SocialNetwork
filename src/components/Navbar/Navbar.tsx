@@ -6,7 +6,7 @@ import FriendsContainer from "../Friends/FriendsContainer";
 const Navbar = () => {
     return <nav className={s.nav}>
         <div className={s.item}>
-            <NavLink to="/Profile" className={navData => navData.isActive ? s.active : s.itemnav}>Profile</NavLink>
+            <NavLink to="/profile" className={navData => navData.isActive ? s.active : s.itemnav}>Profile</NavLink>
         </div>
         <div className={s.item}>
             <NavLink to="/Dialogs" className={navData => navData.isActive ? s.active : s.itemnav}>Messages</NavLink>
