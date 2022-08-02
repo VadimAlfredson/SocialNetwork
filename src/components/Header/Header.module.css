@@ -11,8 +11,16 @@
 }
 
 .h2 {
-    position: relative;
-    left: 20px;
-    bottom: 10px;
+    float: left;
     font-family: "Bookman Old Style";
+}
+
+.loginBlock {
+    float: right;
+}
+
+.loginBlock a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 0 5px 0;
 }

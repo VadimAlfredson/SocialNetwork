@@ -3,6 +3,7 @@ import profileReducer from "./profile_reducer";
 import dialogsReducer from "./dialogs_reducer";
 import friendsReducer from "./friends_reducer";
 import usersReducer from "./users_reducers";
+import authReducer from "./auth_reducers";
 
 
 let reducers = combineReducers({
@@ -10,6 +11,7 @@ let reducers = combineReducers({
     dialogsPage: dialogsReducer,
     friendsList: friendsReducer,
     usersPage: usersReducer,
+    auth: authReducer
 });
 
 type reducersType = typeof reducers;
