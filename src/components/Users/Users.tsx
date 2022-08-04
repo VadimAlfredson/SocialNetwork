@@ -34,7 +34,7 @@ let Users = (props) => {
                 </NavLink>
                 {
                 <button
-                    onClick={() => (props.followed(u.id))}>{u.followed ? 'Unfollew' : 'Follow'}
+                    onClick={() => (props.followed(u.id))}>{u.followed ? 'Unfollow' : 'Follow'}
                 </button>
             }
             </div>
