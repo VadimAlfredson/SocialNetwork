@@ -33,10 +33,10 @@ let Users = (props) => {
                 } className={s.avatar}/>
                 </NavLink>
                 {
-                <button
-                    onClick={() => (props.followed(u.id))}>{u.followed ? 'Unfollow' : 'Follow'}
-                </button>
-            }
+                    <button
+                        onClick={() => (props.onFollowChange(u.id))}>{u.followed ? 'Unfollow' : 'Follow'}
+                    </button>
+                }
             </div>
 <span>
     <div>{u.name}</div>
