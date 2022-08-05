@@ -45,7 +45,7 @@ export class UsersContainer extends React.Component {
             axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {
                 withCredentials: true,
                 headers: {
-                    "API-KEY": "тут ключ, когда зарегестрируешься"
+                    "API-KEY": "1ac9e29d-59a9-47e9-9ac8-79262136abea"
                 }
             })
                 .then(responce => {
@@ -57,7 +57,7 @@ export class UsersContainer extends React.Component {
             axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {}, {
                 withCredentials: true,
                 headers: {
-                    "API-KEY": "тут ключ, когда зарегестрируешься"
+                    "API-KEY": "1ac9e29d-59a9-47e9-9ac8-79262136abea"
                 }
             })
                 .then(responce => {
