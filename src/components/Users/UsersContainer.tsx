@@ -15,7 +15,7 @@ import Preloader from "../common/Preloader/Preloader";
 
 export class UsersContainer extends React.Component {
 
-    componentDidMount(): void {
+    componentDidMount() {
         this.props.ToggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
             withCredentials: true
@@ -28,8 +28,8 @@ export class UsersContainer extends React.Component {
     }
 
     onPageChange = (pageNumber) => {
-        this.props.setCurrentPage(pageNumber),
-            this.props.ToggleIsFetching(true)
+        this.props.setCurrentPage(pageNumber)
+        this.props.ToggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
             withCredentials: true
         })
@@ -40,8 +40,8 @@ export class UsersContainer extends React.Component {
             })
     }
 
-    onFollowChange = (userId) => {
-        if (this.props.users.followed === true) {
+    onFollowChange = (userId: number, follow: boolean) => {
+        if (follow == true) {
             axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {
                 withCredentials: true,
                 headers: {
@@ -49,8 +49,8 @@ export class UsersContainer extends React.Component {
                 }
             })
                 .then(responce => {
-                    if (this.props.responce.data.resultCode == 0) {
-                        followed(userId)
+                    if (responce.data.resultCode == 0) {
+                        this.props.followed(userId)
                     }
                 })
         } else {
@@ -61,8 +61,8 @@ export class UsersContainer extends React.Component {
                 }
             })
                 .then(responce => {
-                    if (this.props.responce.data.resultCode == 0) {
-                        followed(userId)
+                    if (responce.data.resultCode == 0) {
+                        this.props.followed(userId)
                     }
                 })
         }
