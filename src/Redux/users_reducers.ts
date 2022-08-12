@@ -12,7 +12,13 @@ export type UserType = {
     followed: boolean,
 }
 
-export type UserActionType = FollowedActionType | SetUsersActionType | SetCurrentPageActionType | SetTotalUsersCountActionType | SetIsFetchingAC
+export type UserActionType = FollowedActionType | SetUsersActionType | SetCurrentPageActionType | SetTotalUsersCountActionType | SetIsFetchingAC | SetIsFollowingActionType
+
+type SetIsFollowingActionType = {
+    type: 'FOLLOWING_IN_PROGRESS'
+    isFetching: boolean
+    userId: number
+}
 
 type FollowedActionType = {
     type: 'FOLLOWED'
@@ -45,6 +51,7 @@ type usersStateType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: []
 }
 
 let initialState: usersStateType = {
@@ -52,7 +59,8 @@ let initialState: usersStateType = {
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: false
+    isFetching: false,
+    followingInProgress: []
 }
 
 const usersReducer = (state = initialState, action: UserActionType) => {
@@ -93,6 +101,14 @@ const usersReducer = (state = initialState, action: UserActionType) => {
                 isFetching: action.isFetching
             }
         }
+        case "FOLLOWING_IN_PROGRESS": {
+            return {
+                ...state,
+                followingInProgress: action.isFetching
+                ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id => id !== action.userId)
+            }
+        }
         default:
             return state
 
@@ -103,6 +119,7 @@ export const followed: Dispatch<number> = (userId: number): UserActionType => ({
 export const setUsers: Dispatch<UserType[]> = (users: UserType[]): UserActionType => ({type: 'SET_USERS', users})
 export const setCurrentPage: Dispatch<number> = (currentPage: number) => ({type: "SET_CURRENT_PAGE", currentPage})
 export const setTotalUsersCount: Dispatch<number> = (totalUsersCount: number) => ({type: "SET_TOTAL_USERS_COUNT", totalUsersCount})
-export const ToggleIsFetching: Dispatch<boolean> = (isFetching: boolean) => ({type: "SET_IS_FETCHING", isFetching})
+export const toggleIsFetching: Dispatch<boolean> = (isFetching: boolean) => ({type: "SET_IS_FETCHING", isFetching})
+export const toggleIsFollowing = (isFetching:boolean, userId: number) => ({type: "FOLLOWING_IN_PROGRESS", isFetching, userId})
 
 export default usersReducer

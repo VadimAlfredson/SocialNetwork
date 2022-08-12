@@ -5,9 +5,9 @@ import {AddStateType} from "../../Redux/reduxStore";
 import {
     followed,
     setCurrentPage,
-    ToggleIsFetching,
+    toggleIsFetching,
     setTotalUsersCount,
-    setUsers,
+    setUsers, toggleIsFollowing,
 } from "../../Redux/users_reducers";
 import Preloader from "../common/Preloader/Preloader";
 import {usersApi} from "../api/api";
@@ -16,33 +16,35 @@ import {usersApi} from "../api/api";
 export class UsersContainer extends React.Component {
 
     componentDidMount() {
-        this.props.ToggleIsFetching(true)
+        this.props.toggleIsFetching(true)
         usersApi.getUsers(this.props.currentPage, this.props.pageSize)
             .then(data => {
                 this.props.setUsers(data.items)
                 this.props.setTotalUsersCount(data.totalCount)
-                this.props.ToggleIsFetching(false)
+                this.props.toggleIsFetching(false)
             })
     }
 
     onPageChange = (pageNumber) => {
         this.props.setCurrentPage(pageNumber)
-        this.props.ToggleIsFetching(true)
+        this.props.toggleIsFetching(true)
         usersApi.getUsers2(pageNumber, this.props.pageSize)
             .then(data => {
                 this.props.setUsers(data.items)
                 this.props.setTotalUsersCount(data.totalCount)
-                this.props.ToggleIsFetching(false)
+                this.props.toggleIsFetching(false)
             })
     }
 
     onFollowChange = (userId: number, follow: boolean) => {
+        this.props.toggleIsFollowing(true, userId)
         if (follow == true) {
             usersApi.unfollowUser(userId)
                 .then(data => {
                     if (data.resultCode == 0) {
                         this.props.followed(userId)
                     }
+                    this.props.toggleIsFollowing(false, userId)
                 })
         } else {
             usersApi.followedUser(userId)
@@ -50,6 +52,7 @@ export class UsersContainer extends React.Component {
                     if (data.resultCode == 0) {
                         this.props.followed(userId)
                     }
+                    this.props.toggleIsFollowing(false, userId)
                 })
         }
     }
@@ -70,6 +73,8 @@ export class UsersContainer extends React.Component {
                 totalUsersCount={this.props.totalUsersCount}
                 onPageChange={this.onPageChange}
                 onFollowChange={this.onFollowChange}
+                toggleIsFollowing={this.props.toggleIsFollowing}
+                followingInProgress={this.props.followingInProgress}
             />;
         </>
     }
@@ -82,6 +87,7 @@ let mapStateToProps = (state: AddStateType) => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
+        followingInProgress: state.usersPage.followingInProgress
     }
 }
 
@@ -112,6 +118,7 @@ export default connect(mapStateToProps,
         setUsers,
         setCurrentPage,
         setTotalUsersCount,
-        ToggleIsFetching,
+        toggleIsFetching,
+        toggleIsFollowing,
     }
 )(UsersContainer)

@@ -34,7 +34,9 @@ let Users = (props) => {
                 </NavLink>
                 {
                     <button
-                        onClick={() => (props.onFollowChange(u.id, u.followed))}>{u.followed ? 'Unfollow' : 'Follow'}
+                        disabled={props.followingInProgress.includes(u.id)}
+                        onClick={() => (props.onFollowChange(u.id, u.followed))
+                        }>{u.followed ? 'Unfollow' : 'Follow'}
                     </button>
                 }
             </div>
