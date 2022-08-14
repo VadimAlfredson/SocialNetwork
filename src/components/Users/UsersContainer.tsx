@@ -10,6 +10,8 @@ import {
     setUsers,
     toggleIsFollowing,
     getUsersThunkCreator,
+    onPageChangeThunkCreator,
+    onFollowChangeThunkCreator,
 } from "../../Redux/users_reducers";
 import Preloader from "../common/Preloader/Preloader";
 import {usersApi} from "../api/api";
@@ -29,18 +31,20 @@ export class UsersContainer extends React.Component {
     }
 
     onPageChange = (pageNumber) => {
-        this.props.setCurrentPage(pageNumber)
-        this.props.toggleIsFetching(true)
-        usersApi.getUsers2(pageNumber, this.props.pageSize)
-            .then(data => {
-                this.props.setUsers(data.items)
-                this.props.setTotalUsersCount(data.totalCount)
-                this.props.toggleIsFetching(false)
-            })
+        this.props.onPageChangeThunkCreator(pageNumber, this.props.pageSize)
+        // this.props.setCurrentPage(pageNumber)
+        // this.props.toggleIsFetching(true)
+        // usersApi.getUsers2(pageNumber, this.props.pageSize)
+        //     .then(data => {
+        //         this.props.setUsers(data.items)
+        //         this.props.setTotalUsersCount(data.totalCount)
+        //         this.props.toggleIsFetching(false)
+        //     })
     }
 
     onFollowChange = (userId: number, follow: boolean) => {
-        this.props.toggleIsFollowing(true, userId)
+        this.props.onFollowChangeThunkCreator(userId, follow)
+        /*this.props.toggleIsFollowing(true, userId)
         if (follow == true) {
             usersApi.unfollowUser(userId)
                 .then(data => {
@@ -57,7 +61,7 @@ export class UsersContainer extends React.Component {
                     }
                     this.props.toggleIsFollowing(false, userId)
                 })
-        }
+        }*/
     }
 
     render(): React.ReactNode {
@@ -123,7 +127,9 @@ export default connect(mapStateToProps,
         setTotalUsersCount,
         toggleIsFetching,
         toggleIsFollowing,
-        getUsersThunkCreator
+        getUsersThunkCreator,
+        onPageChangeThunkCreator,
+        onFollowChangeThunkCreator
 
     }
 )(UsersContainer)

@@ -135,4 +135,40 @@ export const getUsersThunkCreator = (currentPage, pageSize) => {
     }
 }
 
+export const onPageChangeThunkCreator = (pageNumber, pageSize) => {
+    return (dispatch) => {
+        dispatch(setCurrentPage(pageNumber))
+        dispatch(toggleIsFetching(true))
+        usersApi.getUsers2(pageNumber, pageSize)
+        .then(data => {
+            dispatch(setUsers(data.items))
+            dispatch(setTotalUsersCount(data.totalCount))
+            dispatch(toggleIsFetching(false))
+        })
+    }
+}
+
+export const onFollowChangeThunkCreator = (userId, follow) => {
+    return (dispatch) => {
+        dispatch(toggleIsFollowing(true, userId))
+        if (follow == true) {
+            usersApi.unfollowUser(userId)
+                .then(data => {
+                    if (data.resultCode == 0) {
+                        dispatch(followed(userId))
+                    }
+                    dispatch(toggleIsFollowing(false, userId))
+                })
+        } else {
+            usersApi.followedUser(userId)
+                .then(data => {
+                    if (data.resultCode == 0) {
+                        dispatch(followed(userId))
+                    }
+                    dispatch(toggleIsFollowing(false, userId))
+                })
+        }
+    }
+}
+
 export default usersReducer
