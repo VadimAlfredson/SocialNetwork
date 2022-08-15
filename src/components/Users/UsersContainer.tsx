@@ -129,7 +129,6 @@ export default connect(mapStateToProps,
         toggleIsFollowing,
         getUsersThunkCreator,
         onPageChangeThunkCreator,
-        onFollowChangeThunkCreator
-
+        onFollowChangeThunkCreator,
     }
 )(UsersContainer)

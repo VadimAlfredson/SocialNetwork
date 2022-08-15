@@ -1,3 +1,6 @@
+import {usersApi} from "../components/api/api";
+import {SetUserData} from "./auth_reducers";
+
 export type profilePageType = {
     posts: postsType[],
     newPostText: string
@@ -76,5 +79,14 @@ export const UpdatePostTextActionCreator = (text: string): ProfileType => ({
 })
 export const setUserProfile = (profile: any): ProfileType => ({type: 'SET_USER_PROFILE', profile})
 
+
+export const userProfileThunkCreator = (userId) => {
+    return (dispatch) => {
+        usersApi.userProfile(userId)
+            .then(data => {
+                dispatch(setUserProfile(data))
+            })
+    }
+}
 
 export default profileReducer;

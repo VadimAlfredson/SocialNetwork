@@ -1,8 +1,7 @@
 import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import * as axios from "axios";
-import {setUserProfile} from "../../Redux/profile_reducer";
+import {setUserProfile, userProfileThunkCreator} from "../../Redux/profile_reducer";
 import {AddStateType} from "../../Redux/reduxStore";
 import {
     useLocation,
@@ -31,10 +30,11 @@ class ProfileContainer extends React.Component<any, any> {
     componentDidMount(): void {
         let userId: number = this.props.router.params.userId
         if (!userId) {userId = 25265}
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
+        this.props.userProfileThunkCreator(userId)
+        /*axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
             .then(responce => {
                 this.props.setUserProfile(responce.data)
-            })
+            })*/
     }
 
     render(): React.ReactNode {
@@ -48,4 +48,4 @@ let mapStateToProps = (state: AddStateType) => {
     }
 }
 
-export default connect (mapStateToProps, {setUserProfile}) (withRouter(ProfileContainer))
+export default connect (mapStateToProps, {setUserProfile, userProfileThunkCreator}) (withRouter(ProfileContainer))

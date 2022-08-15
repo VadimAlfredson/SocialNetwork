@@ -1,4 +1,5 @@
-import {Dispatch} from "react";
+
+import {authApi} from "../components/api/api";
 
 
 export type AuthReducersType = SetUserDataType
@@ -38,6 +39,18 @@ const authReducer = (state = initialState, action: SetUserDataType) => {
 }
 
 export const SetUserData = (userId: number, email: string, login: string, isAuth: boolean): SetUserDataType => ({type: 'SET_USER_DATA', data:{userId, email, login, isAuth}})
+
+export const loginAuthThunkCreator = () => {
+    return (dispatch) => {
+        authApi.loginAuth()
+            .then(data => {
+                if (data.resultCode === 0) {
+                    let {id, email, login, isAuth} = data.data;
+                    dispatch(SetUserData(id, email, login, isAuth))
+                }
+            })
+    }
+}
 
 
 export default authReducer
