@@ -4,11 +4,15 @@ import {DialogItem} from "./DialogItem/DialogItem";
 import {MessagesItem} from "./MessagesItem/MessagesItem";
 import {AddMessage} from "./AddMessage/AddMessage";
 import {dialogsPageType} from "../../Redux/dialogs_reducer";
+import { Redirect } from "react-router-dom";
 
 
-const Dialogs = (props: {dialogsPage: dialogsPageType,
-    AddMessageIDialogs: () => void
-    UpdateMessageInDialogs: (text: string) => void}
+const Dialogs = (props: {
+                     dialogsPage: dialogsPageType,
+                     AddMessageIDialogs: () => void,
+                     UpdateMessageInDialogs: (text: string) => void,
+                     isAuth: boolean
+                 }
 ) => {
     let dialogUsers = props.dialogsPage.dialogs.map(
         d => <DialogItem name={d.name} id={d.id} key={d.id}/>
@@ -17,7 +21,6 @@ const Dialogs = (props: {dialogsPage: dialogsPageType,
     let messagesItem = props.dialogsPage.messages.map(
         m => <MessagesItem message={m.message} icon={m.icon} key={m.id}/>
     );
-
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsUsers}>

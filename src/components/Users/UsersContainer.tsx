@@ -15,6 +15,7 @@ import {
 } from "../../Redux/users_reducers";
 import Preloader from "../common/Preloader/Preloader";
 import {usersApi} from "../api/api";
+import {Redirect} from "react-router-dom";
 
 
 export class UsersContainer extends React.Component {
@@ -65,6 +66,7 @@ export class UsersContainer extends React.Component {
     }
 
     render(): React.ReactNode {
+        if (props.isAuth) return <Redirect to={'/login'}>
         let pageCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
         let pages = [];
         for (let i = 1; i <= pageCount; i++) {
@@ -94,7 +96,8 @@ let mapStateToProps = (state: AddStateType) => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        followingInProgress: state.usersPage.followingInProgress
+        followingInProgress: state.usersPage.followingInProgress,
+        isAuth: state.auth.isAuth,
     }
 }
 
