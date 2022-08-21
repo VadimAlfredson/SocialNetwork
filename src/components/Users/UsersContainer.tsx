@@ -14,8 +14,8 @@ import {
     onFollowChangeThunkCreator,
 } from "../../Redux/users_reducers";
 import Preloader from "../common/Preloader/Preloader";
-import {usersApi} from "../api/api";
-import {Navigate} from "react-router-dom";
+import {withAuthNavigate} from "../hoc/witAuthNavigate";
+import {Navigate} from "react-router-dom"
 
 
 export class UsersContainer extends React.Component {
@@ -97,7 +97,6 @@ let mapStateToProps = (state: AddStateType) => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         followingInProgress: state.usersPage.followingInProgress,
-        auth: state.auth.isAuth,
     }
 }
 
@@ -122,7 +121,7 @@ let mapStateToProps = (state: AddStateType) => {
 }
 */
 
-export default connect(mapStateToProps,
+export default withAuthNavigate(connect(mapStateToProps,
     {
         followed,
         setUsers,
@@ -134,4 +133,4 @@ export default connect(mapStateToProps,
         onPageChangeThunkCreator,
         onFollowChangeThunkCreator,
     }
-)(UsersContainer)
+)(UsersContainer))

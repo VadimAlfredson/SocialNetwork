@@ -1,10 +1,10 @@
-import React, {FC} from "react";
+import React from "react";
 import s from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {MessagesItem} from "./MessagesItem/MessagesItem";
 import {AddMessage} from "./AddMessage/AddMessage";
 import {dialogsPageType} from "../../Redux/dialogs_reducer";
-import { Redirect } from "react-router-dom";
+import {Navigate} from "react-router-dom";
 
 
 const Dialogs = (props: {
@@ -21,6 +21,7 @@ const Dialogs = (props: {
     let messagesItem = props.dialogsPage.messages.map(
         m => <MessagesItem message={m.message} icon={m.icon} key={m.id}/>
     );
+    if (!props.isAuth) {return <Navigate to={'/login'}/>}
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsUsers}>
