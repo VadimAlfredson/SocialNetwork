@@ -8,6 +8,8 @@ import {
     useNavigate,
     useParams,
 } from "react-router-dom";
+import {compose} from "redux";
+import {withAuthNavigate} from "../hoc/witAuthNavigate";
 
 function withRouter(Component) {
     function ComponentWithRouterProp(props) {
@@ -48,4 +50,8 @@ let mapStateToProps = (state: AddStateType) => {
     }
 }
 
-export default connect (mapStateToProps, {setUserProfile, userProfileThunkCreator}) (withRouter(ProfileContainer))
+export default compose(
+    withRouter,
+    connect (mapStateToProps, {setUserProfile, userProfileThunkCreator}),
+    withAuthNavigate
+)(ProfileContainer)

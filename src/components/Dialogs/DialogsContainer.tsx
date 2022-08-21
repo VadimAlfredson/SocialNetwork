@@ -7,6 +7,8 @@ import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {AddStateType} from "../../Redux/reduxStore";
 import {DispatchType} from "../../Redux/Types";
+import {compose} from "redux";
+import {withAuthNavigate} from "../hoc/witAuthNavigate";
 
 let mapStateToProps = (state: AddStateType) => {
     return {
@@ -28,6 +30,7 @@ let mapDispatchToProps = (dispatch: DispatchType) => {
     }
 }
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
-
-export default DialogsContainer
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthNavigate
+)(Dialogs)

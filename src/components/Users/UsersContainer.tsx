@@ -16,6 +16,7 @@ import {
 import Preloader from "../common/Preloader/Preloader";
 import {withAuthNavigate} from "../hoc/witAuthNavigate";
 import {Navigate} from "react-router-dom"
+import {compose} from "redux";
 
 
 export class UsersContainer extends React.Component {
@@ -66,7 +67,6 @@ export class UsersContainer extends React.Component {
     }
 
     render(): React.ReactNode {
-        if (!this.props.auth) {return <Navigate to={'/login'}/>}
         let pageCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
         let pages = [];
         for (let i = 1; i <= pageCount; i++) {
@@ -97,6 +97,7 @@ let mapStateToProps = (state: AddStateType) => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         followingInProgress: state.usersPage.followingInProgress,
+        isAuth: state.auth.isAuth
     }
 }
 
@@ -121,7 +122,7 @@ let mapStateToProps = (state: AddStateType) => {
 }
 */
 
-export default withAuthNavigate(connect(mapStateToProps,
+/*export default withAuthNavigate(connect(mapStateToProps,
     {
         followed,
         setUsers,
@@ -133,4 +134,20 @@ export default withAuthNavigate(connect(mapStateToProps,
         onPageChangeThunkCreator,
         onFollowChangeThunkCreator,
     }
-)(UsersContainer))
+)(UsersContainer))*/
+
+export default compose(
+    withAuthNavigate,
+    connect(mapStateToProps,
+    {
+        followed,
+        setUsers,
+        setCurrentPage,
+        setTotalUsersCount,
+        toggleIsFetching,
+        toggleIsFollowing,
+        getUsersThunkCreator,
+        onPageChangeThunkCreator,
+        onFollowChangeThunkCreator,
+    })
+)(UsersContainer)
