@@ -1,5 +1,7 @@
 import {usersApi} from "../components/api/api";
 import {SetUserData} from "./auth_reducers";
+import { createSlice } from "@reduxjs/toolkit";
+
 
 export type profilePageType = {
     posts: postsType[],
@@ -11,16 +13,6 @@ export type postsType = {
     id: number,
     message: string,
     likeCount: number,
-}
-
-let initialState = {
-    posts: [
-        {id: 1, message: 'Hi, how are you?', likeCount: 23},
-        {id: 2, message: 'Yo', likeCount: 12},
-        {id: 3, message: 'My first post!', likeCount: 32},
-    ] as Array<postsType>,
-    newPostText: ' ' as string,
-    profile: null
 }
 
 export type ProfileType = ProfileReducerAction | setUserProfile
@@ -35,6 +27,18 @@ export type setUserProfile = {
     profile: null | any
 
 }
+
+/*let initialState = {
+    posts: [
+        {id: 1, message: 'Hi, how are you?', likeCount: 23},
+        {id: 2, message: 'Yo', likeCount: 12},
+        {id: 3, message: 'My first post!', likeCount: 32},
+    ] as Array<postsType>,
+    newPostText: ' ' as string,
+    profile: null
+}
+
+
 
 let i: number = 5
 
@@ -77,8 +81,51 @@ export const UpdatePostTextActionCreator = (text: string): ProfileType => ({
     type: 'UPDATE-POST-TEXT',
     newText: text
 })
-export const setUserProfile = (profile: any): ProfileType => ({type: 'SET_USER_PROFILE', profile})
+export const setUserProfile = (profile: any): ProfileType => ({type: 'SET_USER_PROFILE', profile})*/
 
+let i: number = 5
+
+const todosSlice = createSlice({
+    name: 'profile',
+    initialState: {
+    posts: [
+        {id: 1, message: 'Hi, how are you?', likeCount: 23},
+        {id: 2, message: 'Yo', likeCount: 12},
+        {id: 3, message: 'My first post!', likeCount: 32},
+    ] as Array<postsType>,
+    newPostText: ' ' as string,
+    profile: null
+},
+    reducers: {
+        AddPostActionCreator(state, action) {
+            let newPost: postsType = {
+                id: i++,
+                message: state.newPostText,
+                likeCount: 0,
+            };
+            return {
+                ...state,
+                posts: [newPost, ...state.posts],
+                newPostText: ''
+            }
+        },
+        UpdatePostTextActionCreator(state, action) {
+        if (action != null) {
+                state.newPostText = action.payload;
+            }
+        },
+        setUserProfile(state, action) {
+            debugger
+        return {
+                ...state,
+                profile: action.payload
+            }
+        }
+    }
+})
+
+export const { AddPostActionCreator, UpdatePostTextActionCreator, setUserProfile } = todosSlice.actions
+export default todosSlice.reducer
 
 export const userProfileThunkCreator = (userId) => {
     return (dispatch) => {
@@ -89,4 +136,5 @@ export const userProfileThunkCreator = (userId) => {
     }
 }
 
-export default profileReducer;
+/*
+export default profileReducer;*/
