@@ -1,6 +1,6 @@
 import {Dispatch} from "react";
 import {usersApi} from "../components/api/api";
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import {dialogsType, messagesType} from "./dialogs_reducer";
 
 export type UserType = {
@@ -13,39 +13,6 @@ export type UserType = {
     }
     status: string
     followed: boolean,
-}
-
-export type UserActionType = FollowedActionType | SetUsersActionType | SetCurrentPageActionType | SetTotalUsersCountActionType | SetIsFetchingAC | SetIsFollowingActionType
-
-type SetIsFollowingActionType = {
-    type: 'FOLLOWING_IN_PROGRESS'
-    isFetching: boolean
-    userId: number
-}
-
-type FollowedActionType = {
-    type: 'FOLLOWED'
-    userId: number
-}
-
-type SetUsersActionType = {
-    type: 'SET_USERS'
-    users: UserType[]
-}
-
-type SetCurrentPageActionType = {
-    type: "SET_CURRENT_PAGE"
-    currentPage: number
-}
-
-type SetTotalUsersCountActionType = {
-    type: "SET_TOTAL_USERS_COUNT",
-    totalUsersCount: number
-}
-
-type SetIsFetchingAC ={
-    type: "SET_IS_FETCHING"
-    isFetching: boolean
 }
 
 type usersStateType = {
@@ -66,7 +33,7 @@ let initialState: usersStateType = {
     followingInProgress: []
 }
 
-/*const usersReducer = (state = initialState, action: UserActionType) => {
+const usersReducer = (state = initialState, action: UserActionType) => {
     switch (action.type) {
         case 'FOLLOWED': {
             return {
@@ -118,30 +85,47 @@ let initialState: usersStateType = {
     }
 }
 
-export const followed: Dispatch<number> = (userId: number): UserActionType => ({type: 'FOLLOWED', userId})
-export const setUsers: Dispatch<UserType[]> = (users: UserType[]): UserActionType => ({type: 'SET_USERS', users})
-export const setCurrentPage: Dispatch<number> = (currentPage: number) => ({type: "SET_CURRENT_PAGE", currentPage})
-export const setTotalUsersCount: Dispatch<number> = (totalUsersCount: number) => ({type: "SET_TOTAL_USERS_COUNT", totalUsersCount})
-export const toggleIsFetching: Dispatch<boolean> = (isFetching: boolean) => ({type: "SET_IS_FETCHING", isFetching})
-export const toggleIsFollowing = (isFetching:boolean, userId: number) => ({type: "FOLLOWING_IN_PROGRESS", isFetching, userId})*/
-
 const todosSlice = createSlice({
     name: 'users',
     initialState: {
-        users: [],
-        pageSize: 5,
-        totalUsersCount: 0,
-        currentPage: 1,
-        isFetching: false,
-        followingInProgress: []
+        dialogs: [
+            {id: 1, name: 'Alex'},
+            {id: 2, name: 'Danil'},
+            {id: 3, name: 'Rail'},
+            {id: 4, name: 'Artur'},
+            {id: 5, name: 'Nikita'}
+        ] as Array<dialogsType>,
+
+        messages: [
+            {
+                id: 1,
+                message: 'Hi',
+                icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
+            },
+            {
+                id: 2,
+                message: 'How are you?',
+                icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
+            },
+            {
+                id: 3,
+                message: 'message',
+                icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
+            },
+            {
+                id: 4,
+                message: 'message',
+                icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
+            },
+        ] as Array<messagesType>,
+        addNewMessage: '' as string,
     },
     reducers: {
         followed(state, action) {
-            debugger
             return {
                 ...state,
                 users: state.users.map(u => {
-                        if (u.id === action.payload) {
+                        if (u.id === action.userId) {
                             return {...u, followed: !u.followed}
                         }
                         return u
@@ -150,46 +134,48 @@ const todosSlice = createSlice({
             }
         },
         setUsers(state, action){
-            debugger
             return {
                 ...state,
-                users: [...action.payload]
+                users: [...action.users]
             }
         },
         setCurrentPage(state, action){
-            debugger
             return {
                 ...state,
-                currentPage: action.payload
+                currentPage: action.currentPage
             }
         },
         setTotalUsersCount(state, action){
-            debugger
             return {
                 ...state,
-                totalUsersCount: action.payload
+                totalUsersCount: action.totalUsersCount
             }
         },
         toggleIsFetching(state, action){
-            debugger
             return {
                 ...state,
-                isFetching: action.payload
+                isFetching: action.isFetching
             }
         },
         toggleIsFollowing(state, action){
-            debugger
             return {
                 ...state,
-                followingInProgress: action.payload
-                    ? [...state.followingInProgress, action.payload]
-                    : state.followingInProgress.filter(id => id !== action.payload)
+                followingInProgress: action.isFetching
+                    ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id => id !== action.userId)
             }
         }
     }
 })
 
 export const { followed, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleIsFollowing } = todosSlice.actions
+
+export const followed: Dispatch<number> = (userId: number)=> ({type: 'FOLLOWED', userId})
+export const setUsers: Dispatch<UserType[]> = (users: UserType[]) => ({type: 'SET_USERS', users})
+export const setCurrentPage: Dispatch<number> = (currentPage: number) => ({type: "SET_CURRENT_PAGE", currentPage})
+export const setTotalUsersCount: Dispatch<number> = (totalUsersCount: number) => ({type: "SET_TOTAL_USERS_COUNT", totalUsersCount})
+export const toggleIsFetching: Dispatch<boolean> = (isFetching: boolean) => ({type: "SET_IS_FETCHING", isFetching})
+export const toggleIsFollowing = (isFetching:boolean, userId: number) => ({type: "FOLLOWING_IN_PROGRESS", isFetching, userId})
 
 export const getUsersThunkCreator = (currentPage, pageSize) => {
     return (dispatch) => {
@@ -239,6 +225,4 @@ export const onFollowChangeThunkCreator = (userId, follow) => {
     }
 }
 
-/*
-export default usersReducer*/
-export default todosSlice.reducer
+export default usersReducer
