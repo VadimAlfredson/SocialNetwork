@@ -57,14 +57,14 @@ type usersStateType = {
     followingInProgress: []
 }
 
-let initialState: usersStateType = {
+/*let initialState: usersStateType = {
     users: [],
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
     followingInProgress: []
-}
+}*/
 
 /*const usersReducer = (state = initialState, action: UserActionType) => {
     switch (action.type) {
@@ -134,7 +134,7 @@ const todosSlice = createSlice({
         currentPage: 1,
         isFetching: false,
         followingInProgress: []
-    },
+    } as usersStateType,
     reducers: {
         followed(state, action) {
             debugger
