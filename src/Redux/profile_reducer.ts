@@ -115,7 +115,6 @@ const todosSlice = createSlice({
             }
         },
         setUserProfile(state, action) {
-            debugger
         return {
                 ...state,
                 profile: action.payload

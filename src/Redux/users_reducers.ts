@@ -150,35 +150,30 @@ const todosSlice = createSlice({
             }
         },
         setUsers(state, action){
-            debugger
             return {
                 ...state,
                 users: [...action.payload]
             }
         },
         setCurrentPage(state, action){
-            debugger
             return {
                 ...state,
                 currentPage: action.payload
             }
         },
         setTotalUsersCount(state, action){
-            debugger
             return {
                 ...state,
                 totalUsersCount: action.payload
             }
         },
         toggleIsFetching(state, action){
-            debugger
             return {
                 ...state,
                 isFetching: action.payload
             }
         },
         toggleIsFollowing(state, action){
-            debugger
             return {
                 ...state,
                 followingInProgress: action.payload
