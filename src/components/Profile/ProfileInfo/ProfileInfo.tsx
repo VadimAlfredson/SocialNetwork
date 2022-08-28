@@ -19,7 +19,7 @@ const ProfileInfo = (props) => {
                  discription
 
         </div>
-        <ProfileStatus status='Hi! This is my status!'/>
+        <ProfileStatus status={props.status} putStatusThunkCreator={props.putStatusThunkCreator}/>
         Main Content;
     </div>
 }

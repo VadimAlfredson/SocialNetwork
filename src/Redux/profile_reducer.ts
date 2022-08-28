@@ -1,6 +1,6 @@
-import {usersApi} from "../components/api/api";
+import {profileApi, usersApi} from "../components/api/api";
 import {SetUserData} from "./auth_reducers";
-import { createSlice } from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 
 
 export type profilePageType = {
@@ -88,14 +88,15 @@ let i: number = 5
 const todosSlice = createSlice({
     name: 'profile',
     initialState: {
-    posts: [
-        {id: 1, message: 'Hi, how are you?', likeCount: 23},
-        {id: 2, message: 'Yo', likeCount: 12},
-        {id: 3, message: 'My first post!', likeCount: 32},
-    ] as Array<postsType>,
-    newPostText: ' ' as string,
-    profile: null
-},
+        posts: [
+            {id: 1, message: 'Hi, how are you?', likeCount: 23},
+            {id: 2, message: 'Yo', likeCount: 12},
+            {id: 3, message: 'My first post!', likeCount: 32},
+        ] as Array<postsType>,
+        newPostText: ' ' as string,
+        profile: null,
+        status: '',
+    },
     reducers: {
         AddPostActionCreator(state, action) {
             let newPost: postsType = {
@@ -110,28 +111,55 @@ const todosSlice = createSlice({
             }
         },
         UpdatePostTextActionCreator(state, action) {
-        if (action != null) {
+            if (action != null) {
                 state.newPostText = action.payload;
             }
         },
         setUserProfile(state, action) {
-        return {
+            return {
                 ...state,
                 profile: action.payload
             }
+        },
+        setStatus(state, action) {
+            return {
+                ...state,
+                status: action.payload
+            }
+
         }
     }
 })
 
-export const { AddPostActionCreator, UpdatePostTextActionCreator, setUserProfile } = todosSlice.actions
+export const {AddPostActionCreator, UpdatePostTextActionCreator, setUserProfile, setStatus} = todosSlice.actions
 export default todosSlice.reducer
 
-export const userProfileThunkCreator = (userId) => {
+export const userProfileThunkCreator = (userId: number) => {
     return (dispatch) => {
         usersApi.userProfile(userId)
             .then(data => {
                 dispatch(setUserProfile(data))
             })
+    }
+}
+
+export const getStatusThunkCreator = (userId: number) => {
+    return (dispatch) => {
+        profileApi.getStatus(userId)
+            .then(data => {
+                dispatch(setStatus(data))
+            })
+    }
+}
+
+export const putStatusThunkCreator = (status) => {
+    return (dispatch) => {
+        profileApi.putStatus(status)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(setStatus(status))
+                }
+                })
     }
 }
 

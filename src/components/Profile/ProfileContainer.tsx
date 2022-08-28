@@ -1,7 +1,12 @@
 import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {setUserProfile, userProfileThunkCreator} from "../../Redux/profile_reducer";
+import {
+    getStatusThunkCreator,
+    putStatusThunkCreator,
+    setUserProfile,
+    userProfileThunkCreator
+} from "../../Redux/profile_reducer";
 import {AddStateType} from "../../Redux/reduxStore";
 import {
     useLocation,
@@ -10,6 +15,7 @@ import {
 } from "react-router-dom";
 import {compose} from "redux";
 import {withAuthNavigate} from "../hoc/witAuthNavigate";
+import set = Reflect.set;
 
 function withRouter(Component) {
     function ComponentWithRouterProp(props) {
@@ -33,25 +39,23 @@ class ProfileContainer extends React.Component<any, any> {
         let userId: number = this.props.router.params.userId
         if (!userId) {userId = 25265}
         this.props.userProfileThunkCreator(userId)
-        /*axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-            .then(responce => {
-                this.props.setUserProfile(responce.data)
-            })*/
+        this.props.getStatusThunkCreator(userId)
     }
 
     render(): React.ReactNode {
-        return <Profile {...this.props} profile={this.props.profile} />
+        return <Profile {...this.props} profile={this.props.profile} status={this.props.status} putStatusThunkCreator={this.props.putStatusThunkCreator}/>
     }
 }
 
 let mapStateToProps = (state: AddStateType) => {
     return {
-        profile: state.profilePage.profile
+        profile: state.profilePage.profile,
+        status: state.profilePage.status
     }
 }
 
 export default compose(
     withRouter,
-    connect (mapStateToProps, {setUserProfile, userProfileThunkCreator}),
+    connect (mapStateToProps, {setUserProfile, userProfileThunkCreator, getStatusThunkCreator, putStatusThunkCreator}),
     withAuthNavigate
 )(ProfileContainer)
