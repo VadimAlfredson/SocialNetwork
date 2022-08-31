@@ -21,7 +21,6 @@ export class ProfileStatus extends React.Component {
     }
 
     onStatusChange = (e) => {
-        debugger
         this.setState({
             status: e.currentTarget.value
         });
@@ -48,7 +47,7 @@ export class ProfileStatus extends React.Component {
                 onChange={this.onStatusChange}
                 autoFocus={true}
                 onBlur={this.deactivateEditMode}
-                value={this.props.status}/>
+                value={this.state.status}/>
                 </div>
             }
         </div>
