@@ -1,6 +1,7 @@
 import React from "react";
 import {dialogsPageType} from "../../../Redux/dialogs_reducer";
 import s from "../Dialogs.module.css";
+import {AddMessageForm} from "./AddMessageForm";
 
 export const AddMessage = (props: {
     dialogsPage: dialogsPageType,
@@ -18,19 +19,13 @@ export const AddMessage = (props: {
     }
 
     return (
-        <div className={s.divAddMessage}>
-            <div>
-            <textarea
-                placeholder={'Add message'}
-                className={s.textareaAddMessage}
-                ref={createMessage}
-                onChange={onMessageChange}
-                value={props.dialogsPage.addNewMessage}
-            />
-            </div>
-            <div>
-                <button className={s.buttonAddMessage} onClick={addMessageElement}>Sent</button>
-            </div>
-        </div>
+        <AddMessageForm
+            dialogsPage={props.dialogsPage}
+            AddMessageIDialogs={props.AddMessageIDialogs}
+            UpdateMessageInDialogs={props.UpdateMessageInDialogs}
+            addMessageElement={addMessageElement}
+            onMessageChange={onMessageChange}
+            createMessage={createMessage}
+        />
     )
 }

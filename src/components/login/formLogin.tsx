@@ -6,7 +6,7 @@ import * as yup from "yup";
 export const LoginForm = () => {
     const validationSchema = yup.object().shape({
         email: yup.string().typeError('Incorrect email').required('required to fill out')
-        })
+    })
     return <Formik
         initialValues={{
             email: '',
@@ -14,25 +14,29 @@ export const LoginForm = () => {
             checkbox: '',
         }}
         validateOnBlur
-        onSubmit={(values => { console.log(values)})}
+        onSubmit={(values => {
+            console.log(values)
+        })}
         validationSchema={validationSchema}
     >
-        {({ values,
+        {({
+              values,
               errors,
               touched,
               handleBlur,
               handleChange,
               isValid,
               handleSubmit,
-              dirty}) => (
+              dirty
+          }) => (
             <div>
                 <input
-                type={'email'}
-                name={'email'}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.email}
-                placeholder={'email'}
+                    type={'email'}
+                    name={'email'}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.email}
+                    placeholder={'email'}
                 /><br/>
                 <input
                     type={'password'}
@@ -50,10 +54,11 @@ export const LoginForm = () => {
                     value={values.checkbox}
                 /><br/>
                 <button
-                disabled={!isValid && !dirty}
-                onClick={handleSubmit}
-                type={'submit'}
-                >login</button>
+                    disabled={!isValid && !dirty}
+                    onClick={handleSubmit}
+                    type={'submit'}
+                >login
+                </button>
             </div>
         )}
     </Formik>
