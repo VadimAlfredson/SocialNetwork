@@ -1,5 +1,5 @@
 import React from "react";
-import {ErrorMessage, Field, Form, Formik} from "formik";
+import {Formik} from "formik";
 import * as yup from "yup";
 
 
@@ -32,6 +32,7 @@ export const LoginForm = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.email}
+                placeholder={'email'}
                 /><br/>
                 <input
                     type={'password'}
@@ -39,6 +40,7 @@ export const LoginForm = () => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.password}
+                    placeholder={'password'}
                 /><br/>
                 <input
                     type={'checkbox'}
