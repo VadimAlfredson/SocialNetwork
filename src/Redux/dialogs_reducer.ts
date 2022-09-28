@@ -137,7 +137,7 @@ const todosSlice = createSlice({
         AddMessageInDialogsActionCreator(state, action) {
             let newMessage = {
                 id: j++,
-                message: action.payload.textMessage,
+                message: action.payload,
                 icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
             };
             return {
