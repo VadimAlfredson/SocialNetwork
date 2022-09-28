@@ -34,6 +34,7 @@ export const AddMessageForm = (props: {
     dialogsPage: dialogsPageType,
     AddMessageInDialogs: (textMessage: string) => void
 }) => {
+    const validationSchema = yup.string()
     let addMessageElement = (values: string) => {
         props.AddMessageInDialogs(values);
     }
@@ -41,12 +42,14 @@ export const AddMessageForm = (props: {
         initialValues={{
             textMessage: '',
         }}
+        validateOnBlur
         onSubmit={(values => {
             addMessageElement(values.textMessage)
             console.log(values.textMessage)
         })}
-        validateOnBlur
-    > {({
+        validationSchema={validationSchema}
+    >
+        {({
             values,
             handleBlur,
             handleChange,
@@ -67,7 +70,8 @@ export const AddMessageForm = (props: {
                 disabled={!isValid && !dirty}
                 onClick={handleSubmit}
                 type={'submit'}
-            >Add new message</button>
+            >Add new message
+            </button>
         </div>
     )}
     </Formik>
