@@ -1,7 +1,7 @@
 import React from "react";
 import {
-    AddMessageIDialogsActionCreator,
-    UpdateMessageInDialogsActionCreator
+    AddMessageInDialogsActionCreator,
+    /*UpdateMessageInDialogsActionCreator*/
 } from "../../Redux/dialogs_reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
@@ -20,13 +20,13 @@ let mapStateToProps = (state: AddStateType) => {
 let mapDispatchToProps = (dispatch: DispatchType) => {
     return {
 
-        AddMessageIDialogs: () => {
-            dispatch(AddMessageIDialogsActionCreator())
+        AddMessageInDialogs: (textMessage: string) => {
+            dispatch(AddMessageInDialogsActionCreator(textMessage))
         },
-        UpdateMessageInDialogs: (text: string) => {
+        /*UpdateMessageInDialogs: (text: string) => {
             dispatch(UpdateMessageInDialogsActionCreator(text));
 
-        },
+        },*/
     }
 }
 

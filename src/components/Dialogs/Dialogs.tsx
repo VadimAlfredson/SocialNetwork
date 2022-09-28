@@ -8,9 +8,10 @@ import {dialogsPageType} from "../../Redux/dialogs_reducer";
 
 const Dialogs = (props: {
                      dialogsPage: dialogsPageType,
-                     AddMessageIDialogs: () => void,
-                     UpdateMessageInDialogs: (text: string) => void,
+                     AddMessageInDialogs: () => void,
+                     /*UpdateMessageInDialogs: (text: string) => void,*/
                      isAuth: boolean
+    textMessage: string
                  }
 ) => {
     let dialogUsers = props.dialogsPage.dialogs.map(
@@ -34,9 +35,9 @@ const Dialogs = (props: {
                 </div>
                 <div className={s.addMessage}>
                     <AddMessage
-                        AddMessageIDialogs={props.AddMessageIDialogs}
+                        AddMessageIDialogs={props.AddMessageInDialogs}
                         dialogsPage={props.dialogsPage}
-                        UpdateMessageInDialogs={props.UpdateMessageInDialogs}
+                        /*UpdateMessageInDialogs={props.UpdateMessageInDialogs}*/
                     />
                 </div>
             </div>

@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 export type dialogsPageType = {
     dialogs: dialogsType[],
     messages: messagesType[],
-    addNewMessage: string,
 }
 
 export type dialogsType = {
@@ -18,7 +17,7 @@ export type messagesType = {
 }
 
 export type dialogsReducerAction = {
-    type: 'ADD-MESSAGE-IN-DIALOGS' | 'UPDATE-MESSAGE-IN-DIALOGS'
+    type: 'ADD-MESSAGE-IN-DIALOGS'
     newMessage?: string
 }
 
@@ -133,28 +132,26 @@ const todosSlice = createSlice({
                 icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
             },
         ] as Array<messagesType>,
-        addNewMessage: '' as string,
     },
     reducers: {
-        AddMessageIDialogsActionCreator(state, action) {
+        AddMessageInDialogsActionCreator(state, action) {
             let newMessage = {
                 id: j++,
-                message: state.addNewMessage,
+                message: action.payload.textMessage,
                 icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
             };
             return {
                 ...state,
                 messages: [...state.messages, newMessage],
-                addNewMessage: ''
             };
         },
-        UpdateMessageInDialogsActionCreator(state, action) {
+/*        UpdateMessageInDialogsActionCreator(state, action) {
             if (action != null) {
                 state.addNewMessage = action.payload;
             }
-        }
+        }*/
     }
 })
 
-export const { AddMessageIDialogsActionCreator, UpdateMessageInDialogsActionCreator } = todosSlice.actions
+export const { AddMessageInDialogsActionCreator, /*UpdateMessageInDialogsActionCreator*/ } = todosSlice.actions
 export default todosSlice.reducer

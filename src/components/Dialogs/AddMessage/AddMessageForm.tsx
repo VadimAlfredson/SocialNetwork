@@ -32,24 +32,22 @@ import * as yup from "yup";
 
 export const AddMessageForm = (props: {
     dialogsPage: dialogsPageType,
-    AddMessageIDialogs: () => void
-    UpdateMessageInDialogs: (text: string) => void
-    createMessage
-    addMessageElement
-    onMessageChange
+    AddMessageInDialogs: (textMessage: string) => void
 }) => {
+    let addMessageElement = (values: string) => {
+        props.AddMessageInDialogs(values);
+    }
     return <Formik
         initialValues={{
             textMessage: '',
         }}
         onSubmit={(values => {
-            console.log(values)
+            addMessageElement(values.textMessage)
+            console.log(values.textMessage)
         })}
         validateOnBlur
     > {({
             values,
-            errors,
-            touched,
             handleBlur,
             handleChange,
             isValid,
@@ -58,7 +56,7 @@ export const AddMessageForm = (props: {
         }) => (
         <div>
             <input
-                type={'text'}
+                type={'textarea'}
                 name={'textMessage'}
                 onChange={handleChange}
                 onBlur={handleBlur}
