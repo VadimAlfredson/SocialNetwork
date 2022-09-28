@@ -40,13 +40,14 @@ export const AddMessageForm = (props: {
     }
     return <Formik
         initialValues={{
-            textMessage: '',
+            textMessage: '' as string,
         }}
         validateOnBlur
-        onSubmit={(values => {
+        onSubmit={(values, {resetForm}) => {
             addMessageElement(values.textMessage)
             console.log(values.textMessage)
-        })}
+            resetForm({values: undefined})
+        }}
         validationSchema={validationSchema}
     >
         {({
@@ -57,8 +58,9 @@ export const AddMessageForm = (props: {
             handleSubmit,
             dirty
         }) => (
-        <div>
+        <div className={s.divAddMessage}>
             <input
+                className={s.inputAddMessage}
                 type={'textarea'}
                 name={'textMessage'}
                 onChange={handleChange}
@@ -67,10 +69,11 @@ export const AddMessageForm = (props: {
                 placeholder={'Add new message'}
             /><br/>
             <button
+                className={s.buttonAddMessage}
                 disabled={!isValid && !dirty}
                 onClick={handleSubmit}
                 type={'submit'}
-            >Add new message
+            >Sent
             </button>
         </div>
     )}

@@ -63,10 +63,10 @@
     margin: 2%;
 }
 
-.textareaAddMessage {
+.inputAddMessage {
     float: left;
     width: 100%;
-    grid-area: textarea;
+    grid-area: input;
     border-radius: 15px;
     border: solid 2px rgba(0, 0, 0, 0.55);
     background: linear-gradient(to bottom right, rgba(255, 171, 171, 0.29), rgba(255, 255, 255, 0.54), rgba(155, 255, 121, 0.3));
@@ -85,8 +85,8 @@
 
 .divAddMessage {
     display: grid;
-    grid-template-areas: 'textarea button';
-    grid-template-columns: 9fr 2fr;
+    grid-template-areas: 'input c button';
+    grid-template-columns: 20fr 1fr 4fr;
 }
 
 .iconMessage {
