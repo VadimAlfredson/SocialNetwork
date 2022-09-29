@@ -101,20 +101,19 @@ const todosSlice = createSlice({
         AddPostActionCreator(state, action) {
             let newPost: postsType = {
                 id: i++,
-                message: state.newPostText,
+                message: action.payload,
                 likeCount: 0,
             };
             return {
                 ...state,
                 posts: [newPost, ...state.posts],
-                newPostText: ''
             }
         },
-        UpdatePostTextActionCreator(state, action) {
+/*        UpdatePostTextActionCreator(state, action) {
             if (action != null) {
                 state.newPostText = action.payload;
             }
-        },
+        },*/
         setUserProfile(state, action) {
             return {
                 ...state,
