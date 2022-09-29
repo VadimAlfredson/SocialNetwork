@@ -14,7 +14,7 @@ export const MyPostsForm = (props: {
         }}
         validateOnBlur
         onSubmit={(values, {resetForm}) => {
-                props.createNewPost(values.newPost),
+            props.createNewPost(values.newPost)
             console.log(values.newPost)
             resetForm({values: undefined})
         }}
@@ -29,14 +29,14 @@ export const MyPostsForm = (props: {
           }) => (
             <div /*className={s.addpost}*/>
                 <input
-                    type={'textarea'}
+                    type={'input'}
                     name={'newPost'}
                     onChange={handleChange}
                     placeholder={'Add text'}
-                    /*className={s.createText}*/
+                    className={s.createText}
                     value={values.newPost}
                     onBlur={handleBlur}
-                /><br/>
+                />
                 <button
                     className={s.buttonAddPost}
                     disabled={!isValid && !dirty}

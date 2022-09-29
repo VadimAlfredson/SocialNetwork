@@ -18,8 +18,8 @@ export type postsType = {
 export type ProfileType = ProfileReducerAction | setUserProfile
 
 export type ProfileReducerAction = {
-    type: 'ADD-POST' | 'UPDATE-POST-TEXT'
-    newText?: string
+    type: 'ADD-POST'
+    newPost: string
 
 }
 export type setUserProfile = {
@@ -130,7 +130,7 @@ const todosSlice = createSlice({
     }
 })
 
-export const {AddPostActionCreator, UpdatePostTextActionCreator, setUserProfile, setStatus} = todosSlice.actions
+export const {AddPostActionCreator, setUserProfile, setStatus} = todosSlice.actions
 export default todosSlice.reducer
 
 export const userProfileThunkCreator = (userId: number) => {
