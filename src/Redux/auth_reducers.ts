@@ -52,5 +52,27 @@ export const loginAuthThunkCreator = () => {
     }
 }
 
+export const loginThunkCreator = (email: string, password: string, rememberMe: boolean) => {
+    return (dispatch) => {
+        authApi.login(email, password, rememberMe)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(loginAuthThunkCreator())
+                }
+            })
+    }
+}
+
+export const logoutThunkCreator = () => {
+    return (dispatch) => {
+        authApi.logout()
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(loginAuthThunkCreator(null, null, null, false))
+                }
+            })
+    }
+}
+
 
 export default authReducer

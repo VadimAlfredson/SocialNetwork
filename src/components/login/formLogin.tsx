@@ -1,9 +1,11 @@
 import React from "react";
 import {Formik} from "formik";
 import * as yup from "yup";
+import {connect} from "react-redux";
+import {loginThunkCreator} from "../../Redux/auth_reducers";
 
 
-export const LoginForm = () => {
+const LoginForm = (props) => {
     const validationSchema = yup.object().shape({
         email: yup.string().typeError('Incorrect email').required('required to fill out')
     })
@@ -11,11 +13,12 @@ export const LoginForm = () => {
         initialValues={{
             email: '',
             password: '',
-            checkbox: '',
+            checkbox: false,
         }}
         validateOnBlur
         onSubmit={(values => {
             console.log(values)
+            props.loginThunkCreator(values.email, values.password, values.checkbox)
         })}
         validationSchema={validationSchema}
     >
@@ -63,3 +66,6 @@ export const LoginForm = () => {
         )}
     </Formik>
 };
+
+
+export default connect(null, {loginThunkCreator})(LoginForm)
