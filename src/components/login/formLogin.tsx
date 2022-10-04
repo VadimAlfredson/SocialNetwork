@@ -3,9 +3,15 @@ import {Formik} from "formik";
 import * as yup from "yup";
 import {connect} from "react-redux";
 import {loginThunkCreator} from "../../Redux/auth_reducers";
+import { Navigate } from "react-router-dom";
 
 
 const LoginForm = (props) => {
+
+    if (props.isAuth){
+        return <Navigate to={"/profile/"}/>
+    }
+
     const validationSchema = yup.object().shape({
         email: yup.string().typeError('Incorrect email').required('required to fill out')
     })
@@ -67,5 +73,7 @@ const LoginForm = (props) => {
     </Formik>
 };
 
-
-export default connect(null, {loginThunkCreator})(LoginForm)
+const mapStateToProps = (state) => ({
+  isAuth: state.auth.isAuth
+})
+export default connect(mapStateToProps, {loginThunkCreator})(LoginForm)
