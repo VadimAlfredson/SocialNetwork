@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './Header.module.css';
 import {NavLink} from "react-router-dom";
+import {logoutThunkCreator} from "../../Redux/auth_reducers";
 
 const Header = (props) => {
     return <header className={s.header}>
@@ -8,7 +9,9 @@ const Header = (props) => {
         <h2 className={s.h2}><em>Social Void</em></h2>
         <div className={s.loginBlock}>
             {props.isAuth ?
-                <div>{props.login} <button onClick={props.logoutTC}>Log out</button></div>
+                <div>{props.login}
+                <button onClick={props.logoutThunkCreator}>Log out</button>
+                </div>
                  :
             <NavLink to={'/login'}>login</NavLink>}
         </div>

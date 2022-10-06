@@ -5,7 +5,7 @@ import {loginAuthThunkCreator, SetUserData, logoutThunkCreator} from "../../Redu
 
 class HeaderContainer extends React.Component {
     componentDidMount() {
-        this.props.loginATC()
+        this.props.loginAuthThunkCreator()
     }
 
     render() {
@@ -18,10 +18,4 @@ let mapStateToProps = (state) => ({
     login: state.auth.login
 })
 
-let mapDispatchToProps=(state)=> ({
-    SetUserData: SetUserData,
-    loginATC: loginAuthThunkCreator,
-    logoutTC: logoutThunkCreator
-})
-
-export default connect (mapStateToProps, mapDispatchToProps) (HeaderContainer)
+export default connect (mapStateToProps, {loginAuthThunkCreator, SetUserData, logoutThunkCreator}) (HeaderContainer)

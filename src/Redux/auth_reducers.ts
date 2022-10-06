@@ -29,7 +29,7 @@ const authReducer = (state = initialState, action: SetUserDataType) => {
             return {
                 ...state,
                 ...action.data,
-                isAuth: true
+                /*isAuth: true*/
             }
         }
         default:
@@ -38,15 +38,24 @@ const authReducer = (state = initialState, action: SetUserDataType) => {
     }
 }
 
-export const SetUserData = (userId: number, email: string, login: string, isAuth: boolean): SetUserDataType => ({type: 'SET_USER_DATA', data:{userId, email, login, isAuth}})
+export const SetUserData: (userId: number | null,
+                           email: string | null,
+                           login: string | null,
+                           isAuth: boolean) => SetUserDataType =
+    (userId,
+     email,
+     login,
+     isAuth) => ({
+        type: 'SET_USER_DATA', data:{userId, email, login, isAuth}
+     })
 
 export const loginAuthThunkCreator = () => {
     return (dispatch) => {
         authApi.loginAuth()
             .then(data => {
                 if (data.resultCode === 0) {
-                    let {id, email, login, isAuth} = data.data;
-                    dispatch(SetUserData(id, email, login, isAuth))
+                    let {id, email, login} = data.data;
+                    dispatch(SetUserData(id, email, login, true))
                 }
             })
     }
@@ -68,7 +77,7 @@ export const logoutThunkCreator = () => {
         authApi.logout()
             .then(data => {
                 if (data.resultCode === 0) {
-                    dispatch(loginAuthThunkCreator(null, null, null, false))
+                    dispatch(SetUserData(null, null, null, false))
                 }
             })
     }
