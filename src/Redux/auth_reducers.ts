@@ -53,7 +53,6 @@ const todosSlice = createSlice({
             return {
                 ...state,
                 ...action.payload,
-                isAuth: true
             }
         }
     }
@@ -78,8 +77,7 @@ export const loginAuthThunkCreator = () => {
         authApi.loginAuth()
             .then(data => {
                 if (data.resultCode === 0) {
-                    let {userId, email, login} = data.data;
-                    dispatch(SetUserData({userId, email, login}))
+                    dispatch(SetUserData({userId: data.userId, email: data.email, login: data.login, isAuth: true}))
                 }
             })
     }
@@ -101,7 +99,7 @@ export const logoutThunkCreator = () => {
         authApi.logout()
             .then(data => {
                 if (data.resultCode === 0) {
-                    dispatch(SetUserData(null, null, null, false))
+                    dispatch(SetUserData({userId: null, email: null, login: null, isAuth: false}))
                 }
             })
     }
