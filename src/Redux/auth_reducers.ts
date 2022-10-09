@@ -1,13 +1,14 @@
 
 import {authApi} from "../components/api/api";
 import {Dispatch} from "react";
+import {createSlice} from "@reduxjs/toolkit";
 
 
 export type AuthReducersType = SetUserDataType
 
 type SetUserDataType = {
-    type: 'SET_USER_DATA'
-    data: userDataType
+    type: string
+    payload: userDataType
 }
 
 type userDataType = {
@@ -17,7 +18,7 @@ type userDataType = {
     isAuth: boolean
 }
 
-let initialState: userDataType = {
+/*let initialState: userDataType = {
     userId: null,
     email: null,
     login: null,
@@ -30,16 +31,38 @@ const authReducer = (state = initialState, action: SetUserDataType) => {
             return {
                 ...state,
                 ...action.data,
-                /*isAuth: true*/
+                /!*isAuth: true*!/
             }
         }
         default:
             return state
 
     }
-}
+}*/
 
-export const SetUserData: (userId: number | null,
+const todosSlice = createSlice({
+    name: 'auth',
+    initialState: {
+        userId: null,
+        email: null,
+        login: null,
+        isAuth: false
+    } as userDataType,
+    reducers: {
+        SetUserData(state: userDataType, action){
+            return {
+                ...state,
+                ...action.payload,
+                isAuth: true
+            }
+        }
+    }
+    })
+
+export  const {SetUserData} = todosSlice.actions
+export default todosSlice.reducer
+
+/*export const SetUserData: (userId: number | null,
                            email: string | null,
                            login: string | null,
                            isAuth: boolean) => SetUserDataType =
@@ -48,15 +71,15 @@ export const SetUserData: (userId: number | null,
      login,
      isAuth) => ({
         type: 'SET_USER_DATA', data:{userId, email, login, isAuth}
-     })
+     })*/
 
 export const loginAuthThunkCreator = () => {
     return (dispatch: Dispatch<any>) => {
         authApi.loginAuth()
             .then(data => {
                 if (data.resultCode === 0) {
-                    let {id, email, login} = data.data;
-                    dispatch(SetUserData(id, email, login, true))
+                    let {userId, email, login} = data.data;
+                    dispatch(SetUserData({userId, email, login}))
                 }
             })
     }
@@ -85,4 +108,5 @@ export const logoutThunkCreator = () => {
 }
 
 
-export default authReducer
+/*
+export default authReducer*/
