@@ -1,5 +1,6 @@
 
 import {authApi} from "../components/api/api";
+import {Dispatch} from "react";
 
 
 export type AuthReducersType = SetUserDataType
@@ -50,7 +51,7 @@ export const SetUserData: (userId: number | null,
      })
 
 export const loginAuthThunkCreator = () => {
-    return (dispatch) => {
+    return (dispatch: Dispatch<any>) => {
         authApi.loginAuth()
             .then(data => {
                 if (data.resultCode === 0) {
@@ -62,7 +63,7 @@ export const loginAuthThunkCreator = () => {
 }
 
 export const loginThunkCreator = (email: string, password: string, rememberMe: boolean) => {
-    return (dispatch) => {
+    return (dispatch: Dispatch<any>) => {
         authApi.login(email, password, rememberMe)
             .then(data => {
                 if (data.resultCode === 0) {
@@ -73,7 +74,7 @@ export const loginThunkCreator = (email: string, password: string, rememberMe: b
 }
 
 export const logoutThunkCreator = () => {
-    return (dispatch) => {
+    return (dispatch: Dispatch<any>) => {
         authApi.logout()
             .then(data => {
                 if (data.resultCode === 0) {

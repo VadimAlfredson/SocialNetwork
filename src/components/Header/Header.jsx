@@ -1,7 +1,6 @@
 import React from 'react';
 import s from './Header.module.css';
 import {NavLink} from "react-router-dom";
-import {logoutThunkCreator} from "../../Redux/auth_reducers";
 
 const Header = (props) => {
     return <header className={s.header}>
