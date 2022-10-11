@@ -58,7 +58,7 @@ const todosSlice = createSlice({
     }
     })
 
-export  const {SetUserData} = todosSlice.actions
+export const {SetUserData} = todosSlice.actions
 export default todosSlice.reducer
 
 /*export const SetUserData: (userId: number | null,
@@ -77,7 +77,7 @@ export const loginAuthThunkCreator = () => {
         authApi.loginAuth()
             .then(data => {
                 if (data.resultCode === 0) {
-                    dispatch(SetUserData({userId: data.userId, email: data.email, login: data.login, isAuth: true}))
+                    dispatch(SetUserData({userId: data.data.userId, email: data.data.email, login: data.data.login, isAuth: true}))
                 }
             })
     }

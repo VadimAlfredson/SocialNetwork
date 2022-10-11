@@ -15,13 +15,6 @@ export type postsType = {
     likeCount: number,
 }
 
-export type ProfileType = ProfileReducerAction | setUserProfile
-
-export type ProfileReducerAction = {
-    type: 'ADD-POST'
-    newPost: string
-
-}
 export type setUserProfile = {
     type: 'SET_USER_PROFILE'
     profile: null | any
