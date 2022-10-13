@@ -25,6 +25,7 @@ export default todosSlice.reducer
 
 export const InitializeAppTC = () => (dispatch: Dispatch<any>) => {
     let promise = dispatch(loginAuthThunkCreator());
+    debugger
     Promise.all([promise]).then(() => {
         dispatch(InitializedSuccessAC())
     });

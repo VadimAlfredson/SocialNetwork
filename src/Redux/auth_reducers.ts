@@ -74,7 +74,7 @@ export default todosSlice.reducer
 
 export const loginAuthThunkCreator = () => {
     return (dispatch: Dispatch<any>) => {
-        authApi.loginAuth()
+        return authApi.loginAuth()
             .then(data => {
                 if (data.resultCode === 0) {
                     dispatch(SetUserData({userId: data.data.userId, email: data.data.email, login: data.data.login, isAuth: true}))
