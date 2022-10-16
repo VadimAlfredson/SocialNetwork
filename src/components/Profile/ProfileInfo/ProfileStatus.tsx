@@ -1,17 +1,26 @@
 import s from './../Profile.module.css';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 export const ProfileStatus = (props) => {
     let [editMode, setEditMode] = useState(false)
+
     let activeStatusInput = () => setEditMode(true)
+
     let deactivateEditMode = () => {
         setEditMode(false)
         props.putStatusThunkCreator(status)
     }
+
     let [status, setStatus] = useState(props.status)
+
     let onStatusChange = (e) => {
         setStatus(e.currentTarget.value)
-    }
+    };
+
+    useEffect( () => {
+        setStatus(props.status)
+    }, [props.status]);
+
     return (
         <div>  {
             !editMode &&
