@@ -14,8 +14,9 @@ export type UserType = {
     status: string
     followed: boolean,
 }
-
+/*
 export type UserActionType = FollowedActionType | SetUsersActionType | SetCurrentPageActionType | SetTotalUsersCountActionType | SetIsFetchingAC | SetIsFollowingActionType
+
 
 type SetIsFollowingActionType = {
     type: 'FOLLOWING_IN_PROGRESS'
@@ -47,6 +48,7 @@ type SetIsFetchingAC ={
     type: "SET_IS_FETCHING"
     isFetching: boolean
 }
+*/
 
 type usersStateType = {
     users: UserType[]
@@ -125,7 +127,7 @@ export const setTotalUsersCount: Dispatch<number> = (totalUsersCount: number) =>
 export const toggleIsFetching: Dispatch<boolean> = (isFetching: boolean) => ({type: "SET_IS_FETCHING", isFetching})
 export const toggleIsFollowing = (isFetching:boolean, userId: number) => ({type: "FOLLOWING_IN_PROGRESS", isFetching, userId})*/
 
-const todosSlice = createSlice({
+const todosSlice: any = createSlice({
     name: 'users',
     initialState: {
         users: [],
@@ -137,7 +139,6 @@ const todosSlice = createSlice({
     } as usersStateType,
     reducers: {
         followed(state, action) {
-            debugger
             return {
                 ...state,
                 users: state.users.map(u => {
@@ -186,7 +187,7 @@ const todosSlice = createSlice({
 
 export const { followed, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleIsFollowing } = todosSlice.actions
 
-export const getUsersThunkCreator = (currentPage, pageSize) => {
+export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
     return (dispatch) => {
         dispatch(toggleIsFetching(true))
         usersApi.getUsers(currentPage, pageSize)
@@ -198,7 +199,7 @@ export const getUsersThunkCreator = (currentPage, pageSize) => {
     }
 }
 
-export const onPageChangeThunkCreator = (pageNumber, pageSize) => {
+export const onPageChangeThunkCreator = (pageNumber: number, pageSize: number) => {
     return (dispatch) => {
         dispatch(setCurrentPage(pageNumber))
         dispatch(toggleIsFetching(true))
@@ -211,7 +212,7 @@ export const onPageChangeThunkCreator = (pageNumber, pageSize) => {
     }
 }
 
-export const onFollowChangeThunkCreator = (userId, follow) => {
+export const onFollowChangeThunkCreator = (userId: number, follow: boolean) => {
     return (dispatch) => {
         dispatch(toggleIsFollowing(true, userId))
         if (follow == true) {

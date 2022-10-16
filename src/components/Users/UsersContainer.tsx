@@ -17,6 +17,13 @@ import Preloader from "../common/Preloader/Preloader";
 import {withAuthNavigate} from "../hoc/witAuthNavigate";
 import {Navigate} from "react-router-dom"
 import {compose} from "redux";
+import {
+    getCurrentPage,
+    getFollowingInProgress, getIsAuth,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from "../../Redux/users_selectors";
 
 
 export class UsersContainer extends React.Component {
@@ -92,6 +99,17 @@ export class UsersContainer extends React.Component {
 
 let mapStateToProps = (state: AddStateType) => {
     return {
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        followingInProgress: getFollowingInProgress(state),
+        isAuth: getIsAuth(state)
+    }
+}
+
+/*let mapStateToProps = (state: AddStateType) => {
+    return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
@@ -99,7 +117,7 @@ let mapStateToProps = (state: AddStateType) => {
         followingInProgress: state.usersPage.followingInProgress,
         isAuth: state.auth.isAuth
     }
-}
+}*/
 
 /*let mapDispatchToProps = (dispatch: DispatchType) => {
     return {
