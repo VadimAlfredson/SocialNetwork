@@ -11,6 +11,7 @@ const MyPosts = (props: {
     let postElements = props.profilePage.posts.map(
         (p) => <Post message={p.message} likeCount={p.likeCount}  key={p.id}/>
     );
+    console.log('Rerender')
     return (
         <div>
             <MyPostsForm

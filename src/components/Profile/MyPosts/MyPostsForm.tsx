@@ -4,10 +4,11 @@ import s from './MyPosts.module.css'
 import {profilePageType} from "../../../Redux/profile_reducer";
 import {Formik} from "formik";
 
-export const MyPostsForm = (props: {
+export const MyPostsForm = React.memo((props: {
     profilePage: profilePageType,
     createNewPost: Dispatch<string>,
 }) => {
+    console.log('rerenderPost')
     return <Formik
         initialValues={{
             newPost: '' as string
@@ -48,4 +49,4 @@ export const MyPostsForm = (props: {
         )}
 
     </Formik>
-}
+})
