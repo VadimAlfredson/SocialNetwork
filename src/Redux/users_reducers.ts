@@ -187,54 +187,38 @@ const todosSlice: any = createSlice({
 
 export const { followed, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleIsFollowing } = todosSlice.actions
 
-export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
-    return (dispatch) => {
+export const getUsersThunkCreator = (currentPage: number, pageSize: number) => async (dispatch: Dispatch<any>) => {
         dispatch(toggleIsFetching(true))
-        usersApi.getUsers(currentPage, pageSize)
-            .then(data => {
-                dispatch(setUsers(data.items))
-                dispatch(setTotalUsersCount(data.totalCount))
+        let response = await usersApi.getUsers(currentPage, pageSize)
+                dispatch(setUsers(response.items))
+                dispatch(setTotalUsersCount(response.totalCount))
                 dispatch(toggleIsFetching(false))
-            })
-    }
 }
 
-export const onPageChangeThunkCreator = (pageNumber: number, pageSize: number) => {
-    return (dispatch) => {
+export const onPageChangeThunkCreator = (pageNumber: number, pageSize: number) => async (dispatch: Dispatch<any>) => {
         dispatch(setCurrentPage(pageNumber))
         dispatch(toggleIsFetching(true))
-        usersApi.getUsers2(pageNumber, pageSize)
-        .then(data => {
-            dispatch(setUsers(data.items))
-            dispatch(setTotalUsersCount(data.totalCount))
+        let response = await usersApi.getUsers2(pageNumber, pageSize)
+            dispatch(setUsers(response.items))
+            dispatch(setTotalUsersCount(response.totalCount))
             dispatch(toggleIsFetching(false))
-        })
-    }
 }
 
-export const onFollowChangeThunkCreator = (userId: number, follow: boolean) => {
-    return (dispatch) => {
+export const onFollowChangeThunkCreator = (userId: number, follow: boolean) => async (dispatch: Dispatch<any>) => {
         dispatch(toggleIsFollowing(true, userId))
         if (follow == true) {
-            usersApi.unfollowUser(userId)
-                .then(data => {
-                    if (data.resultCode == 0) {
+           let response = await usersApi.unfollowUser(userId)
+                    if (response.resultCode == 0) {
                         dispatch(followed(userId))
                     }
                     dispatch(toggleIsFollowing(false, userId))
-                })
         } else {
-            usersApi.followedUser(userId)
-                .then(data => {
-                    if (data.resultCode == 0) {
+            let response = await usersApi.followedUser(userId)
+                    if (response.resultCode == 0) {
                         dispatch(followed(userId))
                     }
                     dispatch(toggleIsFollowing(false, userId))
-                })
         }
-    }
 }
 
-/*
-export default usersReducer*/
 export default todosSlice.reducer

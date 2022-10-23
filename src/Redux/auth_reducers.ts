@@ -72,37 +72,25 @@ export default todosSlice.reducer
         type: 'SET_USER_DATA', data:{userId, email, login, isAuth}
      })*/
 
-export const loginAuthThunkCreator = () => {
-    return (dispatch: Dispatch<any>) => {
-        return authApi.loginAuth()
-            .then(data => {
-                if (data.resultCode === 0) {
-                    dispatch(SetUserData({userId: data.data.userId, email: data.data.email, login: data.data.login, isAuth: true}))
+export const loginAuthThunkCreator = () => async (dispatch: Dispatch<any>) => {
+        let response = await authApi.loginAuth()
+                if (response.resultCode === 0) {
+                    dispatch(SetUserData({userId: response.data.userId, email: response.data.email, login: response.data.login, isAuth: true}))
                 }
-            })
     }
-}
 
-export const loginThunkCreator = (email: string, password: string, rememberMe: boolean) => {
-    return (dispatch: Dispatch<any>) => {
-        authApi.login(email, password, rememberMe)
-            .then(data => {
-                if (data.resultCode === 0) {
+export const loginThunkCreator = (email: string, password: string, rememberMe: boolean) => async (dispatch: Dispatch<any>) => {
+        let response = await authApi.login(email, password, rememberMe)
+                if (response.resultCode === 0) {
                     dispatch(loginAuthThunkCreator())
                 }
-            })
-    }
 }
 
-export const logoutThunkCreator = () => {
-    return (dispatch: Dispatch<any>) => {
-        authApi.logout()
-            .then(data => {
-                if (data.resultCode === 0) {
+export const logoutThunkCreator = () => async (dispatch: Dispatch<any>) => {
+       let response = await authApi.logout()
+                if (response.resultCode === 0) {
                     dispatch(SetUserData({userId: null, email: null, login: null, isAuth: false}))
                 }
-            })
-    }
 }
 
 

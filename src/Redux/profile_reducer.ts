@@ -1,6 +1,7 @@
 import {profileApi, usersApi} from "../components/api/api";
 import {SetUserData} from "./auth_reducers";
 import {createSlice} from "@reduxjs/toolkit";
+import {Dispatch} from "react";
 
 
 export type profilePageType = {
@@ -126,33 +127,21 @@ const todosSlice = createSlice({
 export const {AddPostActionCreator, setUserProfile, setStatus} = todosSlice.actions
 export default todosSlice.reducer
 
-export const userProfileThunkCreator = (userId: number) => {
-    return (dispatch) => {
-        usersApi.userProfile(userId)
-            .then(data => {
-                dispatch(setUserProfile(data))
-            })
-    }
+export const userProfileThunkCreator = (userId: number) => async (dispatch: Dispatch<any>) => {
+        let response = await usersApi.userProfile(userId)
+                dispatch(setUserProfile(response))
 }
 
-export const getStatusThunkCreator = (userId: number) => {
-    return (dispatch) => {
-        profileApi.getStatus(userId)
-            .then(data => {
-                dispatch(setStatus(data))
-            })
-    }
+export const getStatusThunkCreator = (userId: number) => async (dispatch: Dispatch<any>)=> {
+    let response = await profileApi.getStatus(userId)
+                dispatch(setStatus(response))
 }
 
-export const putStatusThunkCreator = (status) => {
-    return (dispatch) => {
-        profileApi.putStatus(status)
-            .then(data => {
-                if (data.resultCode === 0) {
+export const putStatusThunkCreator = (status: string) => async (dispatch: Dispatch<any>) => {
+       let response = profileApi.putStatus(status)
+                if (response.resultCode === 0) {
                     dispatch(setStatus(status))
                 }
-                })
-    }
 }
 
 /*

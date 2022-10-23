@@ -39,7 +39,7 @@ export class UsersContainer extends React.Component {
         //     })
     }
 
-    onPageChange = (pageNumber) => {
+    onPageChange = (pageNumber: number) => {
         this.props.onPageChangeThunkCreator(pageNumber, this.props.pageSize)
         // this.props.setCurrentPage(pageNumber)
         // this.props.toggleIsFetching(true)
@@ -74,11 +74,11 @@ export class UsersContainer extends React.Component {
     }
 
     render(): React.ReactNode {
-        let pageCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
+ /*       let pageCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
         let pages = [];
         for (let i = 1; i <= pageCount; i++) {
             pages.push(i);
-        }
+        }*/
         return <>
             {this.props.isFitching ? <Preloader/> : null}
             <Users
