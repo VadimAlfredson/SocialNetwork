@@ -41,7 +41,7 @@ export const MyPostsForm = React.memo((props: {
                 <button
                     className={s.buttonAddPost}
                     disabled={!isValid && !dirty}
-                    onClick={handleSubmit}
+                    onClick={() => {handleSubmit()}}
                     type={'submit'}
                 >Add post
                 </button>
