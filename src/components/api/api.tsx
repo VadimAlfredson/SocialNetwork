@@ -1,4 +1,5 @@
-import * as axios from "axios";
+import axios from "axios";
+import {authMeResponse} from "./apiTypes";
 
 
 export const instance = axios.create({
@@ -10,77 +11,77 @@ export const instance = axios.create({
 })
 
 export const usersApi = {
-    getUsers: (currentPage, pageSize) => {
+    getUsers: (currentPage: number, pageSize: number) => {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`)
-            .then(responce => {
-                return responce.data
+            .then(response => {
+                return response.data
             })
     },
 
-    getUsers2: (pageNumber, pageSize) => {
+    getUsers2: (pageNumber: number, pageSize: number) => {
         return instance.get(`users?page=${pageNumber}&count=${pageSize}`)
-            .then(responce => {
-                return responce.data
+            .then(response => {
+                return response.data
             })
     },
 
-    unfollowUser: (userId) => {
+    unfollowUser: (userId: number) => {
         return instance.delete(`follow/${userId}`)
-            .then(responce => {
-                return responce.data
+            .then(response => {
+                return response.data
             })
     },
 
-    followedUser: (userId) => {
+    followedUser: (userId: number) => {
         return instance.post(`follow/${userId}`)
-            .then(responce => {
-                return responce.data
+            .then(response => {
+                return response.data
             })
     },
-    userProfile: (userId) => {
+    userProfile: (userId: number) => {
         console.warn('Obsolete method. Please profileApi object')
         return profileApi.userProfile(userId)
     }
 }
 
 export const profileApi = {
-    userProfile: (userId) => {
+    userProfile: (userId: number) => {
         return instance.get(`profile/${userId}`)
-            .then(responce => {
-                return responce.data
+            .then(response => {
+                return response.data
             })
     },
-    getStatus: (userId) => {
+    getStatus: (userId: number) => {
         return instance.get(`profile/status/${userId}`)
-            .then(responce => {
-                return responce.data
+            .then(response => {
+                return response.data
             })
     },
-    putStatus: (status) => {
+    putStatus: (status: string) => {
         return instance.put('profile/status',  {status: status})
-            .then(responce => {
-                return responce.data
+            .then(response => {
+                return response.data
             })
     },
 }
 
 export const authApi = {
     loginAuth: () => {
-        return instance.get(`auth/me`)
-            .then(responce => {
-                return responce.data
+        return instance.get<authMeResponse>(`auth/me`)
+            .then(response => {
+                return response.data
             })
     },
     login: (email: string, password: string, rememberMe: boolean = false) => {
         return instance.post(`auth/login`, { email, password, rememberMe })
-            .then(responce => {
-                return responce.data
+            .then(response => {
+                return response.data
             })
     },
     logout: () => {
         return instance.delete(`auth/login`)
-            .then(responce => {
-                return responce.data
+            .then(response => {
+                return response.data
             })
     },
 }

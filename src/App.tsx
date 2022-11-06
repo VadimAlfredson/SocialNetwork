@@ -20,6 +20,8 @@ const Login = React.lazy(() => import('./components/login/login'))
 
 class App extends React.Component {
     componentDidMount() {
+        // исправь потом
+        // @ts-ignore
         this.props.InitializeAppTC()
     }
     render() {

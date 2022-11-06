@@ -10,7 +10,7 @@ const todosSlice = createSlice({
         initialized: false
     },
     reducers: {
-        InitializedSuccessAC(state, action){
+        InitializedSuccessAC(state){
             return {
                 ...state,
                 initialized: true

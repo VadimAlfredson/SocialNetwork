@@ -1,7 +1,9 @@
 import {Dispatch} from "react";
 import {usersApi} from "../components/api/api";
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, ThunkAction} from "@reduxjs/toolkit";
 import {dialogsType, messagesType} from "./dialogs_reducer";
+import {AddStateType} from "./reduxStore";
+import {ActionType} from "./Types";
 
 export type UserType = {
     name: string,
@@ -56,7 +58,7 @@ type usersStateType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
-    followingInProgress: []
+    followingInProgress: Array<any>
 }
 
 /*let initialState: usersStateType = {
@@ -187,7 +189,7 @@ const todosSlice: any = createSlice({
 
 export const { followed, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleIsFollowing } = todosSlice.actions
 
-export const getUsersThunkCreator = (currentPage: number, pageSize: number) => async (dispatch: Dispatch<any>) => {
+export const getUsersThunkCreator = (currentPage: number, pageSize: number): ThunkAction<Promise<void>, AddStateType, unknown, any> => async (dispatch) => {
         dispatch(toggleIsFetching(true))
         let response = await usersApi.getUsers(currentPage, pageSize)
                 dispatch(setUsers(response.items))
@@ -195,7 +197,7 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => a
                 dispatch(toggleIsFetching(false))
 }
 
-export const onPageChangeThunkCreator = (pageNumber: number, pageSize: number) => async (dispatch: Dispatch<any>) => {
+export const onPageChangeThunkCreator = (pageNumber: number, pageSize: number): ThunkAction<Promise<void>, AddStateType, unknown, any> => async (dispatch: Dispatch<any>) => {
         dispatch(setCurrentPage(pageNumber))
         dispatch(toggleIsFetching(true))
         let response = await usersApi.getUsers2(pageNumber, pageSize)
@@ -204,7 +206,7 @@ export const onPageChangeThunkCreator = (pageNumber: number, pageSize: number) =
             dispatch(toggleIsFetching(false))
 }
 
-export const onFollowChangeThunkCreator = (userId: number, follow: boolean) => async (dispatch: Dispatch<any>) => {
+export const onFollowChangeThunkCreator = (userId: number, follow: boolean): ThunkAction<Promise<void>, AddStateType, unknown, any> => async (dispatch: Dispatch<any>) => {
         dispatch(toggleIsFollowing(true, userId))
         if (follow == true) {
            let response = await usersApi.unfollowUser(userId)

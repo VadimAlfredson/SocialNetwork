@@ -74,11 +74,11 @@ export class UsersContainer extends React.Component {
     }
 
     render(): React.ReactNode {
- /*       let pageCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
-        let pages = [];
-        for (let i = 1; i <= pageCount; i++) {
-            pages.push(i);
-        }*/
+        /*       let pageCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
+               let pages = [];
+               for (let i = 1; i <= pageCount; i++) {
+                   pages.push(i);
+               }*/
         return <>
             {this.props.isFitching ? <Preloader/> : null}
             <Users
@@ -157,15 +157,15 @@ let mapStateToProps = (state: AddStateType) => {
 export default compose(
     withAuthNavigate,
     connect(mapStateToProps,
-    {
-        followed,
-        setUsers,
-        setCurrentPage,
-        setTotalUsersCount,
-        toggleIsFetching,
-        toggleIsFollowing,
-        getUsersThunkCreator,
-        onPageChangeThunkCreator,
-        onFollowChangeThunkCreator,
-    })
+        {
+            followed,
+            setUsers,
+            setCurrentPage,
+            setTotalUsersCount,
+            toggleIsFetching,
+            toggleIsFollowing,
+            getUsersThunkCreator,
+            onPageChangeThunkCreator,
+            onFollowChangeThunkCreator,
+        })
 )(UsersContainer)

@@ -1,7 +1,5 @@
 import React, {useState} from "react";
-import {UserType} from "../../Redux/users_reducers";
 import s from "../Paginator/paginator.module.css"
-import {NavLink} from "react-router-dom";
 
 let Paginator = (props) => {
     let pageCount = Math.ceil(props.totalUsersCount / props.pageSize);
