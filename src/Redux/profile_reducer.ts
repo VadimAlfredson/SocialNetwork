@@ -1,7 +1,8 @@
 import {profileApi, usersApi} from "../components/api/api";
 import {SetUserData} from "./auth_reducers";
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, ThunkAction} from "@reduxjs/toolkit";
 import {Dispatch} from "react";
+import {AddStateType} from "./reduxStore";
 
 
 export type profilePageType = {
@@ -138,8 +139,8 @@ export const getStatusThunkCreator = (userId: number) => async (dispatch: Dispat
 }
 
 export const putStatusThunkCreator = (status: string) => async (dispatch: Dispatch<any>) => {
-       let response = profileApi.putStatus(status)
-                if (response.resultCode === 0) {
+       let response = await profileApi.putStatus(status)
+                if (response.resultCode == 0) {
                     dispatch(setStatus(status))
                 }
 }

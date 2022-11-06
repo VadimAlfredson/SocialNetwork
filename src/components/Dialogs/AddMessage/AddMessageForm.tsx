@@ -4,32 +4,6 @@ import s from "../Dialogs.module.css";
 import {Formik} from "formik";
 import * as yup from "yup";
 
-/*export const AddMessageForm = (props: {
-    dialogsPage: dialogsPageType,
-    AddMessageIDialogs: () => void
-    UpdateMessageInDialogs: (text: string) => void
-    createMessage
-    addMessageElement
-    onMessageChange
-}) => {
-    return (
-        <div className={s.divAddMessage}>
-            <div>
-            <textarea
-                placeholder={'Add message'}
-                className={s.textareaAddMessage}
-                ref={props.createMessage}
-                onChange={props.onMessageChange}
-                value={props.dialogsPage.addNewMessage}
-            />
-            </div>
-            <div>
-                <button className={s.buttonAddMessage} onClick={props.addMessageElement}>Sent</button>
-            </div>
-        </div>
-    )
-}*/
-
 export const AddMessageForm = (props: {
     dialogsPage: dialogsPageType,
     AddMessageInDialogs: (textMessage: string) => void
@@ -71,7 +45,7 @@ export const AddMessageForm = (props: {
             <button
                 className={s.buttonAddMessage}
                 disabled={!isValid && !dirty}
-                onClick={handleSubmit}
+                onClick={() => {handleSubmit()}}
                 type={'submit'}
             >Sent
             </button>

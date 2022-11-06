@@ -1,12 +1,17 @@
-import React from "react";
+import React, {FC} from "react";
 import {Formik} from "formik";
 import * as yup from "yup";
 import {connect} from "react-redux";
 import {loginThunkCreator} from "../../Redux/auth_reducers";
 import { Navigate } from "react-router-dom";
+import {AddStateType} from "../../Redux/reduxStore";
 
+type PropsType = {
+    isAuth: boolean
+    loginThunkCreator: (email: string, password: string, checkbox: boolean) => void
+}
 
-const LoginForm = (props) => {
+const LoginForm: FC<PropsType> = (props) => {
 
     if (props.isAuth){
         return <Navigate to={"/profile/"}/>
@@ -60,11 +65,11 @@ const LoginForm = (props) => {
                     name={'checkbox'}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.checkbox}
+                    /*value={values.checkbox}*/
                 /><br/>
                 <button
                     disabled={!isValid && !dirty}
-                    onClick={handleSubmit}
+                    onClick={() => {handleSubmit()}}
                     type={'submit'}
                 >login
                 </button>
@@ -73,7 +78,7 @@ const LoginForm = (props) => {
     </Formik>
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AddStateType) => ({
   isAuth: state.auth.isAuth
 })
 export default connect(mapStateToProps, {loginThunkCreator})(LoginForm)

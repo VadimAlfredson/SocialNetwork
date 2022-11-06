@@ -9,7 +9,8 @@ import {DispatchType} from "../../../Redux/Types";
 
 let mapStateToProps = (state: AddStateType) => {
     return {
-        profilePage: state.profilePage
+        posts: state.profilePage.posts,
+        newPostText: state.profilePage.newPostText
     }
 };
 

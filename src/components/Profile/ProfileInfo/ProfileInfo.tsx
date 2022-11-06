@@ -1,9 +1,15 @@
-import React from 'react';
+import React, {FC} from 'react';
 import s from './../Profile.module.css';
 import Preloader from "../../common/Preloader/Preloader";
 import {ProfileStatus} from "./ProfileStatus";
 
-const ProfileInfo = (props) => {
+type PropsType = {
+    profile: null | any
+    putStatusThunkCreator: () => void
+    status: string
+}
+
+const ProfileInfo: FC<PropsType> = (props) => {
     if (!props.profile) {
         return <Preloader />
     }

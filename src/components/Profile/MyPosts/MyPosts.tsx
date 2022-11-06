@@ -1,14 +1,16 @@
-import React, {Dispatch} from 'react'
+import React, {Dispatch, FC} from 'react'
 import Post from './Post/Post'
 import s from './MyPosts.module.css'
-import {profilePageType} from "../../../Redux/profile_reducer";
+import {postsType} from "../../../Redux/profile_reducer";
 import {MyPostsForm} from "./MyPostsForm";
 
-const MyPosts = (props: {
-    profilePage: profilePageType,
-    createNewPost: Dispatch<string>,
-    }) => {
-    let postElements = props.profilePage.posts.map(
+type PropsType = {
+    posts: Array<postsType>,
+    createNewPost: (NewPost: string) => void,
+}
+
+const MyPosts: FC<PropsType> = (props) => {
+    let postElements = props.posts.map(
         (p) => <Post message={p.message} likeCount={p.likeCount}  key={p.id}/>
     );
     console.log('Rerender')

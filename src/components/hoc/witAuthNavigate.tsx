@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {FC} from 'react'
 import {connect} from "react-redux";
 import {Navigate} from 'react-router-dom';
 import {AddStateType} from "../../Redux/reduxStore";
@@ -8,7 +8,7 @@ let mapStateToProps = (state: AddStateType) => {
         isAuth: state.auth.isAuth
     }
 }
-export const withAuthNavigate = (Component) => {
+export const withAuthNavigate = (Component: FC<any>) => {
 
     class NavigateComponent extends React.Component<{isAuth: boolean}> {
         render() {

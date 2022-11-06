@@ -2,9 +2,6 @@ import './App.css';
 import React from 'react';
 import Navbar from './components/Navbar/Navbar';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-/*import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import UsersContainer from "./components/Users/UsersContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";*/
 import HeaderContainer from "./components/Header/HeaderContainer";
 /*import Login from "./components/login/login";*/
 import {connect} from "react-redux";
@@ -13,15 +10,17 @@ import {InitializeAppTC} from "./Redux/app_reducers";
 import Preloader from "./components/common/Preloader/Preloader";
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
+
+//ПРОВЕРЬ тут какая то жопа
+// @ts-ignore
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'))
+// @ts-ignore
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
 const Login = React.lazy(() => import('./components/login/login'))
 
 
-class App extends React.Component {
+class App extends React.Component<{InitializeAppTC: () => void}> {
     componentDidMount() {
-        // исправь потом
-        // @ts-ignore
         this.props.InitializeAppTC()
     }
     render() {

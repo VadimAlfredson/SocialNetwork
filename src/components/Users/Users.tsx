@@ -10,7 +10,7 @@ type PropsType = {
     followingInProgress: Array<number>
     pageSize: number
     currentPage: number
-    onPageChange: () => void
+    onPageChange: (pageNumber: number) => void
     onFollowChange: (id: number, followed: boolean) => void
 }
 

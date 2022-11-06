@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {
@@ -17,8 +17,8 @@ import {compose} from "redux";
 import {withAuthNavigate} from "../hoc/witAuthNavigate";
 import set = Reflect.set;
 
-function withRouter(Component) {
-    function ComponentWithRouterProp(props) {
+function withRouter(Component: FC) {
+    function ComponentWithRouterProp(props: any) {
         let location = useLocation();
         let navigate = useNavigate();
         let params = useParams();

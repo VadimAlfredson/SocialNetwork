@@ -5,8 +5,7 @@ import {profilePageType} from "../../../Redux/profile_reducer";
 import {Formik} from "formik";
 
 export const MyPostsForm = React.memo((props: {
-    profilePage: profilePageType,
-    createNewPost: Dispatch<string>,
+    createNewPost: (newPost: string) => void,
 }) => {
     console.log('rerenderPost')
     return <Formik

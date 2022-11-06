@@ -34,13 +34,11 @@ type PropsType = {
     getUsersThunkCreator: (currentPage: number, pageSize: number) => void
     onPageChangeThunkCreator: (pageNumber: number, pageSize: number) => void
     onFollowChangeThunkCreator: (userId: number, follow: boolean) => void
-    followed: () => void
-    toggleIsFollowing: () => void
     followingInProgress: Array<number>
 }
 
 
-export class UsersContainer extends React.Component<PropsType> {
+class UsersContainer extends React.Component<PropsType> {
 
     componentDidMount() {
         this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
@@ -77,11 +75,9 @@ export class UsersContainer extends React.Component<PropsType> {
                 users={this.props.users}
                 pageSize={this.props.pageSize}
                 currentPage={this.props.currentPage}
-                followed={this.props.followed}
                 totalUsersCount={this.props.totalUsersCount}
                 onPageChange={this.onPageChange}
                 onFollowChange={this.onFollowChange}
-                toggleIsFollowing={this.props.toggleIsFollowing}
                 followingInProgress={this.props.followingInProgress}
             />;
         </>

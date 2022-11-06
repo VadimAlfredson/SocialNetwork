@@ -10,6 +10,7 @@ let state = {
 
 it ('Test: new post should be added', () => {
     let action = AddPostActionCreator('Test');
+    // @ts-ignore
     let newState = profile_reducer(state, action);
     expect(newState.posts.length).toBe(4);
     expect(newState.posts[0].message).toBe('Test')
