@@ -11,11 +11,10 @@ import {
     toggleIsFollowing,
     getUsersThunkCreator,
     onPageChangeThunkCreator,
-    onFollowChangeThunkCreator,
+    onFollowChangeThunkCreator, UserType,
 } from "../../Redux/users_reducers";
 import Preloader from "../common/Preloader/Preloader";
 import {withAuthNavigate} from "../hoc/witAuthNavigate";
-import {Navigate} from "react-router-dom"
 import {compose} from "redux";
 import {
     getCurrentPage,
@@ -25,8 +24,23 @@ import {
     getUsers
 } from "../../Redux/users_selectors";
 
+type PropsType = {
+    currentPage: number
+    pageSize: number
+    isFetching: boolean
+    users: Array<UserType>
+    totalUsersCount: number
 
-export class UsersContainer extends React.Component {
+    getUsersThunkCreator: (currentPage: number, pageSize: number) => void
+    onPageChangeThunkCreator: (pageNumber: number, pageSize: number) => void
+    onFollowChangeThunkCreator: (userId: number, follow: boolean) => void
+    followed: () => void
+    toggleIsFollowing: () => void
+    followingInProgress: Array<number>
+}
+
+
+export class UsersContainer extends React.Component<PropsType> {
 
     componentDidMount() {
         this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
@@ -53,34 +67,12 @@ export class UsersContainer extends React.Component {
 
     onFollowChange = (userId: number, follow: boolean) => {
         this.props.onFollowChangeThunkCreator(userId, follow)
-        /*this.props.toggleIsFollowing(true, userId)
-        if (follow == true) {
-            usersApi.unfollowUser(userId)
-                .then(data => {
-                    if (data.resultCode == 0) {
-                        this.props.followed(userId)
-                    }
-                    this.props.toggleIsFollowing(false, userId)
-                })
-        } else {
-            usersApi.followedUser(userId)
-                .then(data => {
-                    if (data.resultCode == 0) {
-                        this.props.followed(userId)
-                    }
-                    this.props.toggleIsFollowing(false, userId)
-                })
-        }*/
     }
 
     render(): React.ReactNode {
-        /*       let pageCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
-               let pages = [];
-               for (let i = 1; i <= pageCount; i++) {
-                   pages.push(i);
-               }*/
+
         return <>
-            {this.props.isFitching ? <Preloader/> : null}
+            {this.props.isFetching ? <Preloader/> : null}
             <Users
                 users={this.props.users}
                 pageSize={this.props.pageSize}
@@ -107,52 +99,6 @@ let mapStateToProps = (state: AddStateType) => {
         isAuth: getIsAuth(state)
     }
 }
-
-/*let mapStateToProps = (state: AddStateType) => {
-    return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        followingInProgress: state.usersPage.followingInProgress,
-        isAuth: state.auth.isAuth
-    }
-}*/
-
-/*let mapDispatchToProps = (dispatch: DispatchType) => {
-    return {
-        followed: (userId: number) => {
-            dispatch(FollowedActionCreator(userId))
-        },
-        setUsers: (users: UserType[]) => {
-            dispatch(SetUsersActionCreator(users))
-        },
-        setCurrentPage: (pageNumber: number) => {
-            dispatch(SetCurrentPageAC(pageNumber))
-        },
-        setTotalUsersCount: (totalCount: number) => {
-            dispatch(SetTotalUsersCountAC(totalCount))
-        },
-        ToggleIsFetching: (isFetching: boolean) => {
-            dispatch(ToggleIsFetchingAC(isFetching))
-        }
-    }
-}
-*/
-
-/*export default withAuthNavigate(connect(mapStateToProps,
-    {
-        followed,
-        setUsers,
-        setCurrentPage,
-        setTotalUsersCount,
-        toggleIsFetching,
-        toggleIsFollowing,
-        getUsersThunkCreator,
-        onPageChangeThunkCreator,
-        onFollowChangeThunkCreator,
-    }
-)(UsersContainer))*/
 
 export default compose(
     withAuthNavigate,

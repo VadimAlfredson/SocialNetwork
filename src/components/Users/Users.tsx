@@ -1,36 +1,30 @@
-import React from "react";
+import React, {FC} from "react";
 import {UserType} from "../../Redux/users_reducers";
 import s from "../Users/users.module.css"
 import {NavLink} from "react-router-dom";
 import Paginator from "../common/Paginator/Paginator";
 
-let Users = (props) => {
-/*    let pageCount = Math.ceil(props.totalUsersCount / props.pageSize);
-    let pages = [];
-    for (let i = 1; i <= pageCount; i++) {
-        pages.push(i)
-    }
-    ;*/
+type PropsType = {
+    users: Array<UserType>
+    totalUsersCount: number
+    followingInProgress: Array<number>
+    pageSize: number
+    currentPage: number
+    onPageChange: () => void
+    onFollowChange: (id: number, followed: boolean) => void
+}
+
+let Users: FC<PropsType> = (props) => {
     return (
         <div>
-            {/*<div>
-                {pages.map(p => {
-                        return <span className={props.currentPage === p ? s.activePage : null}
-                                     onClick={() => {
-                                         props.onPageChange(p)
-                                     }} key={p}
-                        >{p}</span>
-                    }
-                )}
-            </div>*/}
             <Paginator
                 totalUsersCount={props.totalUsersCount}
                 pageSize={props.pageSize}
                 currentPage={props.currentPage}
                 onPageChange={props.onPageChange}
             />
-                {
-                    props.users.map((u: UserType) => <div key={u.id}>
+            {
+                props.users.map((u: UserType) => <div key={u.id}>
         <span>
             <div>
                 <NavLink to={'/profile/' + u.id}>
@@ -51,7 +45,7 @@ let Users = (props) => {
     <div>{u.status}</div>
 </span>
         </span>
-                    </div>)}
+                </div>)}
         </div>
     )
 };
