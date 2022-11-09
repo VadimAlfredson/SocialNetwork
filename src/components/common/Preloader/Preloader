@@ -1,9 +1,0 @@
-import React from "react";
-
-let Preloader = () => {
-    return <div>
-        <img src='https://loading.io/asset/588115'/>
-    </div>
-}
-
-export default Preloader
