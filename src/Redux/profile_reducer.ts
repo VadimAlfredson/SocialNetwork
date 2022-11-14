@@ -4,11 +4,35 @@ import {createSlice, ThunkAction} from "@reduxjs/toolkit";
 import {Dispatch} from "react";
 import {AddStateType} from "./reduxStore";
 
+export type ContactsType = {
+        github:  string | null,
+        vk:  string | null,
+        facebook:  string | null,
+        instagram:  string | null,
+        twitter:  string | null,
+        website:  string | null,
+        youtube:  string | null,
+        mainLink:  string | null
+}
+
+export type PhotosType = {
+    small: string | null
+    large: string | null
+}
+export type ProfileType = {
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: ContactsType
+    photos: PhotosType
+    aboutMe: string
+}
 
 export type profilePageType = {
     posts: postsType[],
     newPostText: string
-    profile: null | string
+    profile: ProfileType | null
 }
 
 export type postsType = {
@@ -23,60 +47,6 @@ export type setUserProfile = {
 
 }
 
-/*let initialState = {
-    posts: [
-        {id: 1, message: 'Hi, how are you?', likeCount: 23},
-        {id: 2, message: 'Yo', likeCount: 12},
-        {id: 3, message: 'My first post!', likeCount: 32},
-    ] as Array<postsType>,
-    newPostText: ' ' as string,
-    profile: null
-}
-
-
-
-let i: number = 5
-
-
-const profileReducer = (state = initialState, action: ProfileType) => {
-    switch (action.type) {
-        case 'ADD-POST': {
-            let newPost: postsType = {
-                id: i++,
-                message: state.newPostText,
-                likeCount: 0,
-            };
-            return {
-                ...state,
-                posts: [newPost, ...state.posts],
-                newPostText: ''
-            }
-        }
-        case 'UPDATE-POST-TEXT': {
-            if (action.newText != null) {
-                state.newPostText = action.newText;
-            }
-            return {
-                ...state,
-                posts: [...state.posts]
-            }
-        }
-        case 'SET_USER_PROFILE': {
-            return {
-                ...state,
-                profile: action.profile
-            }
-        }
-        default:
-            return state;
-    }
-}
-export const AddPostActionCreator = (): ProfileType => ({type: 'ADD-POST'})
-export const UpdatePostTextActionCreator = (text: string): ProfileType => ({
-    type: 'UPDATE-POST-TEXT',
-    newText: text
-})
-export const setUserProfile = (profile: any): ProfileType => ({type: 'SET_USER_PROFILE', profile})*/
 
 let i: number = 5
 
@@ -89,7 +59,27 @@ const todosSlice = createSlice({
             {id: 3, message: 'My first post!', likeCount: 32},
         ] as Array<postsType>,
         newPostText: ' ' as string,
-        profile: null,
+        profile: {
+            userId: null,
+            lookingForAJob: null,
+            lookingForAJobDescription: null,
+            fullName: null,
+            contacts: {
+                github:  null,
+                vk:  null,
+                facebook:  null,
+                instagram:  null,
+                twitter:  null,
+                website:  null,
+                youtube:  null,
+                mainLink:  null
+            },
+            photos: {
+                small: null,
+                large: null
+            },
+            aboutMe: null,
+        },
         status: '',
     },
     reducers: {
@@ -104,11 +94,6 @@ const todosSlice = createSlice({
                 posts: [newPost, ...state.posts],
             }
         },
-/*        UpdatePostTextActionCreator(state, action) {
-            if (action != null) {
-                state.newPostText = action.payload;
-            }
-        },*/
         setUserProfile(state, action) {
             return {
                 ...state,
@@ -121,28 +106,41 @@ const todosSlice = createSlice({
                 status: action.payload
             }
 
+        },
+        savePhotoSuccess(state, action) {
+            return {
+                ...state,
+                profile: {...state.profile, photos: action.payload}
+            }
         }
     }
 })
 
-export const {AddPostActionCreator, setUserProfile, setStatus} = todosSlice.actions
+export const {AddPostActionCreator, setUserProfile, setStatus, savePhotoSuccess} = todosSlice.actions
 export default todosSlice.reducer
 
 export const userProfileThunkCreator = (userId: number) => async (dispatch: Dispatch<any>) => {
-        let response = await usersApi.userProfile(userId)
-                dispatch(setUserProfile(response))
+    let response = await usersApi.userProfile(userId)
+    dispatch(setUserProfile(response))
 }
 
-export const getStatusThunkCreator = (userId: number) => async (dispatch: Dispatch<any>)=> {
+export const getStatusThunkCreator = (userId: number) => async (dispatch: Dispatch<any>) => {
     let response = await profileApi.getStatus(userId)
-                dispatch(setStatus(response))
+    dispatch(setStatus(response))
 }
 
 export const putStatusThunkCreator = (status: string) => async (dispatch: Dispatch<any>) => {
-       let response = await profileApi.putStatus(status)
-                if (response.resultCode == 0) {
-                    dispatch(setStatus(status))
-                }
+    let response = await profileApi.putStatus(status)
+    if (response.resultCode == 0) {
+        dispatch(setStatus(status))
+    }
+}
+
+export const savePhotoTC = (file: any) => async (dispatch: Dispatch<any>) => {
+    let response = await profileApi.putPhoto(file)
+    if (response.resultCode == 0) {
+        dispatch(savePhotoSuccess(response.data.photos))
+    }
 }
 
 /*

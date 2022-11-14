@@ -5,7 +5,8 @@ import {
     getStatusThunkCreator,
     putStatusThunkCreator,
     setUserProfile,
-    userProfileThunkCreator
+    userProfileThunkCreator,
+    savePhotoTC
 } from "../../Redux/profile_reducer";
 import {AddStateType} from "../../Redux/reduxStore";
 import {
@@ -15,7 +16,6 @@ import {
 } from "react-router-dom";
 import {compose} from "redux";
 import {withAuthNavigate} from "../hoc/witAuthNavigate";
-import set = Reflect.set;
 
 function withRouter(Component: FC) {
     function ComponentWithRouterProp(props: any) {
@@ -35,27 +35,41 @@ function withRouter(Component: FC) {
 
 class ProfileContainer extends React.Component<any, any> {
 
-    componentDidMount(): void {
+    refreshProfile(): void {
         let userId: number = this.props.router.params.userId
-        if (!userId) {userId = 25265}
+        if (!userId) {userId = this.props.authorizedUserId}
         this.props.userProfileThunkCreator(userId)
         this.props.getStatusThunkCreator(userId)
     }
 
+    componentDidMount(): void {
+        this.refreshProfile()
+    }
+
+    componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
+        if (this.props.router.params.userId != prevProps.router.params.userId) {this.refreshProfile()}
+    }
+
     render(): React.ReactNode {
-        return <Profile {...this.props} profile={this.props.profile} status={this.props.status} putStatusThunkCreator={this.props.putStatusThunkCreator}/>
+        return <Profile {...this.props}
+                        isOwner={!!this.props.router.params.userId}
+                        profile={this.props.profile} status={this.props.status}
+                        putStatusThunkCreator={this.props.putStatusThunkCreator}
+                        savePhotoTC={this.props.savePhotoTC}
+        />
     }
 }
 
 let mapStateToProps = (state: AddStateType) => {
     return {
         profile: state.profilePage.profile,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        authorizedUserId: state.auth.userId
     }
 }
 
 export default compose(
     withRouter,
-    connect (mapStateToProps, {setUserProfile, userProfileThunkCreator, getStatusThunkCreator, putStatusThunkCreator}),
+    connect (mapStateToProps, {setUserProfile, userProfileThunkCreator, getStatusThunkCreator, putStatusThunkCreator, savePhotoTC}),
     withAuthNavigate
 )(ProfileContainer)
