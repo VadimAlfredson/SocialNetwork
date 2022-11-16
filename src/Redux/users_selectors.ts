@@ -28,3 +28,7 @@ export const getFollowingInProgress = (state: AddStateType) => {
 export const getIsAuth = (state: AddStateType) => {
     return state.usersPage.isAuth
 }
+
+export const getIsFetching = (state: AddStateType) => {
+    return state.usersPage.isFetching
+}

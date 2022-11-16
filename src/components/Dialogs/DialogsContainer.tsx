@@ -19,14 +19,9 @@ let mapStateToProps = (state: AddStateType) => {
 
 let mapDispatchToProps = (dispatch: DispatchType) => {
     return {
-
         AddMessageInDialogs: (text: string) => {
             dispatch(AddMessageInDialogsActionCreator(text))
         },
-        /*UpdateMessageInDialogs: (text: string) => {
-            dispatch(UpdateMessageInDialogsActionCreator(text));
-
-        },*/
     }
 }
 

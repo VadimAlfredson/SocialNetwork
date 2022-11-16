@@ -16,6 +16,8 @@ import {
 } from "react-router-dom";
 import {compose} from "redux";
 import {withAuthNavigate} from "../hoc/witAuthNavigate";
+import {getFollowingInProgress} from "../../Redux/users_selectors";
+import {onFollowChangeThunkCreator} from "../../Redux/users_reducers";
 
 function withRouter(Component: FC) {
     function ComponentWithRouterProp(props: any) {
@@ -50,12 +52,18 @@ class ProfileContainer extends React.Component<any, any> {
         if (this.props.router.params.userId != prevProps.router.params.userId) {this.refreshProfile()}
     }
 
+    /*onFollowChange = (userId: number, follow: boolean) => {
+        this.props.onFollowChangeThunkCreator(userId, follow)
+    }*/
+
     render(): React.ReactNode {
         return <Profile {...this.props}
                         isOwner={!!this.props.router.params.userId}
                         profile={this.props.profile} status={this.props.status}
                         putStatusThunkCreator={this.props.putStatusThunkCreator}
                         savePhotoTC={this.props.savePhotoTC}
+                        /*onFollowChange={this.onFollowChange}
+                        followingInProgress={this.props.followingInProgress}*/
         />
     }
 }
@@ -64,7 +72,8 @@ let mapStateToProps = (state: AddStateType) => {
     return {
         profile: state.profilePage.profile,
         status: state.profilePage.status,
-        authorizedUserId: state.auth.userId
+        authorizedUserId: state.auth.userId,
+        /*followingInProgress: getFollowingInProgress(state),*/
     }
 }
 
@@ -74,6 +83,8 @@ export default compose(
         userProfileThunkCreator,
         getStatusThunkCreator,
         putStatusThunkCreator,
-        savePhotoTC,}),
+        savePhotoTC,
+        onFollowChangeThunkCreator
+    }),
     withAuthNavigate
 )(ProfileContainer)

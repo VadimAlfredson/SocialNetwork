@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {FC} from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from "react-router-dom";
 import FollowingContainer from "../Friends/FollowingContainer";
 
-const Navbar = () => {
+const Navbar  = () => {
     return <nav className={s.nav}>
         <div className={s.item}>
             <NavLink to="/profile" className={navData => navData.isActive ? s.active : s.itemnav}>Profile</NavLink>

@@ -18,7 +18,7 @@ import {withAuthNavigate} from "../hoc/witAuthNavigate";
 import {compose} from "redux";
 import {
     getCurrentPage,
-    getFollowingInProgress, getIsAuth,
+    getFollowingInProgress, getIsAuth, getIsFetching,
     getPageSize,
     getTotalUsersCount,
     getUsers
@@ -77,7 +77,8 @@ let mapStateToProps = (state: AddStateType) => {
         totalUsersCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),
         followingInProgress: getFollowingInProgress(state),
-        isAuth: getIsAuth(state)
+        isAuth: getIsAuth(state),
+        isFetching: getIsFetching(state)
     }
 }
 

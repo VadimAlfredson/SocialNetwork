@@ -9,6 +9,8 @@ type PropsType = {
     status: string
     isOwner: boolean
     savePhotoTC: ({}) => void
+    /*onFollowChange: (userId: number, follow: boolean) => void
+    followingInProgress: () => void*/
 }
 
 const Profile: FC<PropsType> = (props) => {
@@ -18,6 +20,8 @@ const Profile: FC<PropsType> = (props) => {
                      profile={props.profile}
                      putStatusThunkCreator={props.putStatusThunkCreator}
                      status={props.status}
+                     /*onFollowChange={props.onFollowChange}
+                     followingInProgress={props.followingInProgress}*/
         />
         <MyPostsContainer />
     </div>
