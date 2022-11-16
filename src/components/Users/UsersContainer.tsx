@@ -1,4 +1,4 @@
-import React, {Dispatch} from "react";
+import React from "react";
 import {connect} from "react-redux";
 import Users from "./Users";
 import {AddStateType} from "../../Redux/reduxStore";
@@ -42,25 +42,10 @@ class UsersContainer extends React.Component<PropsType> {
 
     componentDidMount() {
         this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
-        // this.props.toggleIsFetching(true)
-        // usersApi.getUsers(this.props.currentPage, this.props.pageSize)
-        //     .then(data => {
-        //         this.props.setUsers(data.items)
-        //         this.props.setTotalUsersCount(data.totalCount)
-        //         this.props.toggleIsFetching(false)
-        //     })
     }
 
     onPageChange = (pageNumber: number) => {
         this.props.onPageChangeThunkCreator(pageNumber, this.props.pageSize)
-        // this.props.setCurrentPage(pageNumber)
-        // this.props.toggleIsFetching(true)
-        // usersApi.getUsers2(pageNumber, this.props.pageSize)
-        //     .then(data => {
-        //         this.props.setUsers(data.items)
-        //         this.props.setTotalUsersCount(data.totalCount)
-        //         this.props.toggleIsFetching(false)
-        //     })
     }
 
     onFollowChange = (userId: number, follow: boolean) => {

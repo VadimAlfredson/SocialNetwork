@@ -10,7 +10,6 @@ import {InitializeAppTC} from "./Redux/app_reducers";
 import Preloader from "./components/common/Preloader/Preloader";
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
-
 //ПРОВЕРЬ тут какая то жопа
 // @ts-ignore
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'))
@@ -24,9 +23,6 @@ class App extends React.Component<{InitializeAppTC: () => void}> {
         this.props.InitializeAppTC()
     }
     render() {
-       /* if (!this.props.initialized){
-            return <Preloader />
-        }*/
         return (
                 <div className='app-wrapper'>
                     <HeaderContainer/>

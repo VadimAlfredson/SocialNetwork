@@ -26,6 +26,12 @@
     padding: 5px 0 5px 0;
 }
 
+.following {
+    color: white;
+    text-decoration: none;
+    padding: 5px 0 10px 0px;
+}
+
 .active {
     color: darkgoldenrod;
     text-decoration: none;

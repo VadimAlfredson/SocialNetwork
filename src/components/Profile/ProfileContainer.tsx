@@ -6,7 +6,7 @@ import {
     putStatusThunkCreator,
     setUserProfile,
     userProfileThunkCreator,
-    savePhotoTC
+    savePhotoTC,
 } from "../../Redux/profile_reducer";
 import {AddStateType} from "../../Redux/reduxStore";
 import {
@@ -70,6 +70,10 @@ let mapStateToProps = (state: AddStateType) => {
 
 export default compose(
     withRouter,
-    connect (mapStateToProps, {setUserProfile, userProfileThunkCreator, getStatusThunkCreator, putStatusThunkCreator, savePhotoTC}),
+    connect (mapStateToProps, {setUserProfile,
+        userProfileThunkCreator,
+        getStatusThunkCreator,
+        putStatusThunkCreator,
+        savePhotoTC,}),
     withAuthNavigate
 )(ProfileContainer)

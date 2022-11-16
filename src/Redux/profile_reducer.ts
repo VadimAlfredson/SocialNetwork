@@ -112,11 +112,17 @@ const todosSlice = createSlice({
                 ...state,
                 profile: {...state.profile, photos: action.payload}
             }
+        },
+        setContacts(state, action) {
+            return{
+                ...state,
+                profile: {...state.profile, contacts: action.payload}
+            }
         }
     }
 })
 
-export const {AddPostActionCreator, setUserProfile, setStatus, savePhotoSuccess} = todosSlice.actions
+export const {AddPostActionCreator, setUserProfile, setStatus, savePhotoSuccess, setContacts} = todosSlice.actions
 export default todosSlice.reducer
 
 export const userProfileThunkCreator = (userId: number) => async (dispatch: Dispatch<any>) => {
@@ -140,6 +146,12 @@ export const savePhotoTC = (file: any) => async (dispatch: Dispatch<any>) => {
     let response = await profileApi.putPhoto(file)
     if (response.resultCode == 0) {
         dispatch(savePhotoSuccess(response.data.photos))
+    }
+}
+export const ProfileThunkCreator = (profile: ProfileType) => async (dispatch: Dispatch<any>) => {
+    let response = await profileApi.putProfile(profile)
+    if (response.resultCode == 0) {
+        dispatch(setContacts(response))
     }
 }
 

@@ -1,9 +1,10 @@
 import React, {FC} from 'react';
 import MyPostsContainer from './MyPosts/MyPostsContainer'
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import {ProfileType} from "../../Redux/profile_reducer";
 
 type PropsType = {
-    profile: any | null
+    profile: ProfileType
     putStatusThunkCreator: () => void
     status: string
     isOwner: boolean

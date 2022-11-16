@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from "react-router-dom";
-import FriendsContainer from "../Friends/FriendsContainer";
+import FollowingContainer from "../Friends/FollowingContainer";
 
 const Navbar = () => {
     return <nav className={s.nav}>
@@ -23,8 +23,8 @@ const Navbar = () => {
         <div className={s.item}>
             <NavLink to="/Setting" className={navData => navData.isActive ? s.active : s.itemnav}>Settings</NavLink>
         </div>
-        <div>
-            <FriendsContainer/>
+        <div className={s.following}>
+            <FollowingContainer />
         </div>
     </nav>
 }

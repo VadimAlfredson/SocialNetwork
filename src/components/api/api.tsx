@@ -1,5 +1,6 @@
 import axios from "axios";
 import {authMeResponse} from "./apiTypes";
+import {ProfileType} from "../../Redux/profile_reducer";
 
 
 export const instance = axios.create({
@@ -20,6 +21,13 @@ export const usersApi = {
 
     getUsers2: (pageNumber: number, pageSize: number) => {
         return instance.get(`users?page=${pageNumber}&count=${pageSize}`)
+            .then(response => {
+                return response.data
+            })
+    },
+
+    getFollowing: (friend: boolean) => {
+        return instance.get(`users?friend=${friend}&count=9`)
             .then(response => {
                 return response.data
             })
@@ -71,6 +79,12 @@ export const profileApi = {
                 'content-type': 'multipart/form-data'
             }
         })
+            .then(response => {
+                return response.data
+            })
+    },
+    putProfile: (profile: ProfileType) => {
+        return instance.put('profile', profile)
             .then(response => {
                 return response.data
             })

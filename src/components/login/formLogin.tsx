@@ -81,4 +81,5 @@ const LoginForm: FC<PropsType> = (props) => {
 const mapStateToProps = (state: AddStateType) => ({
   isAuth: state.auth.isAuth
 })
+
 export default connect(mapStateToProps, {loginThunkCreator})(LoginForm)
