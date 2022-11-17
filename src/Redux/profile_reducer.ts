@@ -3,6 +3,7 @@ import {SetUserData} from "./auth_reducers";
 import {createSlice, ThunkAction} from "@reduxjs/toolkit";
 import {Dispatch} from "react";
 import {AddStateType} from "./reduxStore";
+import {followed, toggleIsFollowing} from "./users_reducers";
 
 export type ContactsType = {
         github:  string | null,
@@ -162,5 +163,16 @@ export const getFollowThunkCreator = (userId: number) => async (dispatch: Dispat
         dispatch(setFollow(response))
 }
 
-/*
-export default profileReducer;*/
+export const onFollowProfileChangeThunkCreator = (userId: number, follow: boolean) => async (dispatch: Dispatch<any>) => {
+    if (follow == true) {
+        let response = await profileApi.deleteFollowing(userId)
+        if (response.resultCode == 0) {
+            dispatch(setFollow(false))
+        }
+    } else {
+        let response = await profileApi.addFollowing(userId)
+        if (response.resultCode == 0) {
+            dispatch(setFollow(true))
+        }
+    }
+}

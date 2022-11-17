@@ -6,7 +6,9 @@ import {
     putStatusThunkCreator,
     setUserProfile,
     userProfileThunkCreator,
-    savePhotoTC, getFollowThunkCreator,
+    savePhotoTC,
+    getFollowThunkCreator,
+    onFollowProfileChangeThunkCreator,
 } from "../../Redux/profile_reducer";
 import {AddStateType} from "../../Redux/reduxStore";
 import {
@@ -16,8 +18,7 @@ import {
 } from "react-router-dom";
 import {compose} from "redux";
 import {withAuthNavigate} from "../hoc/witAuthNavigate";
-import {getFollowingInProgress} from "../../Redux/users_selectors";
-import {onFollowChangeThunkCreator} from "../../Redux/users_reducers";
+import {getFollowingThunkCreator} from "../../Redux/users_reducers";
 
 function withRouter(Component: FC) {
     function ComponentWithRouterProp(props: any) {
@@ -54,17 +55,21 @@ class ProfileContainer extends React.Component<any, any> {
             this.props.router.params.follow != prevProps.router.params.follow) {this.refreshProfile()}
     }
 
-    /*onFollowChange = (userId: number, follow: boolean) => {
-        this.props.onFollowChangeThunkCreator(userId, follow)
-    }*/
+    onFollowProfileChange = (userId: number, follow: boolean) => {
+        this.props.onFollowProfileChangeThunkCreator(userId, follow)
+        this.props.getFollowingThunkCreator(true)
+    }
+
 
     render(): React.ReactNode {
         return <Profile {...this.props}
                         isOwner={!!this.props.router.params.userId}
-                        profile={this.props.profile} status={this.props.status}
+                        profile={this.props.profile}
+                        status={this.props.status}
                         putStatusThunkCreator={this.props.putStatusThunkCreator}
                         savePhotoTC={this.props.savePhotoTC}
                         follow={this.props.follow}
+                        onFollowProfileChange={this.onFollowProfileChange}
         />
     }
 }
@@ -86,8 +91,9 @@ export default compose(
         getStatusThunkCreator,
         putStatusThunkCreator,
         savePhotoTC,
-        onFollowChangeThunkCreator,
-        getFollowThunkCreator
+        getFollowThunkCreator,
+        onFollowProfileChangeThunkCreator,
+        getFollowingThunkCreator
     }),
     withAuthNavigate
 )(ProfileContainer)

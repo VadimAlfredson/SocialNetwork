@@ -94,7 +94,20 @@ export const profileApi = {
             .then(response => {
                 return response.data
             })
-    }
+    },
+    deleteFollowing: (userId: number) => {
+        return instance.delete(`follow/${userId}`)
+            .then(response => {
+                return response.data
+            })
+    },
+
+    addFollowing: (userId: number) => {
+        return instance.post(`follow/${userId}`)
+            .then(response => {
+                return response.data
+            })
+    },
 }
 
 export const authApi = {

@@ -11,6 +11,7 @@ type PropsType = {
     isOwner: boolean
     savePhotoTC: ({}) => void
     follow: boolean
+    onFollowProfileChange: (userId: number, follow: boolean) => void
 }
 
 const ProfileInfo: FC<PropsType> = (props) => {
@@ -30,7 +31,7 @@ const ProfileInfo: FC<PropsType> = (props) => {
         </div>
         <ProfileStatus status={props.status} putStatusThunkCreator={props.putStatusThunkCreator}/>
         <div>{props.isOwner &&
-            <button>{props.follow ? 'Unfollow' : 'Follow'}</button>}
+            <button onClick={()=>{props.onFollowProfileChange(props.profile.userId, props.follow)}}>{props.follow ? 'Unfollow' : 'Follow'}</button>}
         </div>
         <div>
             <Contacts profile={props.profile} isOwner={props.isOwner} />
