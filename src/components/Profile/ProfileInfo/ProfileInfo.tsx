@@ -10,6 +10,7 @@ type PropsType = {
     status: string
     isOwner: boolean
     savePhotoTC: ({}) => void
+    follow: boolean
 }
 
 const ProfileInfo: FC<PropsType> = (props) => {
@@ -28,13 +29,9 @@ const ProfileInfo: FC<PropsType> = (props) => {
             {props.isOwner || <input type={"file"} onChange={onMainPhotoSelected}/>}
         </div>
         <ProfileStatus status={props.status} putStatusThunkCreator={props.putStatusThunkCreator}/>
-        {/*<div>
-            <button
-                disabled={props.followingInProgress.includes(props.profile.userId)}
-                onClick={() => (props.onFollowChange(props.profile.userId, props.profile.followed))
-                }>{u.followed ? 'Unfollow' : 'Follow'}
-            </button>
-        </div>*/}
+        <div>{props.isOwner &&
+            <button>{props.follow ? 'Unfollow' : 'Follow'}</button>}
+        </div>
         <div>
             <Contacts profile={props.profile} isOwner={props.isOwner} />
         </div>

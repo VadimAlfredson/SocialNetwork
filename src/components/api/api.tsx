@@ -88,6 +88,12 @@ export const profileApi = {
             .then(response => {
                 return response.data
             })
+    },
+    getFollow: (userId: number) => {
+        return instance.get(`follow/${userId}`)
+            .then(response => {
+                return response.data
+            })
     }
 }
 

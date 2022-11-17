@@ -33,18 +33,13 @@ export type profilePageType = {
     posts: postsType[],
     newPostText: string
     profile: ProfileType | null
+    follow: boolean
 }
 
 export type postsType = {
     id: number,
     message: string,
     likeCount: number,
-}
-
-export type setUserProfile = {
-    type: 'SET_USER_PROFILE'
-    profile: null | any
-
 }
 
 
@@ -81,6 +76,7 @@ const todosSlice = createSlice({
             aboutMe: null,
         },
         status: '',
+        follow: false,
     },
     reducers: {
         AddPostActionCreator(state, action) {
@@ -118,11 +114,17 @@ const todosSlice = createSlice({
                 ...state,
                 profile: {...state.profile, contacts: action.payload}
             }
+        },
+        setFollow(state, action) {
+            return {
+                ...state,
+                follow: action.payload
+            }
         }
     }
 })
 
-export const {AddPostActionCreator, setUserProfile, setStatus, savePhotoSuccess, setContacts} = todosSlice.actions
+export const {AddPostActionCreator, setUserProfile, setStatus, savePhotoSuccess, setContacts, setFollow} = todosSlice.actions
 export default todosSlice.reducer
 
 export const userProfileThunkCreator = (userId: number) => async (dispatch: Dispatch<any>) => {
@@ -153,6 +155,11 @@ export const ProfileThunkCreator = (profile: ProfileType) => async (dispatch: Di
     if (response.resultCode == 0) {
         dispatch(setContacts(response))
     }
+}
+
+export const getFollowThunkCreator = (userId: number) => async (dispatch: Dispatch<any>) => {
+    let response = await profileApi.getFollow(userId)
+        dispatch(setFollow(response))
 }
 
 /*
