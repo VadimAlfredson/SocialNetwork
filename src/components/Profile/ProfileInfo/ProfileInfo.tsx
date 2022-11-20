@@ -3,6 +3,7 @@ import s from './../Profile.module.css';
 import Preloader from "../../common/Preloader/Preloader";
 import {ProfileStatus} from "./ProfileStatus";
 import {ProfileType} from "../../../Redux/profile_reducer";
+import ProfileInfoForm from "./formProfileInfo";
 
 type PropsType = {
     profile: ProfileType
@@ -29,12 +30,18 @@ const ProfileInfo: FC<PropsType> = (props) => {
                  src={props.profile.photos.large || 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'}/>
             {props.isOwner || <input type={"file"} onChange={onMainPhotoSelected}/>}
         </div>
+        <div><b>{props.profile.fullName}</b></div>
         <ProfileStatus status={props.status} putStatusThunkCreator={props.putStatusThunkCreator}/>
         <div>{props.isOwner &&
-            <button onClick={()=>{props.onFollowProfileChange(props.profile.userId, props.follow)}}>{props.follow ? 'Unfollow' : 'Follow'}</button>}
+        <button onClick={() => {
+            props.onFollowProfileChange(props.profile.userId, props.follow)
+        }}>{props.follow ? 'Unfollow' : 'Follow'}</button>}
         </div>
         <div>
-            <Contacts profile={props.profile} isOwner={props.isOwner} />
+            <Information
+                profile={props.profile}
+                isOwner={props.isOwner}
+            />
         </div>
     </div>
 }
@@ -45,20 +52,29 @@ const Contact: FC<{ contactTitle: string, contactValue: string }> = ({contactTit
     </div>
 }
 
-type ContactsProps = {
+type InfoProps = {
     profile: any
     isOwner: boolean
 }
 
-const Contacts: FC<ContactsProps> = ({profile, isOwner,}) => {
+const Information: FC<InfoProps> = ({profile, isOwner}) => {
     let [editMode, setEditMode] = useState(false)
+    let editModeOnOff = (value: boolean) => setEditMode(value)
     return <div>
-        {isOwner || <button onClick={() => {setEditMode(!editMode)}}>edit contacts</button>}
-        {!isOwner && editMode && <div>edit</div>}
-    <div>{(!isOwner && editMode) || Object.keys(profile.contacts).filter(i =>
+        {isOwner || <button onClick={() => {
+            editModeOnOff(true)
+        }}>edit contacts</button>}
+        {!isOwner && editMode && <div><ProfileInfoForm editModeOnOff={editModeOnOff} /></div>}
+        {editMode || <div>
+            <div><b>lookingForAJob:</b> {profile.lookingForAJob ? "yes" : 'no'}</div>
+            {profile.lookingForAJob &&
+            <div><b>lookingForAJobDescription:</b> {profile.lookingForAJobDescription}</div>}
+        </div>}
+        <div><b>About me:</b>{profile.aboutMe}</div>
+        <div>{(!isOwner && editMode) || Object.keys(profile.contacts).filter(i =>
             isOwner ? profile.contacts[i] != null : i).map(i => {
             return <Contact key={i} contactTitle={i} contactValue={profile.contacts[i]}/>
-    })}</div>
+        })}</div>
     </div>
 }
 

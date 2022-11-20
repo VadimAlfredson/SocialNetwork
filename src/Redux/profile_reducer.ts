@@ -1,19 +1,19 @@
-import {profileApi, usersApi} from "../components/api/api";
-import {SetUserData} from "./auth_reducers";
+import {authApi, profileApi, usersApi} from "../components/api/api";
+import {loginAuthThunkCreator, SetUserData} from "./auth_reducers";
 import {createSlice, ThunkAction} from "@reduxjs/toolkit";
 import {Dispatch} from "react";
 import {AddStateType} from "./reduxStore";
 import {followed, toggleIsFollowing} from "./users_reducers";
 
 export type ContactsType = {
-        github:  string | null,
-        vk:  string | null,
-        facebook:  string | null,
-        instagram:  string | null,
-        twitter:  string | null,
-        website:  string | null,
-        youtube:  string | null,
-        mainLink:  string | null
+    github: string | null,
+    vk: string | null,
+    facebook: string | null,
+    instagram: string | null,
+    twitter: string | null,
+    website: string | null,
+    youtube: string | null,
+    mainLink: string | null
 }
 
 export type PhotosType = {
@@ -57,24 +57,24 @@ const todosSlice = createSlice({
         newPostText: ' ' as string,
         profile: {
             userId: null,
-            lookingForAJob: null,
-            lookingForAJobDescription: null,
+            lookingForAJob: false,
+            lookingForAJobDescription: '',
             fullName: null,
             contacts: {
-                github:  null,
-                vk:  null,
-                facebook:  null,
-                instagram:  null,
-                twitter:  null,
-                website:  null,
-                youtube:  null,
-                mainLink:  null
+                github: '',
+                vk: '',
+                facebook: '',
+                instagram: '',
+                twitter: '',
+                website: '',
+                youtube: '',
+                mainLink: ''
             },
             photos: {
                 small: null,
                 large: null
             },
-            aboutMe: null,
+            aboutMe: '',
         },
         status: '',
         follow: false,
@@ -110,10 +110,10 @@ const todosSlice = createSlice({
                 profile: {...state.profile, photos: action.payload}
             }
         },
-        setContacts(state, action) {
-            return{
+        setProfileInfo(state, action) {
+            return {
                 ...state,
-                profile: {...state.profile, contacts: action.payload}
+                profile: {...state.profile, profile: action.payload}
             }
         },
         setFollow(state, action) {
@@ -125,7 +125,7 @@ const todosSlice = createSlice({
     }
 })
 
-export const {AddPostActionCreator, setUserProfile, setStatus, savePhotoSuccess, setContacts, setFollow} = todosSlice.actions
+export const {AddPostActionCreator, setUserProfile, setStatus, savePhotoSuccess, setProfileInfo, setFollow} = todosSlice.actions
 export default todosSlice.reducer
 
 export const userProfileThunkCreator = (userId: number) => async (dispatch: Dispatch<any>) => {
@@ -154,13 +154,13 @@ export const savePhotoTC = (file: any) => async (dispatch: Dispatch<any>) => {
 export const ProfileThunkCreator = (profile: ProfileType) => async (dispatch: Dispatch<any>) => {
     let response = await profileApi.putProfile(profile)
     if (response.resultCode == 0) {
-        dispatch(setContacts(response))
+        dispatch(setProfileInfo(response.data))
     }
 }
 
 export const getFollowThunkCreator = (userId: number) => async (dispatch: Dispatch<any>) => {
     let response = await profileApi.getFollow(userId)
-        dispatch(setFollow(response))
+    dispatch(setFollow(response))
 }
 
 export const onFollowProfileChangeThunkCreator = (userId: number, follow: boolean) => async (dispatch: Dispatch<any>) => {
