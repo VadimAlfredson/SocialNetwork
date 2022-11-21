@@ -3,17 +3,18 @@ import {Formik} from "formik";
 import * as yup from "yup";
 import {connect} from "react-redux";
 import {loginThunkCreator} from "../../Redux/auth_reducers";
-import { Navigate } from "react-router-dom";
+import {Navigate} from "react-router-dom";
 import {AddStateType} from "../../Redux/reduxStore";
 
 type PropsType = {
     isAuth: boolean
-    loginThunkCreator: (email: string, password: string, checkbox: boolean) => void
+    loginThunkCreator: (email: string, password: string, checkbox: boolean, captcha: string) => void
+    captchaURL: null | string
 }
 
 const LoginForm: FC<PropsType> = (props) => {
 
-    if (props.isAuth){
+    if (props.isAuth) {
         return <Navigate to={"/profile/"}/>
     }
 
@@ -25,11 +26,12 @@ const LoginForm: FC<PropsType> = (props) => {
             email: '',
             password: '',
             checkbox: false,
+            captcha: '',
         }}
         validateOnBlur
         onSubmit={(values => {
             console.log(values)
-            props.loginThunkCreator(values.email, values.password, values.checkbox)
+            props.loginThunkCreator(values.email, values.password, values.checkbox, values.captcha)
         })}
         validationSchema={validationSchema}
     >
@@ -67,9 +69,24 @@ const LoginForm: FC<PropsType> = (props) => {
                     onBlur={handleBlur}
                     /*value={values.checkbox}*/
                 /><br/>
+
+                {props.captchaURL &&
+                <div>
+                    <img src={props.captchaURL}/>
+                <input
+                    type={'text'}
+                    name={'captcha'}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.captcha}
+                /><br/>
+                </div>
+                }
                 <button
                     disabled={!isValid && !dirty}
-                    onClick={() => {handleSubmit()}}
+                    onClick={() => {
+                        handleSubmit()
+                    }}
                     type={'submit'}
                 >login
                 </button>
@@ -79,7 +96,8 @@ const LoginForm: FC<PropsType> = (props) => {
 };
 
 const mapStateToProps = (state: AddStateType) => ({
-  isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    captchaURL: state.auth.captchaURL
 })
 
 export default connect(mapStateToProps, {loginThunkCreator})(LoginForm)

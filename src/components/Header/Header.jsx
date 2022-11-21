@@ -5,7 +5,7 @@ import {NavLink} from "react-router-dom";
 const Header = (props) => {
     return <header className={s.header}>
         <img src=''/>
-        <h2 className={s.h2}><em>Social Void</em></h2>
+        <h2 className={s.h2}><em>Social Network</em></h2>
         <div className={s.loginBlock}>
             {props.isAuth ?
                 <div>{props.login}

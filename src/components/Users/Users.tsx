@@ -48,6 +48,6 @@ let Users: FC<PropsType> = (props) => {
                 </div>)}
         </div>
     )
-};
+}
 
 export default Users

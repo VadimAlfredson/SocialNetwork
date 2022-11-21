@@ -159,12 +159,14 @@ export const onFollowChangeThunkCreator = (userId: number, follow: boolean): Thu
         let response = await usersApi.unfollowUser(userId)
         if (response.resultCode == 0) {
             dispatch(followed(userId))
+            dispatch(getFollowingThunkCreator(true))
         }
         dispatch(toggleIsFollowing(false, userId))
     } else {
         let response = await usersApi.followedUser(userId)
         if (response.resultCode == 0) {
             dispatch(followed(userId))
+            dispatch(getFollowingThunkCreator(true))
         }
         dispatch(toggleIsFollowing(false, userId))
     }

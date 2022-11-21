@@ -151,10 +151,12 @@ export const savePhotoTC = (file: any) => async (dispatch: Dispatch<any>) => {
         dispatch(savePhotoSuccess(response.data.photos))
     }
 }
-export const ProfileThunkCreator = (profile: ProfileType) => async (dispatch: Dispatch<any>) => {
+export const ProfileThunkCreator = (profile: ProfileType) => async (dispatch: Dispatch<any>, getState: AddStateType) => {
+    let userId = getState().auth.userId
     let response = await profileApi.putProfile(profile)
     if (response.resultCode == 0) {
         dispatch(setProfileInfo(response.data))
+        dispatch(userProfileThunkCreator(userId))
     }
 }
 
