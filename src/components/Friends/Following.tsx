@@ -17,7 +17,7 @@ let Following: FC<PropsType> = (props) => {
             <div>
                 <NavLink to={'/profile/' + u.id}>
                 <img src={u.photos.small !== null ? u.photos.small :
-                    'https://st3.depositphotos.com/1027110/18677/v/450/depositphotos_186777156-stock-illustration-dog-collection-swedish-vallhund-geometric.jpg'
+                    'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
                 } className={s.iconFriend}/>
                 </NavLink>
             </div>

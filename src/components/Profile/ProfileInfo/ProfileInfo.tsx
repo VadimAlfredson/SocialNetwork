@@ -26,7 +26,7 @@ const ProfileInfo: FC<PropsType> = (props) => {
     }
     return <div className={s.profileClass}>
         <div>
-            <img className={s.photo}
+            <img className={s.avatarImg}
                  src={props.profile.photos.large || 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'}/>
             {props.isOwner || <input type={"file"} onChange={onMainPhotoSelected}/>}
         </div>
