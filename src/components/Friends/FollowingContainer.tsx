@@ -25,10 +25,11 @@ const FollowingContainer: FC<PropsType> = (props) => {
         props.getSubscriptionsThunkCreator(true)
     }, [])
         return <>
-            {props.updateSubscriptions ? <Preloader/> : null}
-            <Following
-                subscriptions={props.subscriptions}
-            />
+            {props.updateSubscriptions ? <Preloader/> :
+                <Following
+                    subscriptions={props.subscriptions}
+                />
+            }
         </>
     }
 
