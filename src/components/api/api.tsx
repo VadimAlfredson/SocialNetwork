@@ -1,6 +1,7 @@
 import axios from "axios";
 import {authMeResponse} from "./apiTypes";
 import {ProfileType} from "../../Redux/profile_reducer";
+import {setSubscriptions} from "../../Redux/subscriptions_reducers";
 
 
 export const instance = axios.create({
@@ -26,13 +27,6 @@ export const usersApi = {
             })
     },
 
-    getFollowing: (friend: boolean) => {
-        return instance.get(`users?friend=${friend}&count=9`)
-            .then(response => {
-                return response.data
-            })
-    },
-
     unfollowUser: (userId: number) => {
         return instance.delete(`follow/${userId}`)
             .then(response => {
@@ -50,6 +44,15 @@ export const usersApi = {
         console.warn('Obsolete method. Please profileApi object')
         return profileApi.userProfile(userId)
     }
+}
+
+export const subscriptionsApi = {
+    getSubscriptions: (friend: boolean) => {
+        return instance.get(`users?friend=${friend}&count=9`)
+            .then(response => {
+                return response.data
+            })
+    },
 }
 
 export const profileApi = {

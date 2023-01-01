@@ -18,7 +18,7 @@ import {
 } from "react-router-dom";
 import {compose} from "redux";
 import {withAuthNavigate} from "../hoc/witAuthNavigate";
-import {getFollowingThunkCreator} from "../../Redux/users_reducers";
+import {getSubscriptionsThunkCreator} from "../../Redux/subscriptions_reducers";
 
 function withRouter(Component: FC) {
     function ComponentWithRouterProp(props: any) {
@@ -57,7 +57,7 @@ class ProfileContainer extends React.Component<any, any> {
 
     onFollowProfileChange = (userId: number, follow: boolean) => {
         this.props.onFollowProfileChangeThunkCreator(userId, follow)
-        this.props.getFollowingThunkCreator(true)
+        this.props.getSubscriptionsThunkCreator(true)
     }
 
 
@@ -93,7 +93,7 @@ export default compose(
         savePhotoTC,
         getFollowThunkCreator,
         onFollowProfileChangeThunkCreator,
-        getFollowingThunkCreator
+        getSubscriptionsThunkCreator
     }),
     withAuthNavigate
 )(ProfileContainer)

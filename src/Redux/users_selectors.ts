@@ -5,10 +5,6 @@ export const getUsers = (state: AddStateType) => {
     return state.usersPage.users
 }
 
-export const getFollowing = (state: AddStateType) => {
-    return state.usersPage.following
-}
-
 export const getPageSize = (state: AddStateType) => {
     return state.usersPage.pageSize
 }

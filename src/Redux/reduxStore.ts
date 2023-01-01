@@ -4,6 +4,7 @@ import dialogsReducer from "./dialogs_reducer";
 import usersReducer from "./users_reducers";
 import authReducer from "./auth_reducers";
 import appReducer from "./app_reducers";
+import subscriptionsReducer from "./subscriptions_reducers"
 
 
 export type AddStateType = ReturnType<any>
@@ -14,7 +15,8 @@ let store: AddStateType = configureStore({
         dialogsPage: dialogsReducer,
         usersPage: usersReducer,
         auth: authReducer,
-        app: appReducer
+        app: appReducer,
+        subscriptionsPage: subscriptionsReducer
     }
 });
 

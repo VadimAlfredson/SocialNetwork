@@ -4,7 +4,7 @@ import {UserType} from "../../Redux/users_reducers";
 import {NavLink} from "react-router-dom";
 
 type PropsType = {
-    following: Array<UserType>
+    subscriptions: Array<UserType>
 }
 
 let Following: FC<PropsType> = (props) => {
@@ -12,7 +12,7 @@ let Following: FC<PropsType> = (props) => {
         <div className={s.h4}>Following</div>
             <div className={s.friendsList}>
                 {
-                    props.following.map((u: UserType) => <div key={u.id}>
+                    props.subscriptions.map((u: UserType) => <div key={u.id}>
         <span>
             <div>
                 <NavLink to={'/profile/' + u.id}>

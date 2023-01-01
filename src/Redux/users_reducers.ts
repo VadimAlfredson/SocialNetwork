@@ -4,6 +4,7 @@ import {createSlice, ThunkAction} from "@reduxjs/toolkit";
 import {dialogsType, messagesType} from "./dialogs_reducer";
 import {AddStateType} from "./reduxStore";
 import {ActionType} from "./Types";
+import {getSubscriptionsThunkCreator} from "./subscriptions_reducers";
 
 export type UserType = {
     name: string,
@@ -137,12 +138,12 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number): Thu
     dispatch(toggleIsFetching(false))
 }
 
-export const getFollowingThunkCreator = (friend: boolean): ThunkAction<Promise<void>, AddStateType, unknown, any> => async (dispatch) => {
+/*export const getFollowingThunkCreator = (friend: boolean): ThunkAction<Promise<void>, AddStateType, unknown, any> => async (dispatch) => {
     dispatch(toggleIsFetching(true))
     let response = await usersApi.getFollowing(friend)
     dispatch(setFollowing(response.items))
     dispatch(toggleIsFetching(false))
-}
+}*/
 
 export const onPageChangeThunkCreator = (pageNumber: number, pageSize: number): ThunkAction<Promise<void>, AddStateType, unknown, any> => async (dispatch: Dispatch<any>) => {
     dispatch(setCurrentPage(pageNumber))
@@ -159,17 +160,16 @@ export const onFollowChangeThunkCreator = (userId: number, follow: boolean): Thu
         let response = await usersApi.unfollowUser(userId)
         if (response.resultCode == 0) {
             dispatch(followed(userId))
-            dispatch(getFollowingThunkCreator(true))
         }
         dispatch(toggleIsFollowing(false, userId))
     } else {
         let response = await usersApi.followedUser(userId)
         if (response.resultCode == 0) {
             dispatch(followed(userId))
-            dispatch(getFollowingThunkCreator(true))
         }
         dispatch(toggleIsFollowing(false, userId))
     }
+    dispatch(getSubscriptionsThunkCreator(true))
 }
 
 export default todosSlice.reducer

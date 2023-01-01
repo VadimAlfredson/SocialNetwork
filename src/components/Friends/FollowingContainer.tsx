@@ -4,30 +4,30 @@ import {connect} from "react-redux";
 import {AddStateType} from "../../Redux/reduxStore";
 import {
     UserType,
-    getFollowingThunkCreator,
 } from "../../Redux/users_reducers";
 import Preloader from "../common/Preloader/Preloader";
 import {
-    getFollowing,
-    getIsAuth, getIsFetching,
+    getIsAuth,
 } from "../../Redux/users_selectors";
+import {getSubscriptionsThunkCreator} from "../../Redux/subscriptions_reducers";
+import {getSubscriptions, getUpdateSubscriptions} from "../../Redux/subscriptios_selectors";
 
 type PropsType = {
-    isFetching: boolean
-    following: Array<UserType>
-    getFollowingThunkCreator: (friend: boolean) => void
+    updateSubscriptions: boolean
+    subscriptions: Array<UserType>
+    getSubscriptionsThunkCreator: (friend: boolean) => void
     isAuth: boolean
 }
 
 
 const FollowingContainer: FC<PropsType> = (props) => {
     useEffect(() => {
-        props.getFollowingThunkCreator(true)
+        props.getSubscriptionsThunkCreator(true)
     }, [])
         return <>
-            {props.isFetching ? <Preloader/> : null}
+            {props.updateSubscriptions ? <Preloader/> : null}
             <Following
-                following={props.following}
+                subscriptions={props.subscriptions}
             />
         </>
     }
@@ -35,10 +35,10 @@ const FollowingContainer: FC<PropsType> = (props) => {
 
 let mapStateToProps = (state: AddStateType) => {
     return {
-        following: getFollowing(state),
+        subscriptions: getSubscriptions(state),
         isAuth: getIsAuth(state),
-        isFetching: getIsFetching(state)
+        updateSubscriptions: getUpdateSubscriptions(state)
     }
 }
 
-export default connect(mapStateToProps, {getFollowingThunkCreator,})(FollowingContainer);
+export default connect(mapStateToProps, {getSubscriptionsThunkCreator,})(FollowingContainer);
