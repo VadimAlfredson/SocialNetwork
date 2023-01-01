@@ -28,7 +28,7 @@ const FollowingContainer: FC<PropsType> = (props) => {
             {props.isFetching ? <Preloader/> : null}
             <Following
                 following={props.following}
-            />;
+            />
         </>
     }
 

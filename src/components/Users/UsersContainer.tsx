@@ -64,7 +64,7 @@ class UsersContainer extends React.Component<PropsType> {
                 onPageChange={this.onPageChange}
                 onFollowChange={this.onFollowChange}
                 followingInProgress={this.props.followingInProgress}
-            />;
+            />
         </>
     }
 

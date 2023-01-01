@@ -7,14 +7,8 @@
     grid-template-rows: 50px auto;
     grid-template-columns: minmax(200px, 2fr) 9fr;
     grid-gap: 10px;
-    background-color: rgb(31, 31, 31);
     font-family: Comic Sans;
     color: azure;
-    background-image: url("https://funart.pro/uploads/posts/2022-08/1661426469_1-funart-pro-p-goluboi-paporotnik-pinterest-1.jpg");
-    /*background: linear-gradient( 45deg, #c1a63d, #bbaeb1, #d08888);*/
-    position: relative;
-    background-size: 100%;
-    min-height: 1000px;
     height: 100%;
     width: 100%;
 

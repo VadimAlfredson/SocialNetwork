@@ -61,14 +61,14 @@ const todosSlice = createSlice({
             lookingForAJobDescription: '',
             fullName: null,
             contacts: {
-                github: '',
-                vk: '',
-                facebook: '',
-                instagram: '',
-                twitter: '',
-                website: '',
-                youtube: '',
-                mainLink: ''
+                github: null,
+                vk: null,
+                facebook: null,
+                instagram: null,
+                twitter: null,
+                website: null,
+                youtube: null,
+                mainLink: null
             },
             photos: {
                 small: null,

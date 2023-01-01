@@ -1,11 +1,11 @@
 import './App.css';
 import React from 'react';
 import Navbar from './components/Navbar/Navbar';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
 import HeaderContainer from "./components/Header/HeaderContainer";
 /*import Login from "./components/login/login";*/
 import {connect} from "react-redux";
-import { loginAuthThunkCreator } from './Redux/auth_reducers';
+import {loginAuthThunkCreator} from './Redux/auth_reducers';
 import {InitializeAppTC} from "./Redux/app_reducers";
 import Preloader from "./components/common/Preloader/Preloader";
 
@@ -18,18 +18,21 @@ const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileCo
 const Login = React.lazy(() => import('./components/login/login'))
 
 
-class App extends React.Component<{InitializeAppTC: () => void}> {
+class App extends React.Component<{ InitializeAppTC: () => void }> {
     componentDidMount() {
         this.props.InitializeAppTC()
     }
+
     render() {
         return (
-                <div className='app-wrapper'>
-                    <HeaderContainer/>
-                    <Navbar/>
-                    <div className='app-wrapper-content'>
-                        <React.Suspense fallback={<div><Preloader /></div>}>
+            <div className='app-wrapper'>
+                <HeaderContainer/>
+                <Navbar/>
+                <div className='app-wrapper-content'>
+                    <React.Suspense fallback={<div><Preloader/></div>}>
                         <Routes>
+                            <Route path="/" element={<Navigate to="/profile"/>}/>
+                            <Route path="*" element={<div>404</div>}/>
                             <Route path='/dialogs/*'
                                    element={<DialogsContainer/>}/>
                             <Route path='/profile/:userId'
@@ -40,10 +43,10 @@ class App extends React.Component<{InitializeAppTC: () => void}> {
                             <Route path='/login'
                                    element={<Login/>}/>
                         </Routes>
-                            </React.Suspense>
-                    </div>
-
+                    </React.Suspense>
                 </div>
+
+            </div>
         );
     }
 }

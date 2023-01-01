@@ -24,12 +24,13 @@ const ProfileInfo: FC<PropsType> = (props) => {
             props.savePhotoTC(e.target.files[0])
         }
     }
-    return <div>
+    return <div className={s.profileClass}>
         <div>
-            <img className={s.avatarImg}
+            <img className={s.photo}
                  src={props.profile.photos.large || 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'}/>
             {props.isOwner || <input type={"file"} onChange={onMainPhotoSelected}/>}
         </div>
+        <div className={s.profileInfo}>
         <div><b>{props.profile.fullName}</b></div>
         <ProfileStatus status={props.status} putStatusThunkCreator={props.putStatusThunkCreator}/>
         <div>{props.isOwner &&
@@ -42,6 +43,7 @@ const ProfileInfo: FC<PropsType> = (props) => {
                 profile={props.profile}
                 isOwner={props.isOwner}
             />
+        </div>
         </div>
     </div>
 }
@@ -61,6 +63,7 @@ const Information: FC<InfoProps> = ({profile, isOwner}) => {
     let [editMode, setEditMode] = useState(false)
     let editModeOnOff = (value: boolean) => setEditMode(value)
     return <div>
+        <div>
         {isOwner || !editMode && <button onClick={() => {
             editModeOnOff(true)
         }}>edit contacts</button>}
@@ -71,8 +74,9 @@ const Information: FC<InfoProps> = ({profile, isOwner}) => {
             <div><b>lookingForAJobDescription:</b> {profile.lookingForAJobDescription}</div>}
         </div>}
         <div><b>About me:</b>{profile.aboutMe}</div>
-        <div>{(!isOwner && editMode) || Object.keys(profile.contacts).filter(i =>
-            profile.contacts[i] != null).map(i => {
+        </div>
+        <div className={s.contacts}>{(!isOwner && editMode) || Object.keys(profile.contacts).filter(i =>
+            profile.contacts[i]).map(i => {
             return <Contact key={i} contactTitle={i} contactValue={profile.contacts[i]}/>
         })}</div>
     </div>

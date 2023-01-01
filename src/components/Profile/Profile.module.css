@@ -1,3 +1,11 @@
+.profileClass {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+
+
+
 .topImg {
     height: 300px;
     border-radius: 5px;
