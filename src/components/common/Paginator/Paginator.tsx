@@ -21,15 +21,15 @@ let Paginator: FC<PropsType> = (props) => {
     let leftPortionNumber = (portionNumber - 1) * portionSize + 1
     let rightPortionNumber = portionNumber * portionSize
     return (
-            <div>
+            <div className={s.paginator}>
                 {portionNumber > 1 &&
-                <button onClick={() => {setPortionNumber(portionNumber - 1)}}>left</button>
+                <button className={s.pageNumber} onClick={() => {setPortionNumber(portionNumber - 1)}}>left</button>
                 }
                 {pages
                     .filter(p => p >= leftPortionNumber && p <= rightPortionNumber)
                     .map(p => {
                         // @ts-ignore
-                        return <span className={props.currentPage === p ? s.activePage : null}
+                        return <span className={props.currentPage === p ? s.activePage : s.pageNumber}
                                      onClick={() => {
                                          props.onPageChange(p)
                                      }} key={p}
@@ -37,7 +37,7 @@ let Paginator: FC<PropsType> = (props) => {
                     }
                 )}
                 {portionCount > portionNumber &&
-                <button
+                <button className={s.pageNumber}
                 onClick={() => {setPortionNumber(portionNumber + 1)}}
                 >right</button>
                 }

@@ -9,3 +9,8 @@
     width: 110%;
     color: darkgoldenrod;
 }
+
+.paginatorStile {
+    width: 50%;
+    text-align: center;
+}

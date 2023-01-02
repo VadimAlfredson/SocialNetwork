@@ -3,6 +3,7 @@ import {UserType} from "../../Redux/users_reducers";
 import s from "../Users/users.module.css"
 import {NavLink} from "react-router-dom";
 import Paginator from "../common/Paginator/Paginator";
+import Preloader from "../common/Preloader/Preloader";
 
 type PropsType = {
     users: Array<UserType>
@@ -12,6 +13,7 @@ type PropsType = {
     currentPage: number
     onPageChange: (pageNumber: number) => void
     onFollowChange: (id: number, followed: boolean) => void
+    isFetching: boolean
 }
 
 let Users: FC<PropsType> = (props) => {
@@ -23,6 +25,8 @@ let Users: FC<PropsType> = (props) => {
                 currentPage={props.currentPage}
                 onPageChange={props.onPageChange}
             />
+            {props.isFetching ? <Preloader/> :
+            <div>
             {
                 props.users.map((u: UserType) => <div key={u.id}>
         <span>
@@ -46,6 +50,7 @@ let Users: FC<PropsType> = (props) => {
 </span>
         </span>
                 </div>)}
+            </div>}
         </div>
     )
 }

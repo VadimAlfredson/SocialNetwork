@@ -1,5 +1,32 @@
 .activePage {
-    height: 110%;
-    width: 110%;
-    color: darkgoldenrod;
+    width: 5%;
+    box-shadow: black;
+    border: black solid 1px;
+    border-radius: 10%;
+    margin: 1vh;
+    padding: 1vh;
+    background-color: rgba(161, 0, 0, 0.55);
+}
+
+.paginator {
+    text-align: center;
+}
+
+.pageNumber {
+    width: 5%;
+    box-shadow: black;
+    border: black solid 1px;
+    border-radius: 10%;
+    margin: 1vh;
+    padding: 1vh;
+    background-color: rgba(240, 255, 255, 0.71);
+    color: black;
+}
+
+.pageNumber:hover {
+    background: linear-gradient(to bottom right, rgba(255, 0, 0, 0.33), rgba(241, 241, 241, 0.74));
+}
+
+.pageNumber:active {
+    background-color: rgba(154, 0, 79, 0.18);
 }
