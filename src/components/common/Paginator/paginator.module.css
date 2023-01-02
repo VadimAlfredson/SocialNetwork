@@ -5,7 +5,7 @@
     border-radius: 10%;
     margin: 1vh;
     padding: 1vh;
-    background-color: rgba(161, 0, 0, 0.55);
+    background-color: rgb(104, 6, 6);
 }
 
 .paginator {
@@ -19,14 +19,14 @@
     border-radius: 10%;
     margin: 1vh;
     padding: 1vh;
-    background-color: rgba(240, 255, 255, 0.71);
+    background-color: rgb(240, 255, 255);
     color: black;
 }
 
 .pageNumber:hover {
-    background: linear-gradient(to bottom right, rgba(255, 0, 0, 0.33), rgba(241, 241, 241, 0.74));
+    background-color: rgb(142, 121, 121);
 }
 
 .pageNumber:active {
-    background-color: rgba(154, 0, 79, 0.18);
+    background-color: rgb(0, 0, 0);
 }

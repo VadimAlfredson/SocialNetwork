@@ -1,16 +1,75 @@
+.usersComponent {
+    margin-left: auto;
+    margin-right: auto;
+    align-content: center;
+}
+
+.itemUser {
+    width: 60%;
+    margin: 2%;
+    display: grid;
+    grid-template-columns: 120px 100px 100px 1fr;
+    grid-template-rows: 3fr 1fr;
+    grid-template-areas:
+            "avatar info info info"
+            "avatar followButton massageButton .";
+    grid-column-gap: 10px;
+    grid-row-gap: 5%;
+}
+
+.avatar img {
+    width: 120px;
+    height: 120px;
+    border-radius: 10%;
+
+}
+
 .avatar {
+    grid-area: avatar;
+}
+
+.infoUser {
+    color: black;
+    border-radius: 12px;
+    padding: 1%;
+    grid-area: info;
+    background-color: azure;
+    display: grid;
+    grid-template-rows: 2fr 1fr 1fr;
+    grid-template-areas: "name" "status" "aboutMe";
+    grid-gap: 1%;
+}
+
+.followButton {
+    grid-area: followButton;
     width: 100px;
-    height: 100px;
-    border-radius: 50px;
 }
 
-.activePage {
-    height: 110%;
-    width: 110%;
-    color: darkgoldenrod;
+.massageButton {
+    grid-area: massageButton;
+    width: 100px;
 }
 
-.paginatorStile {
-    width: 50%;
-    text-align: center;
+.buttonStyle {
+    background-color: azure;
+    color: black;
+    border-radius: 10px;
+    border: black solid 1px;
+    width: 100%;
+    height: 95%;
+}
+
+.buttonStyle:hover {
+    background-color: #530000;
+    color: azure;
+}
+
+.nameUser {
+    grid-area: name;
+    font-weight: bold;
+    margin-left: 1%;
+}
+
+.statusUser {
+    grid-area: status;
 }

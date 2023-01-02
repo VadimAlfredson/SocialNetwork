@@ -18,7 +18,7 @@ type PropsType = {
 
 let Users: FC<PropsType> = (props) => {
     return (
-        <div>
+        <div className={s.usersComponent}>
             <Paginator
                 totalUsersCount={props.totalUsersCount}
                 pageSize={props.pageSize}
@@ -26,31 +26,34 @@ let Users: FC<PropsType> = (props) => {
                 onPageChange={props.onPageChange}
             />
             {props.isFetching ? <Preloader/> :
-            <div>
-            {
-                props.users.map((u: UserType) => <div key={u.id}>
-        <span>
-            <div>
+                <div>
+                    {
+                        props.users.map((u: UserType) => <div className={s.itemUser} key={u.id}>
+                            <div className={s.avatar}>
                 <NavLink to={'/profile/' + u.id}>
                 <img src={u.photos.small !== null ? u.photos.small :
                     'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
-                } className={s.avatar}/>
+                } />
                 </NavLink>
-                {
-                    <button
-                        disabled={props.followingInProgress.includes(u.id)}
-                        onClick={() => (props.onFollowChange(u.id, u.followed))
-                        }>{u.followed ? 'Unfollow' : 'Follow'}
+                            </div>
+                            <div className={s.followButton}>
+                    <button className={s.buttonStyle}
+                            disabled={props.followingInProgress.includes(u.id)}
+                            onClick={() => (props.onFollowChange(u.id, u.followed))
+                            }>{u.followed ? 'Unfollow' : 'Follow'}
                     </button>
-                }
-            </div>
-<span>
-    <div>{u.name}</div>
-    <div>{u.status}</div>
-</span>
-        </span>
-                </div>)}
-            </div>}
+                            </div>
+                            <div className={s.massageButton}>
+                                <button className={s.buttonStyle}
+                                        onClick={() => {}}>Massage
+                                </button>
+                            </div>
+                            <div className={s.infoUser}>
+    <div className={s.nameUser}>{u.name}</div>
+    <div className={s.statusUser}>{u.status}</div>
+                            </div>
+                        </div>)}
+                </div>}
         </div>
     )
 }
