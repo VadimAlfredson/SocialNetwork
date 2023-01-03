@@ -6,6 +6,7 @@
     color: #0e2121;
     border-radius: 5px;
     overflow: hidden;
+    margin-left: 5%;
 }
 
 .buttonAddPost {
@@ -15,7 +16,7 @@
     height: 100%;
     padding: 10px;
     grid-area: button;
-    background-color: rgba(0, 0, 0, 0.41);
+    background-color: rgb(95, 0, 0);
     color: azure;
     border-radius: 5px;
     border: solid 1px rgba(0, 0, 0, 0.6);

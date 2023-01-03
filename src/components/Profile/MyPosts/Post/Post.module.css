@@ -15,6 +15,7 @@
     /*    grid-column: span 1;*/
     height: 50px;
     border-radius: 50%;
+    margin-left: 20px;
 }
 
 .messageBlock {
@@ -35,4 +36,5 @@
 
 .like {
     grid-area: like;
+    margin-left: 20px;
 }

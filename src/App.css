@@ -13,8 +13,22 @@
 }
 
 .bodySide {
+    grid-area: bodySide;
     display: grid;
     grid-template-areas: "navbar content";
-    grid-template-columns: minmax(200px, 2fr) 5fr;
+    grid-template-columns: minmax(200px, 400px) 1fr;
     margin: 0 auto;
+}
+
+.app-wrapper-content {
+    grid-area: content;
+    margin-right: auto;
+    margin-left: 0;
+}
+
+.navbar {
+    grid-area: navbar;
+    margin-right: 0;
+    margin-left: auto;
+    width: auto;
 }

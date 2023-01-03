@@ -37,7 +37,7 @@ const ProfileInfo: FC<PropsType> = (props) => {
             <div className={s.name}><b>{props.profile.fullName}</b></div>
             <div className={s.status}><ProfileStatus status={props.status} putStatusThunkCreator={props.putStatusThunkCreator}/></div>
             <div className={s.editMode}>{props.isOwner &&
-                <button onClick={() => {
+                <button className={props.follow ? s.buttonUnfollow : s.buttonFollow} onClick={() => {
                     props.onFollowProfileChange(props.profile.userId, props.follow)
                 }}>{props.follow ? 'Unfollow' : 'Follow'}</button>}
             </div>
