@@ -2,22 +2,19 @@
     margin: auto;
     display: grid;
     grid-template-areas:
-            "header header"
-            "nav content";
+            "header"
+            "bodySide";
     grid-template-rows: 50px auto;
-    grid-template-columns: minmax(200px, 2fr) 9fr;
     grid-gap: 1%;
     font-family: Comic Sans;
     color: azure;
     height: 95%;
     width: 100%;
-
 }
 
-app-wrapper-content {
-    grid-area: content;
-}
-
-app-wrapper-friends {
-    grid-area: friends;
+.bodySide {
+    display: grid;
+    grid-template-areas: "navbar content";
+    grid-template-columns: minmax(200px, 2fr) 5fr;
+    margin: 0 auto;
 }

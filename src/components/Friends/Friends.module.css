@@ -1,11 +1,12 @@
 .friends {
     display: grid;
-    border-radius: 25px;
+    border-radius: 5px;
     border: solid 1px rgb(0, 0, 0);
-    margin: 5%;
+    margin: 1% auto;
     text-align: center;
     padding-bottom: 10%;
     background-color: azure;
+    width: 90%;
 }
 
 .h4 {

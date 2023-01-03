@@ -1,29 +1,38 @@
 .post {
     display: grid;
+    grid-template-areas:
+"img message"
+    "like message";
     grid-template-columns: 1fr 15fr;
     grid-template-rows: 1fr 1fr;
     color: azure;
+    margin: 0 auto auto auto;
 }
+
 .img {
+    grid-area: img;
     float: left;
-/*    grid-column: span 1;*/
-    margin-top: 3px;
+    /*    grid-column: span 1;*/
     height: 50px;
     border-radius: 50%;
 }
 
+.messageBlock {
+    grid-area: message;
+    width: 80%;
+    color: black;
+    margin-top: 25px;
+    margin-left: 1%;
+}
+
 .message {
-    width: 50%;
-    color: azure;
-/*    grid-column: span 2;
-    grid-row: span 1;*/
-    background-color: rgba(11, 17, 11, 0.74);
-    border-radius: 10px;
-    border: solid 2px rgba(255, 255, 255, 0.48);
+    color: black;
+    background-color: azure;
+    border-radius: 0 10px 10px 10px;
+    border: solid 2px black;
     padding: 10px;
 }
 
 .like {
-    grid-column: span 2;
-    grid-row: span 2;
+    grid-area: like;
 }

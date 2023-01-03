@@ -1,9 +1,7 @@
 .nav {
     grid-area: nav;
     justify-content: space-around;
-    margin: 5%;
-    background: linear-gradient(to bottom right, rgba(29, 29, 29, 0.59), rgba(68, 94, 95, 0.53), rgba(18, 49, 7, 0.32));
-    border-radius: 25px;
+    margin: 0 5%;
     border: solid 1px rgba(0, 0, 0, 0.29);
     /*display: flex;*/
     flex-direction: column;
@@ -13,9 +11,9 @@
 .item {
     align-items: center;
     box-shadow: black;
-    margin: 3%;
+    margin: 1% auto;
     background: azure;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 10px 0 10px 0;
     width: 90%;
     text-align: center;

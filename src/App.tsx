@@ -27,25 +27,26 @@ class App extends React.Component<{ InitializeAppTC: () => void }> {
         return (
             <div className='app-wrapper'>
                 <HeaderContainer/>
-                <Navbar/>
-                <div className='app-wrapper-content'>
-                    <React.Suspense fallback={<div><Preloader/></div>}>
-                        <Routes>
-                            <Route path="/" element={<Navigate to="/profile"/>}/>
-                            <Route path="*" element={<div>404</div>}/>
-                            <Route path='/dialogs/*'
-                                   element={<DialogsContainer/>}/>
-                            <Route path='/profile/:userId'
-                                   element={<ProfileContainer/>}/>
-                            <Route path='/profile' element={<ProfileContainer/>}/>
-                            <Route path='/users'
-                                   element={<UsersContainer/>}/>
-                            <Route path='/login'
-                                   element={<Login/>}/>
-                        </Routes>
-                    </React.Suspense>
+                <div className='bodySide'>
+                    <div className='navbar'><Navbar /></div>
+                    <div className='app-wrapper-content'>
+                        <React.Suspense fallback={<div><Preloader/></div>}>
+                            <Routes>
+                                <Route path="/" element={<Navigate to="/profile"/>}/>
+                                <Route path="*" element={<div>404</div>}/>
+                                <Route path='/dialogs/*'
+                                       element={<DialogsContainer/>}/>
+                                <Route path='/profile/:userId'
+                                       element={<ProfileContainer/>}/>
+                                <Route path='/profile' element={<ProfileContainer/>}/>
+                                <Route path='/users'
+                                       element={<UsersContainer/>}/>
+                                <Route path='/login'
+                                       element={<Login/>}/>
+                            </Routes>
+                        </React.Suspense>
+                    </div>
                 </div>
-
             </div>
         );
     }
