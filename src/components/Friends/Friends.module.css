@@ -18,6 +18,7 @@
     width: 60%;
     height: auto;
     border-radius: 50%;
+    border: #0e2121 solid 2px;
 }
 
 .friendsList {

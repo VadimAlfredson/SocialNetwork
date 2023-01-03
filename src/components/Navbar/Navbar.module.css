@@ -39,8 +39,9 @@
 }
 
 .active {
-    color: azure;
+    color: #530000;
     text-decoration: none;
+    background-color: #530000;
 }
 
 .activeItem {

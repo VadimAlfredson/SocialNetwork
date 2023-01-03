@@ -1,18 +1,7 @@
 .profileClass {
     display: grid;
-    grid-template-columns: 1fr;
-}
-
-
-
-
-.topImg {
-    height: 300px;
-    border-radius: 5px;
-}
-
-.topImgDiv {
-  height: 10%;
+    grid-template-columns: 270px 3fr;
+    grid-auto-rows: 2fr 1fr;
 }
 
 .avatarImg {
@@ -20,4 +9,28 @@
     width: 250px;
     border-radius: 5%;
     border: 5px black;
+}
+
+.avatarSide {
+    margin: 0 3%;
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-auto-rows: 1fr 1fr;
+}
+
+.inputPhoto {
+    display: block;
+    opacity: 0.5;
+    height: 25px;
+    width: 250px;
+    z-index: 2;
+}
+
+.avatarSide label {
+    background-color: azure;
+    color: #0e2121;
+    top: -25px;
+    width: 250px;
+    height: 30px;
+    position: relative;
 }
