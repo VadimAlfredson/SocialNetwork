@@ -3,13 +3,14 @@
     box-shadow: black;
     border: black solid 1px;
     border-radius: 10%;
-    margin: 1vh;
-    padding: 1vh;
+    margin: 0 1%;
+    padding: 1%;
     background-color: rgb(104, 6, 6);
 }
 
 .paginator {
     text-align: center;
+    margin: auto;
 }
 
 .pageNumber {
@@ -17,8 +18,8 @@
     box-shadow: black;
     border: black solid 1px;
     border-radius: 10%;
-    margin: 1vh;
-    padding: 1vh;
+    margin: 0 1%;
+    padding: 1%;
     background-color: rgb(240, 255, 255);
     color: black;
 }
