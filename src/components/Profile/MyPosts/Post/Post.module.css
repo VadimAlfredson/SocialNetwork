@@ -1,9 +1,9 @@
 .post {
     display: grid;
     grid-template-areas:
-"img message"
-    "like message";
-    grid-template-columns: 1fr 15fr;
+". img message ."
+". like message .";
+    grid-template-columns: 1fr 1fr 15fr 1fr;
     grid-template-rows: 1fr 1fr;
     color: azure;
     margin: 0 auto auto auto;
@@ -20,7 +20,8 @@
 
 .messageBlock {
     grid-area: message;
-    width: 80%;
+    width: 100%;
+    margin-right: 20px;
     color: black;
     margin-top: 25px;
     margin-left: 1%;

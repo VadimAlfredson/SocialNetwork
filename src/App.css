@@ -9,26 +9,41 @@
     font-family: Comic Sans;
     color: azure;
     height: 95%;
-    width: 100%;
+    width: 100vw;
 }
 
 .bodySide {
     grid-area: bodySide;
     display: grid;
     grid-template-areas: "navbar content";
-    grid-template-columns: minmax(200px, 400px) 1fr;
-    margin: 0 auto;
+    grid-template-columns: 1fr 2fr;
+    margin: auto;
 }
 
 .app-wrapper-content {
     grid-area: content;
     margin-right: auto;
     margin-left: 0;
+    width: 100%;
 }
 
 .navbar {
     grid-area: navbar;
     margin-right: 0;
     margin-left: auto;
-    width: auto;
+    width: 30vw;
+}
+
+.navbarLevel2 {
+    width: 350px;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.content {
+width: 100%;
+    max-width: 1000px;
+    margin-left: 0;
+    margin-right: auto;
+
 }

@@ -28,8 +28,11 @@ class App extends React.Component<{ InitializeAppTC: () => void }> {
             <div className='app-wrapper'>
                 <HeaderContainer/>
                 <div className='bodySide'>
-                    <div className='navbar'><Navbar /></div>
+                    <div className='navbar'>
+                        <div className='navbarLevel2'><Navbar /></div>
+                    </div>
                     <div className='app-wrapper-content'>
+                        <div className='content'>
                         <React.Suspense fallback={<div><Preloader/></div>}>
                             <Routes>
                                 <Route path="/" element={<Navigate to="/profile"/>}/>
@@ -45,6 +48,7 @@ class App extends React.Component<{ InitializeAppTC: () => void }> {
                                        element={<Login/>}/>
                             </Routes>
                         </React.Suspense>
+                        </div>
                     </div>
                 </div>
             </div>
