@@ -4,11 +4,10 @@
     grid-template-areas:
             "header"
             "bodySide";
-    grid-template-rows: 50px auto;
+    grid-template-rows: 60px auto;
     grid-gap: 1%;
     font-family: Comic Sans;
     color: azure;
-    height: 95%;
     width: 100vw;
 }
 

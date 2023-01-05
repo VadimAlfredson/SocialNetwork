@@ -67,9 +67,9 @@ const Information: FC<InfoProps> = ({profile, isOwner}) => {
     let editModeOnOff = (value: boolean) => setEditMode(value)
     return <div>
         <div>
-            {isOwner || !editMode && <button onClick={() => {
+            {isOwner || !editMode && <button className={s.buttonEditInfo} onClick={() => {
                 editModeOnOff(true)
-            }}>edit contacts</button>}
+            }}>edit information</button>}
             {!isOwner && editMode && <div><ProfileInfoForm editModeOnOff={editModeOnOff}/></div>}
             {editMode || <div>
                 <div><b>looking for a job:</b> {profile.lookingForAJob ? "yes" : 'no'}</div>

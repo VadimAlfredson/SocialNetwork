@@ -4,15 +4,15 @@ import {NavLink} from "react-router-dom";
 
 const Header = (props) => {
     return <header className={s.header}>
-        <img src=''/>
-        <h2 className={s.h2}><em>Social Network</em></h2>
-        <div className={s.loginBlock}>
+        <div className={s.logoBlock}>
+        <img src='https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'/>
+        <h2 className={s.h2}>Social Network</h2>
+        </div>
+        <div className={s.log}>
             {props.isAuth ?
-                <div>{props.login}
+                <div className={s.loginBlock}><div>{props.login}</div>
                 <button onClick={props.logoutThunkCreator}>Log out</button>
-                </div>
-                 :
-            <NavLink to={'/login'}>login</NavLink>}
+                </div> : <NavLink className={s.login} to={'/login'}>login</NavLink>}
         </div>
     </header>;
 }

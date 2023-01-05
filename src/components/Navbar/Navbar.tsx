@@ -1,15 +1,18 @@
-import React, {FC} from 'react';
+import React from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from "react-router-dom";
 import FollowingContainer from "../Friends/FollowingContainer";
 
-const Navbar  = () => {
+type propsType = {
+    isAuth: boolean
+}
+const Navbar  = (props: propsType) => {
     return <nav className={s.nav}>
             <NavLink to="/profile" className={navData => navData.isActive ? s.active : s.itemnav}>
                 <div className={s.item}>
                 Profile
                 </div>
-                </NavLink>
+            </NavLink>
             <NavLink to="/Dialogs" className={navData => navData.isActive ? s.active : s.itemnav}>
                 <div className={s.item}>
                 Messages
@@ -35,9 +38,10 @@ const Navbar  = () => {
                 Settings
                 </div>
                 </NavLink>
+        {props.isAuth &&
         <div className={s.following}>
             <FollowingContainer />
-        </div>
+        </div>}
     </nav>
 }
 

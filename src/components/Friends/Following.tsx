@@ -9,7 +9,7 @@ type PropsType = {
 
 let Following: FC<PropsType> = (props) => {
     return <div className={s.friends}>
-        <div className={s.h4}>Following</div>
+        <div className={s.h4}>Subscriptions</div>
             <div className={s.friendsList}>
                 {
                     props.subscriptions.map((u: UserType) => <div key={u.id}>

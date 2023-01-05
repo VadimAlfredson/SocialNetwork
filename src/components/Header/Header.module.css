@@ -1,26 +1,55 @@
-.header img {
-    height: 50px;
-    width: 50px;
-    float: left;
-}
+
 
 .header {
     grid-area: header;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     background-color: rgba(52, 99, 99, 0.51);
     border: solid 2px rgba(0, 0, 0, 0.38);
+    height: 50px;
+}
+
+.log {
+    margin: auto 0 auto auto;
+}
+
+.login {
+    text-decoration: none;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.logoBlock {
+    margin: 5px auto 5px 10px;
+    display: grid;
+    grid-template-columns: 60px 1fr;
+}
+
+.header img {
+    height: 40px;
+    width: 40px;
+    float: left;
+    border-radius: 50%;
 }
 
 .h2 {
-    float: left;
-    font-family: "Bookman Old Style";
+    margin: auto;
 }
 
 .loginBlock {
-    float: right;
+    display: grid;
+    grid-template-columns: 1fr 120px;
 }
 
-.loginBlock a {
-    color: white;
-    text-decoration: none;
-    padding: 5px 0 5px 0;
+.loginBlock div {
+    margin: auto 50px auto auto;
+}
+
+.loginBlock button {
+    height: 30px;
+    width: 80px;
+    background-color: #008b93;
+    color: black;
+    margin: auto;
 }

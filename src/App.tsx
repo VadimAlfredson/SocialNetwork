@@ -18,7 +18,7 @@ const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileCo
 const Login = React.lazy(() => import('./components/login/login'))
 
 
-class App extends React.Component<{ InitializeAppTC: () => void }> {
+class App extends React.Component<{ InitializeAppTC: () => void, isAuth: boolean}> {
     componentDidMount() {
         this.props.InitializeAppTC()
     }
@@ -29,12 +29,15 @@ class App extends React.Component<{ InitializeAppTC: () => void }> {
                 <HeaderContainer/>
                 <div className='bodySide'>
                     <div className='navbar'>
-                        <div className='navbarLevel2'><Navbar /></div>
+                        <div className='navbarLevel2'>
+                            <Navbar isAuth={this.props.isAuth}/>
+                        </div>
                     </div>
                     <div className='app-wrapper-content'>
                         <div className='content'>
                         <React.Suspense fallback={<div><Preloader/></div>}>
                             <Routes>
+                                <Route path="/SocialNetwork" element={<Navigate to="/profile"/>}/>
                                 <Route path="/" element={<Navigate to="/profile"/>}/>
                                 <Route path="*" element={<div>404</div>}/>
                                 <Route path='/dialogs/*'
@@ -57,7 +60,8 @@ class App extends React.Component<{ InitializeAppTC: () => void }> {
 }
 
 const mapStateToProps = (state: any) => ({
-    initialized: state.app.initialized as boolean
+    initialized: state.app.initialized as boolean,
+    isAuth: state.auth.isAuth as boolean
 })
 
 export default connect(mapStateToProps, {InitializeAppTC})(App);

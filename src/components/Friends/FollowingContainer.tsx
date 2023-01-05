@@ -10,7 +10,7 @@ import {
     getIsAuth,
 } from "../../Redux/users_selectors";
 import {getSubscriptionsThunkCreator} from "../../Redux/subscriptions_reducers";
-import {getSubscriptions, getUpdateSubscriptions} from "../../Redux/subscriptios_selectors";
+import {getSubscriptions, getUpdateSubscriptions} from "../../Redux/subscriptions_selectors";
 
 type PropsType = {
     updateSubscriptions: boolean
