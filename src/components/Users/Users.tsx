@@ -45,7 +45,7 @@ let Users: FC<PropsType> = (props) => {
                             </div>
                             <div className={s.massageButton}>
                                 <button className={s.buttonStyle}
-                                        onClick={() => {}}>Massage
+                                        onClick={() => {}}>Message
                                 </button>
                             </div>
                             <div className={s.infoUser}>
