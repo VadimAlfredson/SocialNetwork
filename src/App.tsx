@@ -61,7 +61,8 @@ class App extends React.Component<{ InitializeAppTC: () => void, isAuth: boolean
 
 const mapStateToProps = (state: any) => ({
     initialized: state.app.initialized as boolean,
-    isAuth: state.auth.isAuth as boolean
+    isAuth: state.auth.isAuth as boolean,
+    photo: state /*фотку добавь рядом с именем в шапку*/
 })
 
 export default connect(mapStateToProps, {InitializeAppTC})(App);

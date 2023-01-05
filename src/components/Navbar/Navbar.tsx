@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from "react-router-dom";
 import FollowingContainer from "../Friends/FollowingContainer";

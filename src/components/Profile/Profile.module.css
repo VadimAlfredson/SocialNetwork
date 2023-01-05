@@ -6,9 +6,9 @@
     grid-template-areas:
 "avatar info"
 ;
-    grid-template-columns: 270px 2fr;
+    grid-template-columns: 1fr 2fr;
     margin: 0 auto;
-    bottom: 0;
+    top: 0;
     height: auto;
 }
 

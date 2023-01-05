@@ -8,7 +8,7 @@ export const MessagesItem = (props: {icon: string, message: string}) => {
             <img className={s.iconMessage} src={props.icon}/>
         </div>
         <div className={s.messageForm}>
-            {props.message}
+            <a>{props.message}</a>
         </div>
     </div>
 }
