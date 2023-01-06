@@ -19,7 +19,6 @@
     width: 120px;
     height: 120px;
     border-radius: 10%;
-
 }
 
 .avatar {
@@ -70,4 +69,24 @@
 
 .statusUser {
     grid-area: status;
+}
+
+.navLinkToLogin {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    background-color: azure;
+    color: black;
+    border-radius: 10px;
+    border: black solid 1px;
+    padding: 0 20px;
+    margin: auto;
+    width: 150%;
+    height: 95%;
+    text-align: center;
+}
+
+.navLinkToLogin:hover {
+    background-color: #a2edf3;
 }

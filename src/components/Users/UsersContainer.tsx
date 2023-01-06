@@ -30,6 +30,7 @@ type PropsType = {
     isFetching: boolean
     users: Array<UserType>
     totalUsersCount: number
+    isAuth: boolean
 
     getUsersThunkCreator: (currentPage: number, pageSize: number) => void
     onPageChangeThunkCreator: (pageNumber: number, pageSize: number) => void
@@ -56,6 +57,7 @@ class UsersContainer extends React.Component<PropsType> {
 
         return <>
                 <Users
+                    isAuth={this.props.isAuth}
                     isFetching={this.props.isFetching}
                     users={this.props.users}
                     pageSize={this.props.pageSize}
@@ -83,7 +85,6 @@ let mapStateToProps = (state: AddStateType) => {
 }
 
 export default compose(
-    withAuthNavigate,
     connect(mapStateToProps,
         {
             followed,

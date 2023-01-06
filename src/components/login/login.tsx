@@ -4,7 +4,7 @@ import s from './login.module.css';
 
 const Login = () => {
     return <div className={s.loginBlock}>
-    <h1>Login!!!</h1>
+    <h3>Log in</h3>
     <LoginForm />
     </div>
 };

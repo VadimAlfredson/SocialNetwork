@@ -16,6 +16,7 @@ type userDataType = {
     login: string | null
     isAuth: boolean
     captchaURL: null | string
+    messageError: string | null
 }
 
 const todosSlice = createSlice({
@@ -25,7 +26,8 @@ const todosSlice = createSlice({
         email: null,
         login: null,
         isAuth: false,
-        captchaURL: null
+        captchaURL: null,
+        messageError: null
     } as userDataType,
     reducers: {
         SetUserData(state: userDataType, action) {
@@ -39,11 +41,17 @@ const todosSlice = createSlice({
                 ...state,
                 ...action.payload
             }
+        },
+        GetMessageError(state: userDataType, action) {
+            return {
+                ...state,
+                ...action.payload
+            }
         }
     }
 })
 
-export const {SetUserData, GetCaptchaUrl} = todosSlice.actions
+export const {SetUserData, GetCaptchaUrl, GetMessageError} = todosSlice.actions
 export default todosSlice.reducer
 
 export const loginAuthThunkCreator = () => async (dispatch: Dispatch<any>) => {
@@ -57,15 +65,22 @@ export const loginAuthThunkCreator = () => async (dispatch: Dispatch<any>) => {
         }))
     } else if (response.resultCode === 10) {
         dispatch(getCaptchaThunkCreator())
+        dispatch(GetMessageError({messageError: response.messages[0]}))
     }
-    else console.log('error')
+    else dispatch(GetMessageError({messageError: response.messages[0]}))
 }
 
 export const loginThunkCreator = (email: string, password: string, rememberMe: boolean, captcha: string | null) => async (dispatch: Dispatch<any>) => {
     let response = await authApi.login(email, password, rememberMe, captcha)
     if (response.resultCode === 0) {
         dispatch(loginAuthThunkCreator())
+    } else if (response.resultCode === 10) {
+        dispatch(getCaptchaThunkCreator())
+        dispatch(GetMessageError({messageError: response.messages[0]}))
+        debugger
     }
+    else dispatch(GetMessageError({messageError: response.messages[0]}))
+    debugger
 }
 
 export const logoutThunkCreator = () => async (dispatch: Dispatch<any>) => {
@@ -76,9 +91,10 @@ export const logoutThunkCreator = () => async (dispatch: Dispatch<any>) => {
 }
 
 export const getCaptchaThunkCreator = () => async (dispatch: Dispatch<any>) => {
+    debugger
     let response = await authApi.captchaURL()
-    let captchaURL = response.data.url
-    dispatch(GetCaptchaUrl(captchaURL))
+    debugger
+    dispatch(GetCaptchaUrl({captchaURL: response.url}))
 }
 
 

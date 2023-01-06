@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {FC, useEffect, useState} from "react";
 import {Formik} from "formik";
 import * as yup from "yup";
 import {connect} from "react-redux";
@@ -11,17 +11,19 @@ type PropsType = {
     isAuth: boolean
     loginThunkCreator: (email: string, password: string, checkbox: boolean, captcha: string) => void
     captchaURL: null | string
+    messageError: string
 }
 
 const LoginForm: FC<PropsType> = (props) => {
-
+    const [state, setState] = useState<string>('')
+    useEffect(() => {state != props.messageError ? setState(props.messageError) : console.log('useEffect update')}, [props.messageError, props.captchaURL])
     if (props.isAuth) {
         return <Navigate to={"/profile/"}/>
     }
 
     const validationSchema = yup.object().shape({
-        email: yup.string().email('Incorrect email').typeError('Incorrect email').required('required to fill out'),
-        password: yup.string().typeError('Incorrect password').required('required to fill out'),
+        email: yup.string().required('Required').email('Invalid email').typeError('Invalid email'),
+        password: yup.string().required('Required')
     })
     return <Formik
         initialValues={{
@@ -48,22 +50,25 @@ const LoginForm: FC<PropsType> = (props) => {
               dirty
           }) => (
             <div>
+                <div className={s.messageError}>{(props.messageError != '') && props.messageError}</div>
                 <input
+                    className={touched.email && errors.email ? s.errorsInput : s.inputLogin}
                     type={'email'}
                     name={'email'}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.email}
                     placeholder={'email'}
-                />{touched.email && errors.email && <p>{errors.email}</p>}<br/>
+                />{touched.email && errors.email && <p className={s.errors}>{errors.email}</p>}<br/>
                 <input
+                    className={(touched.password && errors.password) ? s.errorsInput : s.inputLogin}
                     type={'password'}
                     name={'password'}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.password}
                     placeholder={'password'}
-                /><br/>
+                />{touched.password && errors.password && <p className={s.errors}>{errors.password}</p>}<br/>
                 <div className={s.checkboxBlock}>
                     <div className={s.checkbox}>
                         <input
@@ -76,11 +81,11 @@ const LoginForm: FC<PropsType> = (props) => {
                     </div>
                 </div>
                 <br/>
-
                 {props.captchaURL &&
                     <div>
-                        <img src={props.captchaURL}/>
+                        <img className={s.imgCaptcha} src={props.captchaURL}/>
                         <input
+                            className={touched.captcha && errors.captcha ? s.errorsInput : s.inputLogin}
                             type={'text'}
                             name={'captcha'}
                             onChange={handleChange}
@@ -90,13 +95,13 @@ const LoginForm: FC<PropsType> = (props) => {
                     </div>
                 }
                 <button
-                    className={s.buttonLogin}
+                    className={(touched.email && !errors.email && touched.password && !errors.password) ? s.buttonLogin : s.buttonDisable}
                     disabled={!isValid && !dirty}
                     onClick={() => {
                         handleSubmit()
                     }}
                     type={'submit'}
-                >login
+                >log in
                 </button>
             </div>
         )}
@@ -105,7 +110,8 @@ const LoginForm: FC<PropsType> = (props) => {
 
 const mapStateToProps = (state: AddStateType) => ({
     isAuth: state.auth.isAuth,
-    captchaURL: state.auth.captchaURL
+    captchaURL: state.auth.captchaURL,
+    messageError:  state.auth.messageError,
 })
 
 export default connect(mapStateToProps, {loginThunkCreator})(LoginForm)
