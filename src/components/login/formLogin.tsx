@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {loginThunkCreator} from "../../Redux/auth_reducers";
 import {Navigate} from "react-router-dom";
 import {AddStateType} from "../../Redux/reduxStore";
+import s from './login.module.css';
 
 type PropsType = {
     isAuth: boolean
@@ -19,7 +20,8 @@ const LoginForm: FC<PropsType> = (props) => {
     }
 
     const validationSchema = yup.object().shape({
-        email: yup.string().typeError('Incorrect email').required('required to fill out')
+        email: yup.string().email('Incorrect email').typeError('Incorrect email').required('required to fill out'),
+        password: yup.string().typeError('Incorrect password').required('required to fill out'),
     })
     return <Formik
         initialValues={{
@@ -53,7 +55,7 @@ const LoginForm: FC<PropsType> = (props) => {
                     onBlur={handleBlur}
                     value={values.email}
                     placeholder={'email'}
-                /><br/>
+                />{touched.email && errors.email && <p>{errors.email}</p>}<br/>
                 <input
                     type={'password'}
                     name={'password'}
@@ -62,27 +64,33 @@ const LoginForm: FC<PropsType> = (props) => {
                     value={values.password}
                     placeholder={'password'}
                 /><br/>
-                <input
-                    type={'checkbox'}
-                    name={'checkbox'}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    /*value={values.checkbox}*/
-                /><br/>
+                <div className={s.checkboxBlock}>
+                    <div className={s.checkbox}>
+                        <input
+                            type={'checkbox'}
+                            name={'checkbox'}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            /*value={values.checkbox}*/
+                        />
+                    </div>
+                </div>
+                <br/>
 
                 {props.captchaURL &&
-                <div>
-                    <img src={props.captchaURL}/>
-                <input
-                    type={'text'}
-                    name={'captcha'}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.captcha}
-                /><br/>
-                </div>
+                    <div>
+                        <img src={props.captchaURL}/>
+                        <input
+                            type={'text'}
+                            name={'captcha'}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.captcha}
+                        /><br/>
+                    </div>
                 }
                 <button
+                    className={s.buttonLogin}
                     disabled={!isValid && !dirty}
                     onClick={() => {
                         handleSubmit()

@@ -1,0 +1,53 @@
+.loginBlock {
+    background-color: azure;
+    color: #0e2121;
+    padding: 20px;
+    border: #0e2121 solid 2px;
+    border-radius: 10px;
+    width: 300px;
+    margin: auto;
+    text-align: center;
+}
+
+input {
+    background-color: white;
+    border-radius: 5px;
+    border: #0e2121 solid 1px;
+    color: #0e2121;
+    margin: 5px auto;
+    padding: 5px;
+}
+
+input:hover {
+    background-color: #a2edf3;
+}
+
+.buttonLogin {
+    padding: 5px;
+    grid-area: button;
+    background-color: azure;
+    color: black;
+    border-radius: 5px;
+    border: solid 1px rgba(0, 0, 0, 0.6);
+}
+.buttonLogin:hover {
+    background-color: #5f0000;
+    color: azure;
+}
+.buttonLogin:active {
+    background-color: azure;
+}
+
+.loginBlock {
+}
+
+.checkboxBlock {
+}
+
+.checkbox {
+    width: 100%;
+    margin-left: 0;
+}
+.checkbox::after {
+    content: " Remember me";
+}
