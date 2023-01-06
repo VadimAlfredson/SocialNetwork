@@ -1,9 +1,7 @@
-import {Dispatch} from "react";
-import {subscriptionsApi, usersApi} from "../components/api/api";
+
+import {subscriptionsApi} from "../components/api/api";
 import {createSlice, ThunkAction} from "@reduxjs/toolkit";
-import {dialogsType, messagesType} from "./dialogs_reducer";
 import {AddStateType} from "./reduxStore";
-import {ActionType} from "./Types";
 
 export type UserType = {
     name: string,

@@ -1,5 +1,4 @@
 
-import {authApi} from "../components/api/api";
 import {Dispatch} from "react";
 import {createSlice} from "@reduxjs/toolkit";
 import {loginAuthThunkCreator} from "./auth_reducers";

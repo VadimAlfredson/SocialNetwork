@@ -1,7 +1,7 @@
-import React, {FC} from "react";
+import React, {FC, useEffect, useState} from "react";
 import {UserType} from "../../Redux/users_reducers";
 import s from "../Users/users.module.css"
-import {Navigate, NavLink} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import Paginator from "../common/Paginator/Paginator";
 import Preloader from "../common/Preloader/Preloader";
 
@@ -18,6 +18,8 @@ type PropsType = {
 }
 
 let Users: FC<PropsType> = (props) => {
+    const [state, setState] = useState(false)
+    useEffect(()=>{state != props.isAuth ? setState(props.isAuth) : console.log('useEffect')},[props.isAuth])
     return (
         <div className={s.usersComponent}>
             <Paginator
@@ -34,21 +36,18 @@ let Users: FC<PropsType> = (props) => {
                                 <NavLink to={'/profile/' + u.id}>
                                     <img src={u.photos.small !== null ? u.photos.small :
                                         'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
-                                    }/>
+                                    } alt={'картинка'}/>
                                 </NavLink>
                             </div>
                             <div className={s.followButton}>
-                                {props.isAuth &&
+                                {props.isAuth ?
                                     <button className={s.buttonStyle}
                                             disabled={props.followingInProgress.includes(u.id)}
                                             onClick={() => (props.onFollowChange(u.id, u.followed))
                                             }>{u.followed ? 'Unfollow' : 'Follow'}
-                                    </button>}
-                                {!props.isAuth &&
-                                    <NavLink className={s.navLinkToLogin} to={"../login"}>
+                                    </button> : <NavLink className={s.navLinkToLogin} to={"../login"}>
                                         Register to subscribe
-                                    </NavLink>
-                                }
+                                    </NavLink>}
                             </div>
                             <div className={s.massageButton}>
                                 {props.isAuth &&

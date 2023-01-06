@@ -16,7 +16,7 @@ type PropsType = {
 
 const LoginForm: FC<PropsType> = (props) => {
     const [state, setState] = useState<string>('')
-    useEffect(() => {state != props.messageError ? setState(props.messageError) : console.log('useEffect update')}, [props.messageError, props.captchaURL])
+    useEffect(() => {state != props.messageError ? setState(props.messageError) : console.log('useEffect')}, [props.messageError, props.captchaURL])
     if (props.isAuth) {
         return <Navigate to={"/profile/"}/>
     }

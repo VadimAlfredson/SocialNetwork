@@ -54,7 +54,6 @@ class UsersContainer extends React.Component<PropsType> {
     }
 
     render(): React.ReactNode {
-
         return <>
                 <Users
                     isAuth={this.props.isAuth}

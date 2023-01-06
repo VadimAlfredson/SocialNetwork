@@ -1,11 +1,9 @@
 import './App.css';
 import React from 'react';
 import Navbar from './components/Navbar/Navbar';
-import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
+import {Routes, Route, Navigate} from 'react-router-dom';
 import HeaderContainer from "./components/Header/HeaderContainer";
-/*import Login from "./components/login/login";*/
 import {connect} from "react-redux";
-import {loginAuthThunkCreator} from './Redux/auth_reducers';
 import {InitializeAppTC} from "./Redux/app_reducers";
 import Preloader from "./components/common/Preloader/Preloader";
 

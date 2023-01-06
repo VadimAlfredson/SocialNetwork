@@ -1,9 +1,7 @@
-import {authApi, profileApi, usersApi} from "../components/api/api";
-import {loginAuthThunkCreator, SetUserData} from "./auth_reducers";
-import {createSlice, ThunkAction} from "@reduxjs/toolkit";
+import {profileApi, usersApi} from "../components/api/api";
+import {createSlice} from "@reduxjs/toolkit";
 import {Dispatch} from "react";
 import {AddStateType} from "./reduxStore";
-import {followed, toggleIsFollowing} from "./users_reducers";
 
 export type ContactsType = {
     github: string | null,
@@ -140,21 +138,21 @@ export const getStatusThunkCreator = (userId: number) => async (dispatch: Dispat
 
 export const putStatusThunkCreator = (status: string) => async (dispatch: Dispatch<any>) => {
     let response = await profileApi.putStatus(status)
-    if (response.resultCode == 0) {
+    if (response.resultCode === 0) {
         dispatch(setStatus(status))
     }
 }
 
 export const savePhotoTC = (file: any) => async (dispatch: Dispatch<any>) => {
     let response = await profileApi.putPhoto(file)
-    if (response.resultCode == 0) {
+    if (response.resultCode === 0) {
         dispatch(savePhotoSuccess(response.data.photos))
     }
 }
 export const ProfileThunkCreator = (profile: ProfileType) => async (dispatch: Dispatch<any>, getState: AddStateType) => {
     let userId = getState().auth.userId
     let response = await profileApi.putProfile(profile)
-    if (response.resultCode == 0) {
+    if (response.resultCode === 0) {
         dispatch(setProfileInfo(response.data))
         dispatch(userProfileThunkCreator(userId))
     }
@@ -168,12 +166,12 @@ export const getFollowThunkCreator = (userId: number) => async (dispatch: Dispat
 export const onFollowProfileChangeThunkCreator = (userId: number, follow: boolean) => async (dispatch: Dispatch<any>) => {
     if (follow == true) {
         let response = await profileApi.deleteFollowing(userId)
-        if (response.resultCode == 0) {
+        if (response.resultCode === 0) {
             dispatch(setFollow(false))
         }
     } else {
         let response = await profileApi.addFollowing(userId)
-        if (response.resultCode == 0) {
+        if (response.resultCode === 0) {
             dispatch(setFollow(true))
         }
     }

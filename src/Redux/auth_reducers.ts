@@ -31,6 +31,7 @@ const todosSlice = createSlice({
     } as userDataType,
     reducers: {
         SetUserData(state: userDataType, action) {
+            debugger
             return {
                 ...state,
                 ...action.payload,
@@ -77,10 +78,8 @@ export const loginThunkCreator = (email: string, password: string, rememberMe: b
     } else if (response.resultCode === 10) {
         dispatch(getCaptchaThunkCreator())
         dispatch(GetMessageError({messageError: response.messages[0]}))
-        debugger
     }
     else dispatch(GetMessageError({messageError: response.messages[0]}))
-    debugger
 }
 
 export const logoutThunkCreator = () => async (dispatch: Dispatch<any>) => {

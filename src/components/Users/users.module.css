@@ -60,6 +60,10 @@
     background-color: #530000;
     color: azure;
 }
+.buttonStyle:active {
+    background-color: #a9a9a9;
+    color: azure;
+}
 
 .nameUser {
     grid-area: name;

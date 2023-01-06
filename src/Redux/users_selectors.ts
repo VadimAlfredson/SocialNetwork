@@ -1,5 +1,4 @@
 import {AddStateType} from "./reduxStore";
-import {Dispatch} from "redux";
 
 export const getUsers = (state: AddStateType) => {
     return state.usersPage.users
@@ -22,7 +21,7 @@ export const getFollowingInProgress = (state: AddStateType) => {
 }
 
 export const getIsAuth = (state: AddStateType) => {
-    return state.usersPage.isAuth
+    return state.auth.isAuth
 }
 
 export const getIsFetching = (state: AddStateType) => {

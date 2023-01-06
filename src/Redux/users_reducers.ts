@@ -1,9 +1,7 @@
 import {Dispatch} from "react";
 import {usersApi} from "../components/api/api";
 import {createSlice, ThunkAction} from "@reduxjs/toolkit";
-import {dialogsType, messagesType} from "./dialogs_reducer";
 import {AddStateType} from "./reduxStore";
-import {ActionType} from "./Types";
 import {getSubscriptionsThunkCreator} from "./subscriptions_reducers";
 
 export type UserType = {
@@ -156,15 +154,15 @@ export const onPageChangeThunkCreator = (pageNumber: number, pageSize: number): 
 
 export const onFollowChangeThunkCreator = (userId: number, follow: boolean): ThunkAction<Promise<void>, AddStateType, unknown, any> => async (dispatch: Dispatch<any>) => {
     dispatch(toggleIsFollowing(true, userId))
-    if (follow == true) {
+    if (follow) {
         let response = await usersApi.unfollowUser(userId)
-        if (response.resultCode == 0) {
+        if (response.resultCode === 0) {
             dispatch(followed(userId))
         }
         dispatch(toggleIsFollowing(false, userId))
     } else {
         let response = await usersApi.followedUser(userId)
-        if (response.resultCode == 0) {
+        if (response.resultCode === 0) {
             dispatch(followed(userId))
         }
         dispatch(toggleIsFollowing(false, userId))
