@@ -69,7 +69,7 @@ export const profileApi = {
             })
     },
     putStatus: (status: string) => {
-        return instance.put('profile/status',  {status: status})
+        return instance.put('profile/status', {status: status})
             .then(response => {
                 return response.data
             })
@@ -77,7 +77,7 @@ export const profileApi = {
     putPhoto: (photoFile: any) => {
         const formData = new FormData()
         formData.append('image', photoFile)
-        return instance.put('profile/photo',  formData, {
+        return instance.put('profile/photo', formData, {
             headers: {
                 'content-type': 'multipart/form-data'
             }
@@ -121,7 +121,7 @@ export const authApi = {
             })
     },
     login: (email: string, password: string, rememberMe: boolean = false, captcha: string | null = null) => {
-        return instance.post(`auth/login`, { email, password, rememberMe, captcha})
+        return instance.post(`auth/login`, {email, password, rememberMe, captcha})
             .then(response => {
                 return response.data
             })
@@ -138,4 +138,68 @@ export const authApi = {
                 return response.data
             })
     },
+}
+
+
+export const dialogsApi = {
+    getDialogs: () => {
+        return instance.get('dialogs')
+            .then(response => {
+                return response.data
+            })
+    }, /*get all dialogs*/
+    putDialogUser: (userId: number) => {
+        return instance.put(`dialogs/${userId}`)
+            .then(response => {
+                return response.data
+            })
+    }, /*start chatting, refresh your companion so that he was on top*/
+    getMessageUser: (userId: number) => {
+        return instance.get(`dialogs/${userId}/messages`)
+            .then(response => {
+                return response.data
+            })
+    }, /*get list of messages with your friend*/
+    postMessageToUser: (userId: number) => {
+        return instance.post(`dialogs/${userId}/messages`)
+            .then(response => {
+                return response.data
+            })
+    }, /*send message to your friend*/
+    getMessageViewed: (messageId:number) => {
+        return instance.get(`dialogs/messages/${messageId}/viewed`)
+            .then(response => {
+                return response.data
+            })
+    } /*is your message viewed*/ ,
+    postSpamMessage: (messageId: number) => {
+        return instance.post(`dialogs/messages/${messageId}/spam`)
+            .then(response => {
+                return response.data
+            })
+    } /*spam*/,
+    deleteMessage: (messageId: number) => {
+        return instance.delete(`dialogs/messages/${messageId}`)
+            .then(response => {
+                return response.data
+            })
+    } /*delete only for you, not for your companion*/,
+    putRestoreMessage: (messageId: number) => {
+        return instance.put(`dialogs/messages/${messageId}/restore`)
+            .then(response => {
+                return response.data
+            })
+    } /*restore your message form deleted and spam*/,
+    returnMessage: (userId: number, date: string) => {
+        return instance.get(`dialogs/${userId}/messages/new?newerThen=${date}`)
+            .then(response => {
+                return response.data
+            })
+    } /*return messages newer than date*/,
+    getMessagesCount: (count:number) => {
+        return instance.get(`dialogs/messages/new/count`)
+            .then(response => {
+                return response.data
+            })
+    } /*list of new messages*/,
 }

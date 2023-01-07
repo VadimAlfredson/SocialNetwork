@@ -5,7 +5,7 @@
             "header"
             "bodySide";
     grid-template-rows: 60px auto;
-    grid-gap: 1%;
+
     font-family: Comic Sans;
     color: azure;
     width: 100vw;
