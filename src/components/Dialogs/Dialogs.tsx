@@ -1,24 +1,33 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import s from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {MessagesItem} from "./MessagesItem/MessagesItem";
 import {AddMessage} from "./AddMessage/AddMessage";
-import {dialogsPageType} from "../../Redux/dialogs_reducer";
+import {dialogsType, messagesType} from "../../Redux/dialogs_reducer";
 
 
 const Dialogs = (props: {
-                     dialogsPage: dialogsPageType,
+                     dialogs: dialogsType[],
+                     messages: messagesType[],
                      AddMessageInDialogs: () => void,
-                     /*UpdateMessageInDialogs: (text: string) => void,*/
                      isAuth: boolean
-    textMessage: string
+                     textMessage: string
+                     getDialogsThunkCreator: () => void
                  }
 ) => {
-    let dialogUsers = props.dialogsPage.dialogs.map(
-        d => <DialogItem name={d.name} id={d.id} key={d.id}/>
+    /*    const [dialogs, setDialogs] = useState(props.dialogs);
+        const [messages, setMessages] = useState(props.messages);*/
+    /*props.getDialogsThunkCreator()*/
+    useEffect(() => {
+        debugger
+        props.getDialogsThunkCreator()
+    }, [])
+
+    let dialogUsers = props.dialogs.map(
+        d => <DialogItem name={d.userName} id={d.id} key={d.id}/>
     );
 
-    let messagesItem = props.dialogsPage.messages.map(
+    let messagesItem = props.messages.map(
         m => <MessagesItem message={m.message} icon={m.icon} key={m.id}/>
     );
     return (
@@ -36,8 +45,6 @@ const Dialogs = (props: {
                 <div className={s.addMessage}>
                     <AddMessage
                         AddMessageInDialogs={props.AddMessageInDialogs}
-                        dialogsPage={props.dialogsPage}
-                        /*UpdateMessageInDialogs={props.UpdateMessageInDialogs}*/
                     />
                 </div>
             </div>

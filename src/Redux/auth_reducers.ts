@@ -31,7 +31,6 @@ const todosSlice = createSlice({
     } as userDataType,
     reducers: {
         SetUserData(state: userDataType, action) {
-            debugger
             return {
                 ...state,
                 ...action.payload,
@@ -90,9 +89,7 @@ export const logoutThunkCreator = () => async (dispatch: Dispatch<any>) => {
 }
 
 export const getCaptchaThunkCreator = () => async (dispatch: Dispatch<any>) => {
-    debugger
     let response = await authApi.captchaURL()
-    debugger
     dispatch(GetCaptchaUrl({captchaURL: response.url}))
 }
 

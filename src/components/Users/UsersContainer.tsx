@@ -23,6 +23,7 @@ import {
     getTotalUsersCount,
     getUsers
 } from "../../Redux/users_selectors";
+import {putDialogUserThunkCreator} from "../../Redux/dialogs_reducer";
 
 type PropsType = {
     currentPage: number
@@ -36,6 +37,7 @@ type PropsType = {
     onPageChangeThunkCreator: (pageNumber: number, pageSize: number) => void
     onFollowChangeThunkCreator: (userId: number, follow: boolean) => void
     followingInProgress: Array<number>
+    putDialogUserThunkCreator: (userId: number) => {}
 }
 
 
@@ -53,6 +55,10 @@ class UsersContainer extends React.Component<PropsType> {
         this.props.onFollowChangeThunkCreator(userId, follow)
     }
 
+    onDialogUserChange = (userId: number) => {
+        this.props.putDialogUserThunkCreator(userId)
+    }
+
     render(): React.ReactNode {
         return <>
                 <Users
@@ -65,6 +71,7 @@ class UsersContainer extends React.Component<PropsType> {
                     onPageChange={this.onPageChange}
                     onFollowChange={this.onFollowChange}
                     followingInProgress={this.props.followingInProgress}
+                    onDialogUserChange={this.onDialogUserChange}
                 />
         </>
     }
@@ -95,5 +102,6 @@ export default compose(
             getUsersThunkCreator,
             onPageChangeThunkCreator,
             onFollowChangeThunkCreator,
+            putDialogUserThunkCreator,
         })
 )(UsersContainer)

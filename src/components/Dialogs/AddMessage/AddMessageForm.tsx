@@ -5,7 +5,6 @@ import {Formik} from "formik";
 import * as yup from "yup";
 
 export const AddMessageForm = (props: {
-    dialogsPage: dialogsPageType,
     AddMessageInDialogs: (textMessage: string) => void
 }) => {
     const validationSchema = yup.string()

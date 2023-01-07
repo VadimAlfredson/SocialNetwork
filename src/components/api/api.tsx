@@ -149,6 +149,7 @@ export const dialogsApi = {
             })
     }, /*get all dialogs*/
     putDialogUser: (userId: number) => {
+        debugger
         return instance.put(`dialogs/${userId}`)
             .then(response => {
                 return response.data

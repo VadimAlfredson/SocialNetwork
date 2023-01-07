@@ -1,6 +1,6 @@
 import React from "react";
 import {
-    AddMessageInDialogsActionCreator
+    getDialogsThunkCreator
 } from "../../Redux/dialogs_reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
@@ -11,20 +11,13 @@ import {withAuthNavigate} from "../hoc/witAuthNavigate";
 
 let mapStateToProps = (state: AddStateType) => {
     return {
-        dialogsPage: state.dialogsPage,
+        dialogs: state.dialogsPage.dialogs,
+        messages: state.dialogsPage.messages,
         isAuth: state.auth.isAuth
     }
 }
 
-let mapDispatchToProps = (dispatch: DispatchType) => {
-    return {
-        AddMessageInDialogs: (text: string) => {
-            dispatch(AddMessageInDialogsActionCreator(text))
-        },
-    }
-}
-
 export default compose(
-    connect(mapStateToProps, mapDispatchToProps),
+    connect(mapStateToProps, {getDialogsThunkCreator}),
     withAuthNavigate
 )(Dialogs)

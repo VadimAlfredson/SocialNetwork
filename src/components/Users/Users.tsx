@@ -4,6 +4,7 @@ import s from "../Users/users.module.css"
 import {NavLink} from "react-router-dom";
 import Paginator from "../common/Paginator/Paginator";
 import Preloader from "../common/Preloader/Preloader";
+import {putDialogUserThunkCreator} from "../../Redux/dialogs_reducer";
 
 type PropsType = {
     users: Array<UserType>
@@ -15,6 +16,7 @@ type PropsType = {
     onFollowChange: (id: number, followed: boolean) => void
     isFetching: boolean
     isAuth: boolean
+    onDialogUserChange: (userId: number) => void
 }
 
 let Users: FC<PropsType> = (props) => {
@@ -53,6 +55,7 @@ let Users: FC<PropsType> = (props) => {
                                 {props.isAuth &&
                                     <button className={s.buttonStyle}
                                             onClick={() => {
+                                                props.onDialogUserChange(u.id)
                                             }}>Message
                                     </button>}
                             </div>

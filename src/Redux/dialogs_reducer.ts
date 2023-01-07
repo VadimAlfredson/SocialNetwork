@@ -1,4 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import {Dispatch} from "react";
+import {dialogsApi, usersApi} from "../components/api/api";
+import {setUserProfile} from "./profile_reducer";
+import dialogs from "../components/Dialogs/Dialogs";
 
 export type dialogsPageType = {
     dialogs: dialogsType[],
@@ -7,7 +11,15 @@ export type dialogsPageType = {
 
 export type dialogsType = {
     id: number,
-    name: string
+    userName: string,
+    hasNewMessages: boolean,
+    lastDialogActivityDate: string,
+    lastUserActivityDate: string,
+    "newMessagesCount": number,
+    "photos": {
+        "small": string | null,
+        "large": string | null
+    }
 }
 
 export type messagesType = {
@@ -16,142 +28,47 @@ export type messagesType = {
     icon: string,
 }
 
-export type dialogsReducerAction = {
-    type: 'ADD-MESSAGE-IN-DIALOGS'
-    newMessage?: string
-}
-
-/*
-let initialState = {
-    dialogs: [
-        {id: 1, name: 'Alex'},
-        {id: 2, name: 'Danil'},
-        {id: 3, name: 'Rail'},
-        {id: 4, name: 'Artur'},
-        {id: 5, name: 'Nikita'}
-    ] as Array<dialogsType>,
-
-    messages: [
-        {
-            id: 1,
-            message: 'Hi',
-            icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
-        },
-        {
-            id: 2,
-            message: 'How are you?',
-            icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
-        },
-        {
-            id: 3,
-            message: 'message',
-            icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
-        },
-        {
-            id: 4,
-            message: 'message',
-            icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
-        },
-    ] as Array<messagesType>,
-    addNewMessage: '' as string,
-};
-
-
-
-let j: number = 5
-
-const dialogsReducer = (state = initialState, action: dialogsReducerAction) => {
-    switch (action.type) {
-        case 'ADD-MESSAGE-IN-DIALOGS': {
-            let newMessage = {
-                id: j++,
-                message: state.addNewMessage,
-                icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
-            };
-            return {
-                ...state,
-                messages: [...state.messages, newMessage],
-                addNewMessage: ''
-            };
-        }
-        case 'UPDATE-MESSAGE-IN-DIALOGS': {
-            if (action.newMessage != null) {
-                state.addNewMessage = action.newMessage;
-            }
-            return {
-                ...state,
-                messages: [...state.messages]
-            }
-        }
-
-        default:
-            return state;
-    }
-}
-
-export const AddMessageIDialogsActionCreator = (): dialogsReducerAction => ({type: 'ADD-MESSAGE-IN-DIALOGS'})
-export const UpdateMessageInDialogsActionCreator = (text: string): dialogsReducerAction => ({
-    type: 'UPDATE-MESSAGE-IN-DIALOGS',
-    newMessage: text
-})
-
-export default dialogsReducer;*/
-
-let j: number = 5
-
 const todosSlice = createSlice({
     name: 'dialogs',
     initialState: {
-        dialogs: [
-            {id: 1, name: 'Alex'},
-            {id: 2, name: 'Danil'},
-            {id: 3, name: 'Rail'},
-            {id: 4, name: 'Artur'},
-            {id: 5, name: 'Nikita'}
-        ] as Array<dialogsType>,
-
-        messages: [
-            {
-                id: 1,
-                message: 'Hi',
-                icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
-            },
-            {
-                id: 2,
-                message: 'How are you?',
-                icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
-            },
-            {
-                id: 3,
-                message: 'message',
-                icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
-            },
-            {
-                id: 4,
-                message: 'message',
-                icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
-            },
-        ] as Array<messagesType>,
+        dialogs: [],
+        messages: [],
     },
     reducers: {
-        AddMessageInDialogsActionCreator(state, action) {
-            let newMessage = {
-                id: j++,
-                message: action.payload,
-                icon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
-            };
+        setDialogs(state, action) {
+            debugger
             return {
                 ...state,
-                messages: [...state.messages, newMessage],
-            };
-        },
-/*        UpdateMessageInDialogsActionCreator(state, action) {
-            if (action != null) {
-                state.addNewMessage = action.payload;
+                dialogs: action.payload
             }
-        }*/
+            },
+        putDialogUserAC(state, action) {
+            debugger
+            return {...state,
+            }
+        }
+        },
     }
-})
+)
 
-export const { AddMessageInDialogsActionCreator, /*UpdateMessageInDialogsActionCreator*/ } = todosSlice.actions
+export const {setDialogs, putDialogUserAC} = todosSlice.actions
 export default todosSlice.reducer
+
+/*
+export const userProfileThunkCreator = (userId: number) => async (dispatch: Dispatch<any>) => {
+    let response = await usersApi.userProfile(userId)
+    dispatch(setUserProfile(response))
+}*/
+
+export const getDialogsThunkCreator = () => async (dispatch: Dispatch<any>) => {
+    debugger
+    let response = await dialogsApi.getDialogs()
+    debugger
+    dispatch(setDialogs(response))
+}
+
+export const putDialogUserThunkCreator = (userId: number) => async (dispatch: Dispatch<any>) => {
+    debugger
+    let response = await dialogsApi.putDialogUser(userId)
+    dispatch(putDialogUserAC(response))
+}
