@@ -19,6 +19,7 @@ import {
 import {compose} from "redux";
 import {withAuthNavigate} from "../hoc/witAuthNavigate";
 import {getSubscriptionsThunkCreator} from "../../Redux/subscriptions_reducers";
+import {putDialogUserThunkCreator} from "../../Redux/dialogs_reducer";
 
 function withRouter(Component: FC) {
     function ComponentWithRouterProp(props: any) {
@@ -60,6 +61,10 @@ class ProfileContainer extends React.Component<any, any> {
         this.props.getSubscriptionsThunkCreator(true)
     }
 
+    onPutDialogOnProfileChange = (userId: number) => {
+        this.props.putDialogUserThunkCreator(userId)
+    }
+
 
     render(): React.ReactNode {
         return <Profile {...this.props}
@@ -70,6 +75,7 @@ class ProfileContainer extends React.Component<any, any> {
                         savePhotoTC={this.props.savePhotoTC}
                         follow={this.props.follow}
                         onFollowProfileChange={this.onFollowProfileChange}
+                        onPutDialogOnProfileChange={this.onPutDialogOnProfileChange}
         />
     }
 }
@@ -93,7 +99,8 @@ export default compose(
         savePhotoTC,
         getFollowThunkCreator,
         onFollowProfileChangeThunkCreator,
-        getSubscriptionsThunkCreator
+        getSubscriptionsThunkCreator,
+        putDialogUserThunkCreator
     }),
     withAuthNavigate
 )(ProfileContainer)

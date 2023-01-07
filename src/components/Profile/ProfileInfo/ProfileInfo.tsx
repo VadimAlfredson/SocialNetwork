@@ -13,6 +13,7 @@ type PropsType = {
     savePhotoTC: ({}) => void
     follow: boolean
     onFollowProfileChange: (userId: number, follow: boolean) => void
+    onPutDialogOnProfileChange: (userId: number) => void
 }
 
 const ProfileInfo: FC<PropsType> = (props) => {
@@ -40,6 +41,11 @@ const ProfileInfo: FC<PropsType> = (props) => {
                 <button className={props.follow ? s.buttonUnfollow : s.buttonFollow} onClick={() => {
                     props.onFollowProfileChange(props.profile.userId, props.follow)
                 }}>{props.follow ? 'Unfollow' : 'Follow'}</button>}
+            </div>
+            <div className={s.editMode}>
+                <button className={s.buttonFollow} onClick={() => {
+                    props.onPutDialogOnProfileChange(props.profile.userId)
+                }}>Send message</button>
             </div>
             <div className={s.informationUser}>
                 <Information

@@ -3,7 +3,7 @@ import s from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {MessagesItem} from "./MessagesItem/MessagesItem";
 import {AddMessage} from "./AddMessage/AddMessage";
-import {dialogsType, messagesType} from "../../Redux/dialogs_reducer";
+import {dialogsType, getMessagesUserThunkCreator, messagesType} from "../../Redux/dialogs_reducer";
 
 
 const Dialogs = (props: {
@@ -13,6 +13,7 @@ const Dialogs = (props: {
                      isAuth: boolean
                      textMessage: string
                      getDialogsThunkCreator: () => void
+    getMessagesUserThunkCreator: (userId: number) => void
                  }
 ) => {
     /*    const [dialogs, setDialogs] = useState(props.dialogs);
@@ -23,8 +24,12 @@ const Dialogs = (props: {
         props.getDialogsThunkCreator()
     }, [])
 
+    const onGetMessagesUser = (userId: number) => {
+        props.getMessagesUserThunkCreator(userId)
+    }
+
     let dialogUsers = props.dialogs.map(
-        d => <DialogItem name={d.userName} id={d.id} key={d.id}/>
+        d => <DialogItem name={d.userName} id={d.id} key={d.id} onGetMessagesUser={onGetMessagesUser}/>
     );
 
     let messagesItem = props.messages.map(

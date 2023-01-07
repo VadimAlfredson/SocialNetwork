@@ -155,7 +155,7 @@ export const dialogsApi = {
                 return response.data
             })
     }, /*start chatting, refresh your companion so that he was on top*/
-    getMessageUser: (userId: number) => {
+    getMessagesUser: (userId: number) => {
         return instance.get(`dialogs/${userId}/messages`)
             .then(response => {
                 return response.data

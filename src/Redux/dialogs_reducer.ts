@@ -44,14 +44,22 @@ const todosSlice = createSlice({
             },
         putDialogUserAC(state, action) {
             debugger
-            return {...state,
+            return {
+                ...state,
+                ...action.payload
+            }
+        },
+        getMessagesUserAC(state, action) {
+            return {
+                ...state,
+                messages: action.payload
             }
         }
         },
     }
 )
 
-export const {setDialogs, putDialogUserAC} = todosSlice.actions
+export const {setDialogs, putDialogUserAC, getMessagesUserAC} = todosSlice.actions
 export default todosSlice.reducer
 
 /*
@@ -61,14 +69,18 @@ export const userProfileThunkCreator = (userId: number) => async (dispatch: Disp
 }*/
 
 export const getDialogsThunkCreator = () => async (dispatch: Dispatch<any>) => {
-    debugger
     let response = await dialogsApi.getDialogs()
-    debugger
     dispatch(setDialogs(response))
 }
 
 export const putDialogUserThunkCreator = (userId: number) => async (dispatch: Dispatch<any>) => {
-    debugger
     let response = await dialogsApi.putDialogUser(userId)
     dispatch(putDialogUserAC(response))
+    getDialogsThunkCreator()
+    getMessagesUserThunkCreator(userId)
+}
+
+export const getMessagesUserThunkCreator = (userId: number) => async (dispatch: Dispatch<any>) => {
+    let response = await dialogsApi.getMessagesUser(userId)
+    dispatch(getMessagesUserAC(response.items))
 }

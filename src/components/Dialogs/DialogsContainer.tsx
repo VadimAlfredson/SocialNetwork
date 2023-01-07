@@ -1,6 +1,6 @@
 import React from "react";
 import {
-    getDialogsThunkCreator
+    getDialogsThunkCreator, getMessagesUserThunkCreator
 } from "../../Redux/dialogs_reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
@@ -18,6 +18,6 @@ let mapStateToProps = (state: AddStateType) => {
 }
 
 export default compose(
-    connect(mapStateToProps, {getDialogsThunkCreator}),
+    connect(mapStateToProps, {getDialogsThunkCreator, getMessagesUserThunkCreator}),
     withAuthNavigate
 )(Dialogs)

@@ -3,9 +3,10 @@ import {NavLink} from "react-router-dom";
 import React from "react";
 
 
-export const DialogItem = (props: {id: number, name: string}) => {
-    return <NavLink to={"/dialogs/" + props.id}
+export const DialogItem = (props: {id: number, name: string, onGetMessagesUser: (userId: number) => void}) => {
+
+    return <NavLink to={"/dialogs/" + props.id} onClick={() => {props.onGetMessagesUser(props.id)}}
                  className={dialogsData => dialogsData.isActive ? s.active : s.dialogItem}>
-        <div className={s.dialogDiv}>{props.name}</div>
+        {props.name}
     </NavLink>
 };

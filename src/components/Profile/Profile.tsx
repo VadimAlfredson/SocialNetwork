@@ -12,6 +12,7 @@ type PropsType = {
     savePhotoTC: ({}) => void
     follow: boolean
     onFollowProfileChange: (userId: number, follow: boolean) => void
+    onPutDialogOnProfileChange: (userId: number) => void
 }
 
 const Profile: FC<PropsType> = (props) => {
@@ -24,6 +25,7 @@ const Profile: FC<PropsType> = (props) => {
                      status={props.status}
                      follow={props.follow}
                      onFollowProfileChange={props.onFollowProfileChange}
+                     onPutDialogOnProfileChange={props.onPutDialogOnProfileChange}
         />
         </div>
         <div className={s.profilePost}>
