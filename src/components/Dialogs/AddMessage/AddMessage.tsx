@@ -5,7 +5,6 @@ import {AddMessageForm} from "./AddMessageForm";
 export const AddMessage = (props: {
     onMessageSentChange: (userId: number, bodyMessage: string) => void
     dialogId: number
-    /*UpdateMessageInDialogs: (text: string) => void*/
 }) => {
     return (
         <AddMessageForm

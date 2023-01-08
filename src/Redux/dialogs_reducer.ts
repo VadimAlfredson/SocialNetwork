@@ -17,10 +17,20 @@ import dialogs from "../components/Dialogs/Dialogs";
 "error":null}
 */
 
+export type messageType = {
+    id: string,
+    body: string,
+    translatedBody: null,
+    addedAt: string,
+    senderId: number,
+    senderName: string,
+    recipientId: number,
+    viewed: boolean
+}
 
 export type dialogsPageType = {
     dialogs: dialogsType[],
-    messages: messagesType[],
+    messages: messageType[],
     dialogId: number
 }
 
@@ -46,8 +56,8 @@ export type messagesType = {
 const todosSlice = createSlice({
         name: 'dialogs',
         initialState: {
-            dialogs: [],
-            messages: [],
+            dialogs: [] as dialogsType[],
+            messages: [] as messageType[],
             dialogId: null as number | null
         },
         reducers: {
@@ -106,8 +116,8 @@ export const getDialogsThunkCreator = () => async (dispatch: Dispatch<any>) => {
 export const putDialogUserThunkCreator = (userId: number) => async (dispatch: Dispatch<any>) => {
     let response = await dialogsApi.putDialogUser(userId)
     dispatch(putDialogUserAC(response))
-    getDialogsThunkCreator()
-    getMessagesUserThunkCreator(userId)
+    dispatch(getDialogsThunkCreator())
+    dispatch(getMessagesUserThunkCreator(userId))
 }
 
 export const getMessagesUserThunkCreator = (userId: number) => async (dispatch: Dispatch<any>) => {
@@ -120,5 +130,5 @@ export const postMessageToUserThunkCreator = (userId: number, bodyMessage: strin
     let response = await dialogsApi.postMessageToUser(userId, bodyMessage)
     debugger
     dispatch(postMessagesToUserAC(response.body))
-    getMessagesUserThunkCreator(userId)
+    dispatch(getMessagesUserThunkCreator(userId))
 }

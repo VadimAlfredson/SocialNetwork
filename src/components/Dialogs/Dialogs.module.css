@@ -114,6 +114,7 @@
 }
 
 .divMessage {
+    background-color: red;
     display: grid;
     grid-template-columns: 1fr 15fr;
     padding: 10px;

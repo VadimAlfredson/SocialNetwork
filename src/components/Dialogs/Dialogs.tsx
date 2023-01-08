@@ -6,14 +6,14 @@ import {AddMessage} from "./AddMessage/AddMessage";
 import {
     dialogsType,
     getMessagesUserThunkCreator,
-    messagesType,
+    messagesType, messageType,
     postMessageToUserThunkCreator
 } from "../../Redux/dialogs_reducer";
 
 
 const Dialogs = (props: {
                      dialogs: dialogsType[],
-                     messages: messagesType[],
+                     messages: messageType[],
                      AddMessageInDialogs: () => void,
                      isAuth: boolean
                      textMessage: string
@@ -49,9 +49,10 @@ const Dialogs = (props: {
 
     let messagesItem = props.messages.map(
         m => <MessagesItem
-            message={m.message}
-            icon={m.icon}
+            dialogs={props.dialogs}
+            message={m.body}
             key={m.id}
+            dialogId={props.dialogId}
         />
     );
     return (
