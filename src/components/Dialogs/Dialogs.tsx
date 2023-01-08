@@ -3,7 +3,12 @@ import s from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {MessagesItem} from "./MessagesItem/MessagesItem";
 import {AddMessage} from "./AddMessage/AddMessage";
-import {dialogsType, getMessagesUserThunkCreator, messagesType} from "../../Redux/dialogs_reducer";
+import {
+    dialogsType,
+    getMessagesUserThunkCreator,
+    messagesType,
+    postMessageToUserThunkCreator
+} from "../../Redux/dialogs_reducer";
 
 
 const Dialogs = (props: {
@@ -13,7 +18,9 @@ const Dialogs = (props: {
                      isAuth: boolean
                      textMessage: string
                      getDialogsThunkCreator: () => void
-    getMessagesUserThunkCreator: (userId: number) => void
+                     getMessagesUserThunkCreator: (userId: number) => void
+                     postMessageToUserThunkCreator: (userId: number, bodyMessage: string) => void
+                     dialogId: number
                  }
 ) => {
     /*    const [dialogs, setDialogs] = useState(props.dialogs);
@@ -28,12 +35,24 @@ const Dialogs = (props: {
         props.getMessagesUserThunkCreator(userId)
     }
 
+    const onMessageSentChange = (userId: number, bodyMessage: string) => {
+        props.postMessageToUserThunkCreator(userId, bodyMessage)
+    }
+
     let dialogUsers = props.dialogs.map(
-        d => <DialogItem name={d.userName} id={d.id} key={d.id} onGetMessagesUser={onGetMessagesUser}/>
+        d => <DialogItem
+            name={d.userName}
+            id={d.id}
+            key={d.id}
+            onGetMessagesUser={onGetMessagesUser}/>
     );
 
     let messagesItem = props.messages.map(
-        m => <MessagesItem message={m.message} icon={m.icon} key={m.id}/>
+        m => <MessagesItem
+            message={m.message}
+            icon={m.icon}
+            key={m.id}
+        />
     );
     return (
         <div className={s.dialogs}>
@@ -49,7 +68,8 @@ const Dialogs = (props: {
                 </div>
                 <div className={s.addMessage}>
                     <AddMessage
-                        AddMessageInDialogs={props.AddMessageInDialogs}
+                        dialogId={props.dialogId}
+                        onMessageSentChange={onMessageSentChange}
                     />
                 </div>
             </div>

@@ -161,8 +161,8 @@ export const dialogsApi = {
                 return response.data
             })
     }, /*get list of messages with your friend*/
-    postMessageToUser: (userId: number) => {
-        return instance.post(`dialogs/${userId}/messages`)
+    postMessageToUser: (userId: number, bodyMessage: string) => {
+        return instance.post(`dialogs/${userId}/messages`, {body: bodyMessage})
             .then(response => {
                 return response.data
             })

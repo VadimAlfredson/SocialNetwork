@@ -5,15 +5,17 @@ import {Formik} from "formik";
 import * as yup from "yup";
 
 export const AddMessageForm = (props: {
-    AddMessageInDialogs: (textMessage: string) => void
+    onMessageSentChange: (userId: number, bodyMessage: string) => void
+    dialogId: number
 }) => {
     const validationSchema = yup.string()
     let addMessageElement = (values: string) => {
-        props.AddMessageInDialogs(values);
+        debugger
+        props.onMessageSentChange(props.dialogId, values);
     }
     return <Formik
         initialValues={{
-            textMessage: '' as string,
+            textMessage: '',
         }}
         validateOnBlur
         onSubmit={(values, {resetForm}) => {
