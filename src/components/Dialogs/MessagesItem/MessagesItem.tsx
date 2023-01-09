@@ -2,7 +2,12 @@ import React, {useEffect} from "react";
 import s from "../Dialogs.module.css";
 import {dialogsType} from "../../../Redux/dialogs_reducer";
 
-export const MessagesItem = (props: {message: string, dialogs: dialogsType[], dialogId: number}) => {
+export const MessagesItem = (props: {
+    message: string,
+    dialogs: dialogsType[],
+    dialogId: number
+    iconUserInMessage: string
+}) => {
     useEffect(() => {
 
     }, [props.dialogId])
@@ -13,7 +18,7 @@ export const MessagesItem = (props: {message: string, dialogs: dialogsType[], di
     console.log(photoUser())
     return <div className={s.divMessage}>
         <div>
-            <img className={s.iconMessage} src={iconUser}/>
+            <img className={s.iconMessage} src={props.iconUserInMessage}/>
         </div>
         <div className={s.messageForm}>
             <a>{props.message}</a>

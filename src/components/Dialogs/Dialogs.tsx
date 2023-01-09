@@ -39,6 +39,11 @@ const Dialogs = (props: {
         props.postMessageToUserThunkCreator(userId, bodyMessage)
     }
 
+    let photoUser = () => {
+        let arr = props.dialogs.filter(i => i.id === props.dialogId);
+        return arr[0] ? arr[0].photos.large : 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'}
+    let iconUserInMessage = photoUser()
+
     let dialogUsers = props.dialogs.map(
         d => <DialogItem
             name={d.userName}
@@ -49,6 +54,7 @@ const Dialogs = (props: {
 
     let messagesItem = props.messages.map(
         m => <MessagesItem
+            iconUserInMessage={iconUserInMessage}
             dialogs={props.dialogs}
             message={m.body}
             key={m.id}
