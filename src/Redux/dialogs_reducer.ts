@@ -25,7 +25,7 @@ export type messageType = {
     senderId: number,
     senderName: string,
     recipientId: number,
-    viewed: boolean
+    viewed: boolean,
 }
 
 export type dialogsPageType = {
@@ -77,7 +77,7 @@ const todosSlice = createSlice({
             messages: [] as messageType[],
             dialogId: null as number | null,
             senderIcon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg',
-            recipientIcon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
+            senderDefaultId: null as number | null
 
         },
         reducers: {
@@ -100,37 +100,29 @@ const todosSlice = createSlice({
                     messages: action.payload
                 }
             },
+            setDialogIdAC(state, action) {
+              return { ...state,
+                  dialogId: action.payload
+              }
+            },
             postMessagesToUserAC(state, action) {
                 return {
                     ...state,
                     ...action.payload
                 }
             },
-            getUserIdInDialogsAC(state, action) {
-                return {
-                    ...state,
-                    dialogId: action.payload
-                }
-            },
-            setSenderIcon(state, action) {
+            setSenderIconAC(state, action){
                 return {
                     ...state,
                     senderIcon: action.payload
                 }
             },
-            setRecipientIcon(state, action) {
-                return {
-                    ...state,
-                    recipientIcon: action.payload
-                }
-            },
-            
         }
 
     }
 )
 
-export const {setDialogs, putDialogUserAC, getMessagesUserAC, postMessagesToUserAC, getUserIdInDialogsAC, setSenderIcon, setRecipientIcon} = todosSlice.actions
+export const {setDialogs, putDialogUserAC, getMessagesUserAC, setDialogIdAC, postMessagesToUserAC, setSenderIconAC} = todosSlice.actions
 export default todosSlice.reducer
 
 /*
@@ -154,19 +146,17 @@ export const putDialogUserThunkCreator = (userId: number) => async (dispatch: Di
 export const getMessagesUserThunkCreator = (userId: number) => async (dispatch: Dispatch<any>) => {
     let response = await dialogsApi.getMessagesUser(userId)
     dispatch(getMessagesUserAC(response.items))
-    dispatch(getUserIdInDialogsAC(userId))
+    dispatch(setDialogIdAC(userId))
 }
 
 export const postMessageToUserThunkCreator = (userId: number, bodyMessage: string) => async (dispatch: Dispatch<any>) => {
+    debugger
     let response = await dialogsApi.postMessageToUser(userId, bodyMessage)
     dispatch(postMessagesToUserAC(response.body))
     dispatch(getMessagesUserThunkCreator(userId))
 }
 
-export const getUsersIconInDialogsThunkCreator = (senderId: number, recipientId: number) => async (dispatch: Dispatch<any>) => {
-    debugger
-    let response1 = await usersApi.userProfile(senderId)
-    let response2 = await usersApi.userProfile(recipientId)
-    dispatch(setSenderIcon(response1.photos.large))
-    dispatch(setRecipientIcon(response2.photos.large))
+export const getSenderIconThunkCreator = (senderId: number) => async (dispatch: Dispatch<any>) => {
+    let response = await usersApi.userProfile(senderId)
+    dispatch(setSenderIconAC(response.photos.large))
 }

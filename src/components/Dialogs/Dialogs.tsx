@@ -4,10 +4,7 @@ import {DialogItem} from "./DialogItem/DialogItem";
 import {MessagesItem} from "./MessagesItem/MessagesItem";
 import {AddMessage} from "./AddMessage/AddMessage";
 import {
-    dialogsType,
-    getMessagesUserThunkCreator,
-    messagesType, messageType,
-    postMessageToUserThunkCreator
+    dialogsType, getSenderIconThunkCreator, messageType,
 } from "../../Redux/dialogs_reducer";
 
 
@@ -21,13 +18,15 @@ const Dialogs = (props: {
                      getMessagesUserThunkCreator: (userId: number) => void
                      postMessageToUserThunkCreator: (userId: number, bodyMessage: string) => void
                      dialogId: number
+                     getSenderIconThunkCreator: (senderId: number) => void
+                     senderIcon: string
+                     OwnerId: number
                  }
 ) => {
     /*    const [dialogs, setDialogs] = useState(props.dialogs);
         const [messages, setMessages] = useState(props.messages);*/
     /*props.getDialogsThunkCreator()*/
     useEffect(() => {
-        debugger
         props.getDialogsThunkCreator()
     }, [])
 
@@ -39,10 +38,11 @@ const Dialogs = (props: {
         props.postMessageToUserThunkCreator(userId, bodyMessage)
     }
 
-    let photoUser = () => {
-        let arr = props.dialogs.filter(i => i.id === props.dialogId);
-        return arr[0] ? arr[0].photos.large : 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'}
-    let iconUserInMessage = photoUser()
+    const getUsersIcon = (senderId: number) => {
+        return props.getSenderIconThunkCreator(senderId)
+
+    }
+
 
     let dialogUsers = props.dialogs.map(
         d => <DialogItem
@@ -52,15 +52,21 @@ const Dialogs = (props: {
             onGetMessagesUser={onGetMessagesUser}/>
     );
 
-    let messagesItem = props.messages.map(
-        m => <MessagesItem
-            iconUserInMessage={iconUserInMessage}
-            dialogs={props.dialogs}
-            message={m.body}
-            key={m.id}
-            dialogId={props.dialogId}
-        />
-    );
+    let messagesItem =
+        props.messages[0] ?
+        props.messages.map(
+        m =>
+            <MessagesItem
+                dialogs={props.dialogs}
+                message={m.body}
+                key={m.id}
+                dialogId={props.dialogId}
+                senderIcon={props.senderIcon}
+                getUsersIcon={getUsersIcon}
+                senderId={m.senderId}
+                OwnerId={props.OwnerId}
+            />
+        ) : <div><h3 className={s.h3text}>start chatting first</h3></div>
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsUsers}>

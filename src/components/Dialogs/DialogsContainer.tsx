@@ -2,13 +2,12 @@ import React from "react";
 import {
     getDialogsThunkCreator,
     getMessagesUserThunkCreator,
-    getUsersIconInDialogsThunkCreator,
+    getSenderIconThunkCreator,
     postMessageToUserThunkCreator
 } from "../../Redux/dialogs_reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {AddStateType} from "../../Redux/reduxStore";
-import {DispatchType} from "../../Redux/Types";
 import {compose} from "redux";
 import {withAuthNavigate} from "../hoc/witAuthNavigate";
 
@@ -17,11 +16,18 @@ let mapStateToProps = (state: AddStateType) => {
         dialogs: state.dialogsPage.dialogs,
         messages: state.dialogsPage.messages,
         isAuth: state.auth.isAuth,
-        dialogId: state.dialogsPage.dialogId
+        dialogId: state.dialogsPage.dialogId,
+        senderIcon: state.dialogsPage.senderIcon,
+        OwnerId: state.auth.userId
     }
 }
 
 export default compose(
-    connect(mapStateToProps, {getDialogsThunkCreator, getMessagesUserThunkCreator, postMessageToUserThunkCreator, getUsersIconInDialogsThunkCreator}),
+    connect(mapStateToProps, {
+        getDialogsThunkCreator,
+        getMessagesUserThunkCreator,
+        postMessageToUserThunkCreator,
+        getSenderIconThunkCreator
+    }),
     withAuthNavigate
 )(Dialogs)
