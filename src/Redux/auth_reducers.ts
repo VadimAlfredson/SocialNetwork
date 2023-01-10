@@ -1,4 +1,4 @@
-import {authApi} from "../components/api/api";
+import {authApi, usersApi} from "../components/api/api";
 import {Dispatch} from "react";
 import {createSlice} from "@reduxjs/toolkit";
 
@@ -17,6 +17,7 @@ type userDataType = {
     isAuth: boolean
     captchaURL: null | string
     messageError: string | null
+    ownerPhoto: string
 }
 
 const todosSlice = createSlice({
@@ -27,7 +28,8 @@ const todosSlice = createSlice({
         login: null,
         isAuth: false,
         captchaURL: null,
-        messageError: null
+        messageError: null,
+        ownerPhoto: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
     } as userDataType,
     reducers: {
         SetUserData(state: userDataType, action) {
@@ -47,11 +49,17 @@ const todosSlice = createSlice({
                 ...state,
                 ...action.payload
             }
-        }
+        },
+        setOwnerIconAC(state: userDataType, action) {
+            return {
+                ...state,
+                ownerPhoto: action.payload
+            }
+        },
     }
 })
 
-export const {SetUserData, GetCaptchaUrl, GetMessageError} = todosSlice.actions
+export const {SetUserData, GetCaptchaUrl, GetMessageError, setOwnerIconAC} = todosSlice.actions
 export default todosSlice.reducer
 
 export const loginAuthThunkCreator = () => async (dispatch: Dispatch<any>) => {
@@ -63,6 +71,7 @@ export const loginAuthThunkCreator = () => async (dispatch: Dispatch<any>) => {
             login: response.data.login,
             isAuth: true
         }))
+        dispatch(getOwnerIconThunkCreator(response.data.id))
     } else if (response.resultCode === 10) {
         dispatch(getCaptchaThunkCreator())
         dispatch(GetMessageError({messageError: response.messages[0]}))
@@ -93,6 +102,10 @@ export const getCaptchaThunkCreator = () => async (dispatch: Dispatch<any>) => {
     dispatch(GetCaptchaUrl({captchaURL: response.url}))
 }
 
+export const getOwnerIconThunkCreator = (id: number) => async (dispatch: Dispatch<any>) => {
+    let response = await usersApi.userProfile(id)
+    dispatch(setOwnerIconAC(response.photos.large))
+}
 
 /*
 export default authReducer*/

@@ -4,6 +4,7 @@ import Preloader from "../../common/Preloader/Preloader";
 import {ProfileStatus} from "./ProfileStatus";
 import {ProfileType} from "../../../Redux/profile_reducer";
 import ProfileInfoForm from "./formProfileInfo";
+import {Navigate, NavLink} from "react-router-dom";
 
 type PropsType = {
     profile: ProfileType
@@ -42,10 +43,10 @@ const ProfileInfo: FC<PropsType> = (props) => {
                     props.onFollowProfileChange(props.profile.userId, props.follow)
                 }}>{props.follow ? 'Unfollow' : 'Follow'}</button>}
             </div>
-            <div className={s.editMode}>
-                <button className={s.buttonFollow} onClick={() => {
+            <div className={s.editMode}>{props.isOwner &&
+                <NavLink to={"/dialogs/" + props.profile.userId} className={s.buttonFollow} onClick={() => {
                     props.onPutDialogOnProfileChange(props.profile.userId)
-                }}>Send message</button>
+                }}>Send message</NavLink>}
             </div>
             <div className={s.informationUser}>
                 <Information

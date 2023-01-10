@@ -1,6 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {Dispatch} from "react";
-import {dialogsApi, usersApi} from "../components/api/api";
+import {authApi, dialogsApi, usersApi} from "../components/api/api";
 import {setUserProfile} from "./profile_reducer";
 
 /*
@@ -76,8 +76,12 @@ const todosSlice = createSlice({
             dialogs: [] as dialogsType[],
             messages: [] as messageType[],
             dialogId: null as number | null,
-            senderIcon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg',
-            senderDefaultId: null as number | null
+            /*senderIcon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg',*/
+            senderDefaultId: null as number | null,
+            OwnerIcon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg' as string,
+            companionIcon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg' as string,
+            companionId: null as number | null,
+            defaultPhoto: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg' as string
 
         },
         reducers: {
@@ -101,9 +105,10 @@ const todosSlice = createSlice({
                 }
             },
             setDialogIdAC(state, action) {
-              return { ...state,
-                  dialogId: action.payload
-              }
+                return {
+                    ...state,
+                    dialogId: action.payload
+                }
             },
             postMessagesToUserAC(state, action) {
                 return {
@@ -111,10 +116,22 @@ const todosSlice = createSlice({
                     ...action.payload
                 }
             },
-            setSenderIconAC(state, action){
+            setSenderIconAC(state, action) {
                 return {
                     ...state,
                     senderIcon: action.payload
+                }
+            },
+            setCompanionIdAC(state, action) {
+                return {
+                    ...state,
+                    companionId: action.payload
+                }
+            },
+            setCompanionIconAC(state, action) {
+                return {
+                    ...state,
+                    companionIcon: action.payload
                 }
             },
         }
@@ -122,7 +139,17 @@ const todosSlice = createSlice({
     }
 )
 
-export const {setDialogs, putDialogUserAC, getMessagesUserAC, setDialogIdAC, postMessagesToUserAC, setSenderIconAC} = todosSlice.actions
+export const {
+    setDialogs,
+    putDialogUserAC,
+    getMessagesUserAC,
+    setDialogIdAC,
+    postMessagesToUserAC,
+    /*setSenderIconAC,*/
+    setCompanionIdAC,
+    setCompanionIconAC,
+
+} = todosSlice.actions
 export default todosSlice.reducer
 
 /*
@@ -147,6 +174,7 @@ export const getMessagesUserThunkCreator = (userId: number) => async (dispatch: 
     let response = await dialogsApi.getMessagesUser(userId)
     dispatch(getMessagesUserAC(response.items))
     dispatch(setDialogIdAC(userId))
+    dispatch(setCompanionIdAC(userId))
 }
 
 export const postMessageToUserThunkCreator = (userId: number, bodyMessage: string) => async (dispatch: Dispatch<any>) => {
@@ -156,7 +184,13 @@ export const postMessageToUserThunkCreator = (userId: number, bodyMessage: strin
     dispatch(getMessagesUserThunkCreator(userId))
 }
 
-export const getSenderIconThunkCreator = (senderId: number) => async (dispatch: Dispatch<any>) => {
+/*export const getSenderIconThunkCreator = (senderId: number) => async (dispatch: Dispatch<any>) => {
     let response = await usersApi.userProfile(senderId)
     dispatch(setSenderIconAC(response.photos.large))
-}
+}*/
+
+/*
+export const getOwnerIconThunkCreator = (id: number) => async (dispatch: Dispatch<any>) => {
+    let response = await usersApi.userProfile(id)
+    dispatch(setOwnerIconAC(response.photos.large))
+}*/
