@@ -140,21 +140,21 @@
 }
 
 .textMessage {
+    display: inline-block;
     background-color: azure;
     border: #0e2121 solid 2px;
     border-radius: 0 5px 5px 5px;
     color: #0e2121;
-    margin-top: 25px;
     margin-left: 10px;
     padding: 3px 10px;
 }
 
 .ownerTextMessage {
+    display: inline-block;
     background-color: azure;
     border: #0e2121 solid 2px;
     border-radius: 5px 0 5px 5px;
     color: #0e2121;
-    margin-top: 25px;
     margin-right: 10px;
     padding: 3px 10px;
 }
