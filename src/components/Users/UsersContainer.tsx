@@ -36,7 +36,7 @@ type PropsType = {
     friends: boolean
 
     getUsersThunkCreator: (currentPage: number, pageSize: number) => void
-    onChangeUsersThunkCreator: (pageNumber: number, pageSize: number, term: string, friends: boolean) => void
+    onChangeUsersThunkCreator: (pageNumber: number, pageSize: number, term: string, friend: boolean) => void
     onFollowChangeThunkCreator: (userId: number, follow: boolean) => void
     followingInProgress: Array<number>
     putDialogUserThunkCreator: (userId: number) => {}
@@ -49,8 +49,8 @@ class UsersContainer extends React.Component<PropsType> {
         this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
     }
 
-    onUsersChange = (pageNumber: number, pageSize: number, term: string, friends: boolean) => {
-        this.props.onChangeUsersThunkCreator(pageNumber, pageSize || this.props.pageSize, term || '', friends || false)
+    onUsersChange = (pageNumber: number, pageSize: number, term: string, friend: boolean) => {
+        this.props.onChangeUsersThunkCreator(pageNumber, pageSize, term, friend)
     }
 
     onFollowChange = (userId: number, follow: boolean) => {
@@ -63,18 +63,20 @@ class UsersContainer extends React.Component<PropsType> {
 
     render(): React.ReactNode {
         return <>
-                <Users
-                    isAuth={this.props.isAuth}
-                    isFetching={this.props.isFetching}
-                    users={this.props.users}
-                    pageSize={this.props.pageSize}
-                    currentPage={this.props.currentPage}
-                    totalUsersCount={this.props.totalUsersCount}
-                    onUsersChange={this.onUsersChange}
-                    onFollowChange={this.onFollowChange}
-                    followingInProgress={this.props.followingInProgress}
-                    onDialogUserChange={this.onDialogUserChange}
-                />
+            <Users
+                isAuth={this.props.isAuth}
+                isFetching={this.props.isFetching}
+                users={this.props.users}
+                pageSize={this.props.pageSize}
+                currentPage={this.props.currentPage}
+                totalUsersCount={this.props.totalUsersCount}
+                onUsersChange={this.onUsersChange}
+                onFollowChange={this.onFollowChange}
+                followingInProgress={this.props.followingInProgress}
+                onDialogUserChange={this.onDialogUserChange}
+                term={this.props.term}
+                friend={this.props.friends}
+            />
         </>
     }
 

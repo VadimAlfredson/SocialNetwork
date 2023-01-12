@@ -5,7 +5,9 @@ type PropsType = {
     totalUsersCount: number
     pageSize: number
     currentPage: number
-    onPageChange: (p: number) => void
+    onPageChange: (p: number, pageSize: number, term: string, friend: boolean) => void
+    term: string
+    friend: boolean
 }
 
 let Paginator: FC<PropsType> = (props) => {
@@ -31,7 +33,7 @@ let Paginator: FC<PropsType> = (props) => {
                         // @ts-ignore
                         return <span className={props.currentPage === p ? s.activePage : s.pageNumber}
                                      onClick={() => {
-                                         props.onPageChange(p)
+                                         props.onPageChange(p, props.pageSize, props.term, props.friend)
                                      }} key={p}
                         >{p}</span>
                     }

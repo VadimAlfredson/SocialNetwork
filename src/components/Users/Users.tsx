@@ -13,16 +13,20 @@ type PropsType = {
     followingInProgress: Array<number>
     pageSize: number
     currentPage: number
-    onUsersChange: (pageNumber: number, pageSize: number, term: string, friends: boolean) => void
+    onUsersChange: (pageNumber: number, pageSize: number, term: string, friend: boolean) => void
     onFollowChange: (id: number, followed: boolean) => void
     isFetching: boolean
     isAuth: boolean
     onDialogUserChange: (userId: number) => void
+    term: string
+    friend: boolean
 }
 
 let Users: FC<PropsType> = (props) => {
     const [state, setState] = useState(false)
-    useEffect(()=>{state != props.isAuth ? setState(props.isAuth) : console.log('useEffect')},[props.isAuth])
+    useEffect(() => {
+        state != props.isAuth ? setState(props.isAuth) : console.log('useEffect')
+    }, [props.isAuth])
     return (
         <div className={s.usersComponent}>
             <Paginator
@@ -30,6 +34,8 @@ let Users: FC<PropsType> = (props) => {
                 pageSize={props.pageSize}
                 currentPage={props.currentPage}
                 onPageChange={props.onUsersChange}
+                term={props.term}
+                friend={props.friend}
             />
             <FormSearchUsers
                 onUsersChange={props.onUsersChange}

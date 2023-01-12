@@ -59,7 +59,7 @@ const FormSearchUsers: FC<PropsType> = (props) => {
                 </div>
                 <button
                     className={''}
-                    disabled={!isValid && !dirty}
+                    disabled={!isValid}
                     onClick={() => {
                         handleSubmit()
                     }}
