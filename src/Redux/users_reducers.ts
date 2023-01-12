@@ -3,6 +3,7 @@ import {usersApi} from "../components/api/api";
 import {createSlice, ThunkAction} from "@reduxjs/toolkit";
 import {AddStateType} from "./reduxStore";
 import {getSubscriptionsThunkCreator} from "./subscriptions_reducers";
+import dialogs from "../components/Dialogs/Dialogs";
 
 export type UserType = {
     name: string,
@@ -59,6 +60,8 @@ type usersStateType = {
     currentPage: number
     isFetching: boolean
     followingInProgress: Array<any>
+    term: string
+    friends: boolean
 }
 
 const todosSlice: any = createSlice({
@@ -70,7 +73,9 @@ const todosSlice: any = createSlice({
         totalUsersCount: 0,
         currentPage: 1,
         isFetching: false,
-        followingInProgress: []
+        followingInProgress: [],
+        term: '',
+        friends: false
     } as usersStateType,
     reducers: {
         followed(state, action) {
@@ -130,27 +135,30 @@ export const {followed, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFe
 
 export const getUsersThunkCreator = (currentPage: number, pageSize: number): ThunkAction<Promise<void>, AddStateType, unknown, any> => async (dispatch) => {
     dispatch(toggleIsFetching(true))
-    let response = await usersApi.getUsers(currentPage, pageSize)
+    let response = await usersApi.getUsers(currentPage, pageSize, '', false)
     dispatch(setUsers(response.items))
     dispatch(setTotalUsersCount(response.totalCount))
     dispatch(toggleIsFetching(false))
 }
 
-/*export const getFollowingThunkCreator = (friend: boolean): ThunkAction<Promise<void>, AddStateType, unknown, any> => async (dispatch) => {
-    dispatch(toggleIsFetching(true))
-    let response = await usersApi.getFollowing(friend)
-    dispatch(setFollowing(response.items))
-    dispatch(toggleIsFetching(false))
-}*/
-
-export const onPageChangeThunkCreator = (pageNumber: number, pageSize: number): ThunkAction<Promise<void>, AddStateType, unknown, any> => async (dispatch: Dispatch<any>) => {
+export const onChangeUsersThunkCreator = (pageNumber: number, pageSize: number, term: string, friends: boolean): ThunkAction<Promise<void>, AddStateType, unknown, any> => async (dispatch: Dispatch<any>) => {
+    debugger
     dispatch(setCurrentPage(pageNumber))
     dispatch(toggleIsFetching(true))
-    let response = await usersApi.getUsers2(pageNumber, pageSize)
+    let response = await usersApi.getUsers(pageNumber, pageSize, term, friends)
     dispatch(setUsers(response.items))
     dispatch(setTotalUsersCount(response.totalCount))
     dispatch(toggleIsFetching(false))
 }
+
+/*export const onSearchUsersThunkCreator = (pageNumber: number, pageSize: number, term: string, friends: boolean) => async (dispatch: Dispatch<any>) => {
+    dispatch(setCurrentPage(pageNumber))
+    dispatch(toggleIsFetching(true))
+    let response = await usersApi.getUsers(pageNumber, pageSize, term, friends)
+    dispatch(setUsers(response.items))
+    dispatch(setTotalUsersCount(response.totalCount))
+    dispatch(toggleIsFetching(false))
+}*/
 
 export const onFollowChangeThunkCreator = (userId: number, follow: boolean): ThunkAction<Promise<void>, AddStateType, unknown, any> => async (dispatch: Dispatch<any>) => {
     dispatch(toggleIsFollowing(true, userId))

@@ -76,9 +76,6 @@ const todosSlice = createSlice({
             dialogs: [] as dialogsType[],
             messages: [] as messageType[],
             dialogId: null as number | null,
-            /*senderIcon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg',*/
-            senderDefaultId: null as number | null,
-            OwnerIcon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg' as string,
             companionIcon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg' as string,
             companionId: null as number | null,
             defaultPhoto: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg' as string
@@ -92,7 +89,6 @@ const todosSlice = createSlice({
                 }
             },
             putDialogUserAC(state, action) {
-                debugger
                 return {
                     ...state,
                     ...action.payload
@@ -114,12 +110,6 @@ const todosSlice = createSlice({
                 return {
                     ...state,
                     ...action.payload
-                }
-            },
-            setSenderIconAC(state, action) {
-                return {
-                    ...state,
-                    senderIcon: action.payload
                 }
             },
             setCompanionIdAC(state, action) {
@@ -145,7 +135,6 @@ export const {
     getMessagesUserAC,
     setDialogIdAC,
     postMessagesToUserAC,
-    /*setSenderIconAC,*/
     setCompanionIdAC,
     setCompanionIconAC,
 
@@ -166,8 +155,8 @@ export const getDialogsThunkCreator = () => async (dispatch: Dispatch<any>) => {
 export const putDialogUserThunkCreator = (userId: number) => async (dispatch: Dispatch<any>) => {
     let response = await dialogsApi.putDialogUser(userId)
     dispatch(putDialogUserAC(response))
-    dispatch(getDialogsThunkCreator())
     dispatch(getMessagesUserThunkCreator(userId))
+    dispatch(getDialogsThunkCreator())
 }
 
 export const getMessagesUserThunkCreator = (userId: number) => async (dispatch: Dispatch<any>) => {
@@ -183,14 +172,3 @@ export const postMessageToUserThunkCreator = (userId: number, bodyMessage: strin
     dispatch(postMessagesToUserAC(response.body))
     dispatch(getMessagesUserThunkCreator(userId))
 }
-
-/*export const getSenderIconThunkCreator = (senderId: number) => async (dispatch: Dispatch<any>) => {
-    let response = await usersApi.userProfile(senderId)
-    dispatch(setSenderIconAC(response.photos.large))
-}*/
-
-/*
-export const getOwnerIconThunkCreator = (id: number) => async (dispatch: Dispatch<any>) => {
-    let response = await usersApi.userProfile(id)
-    dispatch(setOwnerIconAC(response.photos.large))
-}*/

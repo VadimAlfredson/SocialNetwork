@@ -11,18 +11,12 @@ import {
 const Dialogs = (props: {
                      dialogs: dialogsType[],
                      messages: messageType[],
-                     AddMessageInDialogs: () => void,
                      isAuth: boolean
-                     textMessage: string
                      getDialogsThunkCreator: () => void
                      getMessagesUserThunkCreator: (userId: number) => void
                      postMessageToUserThunkCreator: (userId: number, bodyMessage: string) => void
                      dialogId: number
-                     getSenderIconThunkCreator: (senderId: number) => void
-                     senderIcon: string
                      OwnerId: number
-                     OwnerIcon: string
-                     companionId: number
                      companionIcon: string
                      setCompanionIconAC: (photo: string | null) => void
                      defaultPhoto: string
@@ -70,15 +64,10 @@ const Dialogs = (props: {
             props.messages.map(
                 m =>
                     <MessagesItem
-                        dialogs={props.dialogs}
                         message={m.body}
                         key={m.id}
-                        dialogId={props.dialogId}
-                        senderIcon={props.senderIcon}
-                        /*getUsersIcon={getUsersIcon}*/
                         senderId={m.senderId}
                         OwnerId={props.OwnerId}
-                        OwnerIcon={props.OwnerIcon}
                         companionIcon={props.companionIcon}
                         ownerPhoto={props.ownerPhoto}
                     />

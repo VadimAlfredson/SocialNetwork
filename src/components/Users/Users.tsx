@@ -5,6 +5,7 @@ import {NavLink} from "react-router-dom";
 import Paginator from "../common/Paginator/Paginator";
 import Preloader from "../common/Preloader/Preloader";
 import {putDialogUserThunkCreator} from "../../Redux/dialogs_reducer";
+import FormSearchUsers from "./formSearchUsers";
 
 type PropsType = {
     users: Array<UserType>
@@ -12,7 +13,7 @@ type PropsType = {
     followingInProgress: Array<number>
     pageSize: number
     currentPage: number
-    onPageChange: (pageNumber: number) => void
+    onUsersChange: (pageNumber: number, pageSize: number, term: string, friends: boolean) => void
     onFollowChange: (id: number, followed: boolean) => void
     isFetching: boolean
     isAuth: boolean
@@ -28,7 +29,11 @@ let Users: FC<PropsType> = (props) => {
                 totalUsersCount={props.totalUsersCount}
                 pageSize={props.pageSize}
                 currentPage={props.currentPage}
-                onPageChange={props.onPageChange}
+                onPageChange={props.onUsersChange}
+            />
+            <FormSearchUsers
+                onUsersChange={props.onUsersChange}
+                pageSize={props.pageSize}
             />
             {props.isFetching ? <Preloader/> :
                 <div>

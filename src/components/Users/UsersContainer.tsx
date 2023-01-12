@@ -10,7 +10,7 @@ import {
     setUsers,
     toggleIsFollowing,
     getUsersThunkCreator,
-    onPageChangeThunkCreator,
+    onChangeUsersThunkCreator,
     onFollowChangeThunkCreator, UserType,
 } from "../../Redux/users_reducers";
 import Preloader from "../common/Preloader/Preloader";
@@ -18,8 +18,8 @@ import {withAuthNavigate} from "../hoc/witAuthNavigate";
 import {compose} from "redux";
 import {
     getCurrentPage,
-    getFollowingInProgress, getIsAuth, getIsFetching,
-    getPageSize,
+    getFollowingInProgress, getFriends, getIsAuth, getIsFetching,
+    getPageSize, getTerm,
     getTotalUsersCount,
     getUsers
 } from "../../Redux/users_selectors";
@@ -32,9 +32,11 @@ type PropsType = {
     users: Array<UserType>
     totalUsersCount: number
     isAuth: boolean
+    term: string,
+    friends: boolean
 
     getUsersThunkCreator: (currentPage: number, pageSize: number) => void
-    onPageChangeThunkCreator: (pageNumber: number, pageSize: number) => void
+    onChangeUsersThunkCreator: (pageNumber: number, pageSize: number, term: string, friends: boolean) => void
     onFollowChangeThunkCreator: (userId: number, follow: boolean) => void
     followingInProgress: Array<number>
     putDialogUserThunkCreator: (userId: number) => {}
@@ -47,8 +49,8 @@ class UsersContainer extends React.Component<PropsType> {
         this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
     }
 
-    onPageChange = (pageNumber: number) => {
-        this.props.onPageChangeThunkCreator(pageNumber, this.props.pageSize)
+    onUsersChange = (pageNumber: number, pageSize: number, term: string, friends: boolean) => {
+        this.props.onChangeUsersThunkCreator(pageNumber, pageSize || this.props.pageSize, term || '', friends || false)
     }
 
     onFollowChange = (userId: number, follow: boolean) => {
@@ -68,7 +70,7 @@ class UsersContainer extends React.Component<PropsType> {
                     pageSize={this.props.pageSize}
                     currentPage={this.props.currentPage}
                     totalUsersCount={this.props.totalUsersCount}
-                    onPageChange={this.onPageChange}
+                    onUsersChange={this.onUsersChange}
                     onFollowChange={this.onFollowChange}
                     followingInProgress={this.props.followingInProgress}
                     onDialogUserChange={this.onDialogUserChange}
@@ -86,7 +88,9 @@ let mapStateToProps = (state: AddStateType) => {
         currentPage: getCurrentPage(state),
         followingInProgress: getFollowingInProgress(state),
         isAuth: getIsAuth(state),
-        isFetching: getIsFetching(state)
+        isFetching: getIsFetching(state),
+        term: getTerm(state),
+        friends: getFriends(state)
     }
 }
 
@@ -100,7 +104,7 @@ export default compose(
             toggleIsFetching,
             toggleIsFollowing,
             getUsersThunkCreator,
-            onPageChangeThunkCreator,
+            onChangeUsersThunkCreator,
             onFollowChangeThunkCreator,
             putDialogUserThunkCreator,
         })

@@ -27,3 +27,11 @@ export const getIsAuth = (state: AddStateType) => {
 export const getIsFetching = (state: AddStateType) => {
     return state.usersPage.isFetching
 }
+
+export const getTerm = (state: AddStateType) => {
+    return state.usersPage.term
+}
+
+export const getFriends = (state: AddStateType) => {
+    return state.usersPage.friends
+}

@@ -2,7 +2,6 @@ import React from "react";
 import {
     getDialogsThunkCreator,
     getMessagesUserThunkCreator,
-    /*getSenderIconThunkCreator,*/
     postMessageToUserThunkCreator, setCompanionIconAC
 } from "../../Redux/dialogs_reducer";
 import Dialogs from "./Dialogs";
@@ -17,9 +16,7 @@ let mapStateToProps = (state: AddStateType) => {
         messages: state.dialogsPage.messages,
         isAuth: state.auth.isAuth,
         dialogId: state.dialogsPage.dialogId,
-        senderIcon: state.dialogsPage.senderIcon,
         OwnerId: state.auth.userId,
-        OwnerIcon: state.dialogsPage.OwnerIcon,
         companionId: state.dialogsPage.companionId,
         companionIcon: state.dialogsPage.companionIcon,
         defaultPhoto: state.dialogsPage.defaultPhoto,
@@ -32,7 +29,6 @@ export default compose(
         getDialogsThunkCreator,
         getMessagesUserThunkCreator,
         postMessageToUserThunkCreator,
-        /*getSenderIconThunkCreator,*/
         setCompanionIconAC,
     }),
     withAuthNavigate
