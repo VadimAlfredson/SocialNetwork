@@ -70,6 +70,7 @@ const Dialogs = (props: {
                         OwnerId={props.OwnerId}
                         companionIcon={props.companionIcon}
                         ownerPhoto={props.ownerPhoto}
+                        viewed={m.viewed}
                     />
             ) : <div><h3 className={s.h3text}>start chatting first</h3></div>
     return (

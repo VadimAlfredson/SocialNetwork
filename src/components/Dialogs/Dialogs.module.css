@@ -118,24 +118,25 @@
     display: grid;
     grid-template-columns: 1fr 15fr;
     grid-template-areas: "icon message";
-    padding: 10px;
+    padding: 3px;
 }
 
 .messageForm {
     grid-area: message;
     margin-top: 25px;
+    padding: 5px;
 }
 
 .divOwnerMessage {
     display: grid;
     grid-template-columns: 15fr 1fr;
     grid-template-areas: "message icon";
-    padding: 10px;
+    padding: 3px;
 }
 
 .ownerMessageForm {
     grid-area: message;
-    margin-top: 25px;
+    margin-top: 15px;
     text-align: right;
 }
 
@@ -145,7 +146,6 @@
     border: #0e2121 solid 2px;
     border-radius: 0 5px 5px 5px;
     color: #0e2121;
-    margin-left: 10px;
     padding: 3px 10px;
 }
 
@@ -155,10 +155,18 @@
     border: #0e2121 solid 2px;
     border-radius: 5px 0 5px 5px;
     color: #0e2121;
-    margin-right: 10px;
     padding: 3px 10px;
 }
 
 .h3text {
     text-align: center;
+}
+
+.ownerMessageViewed {
+    background-color: rgba(162, 237, 243, 0.34);
+    grid-area: message;
+    margin-top: 15px;
+    text-align: right;
+    padding: 5px;
+
 }

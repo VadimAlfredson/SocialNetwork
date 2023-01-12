@@ -31,6 +31,7 @@
     width: 40px;
     float: left;
     border-radius: 50%;
+    margin: auto;
 }
 
 .h2 {
@@ -39,7 +40,7 @@
 
 .loginBlock {
     display: grid;
-    grid-template-columns: 1fr 120px;
+    grid-template-columns: 1fr 90px;
 }
 
 .loginBlock div {
@@ -49,7 +50,22 @@
 .loginBlock button {
     height: 30px;
     width: 80px;
-    background-color: #008b93;
+    background-color: rgba(169, 169, 169, 0.43);
     color: black;
     margin: auto;
+}
+
+.ownerInfo {
+    display: grid;
+    grid-template-columns: 1fr 40px;
+    margin-right: 0px;
+}
+
+.ownerInfo div {
+    margin-right: 10px;
+}
+
+.ownerInfo img {
+    margin: auto;
+    border: black solid 1px;
 }
