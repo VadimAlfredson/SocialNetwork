@@ -30,7 +30,7 @@
     height: 250px;
     width: 250px;
     border-radius: 5%;
-    border: 5px black;
+    border: black solid 2px;
 }
 
 .inputPhoto {

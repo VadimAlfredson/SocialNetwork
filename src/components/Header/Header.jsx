@@ -5,7 +5,6 @@ import {NavLink} from "react-router-dom";
 const Header = (props) => {
     return <header className={s.header}>
         <div className={s.logoBlock}>
-        <img src='https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'/>
         <h2 className={s.h2}>Social Network</h2>
         </div>
         <div className={s.log}>

@@ -1,10 +1,10 @@
 .usersComponent {
-    margin: auto;
+    margin: 0 auto;
 }
 
 .itemUser {
     width: 80%;
-    margin: 5% auto;
+    margin: 20px auto;
     display: grid;
     grid-template-columns: 120px 100px 100px 1fr;
     grid-template-rows: 3fr 1fr;
@@ -18,7 +18,7 @@
 .avatar img {
     width: 120px;
     height: 120px;
-    border-radius: 10%;
+    border-radius: 12px;
 }
 
 .avatar {
@@ -27,7 +27,7 @@
 
 .infoUser {
     color: black;
-    border-radius: 12px;
+    border-radius: 5px;
     padding: 1%;
     grid-area: info;
     background-color: azure;
@@ -50,7 +50,7 @@
 .buttonStyle {
     background-color: azure;
     color: black;
-    border-radius: 10px;
+    border-radius: 5px;
     border: black solid 1px;
     width: 100%;
     height: 95%;
@@ -82,7 +82,7 @@
     text-decoration: none;
     background-color: azure;
     color: black;
-    border-radius: 10px;
+    border-radius: 5px;
     border: black solid 1px;
     padding: 0 20px;
     margin: auto;
@@ -92,5 +92,45 @@
 }
 
 .navLinkToLogin:hover {
-    background-color: #a2edf3;
+    background-color: #008b93;
+}
+
+.formSearchBlock {
+    display: grid;
+    grid-template-columns: min-content min-content min-content min-content;
+    width: min-content;
+    margin: 10px auto;
+    height: 40px;
+}
+
+.searchInput {
+    border-radius: 5px;
+    background-color: azure;
+    margin: 0 10px;
+}
+
+.searchButton {
+    border-radius: 5px;
+    background-color: azure;
+    margin: auto;
+    height: 100%;
+}
+
+.searchButton:hover {
+    background-color: #5f0000;
+    color: azure;
+}
+
+.searchButton:active {
+    background-color: #008b93;
+}
+
+.searchCheckbox {
+    margin: auto 0 auto 20px;
+}
+
+.searchText {
+    display: inline-block;
+    width: max-content;
+    margin: auto auto auto 5px;
 }

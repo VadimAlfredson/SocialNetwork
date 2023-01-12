@@ -164,6 +164,7 @@
 
 .ownerMessageViewed {
     background-color: rgba(162, 237, 243, 0.34);
+    border-radius: 2px;
     grid-area: message;
     margin-top: 15px;
     text-align: right;

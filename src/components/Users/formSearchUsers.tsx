@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from "react";
 import {Formik} from "formik";
 import * as yup from "yup";
-import s from './login.module.css';
+import s from './users.module.css';
 
 type PropsType = {
     onUsersChange: (pageNumber: number, pageSize: number, term: string, friends: boolean) => void
@@ -10,7 +10,7 @@ type PropsType = {
 
 const FormSearchUsers: FC<PropsType> = (props) => {
     const validationSchema = yup.object().shape({
-        search: yup.string().required('Required'),
+        search: yup.string(),
     })
 
     return <Formik
@@ -21,7 +21,6 @@ const FormSearchUsers: FC<PropsType> = (props) => {
         validateOnBlur
         onSubmit={(values => {
             console.log(values)
-            debugger
             props.onUsersChange(1, props.pageSize, values.search, values.subscriptionsCheckbox)
         })}
         validationSchema={validationSchema}
@@ -36,18 +35,26 @@ const FormSearchUsers: FC<PropsType> = (props) => {
               handleSubmit,
               dirty
           }) => (
-            <div>
-                <div ></div>
+            <div className={s.formSearchBlock}>
                 <input
-                    className={''}
+                    className={s.searchInput}
                     type={'text'}
                     name={'search'}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.search}
-                    placeholder={'search'}
+                    placeholder={'text'}
                 />
-                <div className={''}>
+                <button
+                    className={s.searchButton}
+                    /*disabled={!isValid}*/
+                    onClick={() => {
+                        handleSubmit()
+                    }}
+                    type={'submit'}
+                >Search
+                </button>
+                <div className={s.searchCheckbox}>
                     <div className={''}>
                         <input
                             type={'checkbox'}
@@ -57,15 +64,7 @@ const FormSearchUsers: FC<PropsType> = (props) => {
                         />
                     </div>
                 </div>
-                <button
-                    className={''}
-                    disabled={!isValid}
-                    onClick={() => {
-                        handleSubmit()
-                    }}
-                    type={'submit'}
-                >Search
-                </button>
+                <div className={s.searchText}>Only subscriptions</div>
             </div>
         )}
     </Formik>

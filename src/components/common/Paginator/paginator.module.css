@@ -1,25 +1,27 @@
 .activePage {
+    display: inline-block;
     width: auto;
     box-shadow: black;
     border: black solid 1px;
-    border-radius: 10%;
-    margin: 0 1%;
-    padding: 1%;
+    border-radius: 5px;
+    margin: auto 10px;
+    padding: 10px;
     background-color: rgb(104, 6, 6);
 }
 
 .paginator {
     text-align: center;
-    margin: auto;
+    margin: 0 auto;
 }
 
 .pageNumber {
+    display: inline-block;
     width: auto;
     box-shadow: black;
     border: black solid 1px;
-    border-radius: 10%;
-    margin: 1% 1%;
-    padding: 1%;
+    border-radius: 5px;
+    margin: auto 10px;
+    padding: 10px;
     background-color: rgb(240, 255, 255);
     color: black;
 }
