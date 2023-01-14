@@ -17,9 +17,12 @@ export const MessagesItem = (props: {
             <img className={s.iconMessage} src={senderIcon}/>
         </div>
         <div className={props.senderId === props.OwnerId ?
-            (props.viewed ? s.ownerMessageForm : s.ownerMessageViewed) :
+            s.ownerMessageForm :
             s.messageForm}>
-            <a className={props.senderId === props.OwnerId ? s.ownerTextMessage : s.textMessage}>{props.message}{props.viewed && 'прочитано'}</a>
+            <a className={props.senderId === props.OwnerId ?
+                (props.viewed ? s.ownerTextMessage : s.ownerMessageViewed) :
+                (props.viewed ? s.textMessage : s.textMessageViewed)
+            }>{props.message}</a>
         </div>
     </div>
 }

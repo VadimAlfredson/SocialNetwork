@@ -163,11 +163,19 @@
 }
 
 .ownerMessageViewed {
-    background-color: rgba(162, 237, 243, 0.34);
-    border-radius: 2px;
-    grid-area: message;
-    margin-top: 15px;
-    text-align: right;
-    padding: 5px;
+    display: inline-block;
+    background-color: #a2edf3;
+    border: #0e2121 solid 2px;
+    border-radius: 5px 0 5px 5px;
+    color: #0e2121;
+    padding: 3px 10px;
+}
 
+.textMessageViewed {
+    display: inline-block;
+    background-color: #a2edf3;
+    border: #0e2121 solid 2px;
+    border-radius: 0 5px 5px 5px;
+    color: #0e2121;
+    padding: 3px 10px;
 }
