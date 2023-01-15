@@ -76,12 +76,10 @@ const Dialogs = (props: {
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsUsers}>
-                <div className={s.dialogsTitle}>Dialogs</div>
                 {dialogUsers}
             </div>
 
             <div className={s.messages}>
-                <div className={s.titleMessages}>Messages</div>
                 <div className={s.message}>
                     {messagesItem}
                 </div>

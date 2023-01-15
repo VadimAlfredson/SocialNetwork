@@ -1,15 +1,9 @@
 .dialogs {
     display: grid;
+    margin: 10px auto;
     grid-area: content;
     grid-template-columns: minmax(250px, 10vw) 35vw;
     height: auto;
-}
-
-.dialogsTitle {
-    text-align: center;
-    width: 80%;
-    margin: auto auto 10px auto;
-    padding: 10px;
 }
 
 .dialogsUsers {

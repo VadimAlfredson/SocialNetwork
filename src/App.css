@@ -1,48 +1,111 @@
-.app-wrapper {
-    margin: auto;
-    display: grid;
-    grid-template-areas:
+@media (max-width: 999px) {
+    .app-wrapper {
+        margin: auto;
+        display: grid;
+        grid-template-areas:
             "header"
             "bodySide";
-    grid-template-rows: 60px auto;
+        grid-template-rows: 60px auto;
+        font-family: Comic Sans;
+        color: azure;
+    }
 
-    font-family: Comic Sans;
-    color: azure;
-    width: 100vw;
+    .bodySide {
+        grid-area: bodySide;
+        display: grid;
+        grid-template-areas:
+                "navbar"
+                "content";
+        grid-template-columns: max-content;
+        grid-template-rows: min-content max-content;
+        margin: 0 auto;
+        align-content: center;
+    }
+
+    .app-wrapper-content {
+        grid-area: content;
+        margin: auto;
+        width: 100vw
+    }
+
+    .navbar {
+        display: block;
+        grid-area: navbar;
+        margin: 10px auto;
+        width: min-content;
+    }
+
+    .content {
+        width: 90%;
+        margin: auto;
+
+    }
+
+    .navbarLevel2 {
+        width: 100vw;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .content {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
-.bodySide {
-    grid-area: bodySide;
-    display: grid;
-    grid-template-areas: "navbar content";
-    grid-template-columns: 1fr 2fr;
-    margin: auto;
+
+
+
+
+
+
+@media (min-width: 1000px) {
+    .app-wrapper {
+        margin: auto;
+        display: grid;
+        grid-template-areas:
+            "header"
+            "bodySide";
+        grid-template-rows: 60px auto;
+        font-family: Comic Sans;
+        color: azure;
+        width: 100vw;
+    }
+
+    .bodySide {
+        grid-area: bodySide;
+        display: grid;
+        grid-template-areas: "navbar content";
+        grid-template-columns: 1fr 2fr;
+        margin: auto;
+    }
+
+    .navbar {
+        display: block;
+        grid-area: navbar;
+        align-content: center;
+        margin: 10px 0 auto auto;
+    }
+
+    .app-wrapper-content {
+        grid-area: content;
+        margin-right: auto;
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .navbarLevel2 {
+        width: 350px;
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+    .content {
+        width: 100%;
+        max-width: 1000px;
+        margin-left: 0;
+        margin-right: auto;
+    }
 }
 
-.app-wrapper-content {
-    grid-area: content;
-    margin-right: auto;
-    margin-left: 0;
-    width: 100%;
-}
-
-.navbar {
-    grid-area: navbar;
-    margin-right: 0;
-    margin-left: auto;
-    width: 30vw;
-}
-
-.navbarLevel2 {
-    width: 350px;
-    margin-left: auto;
-    margin-right: 0;
-}
-
-.content {
-width: 100%;
-    max-width: 1000px;
-    margin-left: 0;
-    margin-right: auto;
-
-}

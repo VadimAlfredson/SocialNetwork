@@ -1,47 +1,94 @@
-.nav {
-    grid-area: nav;
-    justify-content: space-around;
-    margin: 0 5%;
-    flex-direction: column;
-    align-items: center;
+@media (min-width: 1000px) {
+    .nav {
+        grid-area: nav;
+        margin: 0 5%;
+    }
+
+    .item {
+        align-items: center;
+    }
+
+    .itemnav {
+        display: block;
+        color: black;
+        text-decoration: none;
+        background-color: azure;
+        border: #0e2121 solid 1px;
+        border-radius: 5px;
+        padding: 10px 0 10px 0;
+        width: 90%;
+        text-align: center;
+        margin: auto;
+    }
+
+    .itemnav:hover {
+        background-color: #a2edf3;
+    }
+
+    .following {
+        color: black;
+        text-decoration: none;
+        padding: 5px 0 10px 0px;
+    }
+
+    .active {
+        display: block;
+        color: rgb(0, 0, 0);
+        text-decoration: none;
+        background-color: rgb(0, 139, 147);
+        border: #0e2121 solid 1px;
+        border-radius: 5px;
+        padding: 10px 0 10px 0;
+        width: 90%;
+        text-align: center;
+        margin: auto;
+    }
 }
 
-.item {
-    align-items: center;
-}
+@media (max-width: 999px) {
 
-.itemnav {
-    display: block;
-    color: black;
-    text-decoration: none;
-    background-color: azure;
-    border: #0e2121 solid 1px;
-    border-radius: 5px;
-    padding: 10px 0 10px 0;
-    width: 90%;
-    text-align: center;
-    margin: auto;
-}
+    .nav {
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        background-color: red;
+    }
 
-.itemnav:hover {
-    background-color: #a2edf3;
-}
+    .itemnav {
+        display: block;
+        color: black;
+        text-decoration: none;
+        background-color: azure;
+        border: #0e2121 solid 1px;
+        border-radius: 5px;
+        padding: 10px 0;
+        width: 98%;
+        margin: auto;
+        text-align: center;
+    }
 
-.following {
-    color: black;
-    text-decoration: none;
-    padding: 5px 0 10px 0px;
-}
+    .following {
+        color: black;
+        text-decoration: none;
+        padding: 5px 0 10px 0px;
+        display: none;
+    }
 
-.active {
-    display: block;
-    color: rgb(0, 0, 0);
-    text-decoration: none;
-    background-color: rgb(0, 139, 147);
-    border: #0e2121 solid 1px;
-    border-radius: 5px;
-    padding: 10px 0 10px 0;
-    width: 90%;
-    text-align: center;
-    margin: auto;
+    .item {
+        align-items: center;
+        padding: 0 20px;
+    }
+
+    .active {
+        display: block;
+        color: rgb(0, 0, 0);
+        text-decoration: none;
+        background-color: rgb(0, 139, 147);
+        border: #0e2121 solid 1px;
+        border-radius: 5px;
+        padding: 10px 0;
+        width: 98%;
+        margin: auto;
+        text-align: center;
+    }
 }
