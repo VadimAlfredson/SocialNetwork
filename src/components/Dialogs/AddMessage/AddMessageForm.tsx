@@ -48,7 +48,7 @@ export const AddMessageForm = (props: {
                 disabled={!isValid && !dirty}
                 onClick={() => {handleSubmit()}}
                 type={'submit'}
-            >Sent
+            >Send
             </button>
         </div>
     )}
