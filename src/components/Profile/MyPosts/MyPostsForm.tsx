@@ -42,7 +42,7 @@ export const MyPostsForm = React.memo((props: {
                     disabled={!isValid && !dirty}
                     onClick={() => {handleSubmit()}}
                     type={'submit'}
-                >Add post
+                >Send
                 </button>
             </div>
         )}

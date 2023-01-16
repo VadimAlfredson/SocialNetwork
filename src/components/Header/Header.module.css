@@ -71,3 +71,75 @@
     margin: auto;
     border: black solid 1px;
 }
+
+@media screen and (max-width: 479px) {
+    .header {
+        grid-area: header;
+        background-color: rgba(52, 99, 99, 0.51);
+        border: solid 2px rgba(0, 0, 0, 0.38);
+        height: 50px;
+    }
+
+    .log {
+        margin: auto 0 auto auto;
+    }
+
+    .login {
+        text-decoration: none;
+        background-color: white;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .logoBlock {
+        margin: 5px auto 5px 10px;
+        display: grid;
+        grid-template-columns: 60px 1fr;
+    }
+
+    .header img {
+        height: 40px;
+        width: 40px;
+        float: left;
+        border-radius: 50%;
+        margin: auto;
+    }
+
+    .h2 {
+        display: none;
+        margin: auto;
+        width: max-content;
+    }
+
+    .loginBlock {
+        display: grid;
+        grid-template-columns: 1fr 50px;
+    }
+
+    .loginBlock div {
+        margin: auto 10px auto auto;
+    }
+
+    .loginBlock button {
+        height: 50px;
+        width: 50px;
+        background-color: rgba(169, 169, 169, 0.43);
+        color: black;
+        margin: auto;
+    }
+
+    .ownerInfo {
+        display: grid;
+        grid-template-columns: 1fr 40px;
+        margin-right: 0px;
+    }
+
+    .ownerInfo div {
+        margin-right: 10px;
+    }
+
+    .ownerInfo img {
+        margin: auto;
+        border: black solid 1px;
+    }
+}
