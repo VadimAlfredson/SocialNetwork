@@ -1,15 +1,16 @@
 import React, {FC} from 'react';
-import s from './Friends.module.css';
+import s from './Subscriptions.module.css';
 import {UserType} from "../../Redux/users_reducers";
 import {NavLink} from "react-router-dom";
 
 type PropsType = {
     subscriptions: Array<UserType>
+    totalCountSubscriptions: number
 }
 
-let Following: FC<PropsType> = (props) => {
+let Subscriptions: FC<PropsType> = (props) => {
     return <div className={s.friends}>
-        <div className={s.h4}>Subscriptions</div>
+        <div className={s.h4}>Subscriptions ({props.totalCountSubscriptions})</div>
             <div className={s.friendsList}>
                 {
                     props.subscriptions.map((u: UserType) => <div key={u.id}>
@@ -30,4 +31,4 @@ let Following: FC<PropsType> = (props) => {
         </div>
 }
 
-export default Following;
+export default Subscriptions;

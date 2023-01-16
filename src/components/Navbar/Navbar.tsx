@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from "react-router-dom";
-import FollowingContainer from "../Friends/FollowingContainer";
+import SubscriptionsContainer from "../Subscriptions/SubscriptionsContainer";
 
 type propsType = {
     isAuth: boolean
@@ -40,7 +40,7 @@ const Navbar  = (props: propsType) => {
                 </NavLink>
         {props.isAuth &&
         <div className={s.following}>
-            <FollowingContainer />
+            <SubscriptionsContainer />
         </div>}
     </nav>
 }

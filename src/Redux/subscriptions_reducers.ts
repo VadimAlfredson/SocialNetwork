@@ -18,13 +18,15 @@ export type UserType = {
 type usersStateType = {
     subscriptions: UserType[],
     updateSubscriptions: boolean
+    totalCountSubscriptions: number
 }
 
 const todosSlice: any = createSlice({
     name: 'subscriptions',
     initialState: {
         subscriptions: [],
-        updateSubscriptions: false
+        updateSubscriptions: false,
+        totalCountSubscriptions: 0
     } as usersStateType,
     reducers: {
         setSubscriptions(state, action) {
@@ -39,15 +41,22 @@ const todosSlice: any = createSlice({
                 updateSubscriptions: action.payload
             }
         },
+        getTotalCountSubscriptions(state, action) {
+            return {
+                ...state,
+                totalCountSubscriptions: action.payload
+            }
+        }
     }
 })
 
-export const {setSubscriptions, toggleUpdateSubscriptions} = todosSlice.actions
+export const {setSubscriptions, toggleUpdateSubscriptions, getTotalCountSubscriptions} = todosSlice.actions
 
 export const getSubscriptionsThunkCreator = (friend: boolean): ThunkAction<Promise<void>, AddStateType, unknown, any> => async (dispatch) => {
     dispatch(toggleUpdateSubscriptions(true))
     let response = await subscriptionsApi.getSubscriptions(true)
     dispatch(setSubscriptions(response.items))
+    dispatch(getTotalCountSubscriptions(response.totalCount))
     dispatch(toggleUpdateSubscriptions(false))
 }
 

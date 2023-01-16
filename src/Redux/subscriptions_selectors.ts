@@ -7,3 +7,7 @@ export const getSubscriptions = (state: AddStateType) => {
 export const getUpdateSubscriptions = (state: AddStateType) => {
     return state.subscriptionsPage.updateSubscriptions
 }
+
+export const getTotalCountSubscriptions = (state: AddStateType) => {
+    return state.subscriptionsPage.totalCountSubscriptions
+}
