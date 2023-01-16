@@ -1,11 +1,11 @@
 .activePage {
-    display: inline-block;
+    display: inline;
     width: auto;
     box-shadow: black;
     border: black solid 1px;
     border-radius: 5px;
-    margin: auto 10px;
-    padding: 10px;
+    margin: auto 0.2%;
+    padding: 5px;
     background-color: rgb(104, 6, 6);
 }
 
@@ -15,13 +15,13 @@
 }
 
 .pageNumber {
-    display: inline-block;
+    display: inline;
     width: auto;
     box-shadow: black;
     border: black solid 1px;
     border-radius: 5px;
-    margin: auto 10px;
-    padding: 10px;
+    margin: auto 0.2%;
+    padding: 5px;
     background-color: rgb(240, 255, 255);
     color: black;
 }
