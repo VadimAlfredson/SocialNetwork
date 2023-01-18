@@ -14,9 +14,10 @@ const UsersContainer = React.lazy(() => import('./components/Users/UsersContaine
 // @ts-ignore
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
 const Login = React.lazy(() => import('./components/login/login'))
+const SettingContainer = React.lazy(() => import('./components/Setting/SettingContainer'))
 
 
-class App extends React.Component<{ InitializeAppTC: () => void, isAuth: boolean}> {
+class App extends React.Component<{ InitializeAppTC: () => void, isAuth: boolean }> {
     componentDidMount() {
         this.props.InitializeAppTC()
     }
@@ -33,22 +34,25 @@ class App extends React.Component<{ InitializeAppTC: () => void, isAuth: boolean
                     </div>
                     <div className='app-wrapper-content'>
                         <div className='content'>
-                        <React.Suspense fallback={<div><Preloader/></div>}>
-                            <Routes>
-                                <Route path="/SocialNetwork" element={<Navigate to="/profile"/>}/>
-                                <Route path="/" element={<Navigate to="/profile"/>}/>
-                                <Route path="*" element={<div>404</div>}/>
-                                <Route path='/dialogs/*'
-                                       element={<DialogsContainer/>}/>
-                                <Route path='/profile/:userId'
-                                       element={<ProfileContainer/>}/>
-                                <Route path='/profile' element={<ProfileContainer/>}/>
-                                <Route path='/users'
-                                       element={<UsersContainer/>}/>
-                                <Route path='/login'
-                                       element={<Login/>}/>
-                            </Routes>
-                        </React.Suspense>
+                            <React.Suspense fallback={<div><Preloader/></div>}>
+                                <Routes>
+                                    <Route path="/SocialNetwork" element={<Navigate to="/profile"/>}/>
+                                    <Route path="/" element={<Navigate to="/profile"/>}/>
+                                    <Route path="*" element={<div>404</div>}/>
+                                    <Route path='/dialogs/*'
+                                           element={<DialogsContainer/>}/>
+                                    <Route path='/profile/:userId'
+                                           element={<ProfileContainer/>}/>
+                                    <Route path='/profile' element={<ProfileContainer/>}/>
+                                    <Route path='/users'
+                                           element={<UsersContainer/>}/>
+                                    <Route path='/login'
+                                           element={<Login/>}/>
+                                    <Route path='setting'
+                                           element={<SettingContainer/>}
+                                    />
+                                </Routes>
+                            </React.Suspense>
                         </div>
                     </div>
                 </div>

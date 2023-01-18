@@ -4,12 +4,13 @@ import React, {ChangeEvent, FC, useEffect, useState} from 'react';
 type PropsType = {
     status: string
     putStatusThunkCreator: (status: string) => void
+    isOwner: boolean
 }
 
 export const ProfileStatus: FC<PropsType> = (props) => {
     let [editMode, setEditMode] = useState(false)
 
-    let activeStatusInput = () => setEditMode(true)
+    let activeStatusInput = () => setEditMode(!props.isOwner)
 
     let deactivateEditMode = () => {
         setEditMode(false)
