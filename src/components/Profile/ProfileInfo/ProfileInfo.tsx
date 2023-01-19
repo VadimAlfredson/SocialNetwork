@@ -74,15 +74,15 @@ const Information: FC<InfoProps> = ({profile, isOwner}) => {
     let editModeOnOff = (value: boolean) => setEditMode(value)
     return <div>
         <div>
-            {isOwner || !editMode && <button className={s.buttonEditInfo} onClick={() => {
+            {/*{isOwner || !editMode && <button className={s.buttonEditInfo} onClick={() => {
                 editModeOnOff(true)
             }}>edit information</button>}
             {!isOwner && editMode && <div><ProfileInfoForm editModeOnOff={editModeOnOff}/></div>}
-            {editMode || <div>
+            {editMode || */}<div>
                 <div><b>looking for a job:</b> {profile.lookingForAJob ? "yes" : 'no'}</div>
                 {profile.lookingForAJob &&
                     <div><b>looking for a job description:</b> {profile.lookingForAJobDescription}</div>}
-            </div>}
+            </div>{/*}*/}
             <div className={s.aboutMe}><b>About me:</b>{profile.aboutMe}</div>
         </div>
         <div className={s.contacts}>{(!isOwner && editMode) || Object.keys(profile.contacts).filter(i =>

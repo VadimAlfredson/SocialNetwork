@@ -1,9 +1,12 @@
 import React from "react";
 import s from './Setting.module.css';
+import ProfileInfoForm from "../Profile/ProfileInfo/formProfileInfo";
 
 const Setting = () => {
     return (
-        <div>Setting</div>
+        <div>
+            <ProfileInfoForm />
+        </div>
     )
 }
 

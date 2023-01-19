@@ -1,9 +1,9 @@
-import React, {FC} from "react";
+import React, {FC, useEffect, useState} from "react";
 import {Formik} from "formik";
 import * as yup from "yup";
 import {connect} from "react-redux";
 import {AddStateType} from "../../../Redux/reduxStore";
-import {ProfileThunkCreator} from "../../../Redux/profile_reducer";
+import {ProfileThunkCreator, userProfileThunkCreator} from "../../../Redux/profile_reducer";
 
 type PropsType = {
     isAuth: boolean
@@ -12,6 +12,12 @@ type PropsType = {
 }
 
 const ProfileInfoForm: FC<any> = (props) => {
+    debugger
+    let [state, setState] = useState(props.profile.userId)
+    useEffect(() => {
+        if (props.ownerId != props.profile.userId){userProfileThunkCreator(props.ownerId)}
+        setState(props.ownerId)
+    }, [state])
     /*const validationSchema = yup.object().shape({
         email: yup.string().typeError('Incorrect email').required('required to fill out')
     })*/
@@ -156,7 +162,8 @@ const ProfileInfoForm: FC<any> = (props) => {
 
 const mapStateToProps = (state: AddStateType) => ({
     isAuth: state.auth.isAuth,
+    ownerId: state.auth.userId,
     profile: state.profilePage.profile,
 })
 
-export default connect(mapStateToProps, {ProfileThunkCreator})(ProfileInfoForm)
+export default connect(mapStateToProps, {ProfileThunkCreator, userProfileThunkCreator})(ProfileInfoForm)
