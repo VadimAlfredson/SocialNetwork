@@ -8,11 +8,12 @@ const ProfileInfoForm: FC<any> = (props) => {
     console.log(props.ownerId, props.profile.userId)
     useEffect(() => {
         if (props.ownerId != props.profile.userId){props.userProfileThunkCreator(props.ownerId)}
-    }, [props.profile])
+    })
     /*const validationSchema = yup.object().shape({
         email: yup.string().typeError('Incorrect email').required('required to fill out')
     })*/
     return <Formik
+        enableReinitialize={true}
         /*initialValues={{
             lookingForAJob: false,
             lookingForAJobDescription: '',
@@ -32,7 +33,7 @@ const ProfileInfoForm: FC<any> = (props) => {
             lookingForAJob: props.profile.lookingForAJob,
             lookingForAJobDescription: props.profile.lookingForAJobDescription,
             aboutMe: props.profile.aboutMe,
-            contacts: props.profile.contacts
+            contacts: props.profile.contacts,
         }}
         validateOnBlur
         onSubmit={(values => {
@@ -44,6 +45,7 @@ const ProfileInfoForm: FC<any> = (props) => {
         /*validationSchema={validationSchema}*/
     >
         {({
+              enableReinitialize,
               values,
               errors,
               touched,

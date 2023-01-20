@@ -4,7 +4,7 @@ import ProfileInfoForm from "../Profile/ProfileInfo/formProfileInfo";
 
 const Setting = () => {
     return (
-        <div>
+        <div className={s.profileInfoForm}>
             <ProfileInfoForm />
         </div>
     )
