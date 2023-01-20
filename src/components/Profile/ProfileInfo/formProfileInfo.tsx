@@ -4,20 +4,11 @@ import * as yup from "yup";
 import {connect} from "react-redux";
 import {AddStateType} from "../../../Redux/reduxStore";
 import {ProfileThunkCreator, userProfileThunkCreator} from "../../../Redux/profile_reducer";
-
-type PropsType = {
-    isAuth: boolean
-    loginThunkCreator: (email: string, password: string, checkbox: boolean) => void
-    ProfileThunkCreator: ({}) => void
-}
-
 const ProfileInfoForm: FC<any> = (props) => {
-    debugger
-    let [state, setState] = useState(props.profile.userId)
+    console.log(props.ownerId, props.profile.userId)
     useEffect(() => {
-        if (props.ownerId != props.profile.userId){userProfileThunkCreator(props.ownerId)}
-        setState(props.ownerId)
-    }, [state])
+        if (props.ownerId != props.profile.userId){props.userProfileThunkCreator(props.ownerId)}
+    }, [props.profile])
     /*const validationSchema = yup.object().shape({
         email: yup.string().typeError('Incorrect email').required('required to fill out')
     })*/

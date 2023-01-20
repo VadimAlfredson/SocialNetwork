@@ -90,6 +90,7 @@ const todosSlice = createSlice({
             }
         },
         setUserProfile(state, action) {
+            debugger
             return {
                 ...state,
                 profile: action.payload
@@ -127,6 +128,7 @@ export const {AddPostActionCreator, setUserProfile, setStatus, savePhotoSuccess,
 export default todosSlice.reducer
 
 export const userProfileThunkCreator = (userId: number) => async (dispatch: Dispatch<any>) => {
+    debugger
     let response = await usersApi.userProfile(userId)
     dispatch(setUserProfile(response))
 }

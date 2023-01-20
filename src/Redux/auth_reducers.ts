@@ -33,6 +33,7 @@ const todosSlice = createSlice({
     } as userDataType,
     reducers: {
         SetUserData(state: userDataType, action) {
+            debugger
             return {
                 ...state,
                 ...action.payload,
@@ -65,6 +66,7 @@ export default todosSlice.reducer
 export const loginAuthThunkCreator = () => async (dispatch: Dispatch<any>) => {
     let response = await authApi.loginAuth()
     if (response.resultCode === 0) {
+        debugger
         dispatch(SetUserData({
             userId: response.data.id,
             email: response.data.email,
