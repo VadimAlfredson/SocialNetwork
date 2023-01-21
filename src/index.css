@@ -5,10 +5,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url("https://funart.pro/uploads/posts/2022-08/1661426469_1-funart-pro-p-goluboi-paporotnik-pinterest-1.jpg");
+  background-image: url("https://images.wallpaperscraft.ru/image/single/rastenie_listia_temnyj_160775_2560x1600.jpg");
   /*background: linear-gradient( 45deg, #c1a63d, #bbaeb1, #d08888);*/
   position: relative;
-  background-size: 100%;
+  /*background-size: 100%;*/
+  width: 100vw;
+  height: 100vh;
 }
 
 code {

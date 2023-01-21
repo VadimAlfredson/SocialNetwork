@@ -30,10 +30,10 @@ const ProfileInfo: FC<PropsType> = (props) => {
         <div className={s.avatarSide}>
             <img className={s.avatarImg}
                  src={props.profile.photos.large || 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'}/>
-            {props.isOwner || <div>
+            {/*{props.isOwner || <div>
                 <div className={s.labelUpdatePhoto}>upload photo</div>
                 <input className={s.inputPhoto} type={"file"} onChange={onMainPhotoSelected}/>
-            </div>}
+            </div>}*/}
         </div>
         <div className={s.profileInfo}>
             <div className={s.name}><b>{props.profile.fullName}</b></div>

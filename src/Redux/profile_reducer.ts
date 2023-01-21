@@ -33,6 +33,7 @@ export type profilePageType = {
     newPostText: string
     profile: ProfileType | null
     follow: boolean
+    defaultPhoto: string
 }
 
 export type postsType = {
@@ -76,6 +77,7 @@ const todosSlice = createSlice({
         },
         status: '',
         follow: false,
+        defaultPhoto: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg',
     },
     reducers: {
         AddPostActionCreator(state, action) {

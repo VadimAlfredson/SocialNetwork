@@ -4,7 +4,7 @@
     grid-area: header;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    background-color: rgba(52, 99, 99, 0.51);
+    background-color: rgba(100, 0, 0, 0.41);
     border: solid 2px rgba(0, 0, 0, 0.38);
     height: 50px;
 }
@@ -52,8 +52,8 @@
 .loginBlock button {
     height: 50px;
     width: 50px;
-    background-color: rgba(169, 169, 169, 0.43);
-    color: black;
+    background-color: rgba(0, 66, 66, 0.58);
+    color: azure;
     margin: auto;
 }
 
@@ -75,7 +75,7 @@
 @media screen and (max-width: 479px) {
     .header {
         grid-area: header;
-        background-color: rgba(52, 99, 99, 0.51);
+        background-color: rgba(100, 0, 0, 0.41);
         border: solid 2px rgba(0, 0, 0, 0.38);
         height: 50px;
     }

@@ -4,33 +4,17 @@ import {connect} from "react-redux";
 import {ProfileThunkCreator, userProfileThunkCreator,} from "../../Redux/profile_reducer";
 import s from "./Setting.module.css"
 import {AddStateType} from "../../Redux/reduxStore";
+import * as yup from "yup";
 
 const ProfileInfoForm: FC<any> = (props) => {
-    console.log(props.ownerId, props.profile.userId)
-    useEffect(() => {
-        if (props.ownerId != props.profile.userId) {
-            props.userProfileThunkCreator(props.ownerId)
-        }
-    })
+    let [initialValue, setInitialValue] = useState(props.profile)
+
     /*const validationSchema = yup.object().shape({
         email: yup.string().typeError('Incorrect email').required('required to fill out')
     })*/
+
     return <Formik
         enableReinitialize={true}
-        /*initialValues={{
-            lookingForAJob: false,
-            lookingForAJobDescription: '',
-            contacts: {
-                github: '',
-                vk: '',
-                facebook: '',
-                instagram: '',
-                twitter: '',
-                website: '',
-                youtube: '',
-                mainLink: ''
-            }
-        }}*/
         initialValues={{
             fullName: props.profile.fullName,
             lookingForAJob: props.profile.lookingForAJob,
@@ -76,7 +60,6 @@ const ProfileInfoForm: FC<any> = (props) => {
                     onBlur={handleBlur}
                 /><br/>
                 <b>Looking for a job description:</b>
-                <br/>
                 <input
                     className={s.itemFormInput}
                     type={'text'}
@@ -87,7 +70,6 @@ const ProfileInfoForm: FC<any> = (props) => {
                     disabled={!values.lookingForAJob}
                 /><br/>
                 <b>About Me:</b>
-                <br/>
                 <input
                     className={s.itemFormInput}
                     type={'text'}

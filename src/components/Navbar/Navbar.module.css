@@ -22,7 +22,7 @@
     }
 
     .itemnav:hover {
-        background-color: #a2edf3;
+        background-color: #a9a9a9;
     }
 
     .following {
@@ -35,7 +35,7 @@
         display: block;
         color: rgb(0, 0, 0);
         text-decoration: none;
-        background-color: rgb(0, 139, 147);
+        background-color: rgb(84, 84, 84);
         border: #0e2121 solid 1px;
         border-radius: 5px;
         padding: 10px 0 10px 0;
@@ -83,7 +83,7 @@
         display: block;
         color: rgb(0, 0, 0);
         text-decoration: none;
-        background-color: rgb(0, 139, 147);
+        background-color: rgb(84, 84, 84);
         border: #0e2121 solid 1px;
         border-radius: 5px;
         padding: 10px 0;
@@ -129,7 +129,7 @@
         display: block;
         color: rgb(0, 0, 0);
         text-decoration: none;
-        background-color: rgb(0, 139, 147);
+        background-color: rgb(84, 84, 84);
         border: #0e2121 solid 1px;
         border-radius: 5px;
         padding: 5px 0;

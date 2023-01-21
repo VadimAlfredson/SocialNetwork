@@ -3,7 +3,41 @@
     border: #0e2121 solid 2px;
     background-color: azure;
     color: #0e2121;
+    margin: 0 20px auto 20px;
+    padding: 15px 10px;
 }
 
 .itemFormInput {
+}
+
+.inputUploadPhoto {
+    display: none;
+}
+
+.blockUploadPhoto {
+    position: relative;
+    text-align: center;
+    display: block;
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    border: #0e2121 solid 2px;
+}
+
+.blockUploadPhoto img {
+    position: relative;
+    width: 100px;
+    border-radius: 5px;
+}
+
+.textUploadPhoto {
+    display: block;
+    position: absolute;
+    height: 100%;
+    margin: 40% auto;
+    width: 100%;
+    z-index: 2;
+    align-content: center;
+    color: azure;
+    text-shadow: #0e2121 5px 5px 3px;
 }
