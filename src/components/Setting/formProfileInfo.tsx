@@ -1,13 +1,16 @@
 import React, {FC, useEffect, useState} from "react";
 import {Formik} from "formik";
-import * as yup from "yup";
 import {connect} from "react-redux";
-import {AddStateType} from "../../../Redux/reduxStore";
-import {ProfileThunkCreator, userProfileThunkCreator} from "../../../Redux/profile_reducer";
+import {ProfileThunkCreator, userProfileThunkCreator,} from "../../Redux/profile_reducer";
+import s from "./Setting.module.css"
+import {AddStateType} from "../../Redux/reduxStore";
+
 const ProfileInfoForm: FC<any> = (props) => {
     console.log(props.ownerId, props.profile.userId)
     useEffect(() => {
-        if (props.ownerId != props.profile.userId){props.userProfileThunkCreator(props.ownerId)}
+        if (props.ownerId != props.profile.userId) {
+            props.userProfileThunkCreator(props.ownerId)
+        }
     })
     /*const validationSchema = yup.object().shape({
         email: yup.string().typeError('Incorrect email').required('required to fill out')
@@ -57,36 +60,45 @@ const ProfileInfoForm: FC<any> = (props) => {
           }) => (
             <div>
                 <input
-                type={'text'}
-                name={'fullName'}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                disabled={true}
-                value={values.fullName || props.profile.fullName || ''}
-            /><br/>
-                <b>Looking for a job:</b><input
-                type={'checkbox'}
-                name={'lookingForAJob'}
-                onChange={handleChange}
-                onBlur={handleBlur}
-            /><br/>
-                <b>Looking for a job description:</b><input
-                type={'text'}
-                name={'lookingForAJobDescription'}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.lookingForAJobDescription || ''}
-                disabled={!values.lookingForAJob}
-            /><br/>
-                <b>About Me:</b><input
-                type={'text'}
-                name={'aboutMe'}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.aboutMe || ''}
-            /><br/>
+                    className={s.itemFormInput}
+                    type={'text'}
+                    name={'fullName'}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    disabled={true}
+                    value={values.fullName || props.profile.fullName || ''}
+                /><br/>
+                <b>Looking for a job:</b>
+                <input
+                    type={'checkbox'}
+                    name={'lookingForAJob'}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                /><br/>
+                <b>Looking for a job description:</b>
+                <br/>
+                <input
+                    className={s.itemFormInput}
+                    type={'text'}
+                    name={'lookingForAJobDescription'}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.lookingForAJobDescription || ''}
+                    disabled={!values.lookingForAJob}
+                /><br/>
+                <b>About Me:</b>
+                <br/>
+                <input
+                    className={s.itemFormInput}
+                    type={'text'}
+                    name={'aboutMe'}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.aboutMe || ''}
+                /><br/>
                 <b>contacts:</b><br/>
                 <b>github:</b><input
+                className={s.itemFormInput}
                 type={'text'}
                 name={'contacts.github'}
                 onChange={handleChange}
@@ -94,6 +106,7 @@ const ProfileInfoForm: FC<any> = (props) => {
                 value={values.contacts.github || ''}
             /><br/>
                 <b>vk:</b><input
+                className={s.itemFormInput}
                 type={'text'}
                 name={'contacts.vk'}
                 onChange={handleChange}
@@ -101,6 +114,7 @@ const ProfileInfoForm: FC<any> = (props) => {
                 value={values.contacts.vk || ''}
             /><br/>
                 <b>facebook:</b><input
+                className={s.itemFormInput}
                 type={'text'}
                 name={'contacts.facebook'}
                 onChange={handleChange}
@@ -108,6 +122,7 @@ const ProfileInfoForm: FC<any> = (props) => {
                 value={values.contacts.facebook || ''}
             /><br/>
                 <b>instagram:</b><input
+                className={s.itemFormInput}
                 type={'text'}
                 name={'contacts.instagram'}
                 onChange={handleChange}
@@ -115,6 +130,7 @@ const ProfileInfoForm: FC<any> = (props) => {
                 value={values.contacts.instagram || ''}
             /><br/>
                 <b>twitter:</b><input
+                className={s.itemFormInput}
                 type={'text'}
                 name={'contacts.twitter'}
                 onChange={handleChange}
@@ -122,6 +138,7 @@ const ProfileInfoForm: FC<any> = (props) => {
                 value={values.contacts.twitter || ''}
             /><br/>
                 <b>website:</b><input
+                className={s.itemFormInput}
                 type={'text'}
                 name={'contacts.website'}
                 onChange={handleChange}
@@ -129,6 +146,7 @@ const ProfileInfoForm: FC<any> = (props) => {
                 value={values.contacts.website || ''}
             /><br/>
                 <b>youtube:</b><input
+                className={s.itemFormInput}
                 type={'text'}
                 name={'contacts.youtube'}
                 onChange={handleChange}
@@ -136,6 +154,7 @@ const ProfileInfoForm: FC<any> = (props) => {
                 value={values.contacts.youtube || ''}
             /><br/>
                 <b>mainLink:</b><input
+                className={s.itemFormInput}
                 type={'text'}
                 name={'contacts.mainLink'}
                 onChange={handleChange}
@@ -144,7 +163,9 @@ const ProfileInfoForm: FC<any> = (props) => {
             /><br/>
                 <button
                     disabled={!isValid && !dirty}
-                    onClick={() => {handleSubmit()}}
+                    onClick={() => {
+                        handleSubmit()
+                    }}
                     type={'submit'}
                 >Save
                 </button>

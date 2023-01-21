@@ -3,7 +3,7 @@ import s from './../Profile.module.css';
 import Preloader from "../../common/Preloader/Preloader";
 import {ProfileStatus} from "./ProfileStatus";
 import {ProfileType} from "../../../Redux/profile_reducer";
-import ProfileInfoForm from "./formProfileInfo";
+import ProfileInfoForm from "../../Setting/formProfileInfo";
 import {Navigate, NavLink} from "react-router-dom";
 
 type PropsType = {
