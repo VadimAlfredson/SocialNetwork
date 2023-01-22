@@ -36,7 +36,7 @@ type PropsType = {
     friends: boolean
 
     getUsersThunkCreator: (currentPage: number, pageSize: number) => void
-    onChangeUsersThunkCreator: (pageNumber: number, pageSize: number, term: string, friend: boolean) => void
+    onChangeUsersThunkCreator: (pageNumber: number, pageSize: number, term: string, friend?: boolean) => void
     onFollowChangeThunkCreator: (userId: number, follow: boolean) => void
     followingInProgress: Array<number>
     putDialogUserThunkCreator: (userId: number) => {}
@@ -49,7 +49,8 @@ class UsersContainer extends React.Component<PropsType> {
         this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
     }
 
-    onUsersChange = (pageNumber: number, pageSize: number, term: string, friend: boolean) => {
+    onUsersChange = (pageNumber: number, pageSize: number, term: string, friend?: boolean) => {
+        debugger
         this.props.onChangeUsersThunkCreator(pageNumber, pageSize, term, friend)
     }
 

@@ -38,8 +38,9 @@
     margin: 1px;
     border-radius: 5px;
     text-align: center;
-    background-color: azure;
-    color: #0e2121;
+    background-color: #5f0000;
+    color: azure;
+    text-shadow: #0e2121;
     display: block;
     text-decoration: none;
 }
@@ -206,18 +207,6 @@
         background-color: #a9a9a9;
     }
 
-    .active {
-        padding: 5px;
-        border: solid 1px rgba(0, 0, 0, 0.26);
-        margin: 1px;
-        border-radius: 5px;
-        text-align: center;
-        background-color: azure;
-        color: #0e2121;
-        display: block;
-        text-decoration: none;
-    }
-
     .titleMessages {
         text-align: center;
         width: 80%;
@@ -305,8 +294,9 @@
         margin: 0.2% 1%;
         border-radius: 5px;
         text-align: center;
-        background-color: azure;
-        color: #0e2121;
+        background-color: #5f0000;
+        color: azure;
+        text-shadow: #0e2121;;
         display: inline-block;
         text-decoration: none;
         width: 30%;

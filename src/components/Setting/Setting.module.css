@@ -7,7 +7,14 @@
     padding: 15px 10px;
 }
 
+.profileInfoForm h3 {
+    margin: 0 auto;
+    align-content: center;
+    text-align: center;
+}
+
 .itemFormInput {
+    margin: 5px;
 }
 
 .inputUploadPhoto {
@@ -22,6 +29,7 @@
     height: 100px;
     border-radius: 5px;
     border: #0e2121 solid 2px;
+    margin: 20px
 }
 
 .blockUploadPhoto img {

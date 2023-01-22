@@ -13,7 +13,7 @@ type PropsType = {
     followingInProgress: Array<number>
     pageSize: number
     currentPage: number
-    onUsersChange: (pageNumber: number, pageSize: number, term: string, friend: boolean) => void
+    onUsersChange: (pageNumber: number, pageSize: number, term: string, friend?: boolean) => void
     onFollowChange: (id: number, followed: boolean) => void
     isFetching: boolean
     isAuth: boolean

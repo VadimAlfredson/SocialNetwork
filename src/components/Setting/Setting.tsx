@@ -15,11 +15,12 @@ const Setting = (props: PropsType) => {
         }
     }
     return (<div className={s.profileInfoForm}>
+            <h3>Profile setting</h3>
         <div>
-            <label /*for='inputUploadPhoto'*/ className={s.blockUploadPhoto}>
+            <label className={s.blockUploadPhoto}>
                 <a className={s.textUploadPhoto}>Upload photo</a>
             <img  src={props.profile.photos.large || props.defaultPhoto} alt={'avatar'}/>
-            <input id='inputUploadPhoto' type={"file"} onChange={onMainPhotoSelected} className={s.inputUploadPhoto}/>
+            <input type={"file"} onChange={onMainPhotoSelected} className={s.inputUploadPhoto}/>
             </label>
         </div>
         <div>

@@ -33,9 +33,10 @@
 
     .active {
         display: block;
-        color: rgb(0, 0, 0);
+        color: azure;
+        text-shadow: #0e2121;
         text-decoration: none;
-        background-color: rgb(84, 84, 84);
+        background-color: rgb(95, 0, 0);
         border: #0e2121 solid 1px;
         border-radius: 5px;
         padding: 10px 0 10px 0;
@@ -81,9 +82,10 @@
 
     .active {
         display: block;
-        color: rgb(0, 0, 0);
+        color: azure;
+        text-shadow: #0e2121;
         text-decoration: none;
-        background-color: rgb(84, 84, 84);
+        background-color: rgb(95, 0, 0);
         border: #0e2121 solid 1px;
         border-radius: 5px;
         padding: 10px 0;
@@ -127,9 +129,10 @@
 
     .active {
         display: block;
-        color: rgb(0, 0, 0);
+        color: azure;
+        text-shadow: #0e2121;
         text-decoration: none;
-        background-color: rgb(84, 84, 84);
+        background-color: rgb(95, 0, 0);
         border: #0e2121 solid 1px;
         border-radius: 5px;
         padding: 5px 0;

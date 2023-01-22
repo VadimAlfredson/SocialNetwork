@@ -17,3 +17,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@media screen and (max-width: 530px) {
+  body {
+    backgrount-image: "https://images.wallpaperscraft.com/image/single/plant_leaves_dark_160775_540x960.jpg"
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  body {
+    backgrount-image: "https://images.wallpaperscraft.com/image/single/plant_leaves_dark_160775_1280x960.jpg"
+  }
+}

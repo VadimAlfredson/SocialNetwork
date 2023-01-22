@@ -5,7 +5,7 @@ type PropsType = {
     totalUsersCount: number
     pageSize: number
     currentPage: number
-    onPageChange: (p: number, pageSize: number, term: string, friend: boolean) => void
+    onPageChange: (p: number, pageSize: number, term: string, friend?: boolean) => void
     term: string
     friend: boolean
 }
@@ -33,11 +33,25 @@ let Paginator: FC<PropsType> = (props) => {
                         // @ts-ignore
                         return <span className={props.currentPage === p ? s.activePage : s.pageNumber}
                                      onClick={() => {
-                                         props.onPageChange(p, props.pageSize, props.term, props.friend)
+                                         if (props.friend) {
+                                         props.onPageChange(p, props.pageSize, props.term, props.friend)}
+                                         else {props.onPageChange(p, props.pageSize, props.term)}
                                      }} key={p}
                         >{p}</span>
                     }
                 )}
+                {portionCount > portionNumber &&
+                    pages
+                        .filter(p => p === pageCount)
+                        .map(p => {
+                            // @ts-ignore
+                            return <span className={props.currentPage === p ? s.activePage : s.pageNumber}
+                                         onClick={() => {
+                                             props.onPageChange(p, props.pageSize, props.term)
+                                         }} key={p}
+                            >{p}</span>
+                        }
+                        )}
                 {portionCount > portionNumber &&
                 <button className={s.pageNumber}
                 onClick={() => {setPortionNumber(portionNumber + 1)}}
