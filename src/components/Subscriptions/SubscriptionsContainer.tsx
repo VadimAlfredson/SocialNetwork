@@ -1,7 +1,7 @@
 import React, {FC, useEffect} from 'react';
 import Subscriptions from "./Subscriptions";
 import {connect} from "react-redux";
-import {AddStateType} from "../../Redux/reduxStore";
+import {RootState, useAppSelector} from "../../Redux/reduxStore";
 import {
     UserType,
 } from "../../Redux/users_reducers";
@@ -22,26 +22,26 @@ type PropsType = {
 
 
 const SubscriptionsContainer: FC<PropsType> = (props) => {
+    /*subscriptions: getSubscriptions(state),
+        isAuth: getIsAuth(state),
+        updateSubscriptions: getUpdateSubscriptions(state),
+        totalCountSubscriptions: getTotalCountSubscriptions(state)*/
+
+    const updateSubscriptions = useAppSelector(state => state.subscriptionsPage.updateSubscriptions)
     useEffect(() => {
         props.getSubscriptionsThunkCreator(true)
     }, [])
         return <>
-            {props.updateSubscriptions ? <Preloader/> :
+            {updateSubscriptions ? <Preloader/> :
                 <Subscriptions
-                    subscriptions={props.subscriptions}
-                    totalCountSubscriptions={props.totalCountSubscriptions}
                 />
             }
         </>
     }
 
 
-let mapStateToProps = (state: AddStateType) => {
+let mapStateToProps = (state: RootState) => {
     return {
-        subscriptions: getSubscriptions(state),
-        isAuth: getIsAuth(state),
-        updateSubscriptions: getUpdateSubscriptions(state),
-        totalCountSubscriptions: getTotalCountSubscriptions(state)
     }
 }
 

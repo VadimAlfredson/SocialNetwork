@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import Users from "./Users";
-import {AddStateType} from "../../Redux/reduxStore";
+import {RootState, useAppSelector} from "../../Redux/reduxStore";
 import {
     followed,
     setCurrentPage,
@@ -44,7 +44,6 @@ type PropsType = {
 
 
 class UsersContainer extends React.Component<PropsType> {
-
     componentDidMount() {
         this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
     }
@@ -65,35 +64,17 @@ class UsersContainer extends React.Component<PropsType> {
     render(): React.ReactNode {
         return <>
             <Users
-                isAuth={this.props.isAuth}
-                isFetching={this.props.isFetching}
-                users={this.props.users}
-                pageSize={this.props.pageSize}
-                currentPage={this.props.currentPage}
-                totalUsersCount={this.props.totalUsersCount}
                 onUsersChange={this.onUsersChange}
                 onFollowChange={this.onFollowChange}
-                followingInProgress={this.props.followingInProgress}
                 onDialogUserChange={this.onDialogUserChange}
-                term={this.props.term}
-                friend={this.props.friends}
             />
         </>
     }
 
 }
 
-let mapStateToProps = (state: AddStateType) => {
+let mapStateToProps = (state: RootState) => {
     return {
-        users: getUsers(state),
-        pageSize: getPageSize(state),
-        totalUsersCount: getTotalUsersCount(state),
-        currentPage: getCurrentPage(state),
-        followingInProgress: getFollowingInProgress(state),
-        isAuth: getIsAuth(state),
-        isFetching: getIsFetching(state),
-        term: getTerm(state),
-        friends: getFriends(state)
     }
 }
 

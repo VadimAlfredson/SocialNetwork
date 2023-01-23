@@ -2,18 +2,18 @@ import React, {FC} from 'react';
 import s from './Subscriptions.module.css';
 import {UserType} from "../../Redux/users_reducers";
 import {NavLink} from "react-router-dom";
+import {useAppSelector} from "../../Redux/reduxStore";
 
-type PropsType = {
-    subscriptions: Array<UserType>
-    totalCountSubscriptions: number
-}
 
-let Subscriptions: FC<PropsType> = (props) => {
+
+let Subscriptions: FC<{}> = (props) => {
+    const subscriptions = useAppSelector(state => state.subscriptionsPage.subscriptions)
+    const totalCountSubscriptions = useAppSelector(state => state.subscriptionsPage.totalCountSubscriptions)
     return <div className={s.friends}>
-        <div className={s.h4}>Subscriptions ({props.totalCountSubscriptions})</div>
+        <div className={s.h4}>Subscriptions ({totalCountSubscriptions})</div>
             <div className={s.friendsList}>
                 {
-                    props.subscriptions.map((u: UserType) => <div key={u.id}>
+                    subscriptions.map((u: UserType) => <div key={u.id}>
         <span>
             <div>
                 <NavLink to={'/profile/' + u.id}>

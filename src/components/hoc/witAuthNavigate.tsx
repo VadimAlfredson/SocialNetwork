@@ -1,9 +1,9 @@
 import React, {FC} from 'react'
 import {connect} from "react-redux";
 import {Navigate} from 'react-router-dom';
-import {AddStateType} from "../../Redux/reduxStore";
+import {RootState} from "../../Redux/reduxStore";
 
-let mapStateToProps = (state: AddStateType) => {
+let mapStateToProps = (state: RootState) => {
     return {
         isAuth: state.auth.isAuth
     }

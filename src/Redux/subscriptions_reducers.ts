@@ -1,7 +1,7 @@
 
 import {subscriptionsApi} from "../components/api/api";
 import {createSlice, ThunkAction} from "@reduxjs/toolkit";
-import {AddStateType} from "./reduxStore";
+import {RootState} from "./reduxStore";
 
 export type UserType = {
     name: string,
@@ -52,7 +52,7 @@ const todosSlice: any = createSlice({
 
 export const {setSubscriptions, toggleUpdateSubscriptions, getTotalCountSubscriptions} = todosSlice.actions
 
-export const getSubscriptionsThunkCreator = (friend: boolean): ThunkAction<Promise<void>, AddStateType, unknown, any> => async (dispatch) => {
+export const getSubscriptionsThunkCreator = (friend: boolean): ThunkAction<Promise<void>, RootState, unknown, any> => async (dispatch) => {
     dispatch(toggleUpdateSubscriptions(true))
     let response = await subscriptionsApi.getSubscriptions(true)
     dispatch(setSubscriptions(response.items))

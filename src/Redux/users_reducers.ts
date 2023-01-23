@@ -1,7 +1,7 @@
 import {Dispatch} from "react";
 import {usersApi} from "../components/api/api";
 import {createSlice, ThunkAction} from "@reduxjs/toolkit";
-import {AddStateType} from "./reduxStore";
+import {RootState} from "./reduxStore";
 import {getSubscriptionsThunkCreator} from "./subscriptions_reducers";
 import dialogs from "../components/Dialogs/Dialogs";
 
@@ -145,7 +145,7 @@ const todosSlice: any = createSlice({
 
 export const {followed, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleIsFollowing, setFollowing, setSearchTerm, setSearchFriends} = todosSlice.actions
 
-export const getUsersThunkCreator = (currentPage: number, pageSize: number): ThunkAction<Promise<void>, AddStateType, unknown, any> => async (dispatch) => {
+export const getUsersThunkCreator = (currentPage: number, pageSize: number): ThunkAction<Promise<void>, RootState, unknown, any> => async (dispatch) => {
     dispatch(toggleIsFetching(true))
     dispatch(setSearchTerm(''))
     dispatch(setSearchFriends(false))
@@ -155,7 +155,7 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number): Thu
     dispatch(toggleIsFetching(false))
 }
 
-export const onChangeUsersThunkCreator = (pageNumber: number, pageSize: number, term: string, friend?: boolean): ThunkAction<Promise<void>, AddStateType, unknown, any> => async (dispatch: Dispatch<any>) => {
+export const onChangeUsersThunkCreator = (pageNumber: number, pageSize: number, term: string, friend?: boolean): ThunkAction<Promise<void>, RootState, unknown, any> => async (dispatch: Dispatch<any>) => {
     dispatch(setCurrentPage(pageNumber))
     dispatch(toggleIsFetching(true))
     if (friend) {
@@ -186,7 +186,7 @@ export const onChangeUsersThunkCreator = (pageNumber: number, pageSize: number, 
         dispatch(toggleIsFetching(false))
 }
 
-export const onFollowChangeThunkCreator = (userId: number, follow: boolean): ThunkAction<Promise<void>, AddStateType, unknown, any> => async (dispatch: Dispatch<any>) => {
+export const onFollowChangeThunkCreator = (userId: number, follow: boolean): ThunkAction<Promise<void>, RootState, unknown, any> => async (dispatch: Dispatch<any>) => {
     dispatch(toggleIsFollowing(true, userId))
     if (follow) {
         let response = await usersApi.unfollowUser(userId)

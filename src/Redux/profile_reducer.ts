@@ -1,7 +1,7 @@
 import {profileApi, usersApi} from "../components/api/api";
 import {createSlice} from "@reduxjs/toolkit";
 import {Dispatch} from "react";
-import {AddStateType} from "./reduxStore";
+import {RootState} from "./reduxStore";
 import {setOwnerIconAC} from "./auth_reducers";
 
 export type ContactsType = {
@@ -153,7 +153,7 @@ export const savePhotoTC = (file: any) => async (dispatch: Dispatch<any>) => {
         dispatch(setOwnerIconAC(response.data.photos.large))
     }
 }
-export const ProfileThunkCreator = (profile: ProfileType) => async (dispatch: Dispatch<any>, getState: AddStateType) => {
+export const ProfileThunkCreator = (profile: ProfileType) => async (dispatch: Dispatch<any>, getState: RootState) => {
     let userId = getState().auth.userId
     let response = await profileApi.putProfile(profile)
     if (response.resultCode === 0) {

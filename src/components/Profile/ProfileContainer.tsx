@@ -10,7 +10,7 @@ import {
     getFollowThunkCreator,
     onFollowProfileChangeThunkCreator,
 } from "../../Redux/profile_reducer";
-import {AddStateType} from "../../Redux/reduxStore";
+import {RootState} from "../../Redux/reduxStore";
 import {
     useLocation,
     useNavigate,
@@ -80,7 +80,7 @@ class ProfileContainer extends React.Component<any, any> {
     }
 }
 
-let mapStateToProps = (state: AddStateType) => {
+let mapStateToProps = (state: RootState) => {
     return {
         profile: state.profilePage.profile,
         status: state.profilePage.status,

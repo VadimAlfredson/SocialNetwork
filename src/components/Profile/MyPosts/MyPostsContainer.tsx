@@ -1,20 +1,19 @@
-import React from 'react'
+import React, {Dispatch} from 'react'
 import {
     AddPostActionCreator,
 } from "../../../Redux/profile_reducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
-import {AddStateType} from "../../../Redux/reduxStore";
-import {DispatchType} from "../../../Redux/Types";
+import {RootState} from "../../../Redux/reduxStore";
 
-let mapStateToProps = (state: AddStateType) => {
+let mapStateToProps = (state: RootState) => {
     return {
         posts: state.profilePage.posts,
         newPostText: state.profilePage.newPostText
     }
 };
 
-let mapDispatchToProps = (dispatch: DispatchType) => {
+let mapDispatchToProps = (dispatch: Dispatch<any>) => {
     return {
         createNewPost: (newPost: string) => {
             dispatch(AddPostActionCreator(newPost))

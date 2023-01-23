@@ -1,8 +1,8 @@
-import React, {useEffect} from "react";
+import React, {JSXElementConstructor, useEffect} from "react";
 import s from './Setting.module.css';
 import Setting from "./Setting";
 import { connect } from "react-redux";
-import {AddStateType} from "../../Redux/reduxStore";
+import {RootState} from "../../Redux/reduxStore";
 import {ProfileType, savePhotoTC, userProfileThunkCreator} from "../../Redux/profile_reducer";
 
 type PropsType = {
@@ -12,7 +12,7 @@ type PropsType = {
     savePhotoTC: (photo: any) => void
     defaultPhoto: string
 }
-const SettingContainer = (props: PropsType) => {
+const SettingContainer: React.FC<PropsType> = (props): JSX.Element => {
     useEffect(() => {
         if (props.ownerId != props.profile.userId) {
             props.userProfileThunkCreator(props.ownerId)
@@ -23,7 +23,7 @@ const SettingContainer = (props: PropsType) => {
     )
 }
 
-const mapStateToProps = (state: AddStateType) => {
+const mapStateToProps = (state: RootState) => {
     return {
         ownerId: state.auth.userId,
         profile: state.profilePage.profile,

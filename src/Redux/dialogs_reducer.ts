@@ -1,21 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {Dispatch} from "react";
-import {authApi, dialogsApi, usersApi} from "../components/api/api";
-import {setUserProfile} from "./profile_reducer";
+import {dialogsApi} from "../components/api/api";
 
-/*
-{"items":[
-{"id":"b324f820-1933-4b4c-9a03-3f8bd3624e26",
-"body":"test",
-"translatedBody":null,
-"addedAt":"2023-01-08T12:17:01.083",
-"senderId":25265,
-"senderName":"VadimAlfredson",
-"recipientId":26623,
-"viewed":false}],
-"totalCount":1,
-"error":null}
-*/
 
 export type messageType = {
     id: string,

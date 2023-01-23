@@ -4,7 +4,7 @@ import * as yup from "yup";
 import {connect} from "react-redux";
 import {loginThunkCreator} from "../../Redux/auth_reducers";
 import {Navigate} from "react-router-dom";
-import {AddStateType} from "../../Redux/reduxStore";
+import {RootState} from "../../Redux/reduxStore";
 import s from './login.module.css';
 
 type PropsType = {
@@ -108,7 +108,7 @@ const LoginForm: FC<PropsType> = (props) => {
     </Formik>
 };
 
-const mapStateToProps = (state: AddStateType) => ({
+const mapStateToProps = (state: RootState) => ({
     isAuth: state.auth.isAuth,
     captchaURL: state.auth.captchaURL,
     messageError:  state.auth.messageError,

@@ -3,7 +3,7 @@ import {Formik} from "formik";
 import {connect} from "react-redux";
 import {ProfileThunkCreator, userProfileThunkCreator,} from "../../Redux/profile_reducer";
 import s from "./Setting.module.css"
-import {AddStateType} from "../../Redux/reduxStore";
+import {RootState} from "../../Redux/reduxStore";
 import * as yup from "yup";
 
 const ProfileInfoForm: FC<any> = (props) => {
@@ -156,7 +156,7 @@ const ProfileInfoForm: FC<any> = (props) => {
     </Formik>
 };
 
-const mapStateToProps = (state: AddStateType) => ({
+const mapStateToProps = (state: RootState) => ({
     isAuth: state.auth.isAuth,
     ownerId: state.auth.userId,
     profile: state.profilePage.profile,

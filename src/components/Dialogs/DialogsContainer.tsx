@@ -6,11 +6,11 @@ import {
 } from "../../Redux/dialogs_reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
-import {AddStateType} from "../../Redux/reduxStore";
+import {RootState} from "../../Redux/reduxStore";
 import {compose} from "redux";
 import {withAuthNavigate} from "../hoc/witAuthNavigate";
 
-let mapStateToProps = (state: AddStateType) => {
+let mapStateToProps = (state: RootState) => {
     return {
         dialogs: state.dialogsPage.dialogs,
         messages: state.dialogsPage.messages,

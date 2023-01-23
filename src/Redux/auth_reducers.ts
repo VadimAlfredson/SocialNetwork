@@ -1,13 +1,15 @@
 import {authApi, usersApi} from "../components/api/api";
 import {Dispatch} from "react";
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 
-export type AuthReducersType = SetUserDataType
+
 
 type SetUserDataType = {
-    type: string
-    payload: userDataType
+    userId: number | null
+    email: string | null
+    login: string | null
+    isAuth: boolean
 }
 
 type userDataType = {
@@ -32,25 +34,25 @@ const todosSlice = createSlice({
         ownerPhoto: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
     } as userDataType,
     reducers: {
-        SetUserData(state: userDataType, action) {
+        SetUserData(state: userDataType, action: PayloadAction<SetUserDataType>) {
             return {
                 ...state,
                 ...action.payload,
             }
         },
-        GetCaptchaUrl(state: userDataType, action) {
+        GetCaptchaUrl(state: userDataType, action: PayloadAction<any>) {
             return {
                 ...state,
-                ...action.payload
+                captchaURL: action.payload
             }
         },
-        GetMessageError(state: userDataType, action) {
+        GetMessageError(state: userDataType, action: PayloadAction<any>) {
             return {
                 ...state,
-                ...action.payload
+                messageError: action.payload
             }
         },
-        setOwnerIconAC(state: userDataType, action) {
+        setOwnerIconAC(state: userDataType, action: PayloadAction<string>) {
             return {
                 ...state,
                 ownerPhoto: action.payload
