@@ -6,28 +6,17 @@ import {
     UserType,
 } from "../../Redux/users_reducers";
 import Preloader from "../common/Preloader/Preloader";
-import {
-    getIsAuth,
-} from "../../Redux/users_selectors";
 import {getSubscriptionsThunkCreator} from "../../Redux/subscriptions_reducers";
-import {getSubscriptions, getUpdateSubscriptions, getTotalCountSubscriptions} from "../../Redux/subscriptions_selectors";
 
 type PropsType = {
-    updateSubscriptions: boolean
-    subscriptions: Array<UserType>
     getSubscriptionsThunkCreator: (friend: boolean) => void
-    isAuth: boolean
-    totalCountSubscriptions: number
+
 }
 
 
 const SubscriptionsContainer: FC<PropsType> = (props) => {
-    /*subscriptions: getSubscriptions(state),
-        isAuth: getIsAuth(state),
-        updateSubscriptions: getUpdateSubscriptions(state),
-        totalCountSubscriptions: getTotalCountSubscriptions(state)*/
 
-    const updateSubscriptions = useAppSelector(state => state.subscriptionsPage.updateSubscriptions)
+    const updateSubscriptions = useAppSelector(state => state.subscriptions.updateSubscriptions)
     useEffect(() => {
         props.getSubscriptionsThunkCreator(true)
     }, [])

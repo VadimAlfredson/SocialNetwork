@@ -2,13 +2,14 @@ import React, {FC, useEffect, useState} from "react";
 import {Formik} from "formik";
 import * as yup from "yup";
 import s from './users.module.css';
+import {useAppSelector} from "../../Redux/reduxStore";
 
 type PropsType = {
     onUsersChange: (pageNumber: number, pageSize: number, term: string, friends: boolean) => void
-    pageSize: number
 }
 
 const FormSearchUsers: FC<PropsType> = (props) => {
+    const pageSize =  useAppSelector(state => state.users.pageSize)
     const validationSchema = yup.object().shape({
         search: yup.string(),
     })
@@ -21,7 +22,7 @@ const FormSearchUsers: FC<PropsType> = (props) => {
         validateOnBlur
         onSubmit={(values => {
             console.log(values)
-            props.onUsersChange(1, props.pageSize, values.search, values.subscriptionsCheckbox)
+            props.onUsersChange(1, pageSize, values.search, values.subscriptionsCheckbox)
         })}
         validationSchema={validationSchema}
     >

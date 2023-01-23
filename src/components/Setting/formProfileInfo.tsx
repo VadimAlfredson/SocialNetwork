@@ -159,7 +159,7 @@ const ProfileInfoForm: FC<any> = (props) => {
 const mapStateToProps = (state: RootState) => ({
     isAuth: state.auth.isAuth,
     ownerId: state.auth.userId,
-    profile: state.profilePage.profile,
+    profile: state.profile.profile,
 })
 
 export default connect(mapStateToProps, {ProfileThunkCreator, userProfileThunkCreator})(ProfileInfoForm)

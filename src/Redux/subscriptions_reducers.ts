@@ -21,10 +21,10 @@ type usersStateType = {
     totalCountSubscriptions: number
 }
 
-const todosSlice: any = createSlice({
+const todosSlice = createSlice({
     name: 'subscriptions',
     initialState: {
-        subscriptions: [],
+        subscriptions: [] as UserType[],
         updateSubscriptions: false,
         totalCountSubscriptions: 0
     } as usersStateType,

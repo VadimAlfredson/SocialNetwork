@@ -82,10 +82,10 @@ class ProfileContainer extends React.Component<any, any> {
 
 let mapStateToProps = (state: RootState) => {
     return {
-        profile: state.profilePage.profile,
-        status: state.profilePage.status,
+        profile: state.profile.profile,
+        status: state.profile.status,
         authorizedUserId: state.auth.userId,
-        follow: state.profilePage.follow,
+        follow: state.profile.follow,
         /*followingInProgress: getFollowingInProgress(state),*/
     }
 }

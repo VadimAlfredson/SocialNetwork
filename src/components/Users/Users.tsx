@@ -15,11 +15,10 @@ type PropsType = {
 }
 
 let Users: FC<PropsType> = (props) => {
-    const users = useAppSelector(state => state.usersPage.users)
-    const pageSize =  useAppSelector(state => state.usersPage.pageSize)
-    const followingInProgress = useAppSelector(state => state.usersPage.followingInProgress)
+    const users = useAppSelector(state => state.users.users)
+    const followingInProgress = useAppSelector(state => state.users.followingInProgress)
     const isAuth = useAppSelector(state => state.auth.isAuth)
-    const isFetching = useAppSelector(state => state.usersPage.isFetching)
+    const isFetching = useAppSelector(state => state.users.isFetching)
     const [state, setState] = useState(false)
     useEffect(() => {
         state != isAuth ? setState(isAuth) : console.log('useEffect')
@@ -27,12 +26,10 @@ let Users: FC<PropsType> = (props) => {
     return (
         <div className={s.usersComponent}>
             <Paginator
-                pageSize={pageSize}
                 onPageChange={props.onUsersChange}
             />
             <FormSearchUsers
                 onUsersChange={props.onUsersChange}
-                pageSize={pageSize}
             />
             {isFetching ? <Preloader/> :
                 <div>

@@ -7,8 +7,8 @@ import {useAppSelector} from "../../Redux/reduxStore";
 
 
 let Subscriptions: FC<{}> = (props) => {
-    const subscriptions = useAppSelector(state => state.subscriptionsPage.subscriptions)
-    const totalCountSubscriptions = useAppSelector(state => state.subscriptionsPage.totalCountSubscriptions)
+    const subscriptions = useAppSelector(state => state.subscriptions.subscriptions)
+    const totalCountSubscriptions = useAppSelector(state => state.subscriptions.totalCountSubscriptions)
     return <div className={s.friends}>
         <div className={s.h4}>Subscriptions ({totalCountSubscriptions})</div>
             <div className={s.friendsList}>

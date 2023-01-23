@@ -1,4 +1,4 @@
-import React from "react";
+import React, {FC, useEffect} from "react";
 import {connect} from "react-redux";
 import Users from "./Users";
 import {RootState, useAppSelector} from "../../Redux/reduxStore";
@@ -13,63 +13,45 @@ import {
     onChangeUsersThunkCreator,
     onFollowChangeThunkCreator, UserType,
 } from "../../Redux/users_reducers";
-import Preloader from "../common/Preloader/Preloader";
-import {withAuthNavigate} from "../hoc/witAuthNavigate";
 import {compose} from "redux";
-import {
-    getCurrentPage,
-    getFollowingInProgress, getFriends, getIsAuth, getIsFetching,
-    getPageSize, getTerm,
-    getTotalUsersCount,
-    getUsers
-} from "../../Redux/users_selectors";
 import {putDialogUserThunkCreator} from "../../Redux/dialogs_reducer";
 
 type PropsType = {
-    currentPage: number
-    pageSize: number
-    isFetching: boolean
-    users: Array<UserType>
-    totalUsersCount: number
-    isAuth: boolean
-    term: string,
-    friends: boolean
-
     getUsersThunkCreator: (currentPage: number, pageSize: number) => void
     onChangeUsersThunkCreator: (pageNumber: number, pageSize: number, term: string, friend?: boolean) => void
     onFollowChangeThunkCreator: (userId: number, follow: boolean) => void
-    followingInProgress: Array<number>
     putDialogUserThunkCreator: (userId: number) => {}
 }
 
 
-class UsersContainer extends React.Component<PropsType> {
-    componentDidMount() {
-        this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
-    }
+const UsersContainer: FC<PropsType> = (props) => {
+    const pageSize =  useAppSelector(state => state.users.pageSize)
+    const currentPage = useAppSelector(state => state.users.currentPage)
+    useEffect(() => {
+        props.getUsersThunkCreator(currentPage, pageSize)}, []
+    )
 
-    onUsersChange = (pageNumber: number, pageSize: number, term: string, friend?: boolean) => {
+    let onUsersChange = (pageNumber: number, pageSize: number, term: string, friend?: boolean) => {
         debugger
-        this.props.onChangeUsersThunkCreator(pageNumber, pageSize, term, friend)
+        props.onChangeUsersThunkCreator(pageNumber, pageSize, term, friend)
     }
 
-    onFollowChange = (userId: number, follow: boolean) => {
-        this.props.onFollowChangeThunkCreator(userId, follow)
+    let onFollowChange = (userId: number, follow: boolean) => {
+        props.onFollowChangeThunkCreator(userId, follow)
     }
 
-    onDialogUserChange = (userId: number) => {
-        this.props.putDialogUserThunkCreator(userId)
+    let onDialogUserChange = (userId: number) => {
+        props.putDialogUserThunkCreator(userId)
     }
 
-    render(): React.ReactNode {
         return <>
             <Users
-                onUsersChange={this.onUsersChange}
-                onFollowChange={this.onFollowChange}
-                onDialogUserChange={this.onDialogUserChange}
+                onUsersChange={onUsersChange}
+                onFollowChange={onFollowChange}
+                onDialogUserChange={onDialogUserChange}
             />
         </>
-    }
+
 
 }
 
@@ -81,12 +63,6 @@ let mapStateToProps = (state: RootState) => {
 export default compose(
     connect(mapStateToProps,
         {
-            followed,
-            setUsers,
-            setCurrentPage,
-            setTotalUsersCount,
-            toggleIsFetching,
-            toggleIsFollowing,
             getUsersThunkCreator,
             onChangeUsersThunkCreator,
             onFollowChangeThunkCreator,

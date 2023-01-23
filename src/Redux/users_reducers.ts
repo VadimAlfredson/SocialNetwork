@@ -1,6 +1,6 @@
 import {Dispatch} from "react";
 import {usersApi} from "../components/api/api";
-import {createSlice, ThunkAction} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction, ThunkAction} from "@reduxjs/toolkit";
 import {RootState} from "./reduxStore";
 import {getSubscriptionsThunkCreator} from "./subscriptions_reducers";
 import dialogs from "../components/Dialogs/Dialogs";
@@ -16,41 +16,6 @@ export type UserType = {
     status: string
     followed: boolean,
 }
-/*
-export type UserActionType = FollowedActionType | SetUsersActionType | SetCurrentPageActionType | SetTotalUsersCountActionType | SetIsFetchingAC | SetIsFollowingActionType
-
-
-type SetIsFollowingActionType = {
-    type: 'FOLLOWING_IN_PROGRESS'
-    isFetching: boolean
-    userId: number
-}
-
-type FollowedActionType = {
-    type: 'FOLLOWED'
-    userId: number
-}
-
-type SetUsersActionType = {
-    type: 'SET_USERS'
-    users: UserType[]
-}
-
-type SetCurrentPageActionType = {
-    type: "SET_CURRENT_PAGE"
-    currentPage: number
-}
-
-type SetTotalUsersCountActionType = {
-    type: "SET_TOTAL_USERS_COUNT",
-    totalUsersCount: number
-}
-
-type SetIsFetchingAC ={
-    type: "SET_IS_FETCHING"
-    isFetching: boolean
-}
-*/
 
 type usersStateType = {
     users: UserType[]
@@ -64,7 +29,7 @@ type usersStateType = {
     friends: boolean
 }
 
-const todosSlice: any = createSlice({
+const todosSlice = createSlice({
     name: 'users',
     initialState: {
         users: [],
@@ -78,7 +43,7 @@ const todosSlice: any = createSlice({
         friends: false
     } as usersStateType,
     reducers: {
-        followed(state, action) {
+        followed(state: usersStateType, action: PayloadAction<any>) {
             return {
                 ...state,
                 users: state.users.map(u => {
@@ -90,31 +55,31 @@ const todosSlice: any = createSlice({
                 )
             }
         },
-        setUsers(state, action) {
+        setUsers(state: usersStateType, action: PayloadAction<UserType[]>) {
             return {
                 ...state,
                 users: [...action.payload]
             }
         },
-        setCurrentPage(state, action) {
+        setCurrentPage(state: usersStateType, action: PayloadAction<number>) {
             return {
                 ...state,
                 currentPage: action.payload
             }
         },
-        setTotalUsersCount(state, action) {
+        setTotalUsersCount(state: usersStateType, action: PayloadAction<number>) {
             return {
                 ...state,
                 totalUsersCount: action.payload
             }
         },
-        toggleIsFetching(state, action) {
+        toggleIsFetching(state: usersStateType, action: PayloadAction<boolean>) {
             return {
                 ...state,
                 isFetching: action.payload
             }
         },
-        toggleIsFollowing(state, action) {
+        toggleIsFollowing(state: usersStateType, action: PayloadAction<boolean>) {
             return {
                 ...state,
                 followingInProgress: action.payload
@@ -122,19 +87,19 @@ const todosSlice: any = createSlice({
                     : state.followingInProgress.filter(id => id !== action.payload)
             }
         },
-        setFollowing(state, action) {
+        setFollowing(state: usersStateType, action: PayloadAction<UserType[]>) {
             return {
                 ...state,
                 following: [...action.payload]
             }
         },
-        setSearchTerm(state, action) {
+        setSearchTerm(state: usersStateType, action: PayloadAction<string>) {
             return {
                 ...state,
             term: action.payload
             }
         },
-        setSearchFriends(state, action) {
+        setSearchFriends(state: usersStateType, action: PayloadAction<boolean>) {
             return {
                 ...state,
                 friends: action.payload
@@ -187,19 +152,19 @@ export const onChangeUsersThunkCreator = (pageNumber: number, pageSize: number, 
 }
 
 export const onFollowChangeThunkCreator = (userId: number, follow: boolean): ThunkAction<Promise<void>, RootState, unknown, any> => async (dispatch: Dispatch<any>) => {
-    dispatch(toggleIsFollowing(true, userId))
+    dispatch(toggleIsFollowing(true))
     if (follow) {
         let response = await usersApi.unfollowUser(userId)
         if (response.resultCode === 0) {
             dispatch(followed(userId))
         }
-        dispatch(toggleIsFollowing(false, userId))
+        dispatch(toggleIsFollowing(false))
     } else {
         let response = await usersApi.followedUser(userId)
         if (response.resultCode === 0) {
             dispatch(followed(userId))
         }
-        dispatch(toggleIsFollowing(false, userId))
+        dispatch(toggleIsFollowing(false))
     }
     dispatch(getSubscriptionsThunkCreator(true))
 }

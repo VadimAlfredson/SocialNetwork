@@ -3,16 +3,16 @@ import s from "../Paginator/paginator.module.css"
 import {useAppSelector} from "../../../Redux/reduxStore";
 
 type PropsType = {
-    pageSize: number
     onPageChange: (p: number, pageSize: number, term: string, friend?: boolean) => void
 }
 
 let Paginator: FC<PropsType> = (props) => {
-    const totalUsersCount = useAppSelector(state => state.usersPage.totalUsersCount)
-    const currentPage = useAppSelector(state => state.usersPage.currentPage)
-    const term = useAppSelector(state => state.usersPage.term)
-    const friend = useAppSelector(state => state.usersPage.friends)
-    let pageCount = Math.ceil(totalUsersCount / props.pageSize);
+    const pageSize =  useAppSelector(state => state.users.pageSize)
+    const totalUsersCount = useAppSelector(state => state.users.totalUsersCount)
+    const currentPage = useAppSelector(state => state.users.currentPage)
+    const term = useAppSelector(state => state.users.term)
+    const friend = useAppSelector(state => state.users.friends)
+    let pageCount = Math.ceil(totalUsersCount / pageSize);
     let pages = [];
     for (let i = 1; i <= pageCount; i++) {
         pages.push(i)
@@ -32,7 +32,7 @@ let Paginator: FC<PropsType> = (props) => {
                             // @ts-ignore
                             return <span className={currentPage === p ? s.activePage : s.pageNumber}
                                          onClick={() => {
-                                             props.onPageChange(p, props.pageSize, term)
+                                             props.onPageChange(p, pageSize, term)
                                          }} key={p}
                             >{p}</span>
                         }
@@ -48,8 +48,8 @@ let Paginator: FC<PropsType> = (props) => {
                         return <span className={props.currentPage === p ? s.activePage : s.pageNumber}
                                      onClick={() => {
                                          if (friend) {
-                                             props.onPageChange(p, props.pageSize, term, friend)}
-                                         else {props.onPageChange(p, props.pageSize, term)}
+                                             props.onPageChange(p, pageSize, term, friend)}
+                                         else {props.onPageChange(p, pageSize, term)}
                                      }} key={p}
                         >{p}</span>
                     }
@@ -67,7 +67,7 @@ let Paginator: FC<PropsType> = (props) => {
                             // @ts-ignore
                             return <span className={currentPage === p ? s.activePage : s.pageNumber}
                                          onClick={() => {
-                                             props.onPageChange(p, props.pageSize, term)
+                                             props.onPageChange(p, pageSize, term)
                                          }} key={p}
                             >{p}</span>
                         }

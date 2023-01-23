@@ -11,12 +11,12 @@ import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 
 let store = configureStore({
     reducer: {
-        profilePage: profileReducer,
-        dialogsPage: dialogsReducer,
-        usersPage: usersReducer,
+        profile: profileReducer,
+        dialogs: dialogsReducer,
+        users: usersReducer,
         auth: authReducer,
         app: appReducer,
-        subscriptionsPage: subscriptionsReducer
+        subscriptions: subscriptionsReducer
     }
 });
 

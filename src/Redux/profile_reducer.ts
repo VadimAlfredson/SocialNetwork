@@ -5,14 +5,14 @@ import {RootState} from "./reduxStore";
 import {setOwnerIconAC} from "./auth_reducers";
 
 export type ContactsType = {
-    github: string | null,
-    vk: string | null,
-    facebook: string | null,
-    instagram: string | null,
-    twitter: string | null,
-    website: string | null,
-    youtube: string | null,
-    mainLink: string | null
+    github: string,
+    vk: string,
+    facebook: string,
+    instagram: string,
+    twitter: string,
+    website: string,
+    youtube: string,
+    mainLink: string
 }
 
 export type PhotosType = {
@@ -32,7 +32,7 @@ export type ProfileType = {
 export type profilePageType = {
     posts: postsType[],
     newPostText: string
-    profile: ProfileType | null
+    profile: ProfileType
     follow: boolean
     defaultPhoto: string
 }
@@ -56,19 +56,19 @@ const todosSlice = createSlice({
         ] as Array<postsType>,
         newPostText: ' ' as string,
         profile: {
-            userId: null,
+            userId: 0,
             lookingForAJob: false,
             lookingForAJobDescription: '',
-            fullName: null,
+            fullName: '',
             contacts: {
-                github: null,
-                vk: null,
-                facebook: null,
-                instagram: null,
-                twitter: null,
-                website: null,
-                youtube: null,
-                mainLink: null
+                github: '',
+                vk: '',
+                facebook: '',
+                instagram: '',
+                twitter: '',
+                website: '',
+                youtube: '',
+                mainLink: ''
             },
             photos: {
                 small: null,
@@ -154,9 +154,9 @@ export const savePhotoTC = (file: any) => async (dispatch: Dispatch<any>) => {
     }
 }
 export const ProfileThunkCreator = (profile: ProfileType) => async (dispatch: Dispatch<any>, getState: RootState) => {
-    let userId = getState().auth.userId
+    let userId = getState.auth.userId
     let response = await profileApi.putProfile(profile)
-    if (response.resultCode === 0) {
+    if (response.resultCode === 0 && userId != null) {
         dispatch(setProfileInfo(response.data))
         dispatch(userProfileThunkCreator(userId))
     }

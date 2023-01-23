@@ -6,31 +6,31 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 
 type SetUserDataType = {
-    userId: number | null
-    email: string | null
-    login: string | null
+    userId: number
+    email: string
+    login: string
     isAuth: boolean
 }
 
 type userDataType = {
-    userId: number | null,
-    email: string | null,
-    login: string | null
+    userId: number,
+    email: string,
+    login: string
     isAuth: boolean
-    captchaURL: null | string
-    messageError: string | null
+    captchaURL: string
+    messageError: string
     ownerPhoto: string
 }
 
 const todosSlice = createSlice({
     name: 'auth',
     initialState: {
-        userId: null,
-        email: null,
-        login: null,
+        userId: 0,
+        email: '',
+        login: '',
         isAuth: false,
-        captchaURL: null,
-        messageError: null,
+        captchaURL: '',
+        messageError: '',
         ownerPhoto: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
     } as userDataType,
     reducers: {
@@ -40,7 +40,7 @@ const todosSlice = createSlice({
                 ...action.payload,
             }
         },
-        GetCaptchaUrl(state: userDataType, action: PayloadAction<any>) {
+        GetCaptchaUrl(state: userDataType, action: PayloadAction<string>) {
             return {
                 ...state,
                 captchaURL: action.payload
@@ -81,7 +81,7 @@ export const loginAuthThunkCreator = () => async (dispatch: Dispatch<any>) => {
     else dispatch(GetMessageError({messageError: response.messages[0]}))
 }
 
-export const loginThunkCreator = (email: string, password: string, rememberMe: boolean, captcha: string | null) => async (dispatch: Dispatch<any>) => {
+export const loginThunkCreator = (email: string, password: string, rememberMe: boolean, captcha: string) => async (dispatch: Dispatch<any>) => {
     let response = await authApi.login(email, password, rememberMe, captcha)
     if (response.resultCode === 0) {
         dispatch(loginAuthThunkCreator())
@@ -95,13 +95,13 @@ export const loginThunkCreator = (email: string, password: string, rememberMe: b
 export const logoutThunkCreator = () => async (dispatch: Dispatch<any>) => {
     let response = await authApi.logout()
     if (response.resultCode === 0) {
-        dispatch(SetUserData({userId: null, email: null, login: null, isAuth: false}))
+        dispatch(SetUserData({userId: 0, email: '', login: '', isAuth: false}))
     }
 }
 
 export const getCaptchaThunkCreator = () => async (dispatch: Dispatch<any>) => {
     let response = await authApi.captchaURL()
-    dispatch(GetCaptchaUrl({captchaURL: response.url}))
+    dispatch(GetCaptchaUrl(response.url))
 }
 
 export const getOwnerIconThunkCreator = (id: number) => async (dispatch: Dispatch<any>) => {

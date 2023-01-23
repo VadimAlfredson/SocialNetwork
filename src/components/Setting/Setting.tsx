@@ -1,14 +1,14 @@
 import React from "react";
 import s from './Setting.module.css';
 import ProfileInfoForm from "./formProfileInfo";
-import {ProfileType} from "../../Redux/profile_reducer";
+import {useAppSelector} from "../../Redux/reduxStore";
 
 type PropsType = {
     savePhotoTC: (photo: any) => void
-    profile: ProfileType
     defaultPhoto: string
 }
 const Setting = (props: PropsType) => {
+    const profile =  useAppSelector(state => state.profile.profile)
     const onMainPhotoSelected = (e: any) => {
         if (e.target.files.length) {
             props.savePhotoTC(e.target.files[0])
@@ -19,7 +19,7 @@ const Setting = (props: PropsType) => {
         <div>
             <label className={s.blockUploadPhoto}>
                 <a className={s.textUploadPhoto}>Upload photo</a>
-            <img  src={props.profile.photos.large || props.defaultPhoto} alt={'avatar'}/>
+            <img  src={profile.photos.large || props.defaultPhoto} alt={'avatar'}/>
             <input type={"file"} onChange={onMainPhotoSelected} className={s.inputUploadPhoto}/>
             </label>
         </div>

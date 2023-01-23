@@ -12,14 +12,14 @@ import {withAuthNavigate} from "../hoc/witAuthNavigate";
 
 let mapStateToProps = (state: RootState) => {
     return {
-        dialogs: state.dialogsPage.dialogs,
-        messages: state.dialogsPage.messages,
+        dialogs: state.dialogs.dialogs,
+        messages: state.dialogs.messages,
         isAuth: state.auth.isAuth,
-        dialogId: state.dialogsPage.dialogId,
+        dialogId: state.dialogs.dialogId,
         OwnerId: state.auth.userId,
-        companionId: state.dialogsPage.companionId,
-        companionIcon: state.dialogsPage.companionIcon,
-        defaultPhoto: state.dialogsPage.defaultPhoto,
+        companionId: state.dialogs.companionId,
+        companionIcon: state.dialogs.companionIcon,
+        defaultPhoto: state.dialogs.defaultPhoto,
         ownerPhoto: state.auth.ownerPhoto
     }
 }

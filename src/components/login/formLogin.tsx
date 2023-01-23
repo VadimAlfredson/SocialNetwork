@@ -10,7 +10,7 @@ import s from './login.module.css';
 type PropsType = {
     isAuth: boolean
     loginThunkCreator: (email: string, password: string, checkbox: boolean, captcha: string) => void
-    captchaURL: null | string
+    captchaURL: string
     messageError: string
 }
 
@@ -50,7 +50,7 @@ const LoginForm: FC<PropsType> = (props) => {
               dirty
           }) => (
             <div>
-                <div className={s.messageError}>{(props.messageError != '') && props.messageError}</div>
+                <div className={s.messageError}>{(props.messageError != '' || null) && props.messageError}</div>
                 <input
                     className={touched.email && errors.email ? s.errorsInput : s.inputLogin}
                     type={'email'}

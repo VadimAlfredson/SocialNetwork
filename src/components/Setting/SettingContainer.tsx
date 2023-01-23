@@ -1,33 +1,30 @@
-import React, {JSXElementConstructor, useEffect} from "react";
-import s from './Setting.module.css';
+import React, {FC, useEffect} from "react";
 import Setting from "./Setting";
 import { connect } from "react-redux";
 import {RootState} from "../../Redux/reduxStore";
-import {ProfileType, savePhotoTC, userProfileThunkCreator} from "../../Redux/profile_reducer";
+import {savePhotoTC, userProfileThunkCreator} from "../../Redux/profile_reducer";
 
 type PropsType = {
     ownerId: number
-    profile: ProfileType
-    userProfileThunkCreator: (id: number) => void
+    userId: number
+    userProfileThunkCreator: (userId: number) => void
     savePhotoTC: (photo: any) => void
     defaultPhoto: string
 }
-const SettingContainer: React.FC<PropsType> = (props): JSX.Element => {
+const SettingContainer: FC<PropsType> = (props) => {
     useEffect(() => {
-        if (props.ownerId != props.profile.userId) {
-            props.userProfileThunkCreator(props.ownerId)
-        }
-    })
+        (props.ownerId !== props.userId) && props.userProfileThunkCreator(props.ownerId)
+    }, [])
     return (
-        <Setting savePhotoTC={props.savePhotoTC} profile={props.profile} defaultPhoto={props.defaultPhoto}/>
+        <Setting savePhotoTC={props.savePhotoTC} defaultPhoto={props.defaultPhoto}/>
     )
 }
 
 const mapStateToProps = (state: RootState) => {
     return {
         ownerId: state.auth.userId,
-        profile: state.profilePage.profile,
-        defaultPhoto: state.profilePage.defaultPhoto,
+        userId: state.profile.profile.userId,
+        defaultPhoto: state.profile.defaultPhoto,
     }
 }
 
