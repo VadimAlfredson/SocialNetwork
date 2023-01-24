@@ -1,13 +1,42 @@
 import React, {FC, useEffect, useState} from "react";
-import {Formik} from "formik";
+import {Formik, FormikProps} from "formik";
 import {connect} from "react-redux";
-import {ProfileThunkCreator, userProfileThunkCreator,} from "../../Redux/profile_reducer";
+import {
+    ContactsType,
+    PhotosType,
+    ProfileThunkCreator,
+    ProfileType, PutProfileValuesProps,
+    userProfileThunkCreator,
+} from "../../Redux/profile_reducer";
 import s from "./Setting.module.css"
-import {RootState} from "../../Redux/reduxStore";
+import {RootState, useAppSelector} from "../../Redux/reduxStore";
 import * as yup from "yup";
 
-const ProfileInfoForm: FC<any> = (props) => {
-    let [initialValue, setInitialValue] = useState(props.profile)
+type MyFormValues = {
+    fullName: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    aboutMe: string
+    contacts: {
+        github: string,
+        vk: string,
+        facebook: string,
+        instagram: string,
+        twitter: string,
+        website: string,
+        youtube: string,
+        mainLink: string
+    }
+}
+
+interface IProps extends FormikProps<MyFormValues> {
+    ProfileThunkCreator: (profile: PutProfileValuesProps) => void
+}
+
+
+const ProfileInfoForm: React.FC<IProps> = (props) => {
+    const profile = useAppSelector(state => state.profile.profile)
+
 
     /*const validationSchema = yup.object().shape({
         email: yup.string().typeError('Incorrect email').required('required to fill out')
@@ -16,18 +45,15 @@ const ProfileInfoForm: FC<any> = (props) => {
     return <Formik
         enableReinitialize={true}
         initialValues={{
-            fullName: props.profile.fullName,
-            lookingForAJob: props.profile.lookingForAJob,
-            lookingForAJobDescription: props.profile.lookingForAJobDescription,
-            aboutMe: props.profile.aboutMe,
-            contacts: props.profile.contacts,
+            fullName: profile.fullName,
+            lookingForAJob: profile.lookingForAJob,
+            lookingForAJobDescription: profile.lookingForAJobDescription,
+            aboutMe: profile.aboutMe,
+            contacts: profile.contacts,
         }}
         validateOnBlur
         onSubmit={(values => {
-            console.log(values)
-            console.log(props.profile)
             props.ProfileThunkCreator(values)
-            props.editModeOnOff(false)
         })}
         /*validationSchema={validationSchema}*/
     >
@@ -50,7 +76,7 @@ const ProfileInfoForm: FC<any> = (props) => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     disabled={true}
-                    value={values.fullName || props.profile.fullName || ''}
+                    value={values.fullName || profile.fullName || ''}
                 /><br/>
                 <b>Looking for a job:</b>
                 <input
@@ -156,10 +182,6 @@ const ProfileInfoForm: FC<any> = (props) => {
     </Formik>
 };
 
-const mapStateToProps = (state: RootState) => ({
-    isAuth: state.auth.isAuth,
-    ownerId: state.auth.userId,
-    profile: state.profile.profile,
-})
+const mapStateToProps = (state: RootState) => ({})
 
 export default connect(mapStateToProps, {ProfileThunkCreator, userProfileThunkCreator})(ProfileInfoForm)

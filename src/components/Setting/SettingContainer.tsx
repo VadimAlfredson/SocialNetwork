@@ -3,6 +3,8 @@ import Setting from "./Setting";
 import { connect } from "react-redux";
 import {RootState} from "../../Redux/reduxStore";
 import {savePhotoTC, userProfileThunkCreator} from "../../Redux/profile_reducer";
+import {compose} from "redux";
+import {withAuthNavigate} from "../hoc/witAuthNavigate";
 
 type PropsType = {
     ownerId: number
@@ -28,4 +30,4 @@ const mapStateToProps = (state: RootState) => {
     }
 }
 
-export default connect(mapStateToProps, {userProfileThunkCreator, savePhotoTC})(SettingContainer)
+export default compose(withAuthNavigate, connect(mapStateToProps, {userProfileThunkCreator, savePhotoTC}))(SettingContainer)

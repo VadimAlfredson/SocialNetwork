@@ -4,6 +4,23 @@ import {Dispatch} from "react";
 import {RootState} from "./reduxStore";
 import {setOwnerIconAC} from "./auth_reducers";
 
+
+export type PutProfileValuesProps = {
+    fullName: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    aboutMe: string
+    contacts: {
+        github: string,
+        vk: string,
+        facebook: string,
+        instagram: string,
+        twitter: string,
+        website: string,
+        youtube: string,
+        mainLink: string
+    }
+}
 export type ContactsType = {
     github: string,
     vk: string,
@@ -153,12 +170,10 @@ export const savePhotoTC = (file: any) => async (dispatch: Dispatch<any>) => {
         dispatch(setOwnerIconAC(response.data.photos.large))
     }
 }
-export const ProfileThunkCreator = (profile: ProfileType) => async (dispatch: Dispatch<any>, getState: RootState) => {
-    let userId = getState.auth.userId
+export const ProfileThunkCreator = (profile: PutProfileValuesProps) => async (dispatch: Dispatch<any>, getState: RootState) => {
     let response = await profileApi.putProfile(profile)
-    if (response.resultCode === 0 && userId != null) {
+    if (response.resultCode === 0) {
         dispatch(setProfileInfo(response.data))
-        dispatch(userProfileThunkCreator(userId))
     }
 }
 

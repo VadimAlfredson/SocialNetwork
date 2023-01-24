@@ -1,35 +1,33 @@
 import './App.css';
-import React from 'react';
+import React, {useEffect} from 'react';
 import Navbar from './components/Navbar/Navbar';
 import {Routes, Route, Navigate} from 'react-router-dom';
 import HeaderContainer from "./components/Header/HeaderContainer";
 import {connect} from "react-redux";
 import {InitializeAppTC} from "./Redux/app_reducers";
 import Preloader from "./components/common/Preloader/Preloader";
+import {useAppDispatch, useAppSelector} from "./Redux/reduxStore";
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
-//ПРОВЕРЬ тут какая то жопа
-// @ts-ignore
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'))
 // @ts-ignore
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
 const Login = React.lazy(() => import('./components/login/login'))
+// @ts-ignore
 const SettingContainer = React.lazy(() => import('./components/Setting/SettingContainer'))
 
 
-class App extends React.Component<{ InitializeAppTC: () => void, isAuth: boolean }> {
-    componentDidMount() {
-        this.props.InitializeAppTC()
-    }
-
-    render() {
+const App = () => {
+    const isAuth = useAppSelector(state => state.auth.isAuth)
+    const dispatch = useAppDispatch()
+    useEffect(() => {dispatch(InitializeAppTC())}, [])
         return (
             <div className='app-wrapper'>
                 <HeaderContainer/>
                 <div className='bodySide'>
                     <div className='navbar'>
                         <div className='navbarLevel2'>
-                            <Navbar isAuth={this.props.isAuth}/>
+                            <Navbar isAuth={isAuth}/>
                         </div>
                     </div>
                     <div className='app-wrapper-content'>
@@ -58,13 +56,6 @@ class App extends React.Component<{ InitializeAppTC: () => void, isAuth: boolean
                 </div>
             </div>
         );
-    }
 }
 
-const mapStateToProps = (state: any) => ({
-    initialized: state.app.initialized as boolean,
-    isAuth: state.auth.isAuth as boolean,
-    photo: state /*фотку добавь рядом с именем в шапку*/,
-})
-
-export default connect(mapStateToProps, {InitializeAppTC})(App);
+export default App

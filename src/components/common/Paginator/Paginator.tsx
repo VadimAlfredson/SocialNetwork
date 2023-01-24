@@ -7,11 +7,13 @@ type PropsType = {
 }
 
 let Paginator: FC<PropsType> = (props) => {
-    const pageSize =  useAppSelector(state => state.users.pageSize)
+    const pageSize = useAppSelector(state => state.users.pageSize)
     const totalUsersCount = useAppSelector(state => state.users.totalUsersCount)
     const currentPage = useAppSelector(state => state.users.currentPage)
     const term = useAppSelector(state => state.users.term)
     const friend = useAppSelector(state => state.users.friends)
+
+
     let pageCount = Math.ceil(totalUsersCount / pageSize);
     let pages = [];
     for (let i = 1; i <= pageCount; i++) {
@@ -39,17 +41,21 @@ let Paginator: FC<PropsType> = (props) => {
                     )
             }
             {portionNumber > 1 &&
-                <button className={s.pageNumber} onClick={() => {setPortionNumber(portionNumber - 1)}}>{`<<`}</button>
+                <button className={s.pageNumber} onClick={() => {
+                    setPortionNumber(portionNumber - 1)
+                }}>{`<<`}</button>
             }
             {pages
                 .filter(p => p >= leftPortionNumber && p <= rightPortionNumber)
                 .map(p => {
                         // @ts-ignore
-                        return <span className={props.currentPage === p ? s.activePage : s.pageNumber}
+                        return <span className={currentPage === p ? s.activePage : s.pageNumber}
                                      onClick={() => {
                                          if (friend) {
-                                             props.onPageChange(p, pageSize, term, friend)}
-                                         else {props.onPageChange(p, pageSize, term)}
+                                             props.onPageChange(p, pageSize, term, friend)
+                                         } else {
+                                             props.onPageChange(p, pageSize, term)
+                                         }
                                      }} key={p}
                         >{p}</span>
                     }
@@ -57,7 +63,9 @@ let Paginator: FC<PropsType> = (props) => {
 
             {portionCount > portionNumber &&
                 <button className={s.pageNumber}
-                        onClick={() => {setPortionNumber(portionNumber + 1)}}
+                        onClick={() => {
+                            setPortionNumber(portionNumber + 1)
+                        }}
                 >{`>>`}</button>
             }
             {portionCount > portionNumber &&
@@ -77,3 +85,5 @@ let Paginator: FC<PropsType> = (props) => {
 };
 
 export default Paginator
+
+

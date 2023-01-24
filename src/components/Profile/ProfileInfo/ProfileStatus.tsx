@@ -1,20 +1,22 @@
 import s from './../Profile.module.css';
 import React, {ChangeEvent, FC, useEffect, useState} from 'react';
+import {useAppDispatch} from "../../../Redux/reduxStore";
+import {putStatusThunkCreator} from "../../../Redux/profile_reducer";
 
 type PropsType = {
     status: string
-    putStatusThunkCreator: (status: string) => void
     isOwner: boolean
 }
 
 export const ProfileStatus: FC<PropsType> = (props) => {
+    const dispatch = useAppDispatch()
     let [editMode, setEditMode] = useState(false)
 
     let activeStatusInput = () => setEditMode(!props.isOwner)
 
     let deactivateEditMode = () => {
         setEditMode(false)
-        props.putStatusThunkCreator(status)
+        dispatch(putStatusThunkCreator(status))
     }
 
     let [status, setStatus] = useState(props.status)

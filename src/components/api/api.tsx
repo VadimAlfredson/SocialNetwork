@@ -1,6 +1,6 @@
 import axios from "axios";
 import {authMeResponse} from "./apiTypes";
-import {ProfileType} from "../../Redux/profile_reducer";
+import {ProfileType, PutProfileValuesProps} from "../../Redux/profile_reducer";
 import {setSubscriptions} from "../../Redux/subscriptions_reducers";
 
 
@@ -79,7 +79,7 @@ export const profileApi = {
                 return response.data
             })
     },
-    putProfile: (profile: ProfileType) => {
+    putProfile: (profile: PutProfileValuesProps) => {
         return instance.put('profile', profile)
             .then(response => {
                 return response.data

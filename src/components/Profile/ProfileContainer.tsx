@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect} from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {
@@ -10,7 +10,7 @@ import {
     getFollowThunkCreator,
     onFollowProfileChangeThunkCreator,
 } from "../../Redux/profile_reducer";
-import {RootState} from "../../Redux/reduxStore";
+import {RootState, useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
 import {
     useLocation,
     useNavigate,
@@ -37,70 +37,51 @@ function withRouter(Component: FC) {
     return ComponentWithRouterProp;
 }
 
-class ProfileContainer extends React.Component<any, any> {
-
-    refreshProfile(): void {
-        let userId: number = this.props.router.params.userId
-        if (!userId) {userId = this.props.authorizedUserId}
-        this.props.userProfileThunkCreator(userId)
-        this.props.getStatusThunkCreator(userId)
-        this.props.getFollowThunkCreator(userId)
-    }
-
-    componentDidMount(): void {
-        this.refreshProfile()
-    }
-
-    componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
-        if (this.props.router.params.userId != prevProps.router.params.userId ||
-            this.props.router.params.follow != prevProps.router.params.follow) {this.refreshProfile()}
-    }
-
-    onFollowProfileChange = (userId: number, follow: boolean) => {
-        this.props.onFollowProfileChangeThunkCreator(userId, follow)
-        this.props.getSubscriptionsThunkCreator(true)
-    }
-
-    onPutDialogOnProfileChange = (userId: number) => {
-        this.props.putDialogUserThunkCreator(userId)
-    }
-
-
-    render(): React.ReactNode {
-        return <Profile {...this.props}
-                        isOwner={!!this.props.router.params.userId}
-                        profile={this.props.profile}
-                        status={this.props.status}
-                        putStatusThunkCreator={this.props.putStatusThunkCreator}
-                        savePhotoTC={this.props.savePhotoTC}
-                        follow={this.props.follow}
-                        onFollowProfileChange={this.onFollowProfileChange}
-                        onPutDialogOnProfileChange={this.onPutDialogOnProfileChange}
-        />
-    }
+type PropsType = {
+    router: any
 }
 
-let mapStateToProps = (state: RootState) => {
-    return {
-        profile: state.profile.profile,
-        status: state.profile.status,
-        authorizedUserId: state.auth.userId,
-        follow: state.profile.follow,
-        /*followingInProgress: getFollowingInProgress(state),*/
+const ProfileContainer = (props: PropsType) => {
+    const dispatch = useAppDispatch()
+    const profile = useAppSelector(state => state.profile.profile)
+    const status = useAppSelector(state => state.profile.status)
+    const follow = useAppSelector(state => state.profile.follow)
+    const authorizedUserId = useAppSelector((state => state.auth.userId))
+
+
+    useEffect(() => {
+        let userId: number = props.router.params.userId
+        if (!userId) {userId = authorizedUserId}
+        dispatch(userProfileThunkCreator(userId))
+        dispatch(getStatusThunkCreator(userId))
+        dispatch(getFollowThunkCreator(userId))
+    }, [props.router.params.userId])
+
+    useEffect(() => {
+
+    }, [])
+
+    let onFollowProfileChange = (userId: number, follow: boolean) => {
+        dispatch(onFollowProfileChangeThunkCreator(userId, follow))
+        dispatch(getSubscriptionsThunkCreator(true))
     }
+
+    let onPutDialogOnProfileChange = (userId: number) => {
+        dispatch(putDialogUserThunkCreator(userId))
+    }
+
+        return <Profile {...props}
+                        isOwner={!!props.router.params.userId}
+                        profile={profile}
+                        status={status}
+                        follow={follow}
+                        onFollowProfileChange={onFollowProfileChange}
+                        onPutDialogOnProfileChange={onPutDialogOnProfileChange}
+        />
+
 }
 
 export default compose(
     withRouter,
-    connect (mapStateToProps, {setUserProfile,
-        userProfileThunkCreator,
-        getStatusThunkCreator,
-        putStatusThunkCreator,
-        savePhotoTC,
-        getFollowThunkCreator,
-        onFollowProfileChangeThunkCreator,
-        getSubscriptionsThunkCreator,
-        putDialogUserThunkCreator
-    }),
     withAuthNavigate
 )(ProfileContainer)

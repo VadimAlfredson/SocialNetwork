@@ -5,26 +5,21 @@ import {ProfileStatus} from "./ProfileStatus";
 import {ProfileType} from "../../../Redux/profile_reducer";
 import ProfileInfoForm from "../../Setting/formProfileInfo";
 import {Navigate, NavLink} from "react-router-dom";
+import {useAppDispatch} from "../../../Redux/reduxStore";
 
 type PropsType = {
     profile: ProfileType
-    putStatusThunkCreator: () => void
     status: string
     isOwner: boolean
-    savePhotoTC: ({}) => void
     follow: boolean
     onFollowProfileChange: (userId: number, follow: boolean) => void
     onPutDialogOnProfileChange: (userId: number) => void
 }
 
 const ProfileInfo: FC<PropsType> = (props) => {
+
     if (!props.profile) {
         return <Preloader/>
-    }
-    const onMainPhotoSelected = (e: any) => {
-        if (e.target.files.length) {
-            props.savePhotoTC(e.target.files[0])
-        }
     }
     return <div className={s.profileClass}>
         <div className={s.avatarSide}>
@@ -37,7 +32,7 @@ const ProfileInfo: FC<PropsType> = (props) => {
         </div>
         <div className={s.profileInfo}>
             <div className={s.name}><b>{props.profile.fullName}</b></div>
-            <div className={s.status}><ProfileStatus status={props.status} putStatusThunkCreator={props.putStatusThunkCreator} isOwner={props.isOwner}/></div>
+            <div className={s.status}><ProfileStatus status={props.status} isOwner={props.isOwner}/></div>
             <div className={s.editMode}>{props.isOwner &&
                 <button className={props.follow ? s.buttonUnfollow : s.buttonFollow} onClick={() => {
                     props.onFollowProfileChange(props.profile.userId, props.follow)
