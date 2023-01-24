@@ -32,7 +32,6 @@ const UsersContainer: FC<PropsType> = (props) => {
     )
 
     let onUsersChange = (pageNumber: number, pageSize: number, term: string, friend?: boolean) => {
-        debugger
         props.onChangeUsersThunkCreator(pageNumber, pageSize, term, friend)
     }
 

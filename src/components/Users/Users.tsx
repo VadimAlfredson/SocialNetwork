@@ -20,6 +20,7 @@ let Users: FC<PropsType> = (props) => {
     const isAuth = useAppSelector(state => state.auth.isAuth)
     const isFetching = useAppSelector(state => state.users.isFetching)
     const [state, setState] = useState(false)
+
     useEffect(() => {
         state != isAuth ? setState(isAuth) : console.log('useEffect')
     }, [isAuth])

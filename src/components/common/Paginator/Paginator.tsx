@@ -39,7 +39,7 @@ let Paginator: FC<PropsType> = (props) => {
                     )
             }
             {portionNumber > 1 &&
-                <button className={s.pageNumber} onClick={() => {setPortionNumber(portionNumber - 1)}}>-5</button>
+                <button className={s.pageNumber} onClick={() => {setPortionNumber(portionNumber - 1)}}>{`<<`}</button>
             }
             {pages
                 .filter(p => p >= leftPortionNumber && p <= rightPortionNumber)
@@ -58,7 +58,7 @@ let Paginator: FC<PropsType> = (props) => {
             {portionCount > portionNumber &&
                 <button className={s.pageNumber}
                         onClick={() => {setPortionNumber(portionNumber + 1)}}
-                >+5</button>
+                >{`>>`}</button>
             }
             {portionCount > portionNumber &&
                 pages
