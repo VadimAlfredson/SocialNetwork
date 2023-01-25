@@ -170,7 +170,7 @@ export const savePhotoTC = (file: any) => async (dispatch: Dispatch<any>) => {
         dispatch(setOwnerIconAC(response.data.photos.large))
     }
 }
-export const ProfileThunkCreator = (profile: PutProfileValuesProps) => async (dispatch: Dispatch<any>, getState: RootState) => {
+export const ProfileThunkCreator = (profile: PutProfileValuesProps) => async (dispatch: Dispatch<any>) => {
     let response = await profileApi.putProfile(profile)
     if (response.resultCode === 0) {
         dispatch(setProfileInfo(response.data))

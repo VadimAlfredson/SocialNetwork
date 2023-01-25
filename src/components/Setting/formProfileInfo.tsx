@@ -1,41 +1,18 @@
 import React, {FC, useEffect, useState} from "react";
-import {Formik, FormikProps} from "formik";
+import {Field, Formik, FormikProps} from "formik";
 import {connect} from "react-redux";
 import {
-    ContactsType,
-    PhotosType,
     ProfileThunkCreator,
-    ProfileType, PutProfileValuesProps,
     userProfileThunkCreator,
 } from "../../Redux/profile_reducer";
 import s from "./Setting.module.css"
-import {RootState, useAppSelector} from "../../Redux/reduxStore";
-import * as yup from "yup";
-
-type MyFormValues = {
-    fullName: string
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    aboutMe: string
-    contacts: {
-        github: string,
-        vk: string,
-        facebook: string,
-        instagram: string,
-        twitter: string,
-        website: string,
-        youtube: string,
-        mainLink: string
-    }
-}
-
-interface IProps extends FormikProps<MyFormValues> {
-    ProfileThunkCreator: (profile: PutProfileValuesProps) => void
-}
+import {RootState, useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
 
 
-const ProfileInfoForm: React.FC<IProps> = (props) => {
+const ProfileInfoForm: React.FC<{}> = () => {
     const profile = useAppSelector(state => state.profile.profile)
+    const dispatch = useAppDispatch()
+    let [disabledSave, setDisabledSave] = useState(true)
 
 
     /*const validationSchema = yup.object().shape({
@@ -53,7 +30,7 @@ const ProfileInfoForm: React.FC<IProps> = (props) => {
         }}
         validateOnBlur
         onSubmit={(values => {
-            props.ProfileThunkCreator(values)
+            dispatch(ProfileThunkCreator(values))
         })}
         /*validationSchema={validationSchema}*/
     >
@@ -84,6 +61,7 @@ const ProfileInfoForm: React.FC<IProps> = (props) => {
                     name={'lookingForAJob'}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    value={values.lookingForAJob ? ["lookingForAJob"] : []}
                 /><br/>
                 <b>Looking for a job description:</b>
                 <input
@@ -170,7 +148,7 @@ const ProfileInfoForm: React.FC<IProps> = (props) => {
                 value={values.contacts.mainLink || ''}
             /><br/>
                 <button
-                    disabled={!isValid && !dirty}
+                    disabled={!dirty}
                     onClick={() => {
                         handleSubmit()
                     }}

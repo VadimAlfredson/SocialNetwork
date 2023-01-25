@@ -48,7 +48,6 @@ let Paginator: FC<PropsType> = (props) => {
             {pages
                 .filter(p => p >= leftPortionNumber && p <= rightPortionNumber)
                 .map(p => {
-                        // @ts-ignore
                         return <span className={currentPage === p ? s.activePage : s.pageNumber}
                                      onClick={() => {
                                          if (friend) {
