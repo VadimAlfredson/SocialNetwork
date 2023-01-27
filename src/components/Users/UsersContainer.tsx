@@ -25,23 +25,10 @@ const UsersContainer: FC<{}> = (props) => {
         dispatch(getUsersThunkCreator(currentPage, pageSize))}, []
     )
 
-    let onUsersChange = (pageNumber: number, pageSize: number, term: string, friend?: boolean) => {
-        dispatch(onChangeUsersThunkCreator(pageNumber, pageSize, term, friend))
-    }
 
-    let onFollowChange = (userId: number, follow: boolean) => {
-        dispatch(onFollowChangeThunkCreator(userId, follow))
-    }
-
-    let onDialogUserChange = (userId: number) => {
-        dispatch(putDialogUserThunkCreator(userId))
-    }
 
         return <>
             <Users
-                onUsersChange={onUsersChange}
-                onFollowChange={onFollowChange}
-                onDialogUserChange={onDialogUserChange}
             />
         </>
 

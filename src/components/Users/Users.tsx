@@ -1,17 +1,15 @@
 import React, {FC, useEffect, useState} from "react";
-import {UserType} from "../../Redux/users_reducers";
+import {onChangeUsersThunkCreator, onFollowChangeThunkCreator, UserType} from "../../Redux/users_reducers";
 import s from "../Users/users.module.css"
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import Paginator from "../common/Paginator/Paginator";
 import Preloader from "../common/Preloader/Preloader";
 import {putDialogUserThunkCreator} from "../../Redux/dialogs_reducer";
 import FormSearchUsers from "./formSearchUsers";
-import {useAppSelector} from "../../Redux/reduxStore";
+import {useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
 
 type PropsType = {
-    onUsersChange: (pageNumber: number, pageSize: number, term: string, friend?: boolean) => void
-    onFollowChange: (id: number, followed: boolean) => void
-    onDialogUserChange: (userId: number) => void
+
 }
 
 let Users: FC<PropsType> = (props) => {
@@ -19,7 +17,23 @@ let Users: FC<PropsType> = (props) => {
     const followingInProgress = useAppSelector(state => state.users.followingInProgress)
     const isAuth = useAppSelector(state => state.auth.isAuth)
     const isFetching = useAppSelector(state => state.users.isFetching)
+
+
     const [state, setState] = useState(false)
+    const navigate = useNavigate()
+    const dispatch = useAppDispatch()
+
+    let onUsersChange = (pageNumber: number, pageSize: number, term: string, friend?: boolean) => {
+        dispatch(onChangeUsersThunkCreator(pageNumber, pageSize, term, friend))
+    }
+
+    let onFollowChange = (userId: number, follow: boolean) => {
+        dispatch(onFollowChangeThunkCreator(userId, follow))
+    }
+
+    let onDialogUserChange = (userId: number) => {
+        dispatch(putDialogUserThunkCreator(userId))
+    }
 
     useEffect(() => {
         state != isAuth ? setState(isAuth) : console.log('useEffect')
@@ -27,10 +41,10 @@ let Users: FC<PropsType> = (props) => {
     return (
         <div className={s.usersComponent}>
             <Paginator
-                onPageChange={props.onUsersChange}
+                onPageChange={onUsersChange}
             />
             <FormSearchUsers
-                onUsersChange={props.onUsersChange}
+                onUsersChange={onUsersChange}
             />
             {isFetching ? <Preloader/> :
                 <div>
@@ -47,7 +61,7 @@ let Users: FC<PropsType> = (props) => {
                                 {isAuth ?
                                     <button className={s.buttonStyle}
                                             disabled={followingInProgress.includes(u.id)}
-                                            onClick={() => (props.onFollowChange(u.id, u.followed))
+                                            onClick={() => (onFollowChange(u.id, u.followed))
                                             }>{u.followed ? 'Unfollow' : 'Follow'}
                                     </button> : <NavLink className={s.navLinkToLogin} to={"../login"}>
                                         Register to subscribe
@@ -57,7 +71,7 @@ let Users: FC<PropsType> = (props) => {
                                 {isAuth &&
                                     <button className={s.buttonStyle}
                                             onClick={() => {
-                                                props.onDialogUserChange(u.id)
+                                                onDialogUserChange(u.id)
                                             }}>Message
                                     </button>}
                             </div>
