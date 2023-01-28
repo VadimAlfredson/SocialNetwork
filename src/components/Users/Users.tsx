@@ -17,6 +17,9 @@ let Users: FC<PropsType> = (props) => {
     const followingInProgress = useAppSelector(state => state.users.followingInProgress)
     const isAuth = useAppSelector(state => state.auth.isAuth)
     const isFetching = useAppSelector(state => state.users.isFetching)
+    const term = useAppSelector(state => state.users.term)
+    const friends = useAppSelector(state => state.users.friends)
+    let [pageNumber, setPageNumber] = useState(1)
 
 
     const [state, setState] = useState(false)
@@ -25,6 +28,7 @@ let Users: FC<PropsType> = (props) => {
 
     let onUsersChange = (pageNumber: number, pageSize: number, term: string, friend?: boolean) => {
         dispatch(onChangeUsersThunkCreator(pageNumber, pageSize, term, friend))
+        setPageNumber(pageNumber)
     }
 
     let onFollowChange = (userId: number, follow: boolean) => {
@@ -34,6 +38,17 @@ let Users: FC<PropsType> = (props) => {
     let onDialogUserChange = (userId: number) => {
         dispatch(putDialogUserThunkCreator(userId))
     }
+
+    useEffect(() => {
+        navigate({
+            pathname: '/users',
+            search: term || friends || pageNumber ? "?" +
+                (pageNumber ? `pageNumber=${pageNumber}${term ? '&' : ''}` : '') +
+                (term ? `term=${term}${friends ? '&' : ''}` : '') +
+                (friends ? `friend=${friends}` : '')
+                : ''
+        })
+    }, [term, friends, pageNumber])
 
     useEffect(() => {
         state != isAuth ? setState(isAuth) : console.log('useEffect')
