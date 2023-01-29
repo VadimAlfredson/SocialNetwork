@@ -84,11 +84,13 @@ let Users: FC<PropsType> = (props) => {
                             </div>
                             <div className={s.massageButton}>
                                 {isAuth &&
+                                    <NavLink to={`/dialogs/${u.id}`}>
                                     <button className={s.buttonStyle}
                                             onClick={() => {
                                                 onDialogUserChange(u.id)
                                             }}>Message
-                                    </button>}
+                                    </button>
+                            </NavLink>}
                             </div>
 
                             <div className={s.infoUser}>

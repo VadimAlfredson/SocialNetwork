@@ -33,6 +33,12 @@
     border: black solid 2px;
 }
 
+.fullPhoto {
+    position: absolute;
+    width: 1000px;
+    height: 1000px;
+}
+
 .inputPhoto {
     display: block;
     opacity: 0;

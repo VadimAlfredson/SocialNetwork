@@ -6,6 +6,8 @@ import {AddMessage} from "./AddMessage/AddMessage";
 import {
     dialogsType, messageType,
 } from "../../Redux/dialogs_reducer";
+import users from "../Users/Users";
+import {NavLink} from "react-router-dom";
 
 
 const Dialogs = (props: {
@@ -40,24 +42,39 @@ const Dialogs = (props: {
         getCompanionIcon(userId)
 
     }
-
     const onMessageSentChange = (userId: number, bodyMessage: string) => {
         props.postMessageToUserThunkCreator(userId, bodyMessage)
     }
 
+
+
+    let [dialogsState, setDialogsState] = useState([] as dialogsType[])
+
+    useEffect(() => {
+        debugger
+        let dialogsArr = [] as dialogsType[]
+        if (props.dialogs.length > 0){
+        for (let i = 0; i < (props.dialogs.length> 10 ? 10 : props.dialogs.length); i++) {
+            dialogsArr.push(props.dialogs[i])
+        }}
+        setDialogsState(dialogsArr)
+        console.log(dialogsArr)
+    }, [props.dialogs, props.dialogId])
     /*const getUsersIcon = (senderId: number) => {
         return props.getSenderIconThunkCreator(senderId)
 
     }*/
 
 
-    let dialogUsers = props.dialogs.map(
+    let dialogUsers =
+        props.dialogs[0] ?
+        dialogsState.map(
         d => <DialogItem
             name={d.userName}
             id={d.id}
             key={d.id}
-            onGetMessagesUser={onGetMessagesUser}/>
-    );
+            onGetMessagesUser={onGetMessagesUser}/> 
+        ) : <NavLink to={'/users'}>Search friends</NavLink>;
 
     let messagesItem =
         props.messages[0] ?

@@ -1,11 +1,10 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import s from './../Profile.module.css';
 import Preloader from "../../common/Preloader/Preloader";
 import {ProfileStatus} from "./ProfileStatus";
 import {ProfileType} from "../../../Redux/profile_reducer";
-import ProfileInfoForm from "../../Setting/formProfileInfo";
-import {Navigate, NavLink} from "react-router-dom";
-import {useAppDispatch} from "../../../Redux/reduxStore";
+import {NavLink} from "react-router-dom";
+import profile from "../Profile";
 
 type PropsType = {
     profile: ProfileType
@@ -17,22 +16,28 @@ type PropsType = {
 }
 
 const ProfileInfo: FC<PropsType> = (props) => {
+    let [showFullPhoto, setShowFullPhoto] = useState(false)
 
+    useEffect(() => {setShowFullPhoto(false)}, [props.profile.userId])
     if (!props.profile) {
         return <Preloader/>
     }
     return <div className={s.profileClass}>
+        {showFullPhoto && props.profile.photos.large &&
+        <img className={s.fullPhoto} onClick={() => setShowFullPhoto(false)}
+        src={props.profile.photos.large}/>
+        }
         <div className={s.avatarSide}>
             <img className={s.avatarImg}
-                 src={props.profile.photos.large || 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'}/>
-            {/*{props.isOwner || <div>
-                <div className={s.labelUpdatePhoto}>upload photo</div>
-                <input className={s.inputPhoto} type={"file"} onChange={onMainPhotoSelected}/>
-            </div>}*/}
+                 src={props.profile.photos.large || 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'}
+            onClick={() => props.profile.photos.large ? setShowFullPhoto(true) : setShowFullPhoto(false)}
+            />
         </div>
         <div className={s.profileInfo}>
             <div className={s.name}><b>{props.profile.fullName}</b></div>
-            <div className={s.status}><ProfileStatus status={props.status} isOwner={props.isOwner}/></div>
+            <div className={s.status}>
+                <ProfileStatus status={props.status} isOwner={props.isOwner}/>
+            </div>
             <div className={s.editMode}>{props.isOwner &&
                 <button className={props.follow ? s.buttonUnfollow : s.buttonFollow} onClick={() => {
                     props.onFollowProfileChange(props.profile.userId, props.follow)
@@ -69,11 +74,7 @@ const Information: FC<InfoProps> = ({profile, isOwner}) => {
     let editModeOnOff = (value: boolean) => setEditMode(value)
     return <div>
         <div>
-            {/*{isOwner || !editMode && <button className={s.buttonEditInfo} onClick={() => {
-                editModeOnOff(true)
-            }}>edit information</button>}
-            {!isOwner && editMode && <div><ProfileInfoForm editModeOnOff={editModeOnOff}/></div>}
-            {editMode || */}<div>
+            <div>
                 <div><b>looking for a job:</b> {profile.lookingForAJob ? "yes" : 'no'}</div>
                 {profile.lookingForAJob &&
                     <div><b>looking for a job description:</b> {profile.lookingForAJobDescription}</div>}
