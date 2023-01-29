@@ -76,9 +76,9 @@ export const loginAuthThunkCreator = () => async (dispatch: Dispatch<any>) => {
         dispatch(getOwnerIconThunkCreator(response.data.id))
     } else if (response.resultCode === 10) {
         dispatch(getCaptchaThunkCreator())
-        dispatch(GetMessageError({messageError: response.messages[0]}))
+        dispatch(GetMessageError(/*{messageError: response.messages[0]}*/ 'жопа какаято'))
     }
-    else dispatch(GetMessageError({messageError: response.messages[0]}))
+    else dispatch(GetMessageError(/*{messageError: response.messages[0]}*/ 'жопа какаято'))
 }
 
 export const loginThunkCreator = (email: string, password: string, rememberMe: boolean, captcha: string) => async (dispatch: Dispatch<any>) => {
@@ -87,9 +87,9 @@ export const loginThunkCreator = (email: string, password: string, rememberMe: b
         dispatch(loginAuthThunkCreator())
     } else if (response.resultCode === 10) {
         dispatch(getCaptchaThunkCreator())
-        dispatch(GetMessageError({messageError: response.messages[0]}))
+        dispatch(GetMessageError(/*{messageError: response.messages[0]}*/ 'жопа какаято'))
     }
-    else dispatch(GetMessageError({messageError: response.messages[0]}))
+    else dispatch(GetMessageError(/*{messageError: response.messages[0]}*/'жопа какаято'))
 }
 
 export const logoutThunkCreator = () => async (dispatch: Dispatch<any>) => {

@@ -4,20 +4,21 @@ import * as yup from "yup";
 import {connect} from "react-redux";
 import {loginThunkCreator} from "../../Redux/auth_reducers";
 import {Navigate} from "react-router-dom";
-import {RootState} from "../../Redux/reduxStore";
+import {RootState, useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
 import s from './login.module.css';
 
-type PropsType = {
-    isAuth: boolean
-    loginThunkCreator: (email: string, password: string, checkbox: boolean, captcha: string) => void
-    captchaURL: string
-    messageError: string
-}
 
-const LoginForm: FC<PropsType> = (props) => {
+const LoginForm: FC = (props) => {
+    const isAuth = useAppSelector(state => state.auth.isAuth)
+    const captchaURL = useAppSelector(state => state.auth.captchaURL)
+    const messageError = useAppSelector(state => state.auth.messageError)
+    const dispatch = useAppDispatch()
+    
     const [state, setState] = useState<string>('')
-    useEffect(() => {state != props.messageError ? setState(props.messageError) : console.log('useEffect')}, [props.messageError, props.captchaURL])
-    if (props.isAuth) {
+    useEffect(() => {
+        state != messageError ? setState(messageError) : console.log('useEffect')
+    }, [messageError, captchaURL])
+    if (isAuth) {
         return <Navigate to={"/profile/"}/>
     }
 
@@ -34,8 +35,9 @@ const LoginForm: FC<PropsType> = (props) => {
         }}
         validateOnBlur
         onSubmit={(values => {
+            debugger
             console.log(values)
-            props.loginThunkCreator(values.email, values.password, values.checkbox, values.captcha)
+            dispatch(loginThunkCreator(values.email, values.password, values.checkbox, values.captcha))
         })}
         validationSchema={validationSchema}
     >
@@ -50,7 +52,7 @@ const LoginForm: FC<PropsType> = (props) => {
               dirty
           }) => (
             <div>
-                <div className={s.messageError}>{(props.messageError != '' || null) && props.messageError}</div>
+                <div className={s.messageError}>{(messageError != '' || null) && messageError}</div>
                 <input
                     className={touched.email && errors.email ? s.errorsInput : s.inputLogin}
                     type={'email'}
@@ -81,9 +83,9 @@ const LoginForm: FC<PropsType> = (props) => {
                     </div>
                 </div>
                 <br/>
-                {props.captchaURL &&
+                {captchaURL &&
                     <div>
-                        <img className={s.imgCaptcha} src={props.captchaURL}/>
+                        <img className={s.imgCaptcha} src={captchaURL}/>
                         <input
                             className={touched.captcha && errors.captcha ? s.errorsInput : s.inputLogin}
                             type={'text'}
@@ -108,10 +110,4 @@ const LoginForm: FC<PropsType> = (props) => {
     </Formik>
 };
 
-const mapStateToProps = (state: RootState) => ({
-    isAuth: state.auth.isAuth,
-    captchaURL: state.auth.captchaURL,
-    messageError:  state.auth.messageError,
-})
-
-export default connect(mapStateToProps, {loginThunkCreator})(LoginForm)
+export default LoginForm
