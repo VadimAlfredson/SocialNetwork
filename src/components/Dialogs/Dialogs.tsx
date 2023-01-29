@@ -73,7 +73,7 @@ const Dialogs = (props: {
             name={d.userName}
             id={d.id}
             key={d.id}
-            onGetMessagesUser={onGetMessagesUser}/> 
+            onGetMessagesUser={onGetMessagesUser}/>
         ) : <NavLink to={'/users'}>Search friends</NavLink>;
 
     let messagesItem =

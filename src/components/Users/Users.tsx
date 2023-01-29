@@ -1,16 +1,14 @@
 import React, {FC, useEffect, useState} from "react";
 import {onChangeUsersThunkCreator, onFollowChangeThunkCreator, UserType} from "../../Redux/users_reducers";
 import s from "../Users/users.module.css"
-import {NavLink, useNavigate} from "react-router-dom";
+import {NavLink, useLocation, useNavigate} from "react-router-dom";
 import Paginator from "../common/Paginator/Paginator";
 import Preloader from "../common/Preloader/Preloader";
 import {putDialogUserThunkCreator} from "../../Redux/dialogs_reducer";
 import FormSearchUsers from "./formSearchUsers";
 import {useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
 
-type PropsType = {
-
-}
+type PropsType = {}
 
 let Users: FC<PropsType> = (props) => {
     const users = useAppSelector(state => state.users.users)
@@ -25,6 +23,8 @@ let Users: FC<PropsType> = (props) => {
     const [state, setState] = useState(false)
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
+    let location = useLocation()
+
 
     let onUsersChange = (pageNumber: number, pageSize: number, term: string, friend?: boolean) => {
         dispatch(onChangeUsersThunkCreator(pageNumber, pageSize, term, friend))
@@ -49,6 +49,16 @@ let Users: FC<PropsType> = (props) => {
                 : ''
         })
     }, [term, friends, pageNumber])
+
+    useEffect(() => {
+        let {search} = location
+        let arr = search.substring(1).split('&').reduce((params, param) => {
+                let [key, value] = param.split('=');
+                params[key] = value ? decodeURIComponent(value.replace(/\+/g, ' ')) : '';
+                return params;}, {})
+        console.log(arr)
+        debugger
+    })
 
     useEffect(() => {
         state != isAuth ? setState(isAuth) : console.log('useEffect')
@@ -85,12 +95,12 @@ let Users: FC<PropsType> = (props) => {
                             <div className={s.massageButton}>
                                 {isAuth &&
                                     <NavLink to={`/dialogs/${u.id}`}>
-                                    <button className={s.buttonStyle}
-                                            onClick={() => {
-                                                onDialogUserChange(u.id)
-                                            }}>Message
-                                    </button>
-                            </NavLink>}
+                                        <button className={s.buttonStyle}
+                                                onClick={() => {
+                                                    onDialogUserChange(u.id)
+                                                }}>Message
+                                        </button>
+                                    </NavLink>}
                             </div>
 
                             <div className={s.infoUser}>
