@@ -32,8 +32,17 @@ let Users: FC = (props) => {
 
 
     let onUsersChange = (pageNumber: number, pageSize: number, term: string, friend?: boolean) => {
-        dispatch(onChangeUsersThunkCreator(pageNumber, pageSize, term, friend))
-        setPageNumber(pageNumber)
+        /*dispatch(onChangeUsersThunkCreator(pageNumber, pageSize, term, friend))*/
+        console.log(navigate)
+        navigate({
+            pathname: '/users',
+            search: term || friend || pageNumber ? "?" +
+                (pageNumber ? `pageNumber=${pageNumber}${term || friend ? '&' : ''}` : '') +
+                (term ? `term=${term}${friend ? '&' : ''}` : '') +
+                (friend === true ? `friend=${friend}` : '')
+                : ''
+        })
+        /*setPageNumber(pageNumber)*/
     }
 
     let onFollowChange = (userId: number, follow: boolean) => {
@@ -50,25 +59,27 @@ let Users: FC = (props) => {
             search: term || friends || pageNumber ? "?" +
                 (pageNumber ? `pageNumber=${pageNumber}${term || friends ? '&' : ''}` : '') +
                 (term ? `term=${term}${friends ? '&' : ''}` : '') +
-                (friends ? `friend=${friends}` : '')
+                (friends === true ? `friend=${friends}` : '')
                 : ''
         })
-    }, [term, friends, pageNumber])
+    }, [])
 
     useEffect(() => {
         let {search} = location
+        console.log(location)
         let arr = search.substring(1).split('&').reduce((params: any, param) => {
-                let [key, value] = param.split('=');
-                console.log(params)
-                params[key] = value ? decodeURIComponent(value.replace(/\+/g, '')) : "";
-                return params;}, {})
+            let [key, value] = param.split('=');
+            console.log(params)
+            params[key] = value ? decodeURIComponent(value.replace(/\+/g, '')) : "";
+            return params;
+        }, {})
         console.log(arr)
-        debugger
-        let friend = arr.friend === 'true' ? true : undefined
+        let friendValue = arr.friend === 'true' ? true : undefined
+        console.log(friendValue)
         if (pageNumber != +arr.pageNumber ||
             term != arr.term ||
-            friends != friend) {
-            dispatch(onChangeUsersThunkCreator(+arr.pageNumber, pageSize, arr.term || '', friend))
+            friends != friendValue) {
+            dispatch(onChangeUsersThunkCreator(+arr.pageNumber, pageSize, arr.term || '', friendValue))
         }
     }, [location.search])
 

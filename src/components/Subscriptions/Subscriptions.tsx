@@ -10,7 +10,7 @@ let Subscriptions: FC<{}> = (props) => {
     const subscriptions = useAppSelector(state => state.subscriptions.subscriptions)
     const totalCountSubscriptions = useAppSelector(state => state.subscriptions.totalCountSubscriptions)
     return <div className={s.friends}>
-        <div className={s.h4}>Subscriptions (<NavLink to={"/users"}>{totalCountSubscriptions})</NavLink></div>
+        <div className={s.h4}>Subscriptions (<NavLink to={"/users?pageNumber=1&friend=true"}>{totalCountSubscriptions})</NavLink></div>
             <div className={s.friendsList}>
                 {
                     subscriptions.map((u: UserType) => <div key={u.id}>

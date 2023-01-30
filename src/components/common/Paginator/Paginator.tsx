@@ -31,7 +31,6 @@ let Paginator: FC<PropsType> = (props) => {
                 pages
                     .filter(p => p === 1)
                     .map(p => {
-                            // @ts-ignore
                             return <span className={currentPage === p ? s.activePage : s.pageNumber}
                                          onClick={() => {
                                              props.onPageChange(p, pageSize, term)
@@ -50,7 +49,7 @@ let Paginator: FC<PropsType> = (props) => {
                 .map(p => {
                         return <span className={currentPage === p ? s.activePage : s.pageNumber}
                                      onClick={() => {
-                                         if (friend) {
+                                         if (friend === true) {
                                              props.onPageChange(p, pageSize, term, friend)
                                          } else {
                                              props.onPageChange(p, pageSize, term)

@@ -62,6 +62,7 @@ const FormSearchUsers: FC<PropsType> = (props) => {
                             name={'subscriptionsCheckbox'}
                             onChange={handleChange}
                             onBlur={handleBlur}
+                            value={`${values.subscriptionsCheckbox}`}
                         />
                     </div>
                 </div>

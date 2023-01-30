@@ -123,7 +123,7 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number): Thu
 export const onChangeUsersThunkCreator = (pageNumber: number, pageSize: number, term: string, friend?: boolean): ThunkAction<Promise<void>, RootState, unknown, any> => async (dispatch: Dispatch<any>) => {
     dispatch(setCurrentPage(pageNumber))
     dispatch(toggleIsFetching(true))
-    if (friend) {
+    if (friend === true) {
     let response = await usersApi.getUsers(pageNumber, pageSize, term, friend)
     if (response.error == null){
         dispatch(setSearchTerm(term))
@@ -141,6 +141,7 @@ export const onChangeUsersThunkCreator = (pageNumber: number, pageSize: number, 
         if (response.error == null){
             dispatch(setSearchTerm(term))
             console.log(response.totalCount)
+            dispatch(setSearchFriends(false))
         }
         else{
             console.log(response.error)
