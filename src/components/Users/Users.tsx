@@ -8,15 +8,20 @@ import {putDialogUserThunkCreator} from "../../Redux/dialogs_reducer";
 import FormSearchUsers from "./formSearchUsers";
 import {useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
 
-type PropsType = {}
+type paramsType = {
+    key: string
+    value: string
+}
 
-let Users: FC<PropsType> = (props) => {
+
+let Users: FC = (props) => {
     const users = useAppSelector(state => state.users.users)
     const followingInProgress = useAppSelector(state => state.users.followingInProgress)
     const isAuth = useAppSelector(state => state.auth.isAuth)
     const isFetching = useAppSelector(state => state.users.isFetching)
     const term = useAppSelector(state => state.users.term)
     const friends = useAppSelector(state => state.users.friends)
+    const pageSize = useAppSelector(state => state.users.pageSize)
     let [pageNumber, setPageNumber] = useState(1)
 
 
@@ -43,7 +48,7 @@ let Users: FC<PropsType> = (props) => {
         navigate({
             pathname: '/users',
             search: term || friends || pageNumber ? "?" +
-                (pageNumber ? `pageNumber=${pageNumber}${term ? '&' : ''}` : '') +
+                (pageNumber ? `pageNumber=${pageNumber}${term || friends ? '&' : ''}` : '') +
                 (term ? `term=${term}${friends ? '&' : ''}` : '') +
                 (friends ? `friend=${friends}` : '')
                 : ''
@@ -52,13 +57,20 @@ let Users: FC<PropsType> = (props) => {
 
     useEffect(() => {
         let {search} = location
-        let arr = search.substring(1).split('&').reduce((params, param) => {
+        let arr = search.substring(1).split('&').reduce((params: any, param) => {
                 let [key, value] = param.split('=');
-                params[key] = value ? decodeURIComponent(value.replace(/\+/g, ' ')) : '';
+                console.log(params)
+                params[key] = value ? decodeURIComponent(value.replace(/\+/g, '')) : "";
                 return params;}, {})
         console.log(arr)
         debugger
-    })
+        let friend = arr.friend === 'true' ? true : undefined
+        if (pageNumber != +arr.pageNumber ||
+            term != arr.term ||
+            friends != friend) {
+            dispatch(onChangeUsersThunkCreator(+arr.pageNumber, pageSize, arr.term || '', friend))
+        }
+    }, [location.search])
 
     useEffect(() => {
         state != isAuth ? setState(isAuth) : console.log('useEffect')

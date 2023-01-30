@@ -51,7 +51,6 @@ const Dialogs = (props: {
     let [dialogsState, setDialogsState] = useState([] as dialogsType[])
 
     useEffect(() => {
-        debugger
         let dialogsArr = [] as dialogsType[]
         if (props.dialogs.length > 0){
         for (let i = 0; i < (props.dialogs.length> 10 ? 10 : props.dialogs.length); i++) {
