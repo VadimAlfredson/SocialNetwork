@@ -25,7 +25,6 @@ let Users: FC = (props) => {
     let [pageNumber, setPageNumber] = useState(1)
 
 
-    const [state, setState] = useState(false)
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     let location = useLocation()
@@ -54,6 +53,24 @@ let Users: FC = (props) => {
     }
 
     useEffect(() => {
+        let {search} = location
+        let arr = search.substring(1).split('&').reduce((params: any, param) => {
+            let [key, value] = param.split('=');
+            console.log(params)
+            params[key] = value ? decodeURIComponent(value.replace(/\+/g, '')) : "";
+            return params;
+        }, {})
+        let friendValue = arr.friend === 'true' ? true : undefined
+        console.log(friendValue)
+        if (pageNumber != +arr.pageNumber ||
+            term != (arr.term ? arr.term : '') ||
+            friends != friendValue) {
+            debugger
+            dispatch(onChangeUsersThunkCreator(+arr.pageNumber, pageSize, arr.term || '', friendValue))
+        }
+    }, [location.search, friends])
+
+    useEffect(() => {
         navigate({
             pathname: '/users',
             search: term || friends || pageNumber ? "?" +
@@ -62,30 +79,12 @@ let Users: FC = (props) => {
                 (friends === true ? `friend=${friends}` : '')
                 : ''
         })
+        console.log(location, navigate)
     }, [])
 
-    useEffect(() => {
-        let {search} = location
-        console.log(location)
-        let arr = search.substring(1).split('&').reduce((params: any, param) => {
-            let [key, value] = param.split('=');
-            console.log(params)
-            params[key] = value ? decodeURIComponent(value.replace(/\+/g, '')) : "";
-            return params;
-        }, {})
-        console.log(arr)
-        let friendValue = arr.friend === 'true' ? true : undefined
-        console.log(friendValue)
-        if (pageNumber != +arr.pageNumber ||
-            term != arr.term ||
-            friends != friendValue) {
-            dispatch(onChangeUsersThunkCreator(+arr.pageNumber, pageSize, arr.term || '', friendValue))
-        }
-    }, [location.search])
-
-    useEffect(() => {
+    /*useEffect(() => {
         state != isAuth ? setState(isAuth) : console.log('useEffect')
-    }, [isAuth])
+    }, [isAuth])*/
     return (
         <div className={s.usersComponent}>
             <Paginator
