@@ -65,7 +65,6 @@ let Users: FC = (props) => {
         if (pageNumber != +arr.pageNumber ||
             term != (arr.term ? arr.term : '') ||
             friends != friendValue) {
-            debugger
             dispatch(onChangeUsersThunkCreator(+arr.pageNumber, pageSize, arr.term || '', friendValue))
         }
     }, [location.search, friends])

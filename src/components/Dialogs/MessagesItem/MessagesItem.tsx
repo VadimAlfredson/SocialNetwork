@@ -11,6 +11,11 @@ export const MessagesItem = (props: {
     ownerPhoto: string
     viewed: boolean
 }) => {
+    let message = props.message
+        .replace(/&quot;/gi, `"`)
+        .replace(/&#171;/gi, `"`)
+        .replace(/&#187;/gi, `"`)
+    console.log(props.message)
     let senderIcon = props.senderId === props.OwnerId ? props.ownerPhoto : props.companionIcon
     return <div className={props.senderId === props.OwnerId ? s.divOwnerMessage : s.divMessage}>
         <div>
@@ -22,7 +27,7 @@ export const MessagesItem = (props: {
             <a className={props.senderId === props.OwnerId ?
                 (props.viewed ? s.ownerTextMessage : s.ownerMessageViewed) :
                 (props.viewed ? s.textMessage : s.textMessageViewed)
-            }>{props.message}</a>
+            }>{message}</a>
         </div>
     </div>
 }

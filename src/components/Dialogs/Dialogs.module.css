@@ -119,6 +119,7 @@
 .messageForm {
     grid-area: message;
     margin-top: 25px;
+    margin-right: 50px;
     padding: 5px;
 }
 
@@ -133,22 +134,25 @@
     grid-area: message;
     margin-top: 15px;
     text-align: right;
+    margin-left: 50px;
 }
 
 .textMessage {
+    text-align: justify;
     display: inline-block;
     background-color: azure;
     border: #0e2121 solid 2px;
-    border-radius: 0 5px 5px 5px;
+    border-radius: 0 10px 10px 10px;
     color: #0e2121;
     padding: 3px 10px;
 }
 
 .ownerTextMessage {
+    text-align: justify;
     display: inline-block;
     background-color: azure;
     border: #0e2121 solid 2px;
-    border-radius: 5px 0 5px 5px;
+    border-radius: 10px 0 10px 10px;
     color: #0e2121;
     padding: 3px 10px;
 }
