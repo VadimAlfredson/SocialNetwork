@@ -31,7 +31,8 @@ const Dialogs = (props: {
 
 
     let onDeleteMessageChange = (messageId: string) => {
-        return deleteMessageThunkCreator(messageId)
+        debugger
+        dispatch(deleteMessageThunkCreator(messageId))
     }
 
 

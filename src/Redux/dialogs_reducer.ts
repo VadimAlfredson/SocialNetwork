@@ -165,9 +165,8 @@ export const postMessageToUserThunkCreator = (userId: number, bodyMessage: strin
     dispatch(getMessagesUserThunkCreator(userId))
 }
 
-export const deleteMessageThunkCreator = (messageId: string) => async (dispatch: Dispatch<string>) => {
+export const deleteMessageThunkCreator = (messageId: string) => async (dispatch: Dispatch<any>) => {
     debugger
     let response = await dialogsApi.deleteMessage(messageId)
     console.log(response)
-    dispatch(deleteMessageAC(response.item))
 }

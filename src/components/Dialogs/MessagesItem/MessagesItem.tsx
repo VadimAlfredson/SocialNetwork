@@ -36,11 +36,11 @@ export const MessagesItem = (props: {
                 (props.viewed ? s.ownerTextMessage : s.ownerMessageViewed) :
                 (props.viewed ? s.textMessage : s.textMessageViewed)
             }>{message}<br/>
-                <span
+                <button
                     className={editMessage ? s.deleteMessageOn : s.deleteMessageOff}
                         onClick={() => {props.onDeleteMessageChange(props.messageId)}}>
                     <img className={s.deleteMessageIcon} src={process.env.PUBLIC_URL + '/free-icon-delete-6467128.png'}/>
-                </ span>
+                </button>
             </a>
         </div>
     </div>
