@@ -203,6 +203,37 @@
     border-radius: 10px;
 }
 
+.warningDeleteMessage {
+    width: 200px;
+    margin: -50px auto 0 auto;
+    background-color:  azure;
+    padding: 10px;
+    color: rgb(0, 0, 0);
+    text-shadow: #0e2121;
+    align-content: center;
+    text-align: center;
+    border-radius: 10px;
+    border: #530000 solid 3px;
+}
+
+.warningDeleteMessage button {
+    background-color: #a9a9a9;
+    text-align: center;
+    margin: 5px 5px 0 5px;
+    border-radius: 3px;
+    border: rgb(0, 0, 0) solid 1px;
+}
+
+.warningDeleteMessage button:hover {
+    background-color: #530000;
+    color: azure;
+}
+
+.warningDeleteMessage button:active {
+    background-color: #a9a9a9;
+    color: #000000;
+}
+
 @media (max-width: 999px) {
     .dialogs {
         display: grid;

@@ -30,9 +30,9 @@ const Dialogs = (props: {
     const dispatch = useAppDispatch()
 
 
-    let onDeleteMessageChange = (messageId: string) => {
+    let onDeleteMessageChange = (messageId: string, userId: number) => {
         debugger
-        dispatch(deleteMessageThunkCreator(messageId))
+        dispatch(deleteMessageThunkCreator(messageId, userId))
     }
 
 
@@ -97,6 +97,7 @@ const Dialogs = (props: {
                         viewed={m.viewed}
                         onDeleteMessageChange={onDeleteMessageChange}
                         messageId={m.id}
+                        recipientId={m.recipientId}
                     />
             ) : <div><h3 className={s.h3text}>start chatting first</h3></div>
     return (
