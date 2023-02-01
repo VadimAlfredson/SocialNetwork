@@ -172,7 +172,7 @@ export const dialogsApi = {
                 return response.data
             })
     } /*spam*/,
-    deleteMessage: (messageId: number) => {
+    deleteMessage: (messageId: string) => {
         return instance.delete(`dialogs/messages/${messageId}`)
             .then(response => {
                 return response.data

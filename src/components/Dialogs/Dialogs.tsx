@@ -4,10 +4,12 @@ import {DialogItem} from "./DialogItem/DialogItem";
 import {MessagesItem} from "./MessagesItem/MessagesItem";
 import {AddMessage} from "./AddMessage/AddMessage";
 import {
+    deleteMessageThunkCreator,
     dialogsType, messageType,
 } from "../../Redux/dialogs_reducer";
 import users from "../Users/Users";
 import {NavLink} from "react-router-dom";
+import {useAppDispatch} from "../../Redux/reduxStore";
 
 
 const Dialogs = (props: {
@@ -25,9 +27,14 @@ const Dialogs = (props: {
                      ownerPhoto: string
                  }
 ) => {
-    /*    const [dialogs, setDialogs] = useState(props.dialogs);
-        const [messages, setMessages] = useState(props.messages);*/
-    /*props.getDialogsThunkCreator()*/
+    const dispatch = useAppDispatch()
+
+
+    let onDeleteMessageChange = (messageId: string) => {
+        return deleteMessageThunkCreator(messageId)
+    }
+
+
     useEffect(() => {
         props.getDialogsThunkCreator()
     }, [])
@@ -87,6 +94,8 @@ const Dialogs = (props: {
                         companionIcon={props.companionIcon}
                         ownerPhoto={props.ownerPhoto}
                         viewed={m.viewed}
+                        onDeleteMessageChange={onDeleteMessageChange}
+                        messageId={m.id}
                     />
             ) : <div><h3 className={s.h3text}>start chatting first</h3></div>
     return (

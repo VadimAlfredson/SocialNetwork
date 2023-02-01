@@ -26,10 +26,10 @@ export type dialogsType = {
     hasNewMessages: boolean,
     lastDialogActivityDate: string,
     lastUserActivityDate: string,
-    "newMessagesCount": number,
-    "photos": {
-        "small": string | null,
-        "large": string | null
+    newMessagesCount: number,
+    photos: {
+        small: string | null,
+        large: string | null
     }
 }
 
@@ -110,6 +110,12 @@ const todosSlice = createSlice({
                     companionIcon: action.payload
                 }
             },
+            deleteMessageAC(state, action) {
+                return {
+                    ...state,
+                    messages: action.payload
+                }
+            }
         }
 
     }
@@ -123,6 +129,7 @@ export const {
     postMessagesToUserAC,
     setCompanionIdAC,
     setCompanionIconAC,
+    deleteMessageAC,
 
 } = todosSlice.actions
 export default todosSlice.reducer
@@ -153,8 +160,14 @@ export const getMessagesUserThunkCreator = (userId: number) => async (dispatch: 
 }
 
 export const postMessageToUserThunkCreator = (userId: number, bodyMessage: string) => async (dispatch: Dispatch<any>) => {
-    debugger
     let response = await dialogsApi.postMessageToUser(userId, bodyMessage)
     dispatch(postMessagesToUserAC(response.body))
     dispatch(getMessagesUserThunkCreator(userId))
+}
+
+export const deleteMessageThunkCreator = (messageId: string) => async (dispatch: Dispatch<string>) => {
+    debugger
+    let response = await dialogsApi.deleteMessage(messageId)
+    console.log(response)
+    dispatch(deleteMessageAC(response.item))
 }

@@ -178,6 +178,23 @@
     color: #0e2121;
     padding: 3px 10px;
 }
+.deleteMessageOff {
+    display: block;
+    background-color: rgba(95, 0, 0, 0);
+}
+.deleteMessageOff {
+    display: none;
+}
+
+.deleteMessageIcon {
+    width: 24px;
+    margin: auto 30px auto 90%;
+}
+
+.activeMessage {
+    background-color: rgba(95, 0, 0, 0.41);
+    border-radius: 10px;
+}
 
 @media (max-width: 999px) {
     .dialogs {
