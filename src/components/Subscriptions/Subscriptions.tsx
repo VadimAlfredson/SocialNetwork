@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import s from './Subscriptions.module.css';
-import {setSearchFriends, UserType} from "../../Redux/users_reducers";
+import {setCurrentPage, setSearchFriends, UserType} from "../../Redux/users_reducers";
 import {NavLink} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
 
@@ -11,6 +11,7 @@ let Subscriptions: FC<{}> = (props) => {
 
     let onClickSearchSubscriptions = () => {
         return dispatch(setSearchFriends(true))
+        dispatch(setCurrentPage(1))
     }
 
     const subscriptions = useAppSelector(state => state.subscriptions.subscriptions)

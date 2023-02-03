@@ -22,6 +22,8 @@ let Users: FC = (props) => {
     const term = useAppSelector(state => state.users.term)
     const friends = useAppSelector(state => state.users.friends)
     const pageSize = useAppSelector(state => state.users.pageSize)
+    const currentPage = useAppSelector(state => state.users.currentPage)
+
     let [pageNumber, setPageNumber] = useState(1)
 
 
@@ -32,7 +34,6 @@ let Users: FC = (props) => {
 
     let onUsersChange = (pageNumber: number, pageSize: number, term: string, friend?: boolean) => {
         /*dispatch(onChangeUsersThunkCreator(pageNumber, pageSize, term, friend))*/
-        console.log(navigate)
         navigate({
             pathname: '/users',
             search: term || friend || pageNumber ? "?" +
@@ -56,18 +57,18 @@ let Users: FC = (props) => {
         let {search} = location
         let arr = search.substring(1).split('&').reduce((params: any, param) => {
             let [key, value] = param.split('=');
-            console.log(params)
             params[key] = value ? decodeURIComponent(value.replace(/\+/g, '')) : "";
             return params;
         }, {})
         let friendValue = arr.friend === 'true' ? true : undefined
-        console.log(friendValue)
         if (pageNumber != +arr.pageNumber ||
             term != (arr.term ? arr.term : '') ||
             friends != friendValue) {
             dispatch(onChangeUsersThunkCreator(+arr.pageNumber, pageSize, arr.term || '', friendValue))
         }
     }, [location.search, friends])
+
+    console.log(navigate)
 
     useEffect(() => {
         navigate({
@@ -78,7 +79,6 @@ let Users: FC = (props) => {
                 (friends === true ? `friend=${friends}` : '')
                 : ''
         })
-        console.log(location, navigate)
     }, [])
 
     /*useEffect(() => {
