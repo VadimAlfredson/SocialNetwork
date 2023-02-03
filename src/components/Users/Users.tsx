@@ -42,6 +42,7 @@ let Users: FC = (props) => {
                 (friend === true ? `friend=${friend}` : '')
                 : ''
         })
+        dispatch(onChangeUsersThunkCreator(pageNumber, pageSize, term || '', friend))
         /*setPageNumber(pageNumber)*/
     }
 
@@ -64,13 +65,14 @@ let Users: FC = (props) => {
         if (pageNumber != +arr.pageNumber ||
             term != (arr.term ? arr.term : '') ||
             friends != friendValue) {
-            dispatch(onChangeUsersThunkCreator(+arr.pageNumber, pageSize, arr.term || '', friendValue))
+            onUsersChange(+arr.pageNumber, pageSize, arr.term || '', friendValue)
         }
-    }, [location.search, friends])
+    }, [location.search])
 
-    console.log(navigate)
+    console.log('rerender users' + currentPage)
 
     useEffect(() => {
+        debugger
         navigate({
             pathname: '/users',
             search: term || friends || pageNumber ? "?" +

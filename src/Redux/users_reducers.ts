@@ -62,6 +62,7 @@ const todosSlice = createSlice({
             }
         },
         setCurrentPage(state: usersStateType, action: PayloadAction<number>) {
+            debugger
             return {
                 ...state,
                 currentPage: action.payload
@@ -121,7 +122,7 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number): Thu
 }
 
 export const onChangeUsersThunkCreator = (pageNumber: number, pageSize: number, term: string, friend?: boolean): ThunkAction<Promise<void>, RootState, unknown, any> => async (dispatch: Dispatch<any>) => {
-    dispatch(setCurrentPage(pageNumber))
+    dispatch(setCurrentPage(pageNumber !== NaN ? pageNumber : 1))
     dispatch(toggleIsFetching(true))
     if (friend === true) {
     let response = await usersApi.getUsers(pageNumber, pageSize, term, friend)

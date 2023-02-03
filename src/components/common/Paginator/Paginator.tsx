@@ -14,7 +14,7 @@ let Paginator: FC<PropsType> = (props) => {
     const term = useAppSelector(state => state.users.term)
     const friend = useAppSelector(state => state.users.friends)
 
-    let [activePage, setActivePage] = useState(currentPage)
+    let [activePage, setActivePage] = useState(1)
     let firstPage = activePage > 2 ? activePage - 2 : activePage > 1 ? activePage -1 : 1
     let pageCount = Math.ceil(totalUsersCount / pageSize);
     let pages = [];
@@ -23,8 +23,10 @@ let Paginator: FC<PropsType> = (props) => {
     }
 
     useEffect(() => {
+        debugger
         console.log(activePage)
-    }, [])
+        setActivePage(currentPage ? currentPage : 1)
+    }, [currentPage])
 
     return (
         <div className={s.paginator}>

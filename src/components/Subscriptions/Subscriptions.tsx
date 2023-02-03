@@ -10,8 +10,8 @@ let Subscriptions: FC<{}> = (props) => {
     const dispatch = useAppDispatch()
 
     let onClickSearchSubscriptions = () => {
-        return dispatch(setSearchFriends(true))
-        dispatch(setCurrentPage(1))
+        /*return dispatch(setSearchFriends(true))
+        dispatch(setCurrentPage(1))*/
     }
 
     const subscriptions = useAppSelector(state => state.subscriptions.subscriptions)
