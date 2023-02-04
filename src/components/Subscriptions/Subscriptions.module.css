@@ -29,11 +29,11 @@
             "i" "i" "i"
             "i" "i" "i";
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
    width: auto;
     column-gap: 5%;
     row-gap: 5%;
     text-decoration: none;
+    height: min-content;
 }
 
 .name {

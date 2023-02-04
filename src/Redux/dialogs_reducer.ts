@@ -61,7 +61,7 @@ const todosSlice = createSlice({
         initialState: {
             dialogs: [] as dialogsType[],
             messages: [] as messageType[],
-            dialogId: null as number | null,
+            dialogId: 0 as number,
             companionIcon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg' as string,
             companionId: null as number | null,
             defaultPhoto: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg' as string

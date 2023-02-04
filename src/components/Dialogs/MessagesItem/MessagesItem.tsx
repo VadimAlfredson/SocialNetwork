@@ -21,6 +21,7 @@ export const MessagesItem = (props: {
         .replace(/&quot;/gi, `"`)
         .replace(/&#171;/gi, `"`)
         .replace(/&#187;/gi, `"`)
+        .replace(/&#39;/gi, `'`)
     console.log(props.senderId)
     let senderIcon = props.senderId === props.OwnerId ? props.ownerPhoto : props.companionIcon
 

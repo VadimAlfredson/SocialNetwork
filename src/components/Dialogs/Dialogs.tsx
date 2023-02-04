@@ -5,14 +5,19 @@ import {MessagesItem} from "./MessagesItem/MessagesItem";
 import {AddMessage} from "./AddMessage/AddMessage";
 import {
     deleteMessageThunkCreator,
-    dialogsType, messageType,
+    dialogsType,
+    getDialogsThunkCreator,
+    getMessagesUserThunkCreator,
+    messageType,
+    postMessageToUserThunkCreator,
+    setCompanionIconAC,
 } from "../../Redux/dialogs_reducer";
 import users from "../Users/Users";
 import {NavLink} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
 
 
-const Dialogs = (props: {
+const Dialogs = (/*props: {
                      dialogs: dialogsType[],
                      messages: messageType[],
                      isAuth: boolean
@@ -25,15 +30,16 @@ const Dialogs = (props: {
                      setCompanionIconAC: (photo: string | null) => void
                      defaultPhoto: string
                      ownerPhoto: string
-                 }
+                 }*/
 ) => {
     const dialogs: dialogsType[] = useAppSelector(state => state.dialogs.dialogs)
     const messages: messageType[] = useAppSelector(state => state.dialogs.messages)
     const isAuth: boolean = useAppSelector(state => state.auth.isAuth)
-    const dialogId: number | null = useAppSelector(state => state.dialogs.dialogId)
+    const dialogId: number = useAppSelector(state => state.dialogs.dialogId)
     const OwnerId: number = useAppSelector(state => state.auth.userId)
+    const defaultPhoto: string = useAppSelector(state => state.dialogs.defaultPhoto)
     const companionIcon: string = useAppSelector(state => state.dialogs.companionIcon)
-
+    const ownerPhoto: string = useAppSelector(state => state.auth.ownerPhoto)
 
     const dispatch = useAppDispatch()
 
@@ -45,44 +51,38 @@ const Dialogs = (props: {
 
 
     useEffect(() => {
-        props.getDialogsThunkCreator()
+        dispatch(getDialogsThunkCreator())
     }, [])
     let getCompanionIcon = (userId: number) => {
-        props.dialogs.find(i =>
+        debugger
+        dialogs.find(i =>
             i.id === userId ?
-                props.setCompanionIconAC(i.photos.large ? i.photos.large : props.defaultPhoto) :
-                props.setCompanionIconAC(props.defaultPhoto))
+                dispatch(setCompanionIconAC(i.photos.large ? i.photos.large : defaultPhoto)) :
+                console.log(i.id))
     }
     const onGetMessagesUser = (userId: number) => {
-        props.getMessagesUserThunkCreator(userId)
+        dispatch(getMessagesUserThunkCreator(userId))
         getCompanionIcon(userId)
 
     }
     const onMessageSentChange = (userId: number, bodyMessage: string) => {
-        props.postMessageToUserThunkCreator(userId, bodyMessage)
+        dispatch(postMessageToUserThunkCreator(userId, bodyMessage))
     }
-
-
 
     let [dialogsState, setDialogsState] = useState([] as dialogsType[])
 
     useEffect(() => {
         let dialogsArr = [] as dialogsType[]
-        if (props.dialogs.length > 0){
-        for (let i = 0; i < (props.dialogs.length> 10 ? 10 : props.dialogs.length); i++) {
-            dialogsArr.push(props.dialogs[i])
+        if (dialogs.length > 0){
+        for (let i = 0; i < (dialogs.length> 10 ? 10 : dialogs.length); i++) {
+            dialogsArr.push(dialogs[i])
         }}
         setDialogsState(dialogsArr)
         console.log(dialogsArr)
-    }, [props.dialogs, props.dialogId])
-    /*const getUsersIcon = (senderId: number) => {
-        return props.getSenderIconThunkCreator(senderId)
-
-    }*/
-
+    }, [dialogs, dialogId])
 
     let dialogUsers =
-        props.dialogs[0] ?
+        dialogs[0] ?
         dialogsState.map(
         d => <DialogItem
             name={d.userName}
@@ -92,16 +92,16 @@ const Dialogs = (props: {
         ) : <NavLink to={'/users'}>Search friends</NavLink>;
 
     let messagesItem =
-        props.messages[0] ?
-            props.messages.map(
+        messages[0] ?
+            messages.map(
                 m =>
                     <MessagesItem
                         message={m.body}
                         key={m.id}
                         senderId={m.senderId}
-                        OwnerId={props.OwnerId}
-                        companionIcon={props.companionIcon}
-                        ownerPhoto={props.ownerPhoto}
+                        OwnerId={OwnerId}
+                        companionIcon={companionIcon}
+                        ownerPhoto={ownerPhoto}
                         viewed={m.viewed}
                         onDeleteMessageChange={onDeleteMessageChange}
                         messageId={m.id}
@@ -120,7 +120,7 @@ const Dialogs = (props: {
                 </div>
                 <div className={s.addMessage}>
                     <AddMessage
-                        dialogId={props.dialogId}
+                        dialogId={dialogId}
                         onMessageSentChange={onMessageSentChange}
                     />
                 </div>
