@@ -9,7 +9,7 @@ import {
 } from "../../Redux/dialogs_reducer";
 import users from "../Users/Users";
 import {NavLink} from "react-router-dom";
-import {useAppDispatch} from "../../Redux/reduxStore";
+import {useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
 
 
 const Dialogs = (props: {
@@ -27,6 +27,14 @@ const Dialogs = (props: {
                      ownerPhoto: string
                  }
 ) => {
+    const dialogs: dialogsType[] = useAppSelector(state => state.dialogs.dialogs)
+    const messages: messageType[] = useAppSelector(state => state.dialogs.messages)
+    const isAuth: boolean = useAppSelector(state => state.auth.isAuth)
+    const dialogId: number | null = useAppSelector(state => state.dialogs.dialogId)
+    const OwnerId: number = useAppSelector(state => state.auth.userId)
+    const companionIcon: string = useAppSelector(state => state.dialogs.companionIcon)
+
+
     const dispatch = useAppDispatch()
 
 

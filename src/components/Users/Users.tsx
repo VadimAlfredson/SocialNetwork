@@ -72,7 +72,6 @@ let Users: FC = (props) => {
     console.log('rerender users' + currentPage)
 
     useEffect(() => {
-        debugger
         navigate({
             pathname: '/users',
             search: term || friends || pageNumber ? "?" +

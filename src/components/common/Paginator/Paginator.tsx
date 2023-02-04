@@ -23,8 +23,6 @@ let Paginator: FC<PropsType> = (props) => {
     }
 
     useEffect(() => {
-        debugger
-        console.log(activePage)
         setActivePage(currentPage ? currentPage : 1)
     }, [currentPage])
 
