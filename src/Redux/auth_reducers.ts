@@ -1,4 +1,4 @@
-import {authApi, usersApi} from "../components/api/api";
+import {authApi, usersApi} from "../api/api";
 import {Dispatch} from "react";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 

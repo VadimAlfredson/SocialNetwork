@@ -1,5 +1,5 @@
 import {Dispatch} from "react";
-import {usersApi} from "../components/api/api";
+import {usersApi} from "../api/api";
 import {createSlice, PayloadAction, ThunkAction} from "@reduxjs/toolkit";
 import {RootState} from "./reduxStore";
 import {getSubscriptionsThunkCreator} from "./subscriptions_reducers";

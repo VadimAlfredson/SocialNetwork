@@ -40,9 +40,9 @@ let Paginator: FC<PropsType> = (props) => {
                 <button className={s.pageNumber} onClick={() => {
                     setActivePage(activePage => activePage-1)
                     if (friend === true) {
-                        props.onPageChange(activePage, pageSize, term, friend)
+                        props.onPageChange(activePage - 1, pageSize, term, friend)
                     } else {
-                        props.onPageChange(activePage, pageSize, term)
+                        props.onPageChange(activePage - 1, pageSize, term)
                     }
                 }}>{`<<`}</button>
             }
@@ -67,9 +67,9 @@ let Paginator: FC<PropsType> = (props) => {
                         onClick={() => {
                             setActivePage(activePage => activePage+1)
                             if (friend === true) {
-                                props.onPageChange(activePage, pageSize, term, friend)
+                                props.onPageChange(activePage + 1, pageSize, term, friend)
                             } else {
-                                props.onPageChange(activePage, pageSize, term)
+                                props.onPageChange(activePage + 1, pageSize, term)
                             }
                         }}
                 >{`>>`}</button>

@@ -1,4 +1,4 @@
-import {profileApi, usersApi} from "../components/api/api";
+import {profileApi, usersApi} from "../api/api";
 import {createSlice} from "@reduxjs/toolkit";
 import {Dispatch} from "react";
 import {RootState} from "./reduxStore";

@@ -1,5 +1,5 @@
 
-import {subscriptionsApi} from "../components/api/api";
+import {subscriptionsApi} from "../api/api";
 import {createSlice, ThunkAction} from "@reduxjs/toolkit";
 import {RootState} from "./reduxStore";
 

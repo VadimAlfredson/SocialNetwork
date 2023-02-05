@@ -1,6 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {Dispatch} from "react";
-import {dialogsApi} from "../components/api/api";
+import {dialogsApi} from "../api/api";
 
 
 export type messageType = {

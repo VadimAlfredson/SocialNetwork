@@ -17,21 +17,7 @@ import {NavLink} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
 
 
-const Dialogs = (/*props: {
-                     dialogs: dialogsType[],
-                     messages: messageType[],
-                     isAuth: boolean
-                     getDialogsThunkCreator: () => void
-                     getMessagesUserThunkCreator: (userId: number) => void
-                     postMessageToUserThunkCreator: (userId: number, bodyMessage: string) => void
-                     dialogId: number
-                     OwnerId: number
-                     companionIcon: string
-                     setCompanionIconAC: (photo: string | null) => void
-                     defaultPhoto: string
-                     ownerPhoto: string
-                 }*/
-) => {
+const Dialogs = () => {
     const dialogs: dialogsType[] = useAppSelector(state => state.dialogs.dialogs)
     const messages: messageType[] = useAppSelector(state => state.dialogs.messages)
     const isAuth: boolean = useAppSelector(state => state.auth.isAuth)
@@ -53,6 +39,7 @@ const Dialogs = (/*props: {
     useEffect(() => {
         dispatch(getDialogsThunkCreator())
     }, [])
+
     let getCompanionIcon = (userId: number) => {
         debugger
         dialogs.find(i =>
