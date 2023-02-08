@@ -21,9 +21,9 @@ const UsersContainer: FC<{}> = (props) => {
     const dispatch = useAppDispatch()
     const pageSize =  useAppSelector(state => state.users.pageSize)
     const currentPage = useAppSelector(state => state.users.currentPage)
-    useEffect(() => {
+    /*useEffect(() => {
         dispatch(getUsersThunkCreator(currentPage, pageSize))}, []
-    )
+    )*/
 
 
 

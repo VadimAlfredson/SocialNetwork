@@ -24,7 +24,7 @@ let Users: FC = (props) => {
     const pageSize = useAppSelector(state => state.users.pageSize)
     const currentPage = useAppSelector(state => state.users.currentPage)
 
-    let [pageNumber, setPageNumber] = useState(1)
+    let [pageNumber, setPageNumber] = useState(currentPage)
 
 
     const navigate = useNavigate()
@@ -32,18 +32,19 @@ let Users: FC = (props) => {
     let location = useLocation()
 
 
-    let onUsersChange = (pageNumber: number, pageSize: number, term: string, friend?: boolean) => {
+    let onUsersChange = (pageNumber: number, pageSize: number, termSearch: string, friend?: boolean) => {
         /*dispatch(onChangeUsersThunkCreator(pageNumber, pageSize, term, friend))*/
         navigate({
             pathname: '/users',
-            search: term || friend || pageNumber ? "?" +
-                (pageNumber ? `pageNumber=${pageNumber}${term || friend ? '&' : ''}` : '') +
-                (term ? `term=${term}${friend ? '&' : ''}` : '') +
+            search: termSearch || friend || pageNumber ? "?" +
+                (pageNumber ? `pageNumber=${pageNumber}${termSearch || friend ? '&' : ''}` : '') +
+                (termSearch ? `term=${termSearch}${friend ? '&' : ''}` : '') +
                 (friend === true ? `friend=${friend}` : '')
                 : ''
         })
-        dispatch(onChangeUsersThunkCreator(pageNumber, pageSize, term || '', friend))
-        /*setPageNumber(pageNumber)*/
+        if (currentPage != pageNumber || term != termSearch || friends != !!friend) {
+            dispatch(onChangeUsersThunkCreator(pageNumber, pageSize, term || '', friend))
+        }
     }
 
     let onFollowChange = (userId: number, follow: boolean) => {
@@ -69,8 +70,6 @@ let Users: FC = (props) => {
         }
     }, [location.search])
 
-    console.log('rerender users' + currentPage)
-
     useEffect(() => {
         navigate({
             pathname: '/users',
@@ -80,11 +79,9 @@ let Users: FC = (props) => {
                 (friends === true ? `friend=${friends}` : '')
                 : ''
         })
-    }, [])
+    }, [term, friends, pageNumber])
 
-    /*useEffect(() => {
-        state != isAuth ? setState(isAuth) : console.log('useEffect')
-    }, [isAuth])*/
+
     return (
         <div className={s.usersComponent}>
             <Paginator
