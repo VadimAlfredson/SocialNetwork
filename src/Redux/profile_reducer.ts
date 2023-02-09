@@ -67,7 +67,7 @@ const todosSlice = createSlice({
     name: 'profile',
     initialState: {
         posts: [
-            {id: 1, message: 'Hi, how are you?', likeCount: 23},
+            {id: 1, message: 'Стена на бэкенде не предусмотрена, так что это просто болванка', likeCount: 23},
             {id: 2, message: 'Yo', likeCount: 12},
             {id: 3, message: 'My first post!', likeCount: 32},
         ] as Array<postsType>,

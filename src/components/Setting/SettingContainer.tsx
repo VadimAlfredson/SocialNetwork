@@ -1,7 +1,7 @@
 import React, {FC, useEffect} from "react";
 import Setting from "./Setting";
 import { connect } from "react-redux";
-import {RootState} from "../../Redux/reduxStore";
+import {RootState, useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
 import {savePhotoTC, userProfileThunkCreator} from "../../Redux/profile_reducer";
 import {compose} from "redux";
 import {withAuthNavigate} from "../hoc/witAuthNavigate";
@@ -14,20 +14,16 @@ type PropsType = {
     defaultPhoto: string
 }
 const SettingContainer: FC<PropsType> = (props) => {
+    const dispatch = useAppDispatch()
+    const ownerId = useAppSelector(state => state.auth.userId)
+    const userId = useAppSelector(state => state.profile.profile.userId)
     useEffect(() => {
-        (props.ownerId !== props.userId) && props.userProfileThunkCreator(props.ownerId)
+        (ownerId !== userId) && dispatch(userProfileThunkCreator(props.ownerId))
     }, [])
     return (
         <Setting savePhotoTC={props.savePhotoTC} defaultPhoto={props.defaultPhoto}/>
     )
 }
 
-const mapStateToProps = (state: RootState) => {
-    return {
-        ownerId: state.auth.userId,
-        userId: state.profile.profile.userId,
-        defaultPhoto: state.profile.defaultPhoto,
-    }
-}
 
-export default compose(withAuthNavigate, connect(mapStateToProps, {userProfileThunkCreator, savePhotoTC}))(SettingContainer)
+export default compose(withAuthNavigate)(SettingContainer)

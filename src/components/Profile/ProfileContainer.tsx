@@ -21,7 +21,7 @@ import {withAuthNavigate} from "../hoc/witAuthNavigate";
 import {getSubscriptionsThunkCreator} from "../../Redux/subscriptions_reducers";
 import {putDialogUserThunkCreator} from "../../Redux/dialogs_reducer";
 
-function withRouter(Component: FC) {
+/*function withRouter(Component: FC) {
     function ComponentWithRouterProp(props: any) {
         let location = useLocation();
         let navigate = useNavigate();
@@ -39,23 +39,24 @@ function withRouter(Component: FC) {
 
 type PropsType = {
     router: any
-}
+}*/
 
-const ProfileContainer = (props: PropsType) => {
+const ProfileContainer = () => {
+    let { userId }= useParams<{ userId: string | undefined}>()
+    let id: number = Number(userId)
+    console.log(useParams())
     const dispatch = useAppDispatch()
     const profile = useAppSelector(state => state.profile.profile)
     const status = useAppSelector(state => state.profile.status)
     const follow = useAppSelector(state => state.profile.follow)
     const authorizedUserId = useAppSelector((state => state.auth.userId))
-
-
+    console.log(userId)
     useEffect(() => {
-        let userId: number = props.router.params.userId
-        if (!userId) {userId = authorizedUserId}
-        dispatch(userProfileThunkCreator(userId))
-        dispatch(getStatusThunkCreator(userId))
-        dispatch(getFollowThunkCreator(userId))
-    }, [props.router.params.userId])
+        if (!id) {id = authorizedUserId}
+        dispatch(userProfileThunkCreator(id))
+        dispatch(getStatusThunkCreator(id))
+        dispatch(getFollowThunkCreator(id))
+    }, [userId])
 
     useEffect(() => {
 
@@ -70,8 +71,8 @@ const ProfileContainer = (props: PropsType) => {
         dispatch(putDialogUserThunkCreator(userId))
     }
 
-        return <Profile {...props}
-                        isOwner={!!props.router.params.userId}
+        return <Profile
+                        isOwner={!!userId}
                         profile={profile}
                         status={status}
                         follow={follow}
@@ -81,7 +82,4 @@ const ProfileContainer = (props: PropsType) => {
 
 }
 
-export default compose(
-    withRouter,
-    withAuthNavigate
-)(ProfileContainer)
+export default withAuthNavigate(ProfileContainer)
