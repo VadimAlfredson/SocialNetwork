@@ -8,14 +8,21 @@ type MessagesChatType = {
     id: number
 }
 
-let messagesChat: MessagesChatType[] = [{name: 'test', message: 'Hi!', icon: '', id: 1}]
 
-export const Chat = () => {
-    return <div></div>
+
+const Chat = () => {
+    let messagesChat: MessagesChatType[] = [{name: 'test', message: 'Hi!', icon: '', id: 1}, {name: 'test2', message: 'Hi!!!', icon: '', id: 2}]
+    return <div>
+        <MessagesChat
+            messagesChat={messagesChat}
+        />
+    </div>
 }
 
-const MessagesChat = () => {
-    return messagesChat.map(m =>
+export default Chat
+
+const MessagesChat: FC<MessagesChatType[]> = (props) => {
+    return props.messagesChat.map(m =>
         <MessageChat
             key={m.id}
             icon={m.icon}
@@ -25,7 +32,14 @@ const MessagesChat = () => {
     )
 }
 
-const MessageChat: FC<MessagesChatType> = (props) => {
+
+type PropsType = {
+    icon: string
+    name: string
+    message: string
+    key: number
+}
+const MessageChat: FC<PropsType> = (props) => {
     return <div>
         <img src={props.icon}/>
         <div>{props.name}</div>

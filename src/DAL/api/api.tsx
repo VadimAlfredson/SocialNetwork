@@ -1,7 +1,7 @@
 import axios from "axios";
 import {authMeResponse} from "./apiTypes";
-import {ProfileType, PutProfileValuesProps} from "../Redux/profile_reducer";
-import {setSubscriptions} from "../Redux/subscriptions_reducers";
+import {ProfileType, PutProfileValuesProps} from "../../Redux/profile_reducer";
+import {setSubscriptions} from "../../Redux/subscriptions_reducers";
 
 
 export const instance = axios.create({

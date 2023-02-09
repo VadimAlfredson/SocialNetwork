@@ -10,11 +10,10 @@ import {useAppDispatch, useAppSelector} from "./Redux/reduxStore";
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'))
-// @ts-ignore
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
 const Login = React.lazy(() => import('./components/login/login'))
-// @ts-ignore
 const SettingContainer = React.lazy(() => import('./components/Setting/SettingContainer'))
+const Chat = React.lazy(() => import('./components/Chat/Chat'))
 
 
 const App = () => {
@@ -48,6 +47,9 @@ const App = () => {
                                            element={<Login/>}/>
                                     <Route path='setting'
                                            element={<SettingContainer/>}
+                                    />
+                                    <Route path='chat'
+                                           element={<Chat/>}
                                     />
                                 </Routes>
                             </React.Suspense>
