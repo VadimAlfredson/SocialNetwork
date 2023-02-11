@@ -46,3 +46,10 @@ const MessageChat: FC<PropsType> = (props) => {
         <div>{props.message}</div>
     </div>
 }
+
+const ChatForm = () => {
+    return <div>
+        <div><input/></div>
+        <div><button></button></div>
+    </div>
+}
