@@ -10,26 +10,24 @@ type MessagesChatType = {
 
 
 
-const Chat = () => {
-    let messagesChat: MessagesChatType[] = [{name: 'test', message: 'Hi!', icon: '', id: 1}, {name: 'test2', message: 'Hi!!!', icon: '', id: 2}]
+const Chat: React.FC = () => {
     return <div>
-        <MessagesChat
-            messagesChat={messagesChat}
-        />
+        <MessagesChat />
     </div>
 }
 
 export default Chat
 
-const MessagesChat: FC<MessagesChatType[]> = (props) => {
-    return props.messagesChat.map(m =>
+const MessagesChat: React.FC = () => {
+    let messagesChat: MessagesChatType[] = [{name: 'test', message: 'Hi!', icon: '', id: 1}, {name: 'test2', message: 'Hi!!!', icon: '', id: 2}]
+    return <div>{messagesChat.map((m: MessagesChatType) =>
         <MessageChat
             key={m.id}
             icon={m.icon}
             message={m.message}
             name={m.name}
         />
-    )
+    )}</div>
 }
 
 
