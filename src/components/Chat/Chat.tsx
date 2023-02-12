@@ -1,14 +1,14 @@
-import React, {FC} from "react";
+import React, {FC, useEffect, useState} from "react";
 
 
 type MessagesChatType = {
-    name: string
-    message: string
-    icon: string
-    id: number
+    userId: number,
+    userName: string,
+    message: string,
+    photo: string
 }
 
-
+const webSocketChat = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
 
 const Chat: React.FC = () => {
     return <div>
@@ -18,14 +18,17 @@ const Chat: React.FC = () => {
 
 export default Chat
 
-const MessagesChat: React.FC = () => {
-    let messagesChat: MessagesChatType[] = [{name: 'test', message: 'Hi!', icon: '', id: 1}, {name: 'test2', message: 'Hi!!!', icon: '', id: 2}]
+const MessagesChat: React.FC = (props) => {
+    const [messagesChat, setMessagesChat] = useState([])
+    useEffect(() => {
+        webSocketChat.addEventListener('message', (e) => setMessagesChat(JSON.parse(e.data)))
+    }, [messagesChat])
     return <div>{messagesChat.map((m: MessagesChatType) =>
         <MessageChat
-            key={m.id}
-            icon={m.icon}
+            key={m.userId}
+            icon={m.photo}
             message={m.message}
-            name={m.name}
+            name={m.userName}
         />
     )}</div>
 }
