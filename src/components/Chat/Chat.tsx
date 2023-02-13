@@ -1,4 +1,5 @@
 import React, {FC, useEffect, useState} from "react";
+import s from './Chat.module.css'
 
 
 type MessagesChatType = {
@@ -27,8 +28,8 @@ const MessagesChat: React.FC = (props) => {
             let newMessagesChat = JSON.parse(e.data)
             setMessagesChat(prev => [...prev, ...newMessagesChat])
         })
-    }, [messagesChat])
-    return <div>{messagesChat.map((m: MessagesChatType, index) =>
+    }, [])
+    return <div  className={s.messagesChat}>{messagesChat.map((m: MessagesChatType, index) =>
         <MessageChat
             key = {index}
             icon={m.photo}
@@ -45,10 +46,10 @@ type PropsType = {
     message: string
 }
 const MessageChat: FC<PropsType> = (props) => {
-    return <div>
-        <img src={props.icon}/>
-        <div>{props.name}</div>
-        <div>{props.message}</div>
+    return <div className={s.messageBlock}>
+        <img className={s.avatar} src={props.icon ? props.icon : 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'}/>
+        <div className={s.name}>{props.name}</div>
+        <div className={s.message}>{props.message}</div>
     </div>
 }
 
@@ -62,7 +63,13 @@ const ChatForm = () => {
         setMessage('')
     }
     return <div>
-        <div><textarea onChange={e => setMessage(e.target.value)} value={message}></textarea></div>
-        <div><button onClick={sendMessageChat}>Send</button></div>
+        <div><textarea
+            onChange={e => setMessage(e.target.value)}
+            value={message}>
+        </textarea></div>
+        <div><button
+            onClick={sendMessageChat}
+            disabled={webSocketChat.readyState !== webSocketChat.OPEN}
+        >Send</button></div>
     </div>
 }

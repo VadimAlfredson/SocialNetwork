@@ -18,7 +18,7 @@ const Navbar = (props: propsType) => {
             <div className={s.item}>
                 Messages
             </div>
-            <img className={s.iconItem} src={process.env.PUBLIC_URL + '/free-icon-chat-bubble-2089142.png'}
+            <img className={s.iconItem} src={process.env.PUBLIC_URL + '/free-icon-speech-bubble-2496514.png'}
                  alt={'Dialogs'}/>
         </NavLink>
         <NavLink to="/Chat" className={navData => navData.isActive ? s.active : s.itemnav}>
