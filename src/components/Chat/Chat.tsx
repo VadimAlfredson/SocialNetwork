@@ -1,5 +1,8 @@
 import React, {FC, useEffect, useState} from "react";
 import s from './Chat.module.css'
+import {withAuthNavigate} from "../hoc/witAuthNavigate";
+import {useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
+import {setMessagesChatActionCreator} from "../../Redux/chat_reducer";
 
 
 type MessagesChatType = {
@@ -18,17 +21,21 @@ const Chat: React.FC = () => {
     </div>
 }
 
-export default Chat
+export default withAuthNavigate(Chat)
 
 const MessagesChat: React.FC = (props) => {
-    const [messagesChat, setMessagesChat] = useState<MessagesChatType[]>([])
+    const messages = useAppSelector(state => state.chat.messages)
+    let [messagesChat, setMessagesChat] = useState<MessagesChatType[]>(messages)
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
         webSocketChat.addEventListener('message', (e) => {
             let newMessagesChat = JSON.parse(e.data)
-            setMessagesChat(prev => [...prev, ...newMessagesChat])
+            setMessagesChat((prev) => [...prev, ...newMessagesChat])
+            dispatch(setMessagesChatActionCreator(newMessagesChat))
         })
-    }, [])
+        console.log(messagesChat)
+    }, [messagesChat])
     return <div  className={s.messagesChat}>{messagesChat.map((m: MessagesChatType, index) =>
         <MessageChat
             key = {index}

@@ -84,7 +84,7 @@ const LoginForm: FC = (props) => {
                 </div>
                 <br/>
                 {captchaURL &&
-                    <div>
+                    <div className={captchaURL && s.displayNone}>
                         <img className={s.imgCaptcha} src={captchaURL}/>
                         <input
                             /*className={touched.captcha && errors.captcha ? s.errorsInput : s.inputLogin}*/

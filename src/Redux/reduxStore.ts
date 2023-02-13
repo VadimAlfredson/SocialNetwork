@@ -4,6 +4,7 @@ import dialogsReducer from "./dialogs_reducer";
 import usersReducer from "./users_reducers";
 import authReducer from "./auth_reducers";
 import appReducer from "./app_reducers";
+import chatReducer from "./chat_reducer"
 import subscriptionsReducer from "./subscriptions_reducers"
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 
@@ -16,7 +17,8 @@ let store = configureStore({
         users: usersReducer,
         auth: authReducer,
         app: appReducer,
-        subscriptions: subscriptionsReducer
+        subscriptions: subscriptionsReducer,
+        chat: chatReducer
     }
 });
 

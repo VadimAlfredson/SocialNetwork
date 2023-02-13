@@ -15,7 +15,7 @@
     border-radius: 5px;
     border: #0e2121 solid 1px;
     color: #0e2121;
-    margin: 0 auto;
+    margin: 3px auto;
     padding: 5px;
     width: 200px;
 }
@@ -41,8 +41,6 @@
     color: azure;
     border-radius: 5px;
     border: solid 1px rgba(0, 0, 0, 0.6);
-    margin-top: 10px;
-    margin-bottom: 20px;
 }
 
 .buttonLogin:active {
@@ -56,8 +54,11 @@
     color: #a9a9a9;
     border-radius: 5px;
     border: solid 1px rgb(169, 169, 169);
-    margin-top: 20px;
 
+}
+
+.displayNone{
+    display: none;
 }
 
 .loginBlock {

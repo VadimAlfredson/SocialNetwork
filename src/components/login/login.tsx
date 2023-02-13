@@ -6,6 +6,7 @@ const Login = () => {
     return <div className={s.loginBlock}>
     <h3>Log in</h3>
     <LoginForm />
+        <br/>
 
         <div>
             <div>Email: free@samuraijs.com</div>
