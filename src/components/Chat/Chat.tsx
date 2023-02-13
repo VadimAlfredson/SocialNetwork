@@ -13,19 +13,24 @@ const webSocketChat = new WebSocket('wss://social-network.samuraijs.com/handlers
 const Chat: React.FC = () => {
     return <div>
         <MessagesChat />
+        <ChatForm />
     </div>
 }
 
 export default Chat
 
 const MessagesChat: React.FC = (props) => {
-    const [messagesChat, setMessagesChat] = useState([])
+    const [messagesChat, setMessagesChat] = useState<MessagesChatType[]>([])
+
     useEffect(() => {
-        webSocketChat.addEventListener('message', (e) => setMessagesChat(JSON.parse(e.data)))
+        webSocketChat.addEventListener('message', (e) => {
+            let newMessagesChat = JSON.parse(e.data)
+            setMessagesChat(prev => [...prev, ...newMessagesChat])
+        })
     }, [messagesChat])
-    return <div>{messagesChat.map((m: MessagesChatType) =>
+    return <div>{messagesChat.map((m: MessagesChatType, index) =>
         <MessageChat
-            key={m.userId}
+            key = {index}
             icon={m.photo}
             message={m.message}
             name={m.userName}
@@ -38,7 +43,6 @@ type PropsType = {
     icon: string
     name: string
     message: string
-    key: number
 }
 const MessageChat: FC<PropsType> = (props) => {
     return <div>
@@ -49,8 +53,16 @@ const MessageChat: FC<PropsType> = (props) => {
 }
 
 const ChatForm = () => {
+    let [message, setMessage] = useState('')
+    let sendMessageChat = () => {
+        if (!message){
+            return;
+        }
+        webSocketChat.send(message)
+        setMessage('')
+    }
     return <div>
-        <div><input/></div>
-        <div><button></button></div>
+        <div><textarea onChange={e => setMessage(e.target.value)} value={message}></textarea></div>
+        <div><button onClick={sendMessageChat}>Send</button></div>
     </div>
 }

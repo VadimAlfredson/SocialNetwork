@@ -40,13 +40,13 @@ const Navbar = (props: propsType) => {
             </div>
             <img className={s.iconItem} src={process.env.PUBLIC_URL + '/free-icon-newspaper-2089343.png'} alt={'News'}/>
         </NavLink>
-        <NavLink to="/Music" className={navData => navData.isActive ? s.active : s.itemnav}>
+        {/*<NavLink to="/Music" className={navData => navData.isActive ? s.active : s.itemnav}>
             <div className={s.item}>
                 Music
             </div>
             <img className={s.iconItem} src={process.env.PUBLIC_URL + '/free-icon-music-note-482046.png'}
                  alt={'Music'}/>
-        </NavLink>
+        </NavLink>*/}
         <NavLink to="/Setting" className={navData => navData.isActive ? s.active : s.itemnav}>
             <div className={s.item}>
                 Settings
