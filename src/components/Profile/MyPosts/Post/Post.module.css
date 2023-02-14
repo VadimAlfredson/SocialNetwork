@@ -1,27 +1,27 @@
 .post {
     display: grid;
     grid-template-areas:
-". img message ."
-". like message .";
-    grid-template-columns: 1fr 1fr 15fr 1fr;
+"img message ."
+"img message like";
+    grid-template-columns: min-content min-content min-content;
     grid-template-rows: 1fr 1fr;
     color: azure;
     margin: 0 auto auto auto;
+    grid-gap: 10px;
 }
 
 .img {
     grid-area: img;
-    float: left;
     /*    grid-column: span 1;*/
     height: 50px;
     border-radius: 50%;
-    margin-left: 20px;
+    margin-left: 50px;
 }
 
 .messageBlock {
+    display: inline-block;
     grid-area: message;
-    width: 100%;
-    margin-right: 20px;
+    width: max-content;
     color: black;
     margin-top: 25px;
     margin-left: 1%;
@@ -37,5 +37,17 @@
 
 .like {
     grid-area: like;
-    margin-left: 20px;
+    width: max-content;
+    margin-left: 0;
+}
+
+.likeActive {
+    grid-area: like;
+    color: rgba(225, 85, 85, 0.73);
+    width: max-content;
+    margin-left: 0;
+}
+
+.likeIcon {
+    height: 20px;
 }
