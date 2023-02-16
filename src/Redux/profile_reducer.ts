@@ -3,6 +3,7 @@ import {createSlice} from "@reduxjs/toolkit";
 import {Dispatch} from "react";
 import {RootState} from "./reduxStore";
 import {setOwnerIconAC} from "./auth_reducers";
+import post from "../components/Profile/MyPosts/Post/Post";
 
 
 export type PutProfileValuesProps = {
@@ -58,18 +59,18 @@ export type postsType = {
     id: number,
     message: string,
     likeCount: number,
+    ownerLike: boolean
 }
 
 
-let i: number = 5
 
 const todosSlice = createSlice({
     name: 'profile',
     initialState: {
         posts: [
-            {id: 1, message: 'Стена на бэкенде не предусмотрена, так что это просто болванка', likeCount: 23},
-            {id: 2, message: 'Yo', likeCount: 12},
-            {id: 3, message: 'My first post!', likeCount: 32},
+            {id: 1, message: 'Стена на бэкенде не предусмотрена, так что это просто болванка', likeCount: 23, ownerLike: false},
+            {id: 2, message: 'Yo', likeCount: 12, ownerLike: false},
+            {id: 3, message: 'My first post!', likeCount: 32, ownerLike: false},
         ] as Array<postsType>,
         newPostText: ' ' as string,
         profile: {
@@ -100,13 +101,27 @@ const todosSlice = createSlice({
     reducers: {
         AddPostActionCreator(state, action) {
             let newPost: postsType = {
-                id: i++,
+                id: post.length,
                 message: action.payload,
                 likeCount: 0,
+                ownerLike: false
             };
             return {
                 ...state,
                 posts: [newPost, ...state.posts],
+            }
+        },
+        setLikePostActionCreator(state, action) {
+            debugger
+            return {
+                ...state,
+                users: state.posts.map(post => {
+                        if (post.id === action.payload) {
+                            return {...post, ownerLike: !post.ownerLike}
+                        }
+                        return post
+                    }
+                )
             }
         },
         setUserProfile(state, action) {
@@ -139,11 +154,11 @@ const todosSlice = createSlice({
                 ...state,
                 follow: action.payload
             }
-        }
+        },
     }
 })
 
-export const {AddPostActionCreator, setUserProfile, setStatus, savePhotoSuccess, setProfileInfo, setFollow} = todosSlice.actions
+export const {AddPostActionCreator, setUserProfile, setStatus, savePhotoSuccess, setProfileInfo, setFollow, setLikePostActionCreator} = todosSlice.actions
 export default todosSlice.reducer
 
 export const userProfileThunkCreator = (userId: number) => async (dispatch: Dispatch<any>) => {

@@ -11,7 +11,7 @@ type PropsType = {
 
 const MyPosts: FC<PropsType> = (props) => {
     let postElements = props.posts.map(
-        (p) => <Post message={p.message} likeCount={p.likeCount}  key={p.id}/>
+        (p) => <Post message={p.message} likeCount={p.likeCount}  key={p.id} ownerLike={p.ownerLike} id={p.id}/>
     );
     console.log('Rerender')
     return (

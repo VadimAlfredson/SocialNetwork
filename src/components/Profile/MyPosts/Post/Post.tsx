@@ -1,11 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import s from './Post.module.css';
+import {useAppDispatch, useAppSelector} from "../../../../Redux/reduxStore";
+import {setLikePostActionCreator} from "../../../../Redux/profile_reducer";
 
-const Post = (props: { message: string, likeCount: number }) => {
-    let [likeActive, setLikeActive] = useState<boolean>(false)
+const Post = (props: { message: string, likeCount: number, ownerLike: boolean, id: number}) => {
+    let [likeActive, setLikeActive] = useState<boolean>(props.ownerLike)
     let [likeCount, setLikeCount] = useState<number>(props.likeCount)
+    const dispatch = useAppDispatch()
+    useEffect(() => {
+        setLikeActive(props.ownerLike)
+        console.log(props.ownerLike)
+    }, [props.ownerLike])
     let onClickChange = () => {
-        setLikeActive(!likeActive)
+        debugger
+        dispatch(setLikePostActionCreator(props.id))
         setLikeCount(!likeActive ? likeCount + 1 : likeCount - 1)
     }
 
