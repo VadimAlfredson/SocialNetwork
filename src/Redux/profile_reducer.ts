@@ -1,5 +1,5 @@
 import {profileApi, usersApi} from "../DAL/api/api";
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {Dispatch} from "react";
 import {RootState} from "./reduxStore";
 import {setOwnerIconAC} from "./auth_reducers";
@@ -67,11 +67,7 @@ export type postsType = {
 const todosSlice = createSlice({
     name: 'profile',
     initialState: {
-        posts: [
-            {id: 1, message: 'Стена на бэкенде не предусмотрена, так что это просто болванка', likeCount: 23, ownerLike: false},
-            {id: 2, message: 'Yo', likeCount: 12, ownerLike: false},
-            {id: 3, message: 'My first post!', likeCount: 32, ownerLike: false},
-        ] as Array<postsType>,
+        posts: [] as Array<postsType>,
         newPostText: ' ' as string,
         profile: {
             userId: 0,
@@ -111,12 +107,13 @@ const todosSlice = createSlice({
                 posts: [newPost, ...state.posts],
             }
         },
-        setLikePostActionCreator(state, action) {
+        setLikePostActionCreator(state, action: PayloadAction<number>) {
             debugger
+            console.log(action.payload)
             return {
                 ...state,
                 users: state.posts.map(post => {
-                        if (post.id === action.payload) {
+                        if (post.id == action.payload) {
                             return {...post, ownerLike: !post.ownerLike}
                         }
                         return post
