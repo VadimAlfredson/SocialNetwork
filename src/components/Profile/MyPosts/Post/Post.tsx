@@ -9,14 +9,12 @@ const Post = (props: { message: string, likeCount: number, ownerLike: boolean, i
     const dispatch = useAppDispatch()
     useEffect(() => {
         setLikeActive(props.ownerLike)
+        setLikeCount(props.likeCount)
         console.log(props.ownerLike)
     }, [props.ownerLike])
     let onClickChange = () => {
-        debugger
         dispatch(setLikePostActionCreator(props.id))
-        setLikeCount(!likeActive ? likeCount + 1 : likeCount - 1)
     }
-
     return (
         <div className={s.post}>
             <img className={s.img}

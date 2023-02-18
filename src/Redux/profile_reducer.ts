@@ -101,7 +101,7 @@ const todosSlice = createSlice({
     reducers: {
         AddPostActionCreator(state, action) {
             let newPost: postsType = {
-                id: post.length,
+                id: post.length + 3,
                 message: action.payload,
                 likeCount: 0,
                 ownerLike: false
@@ -112,14 +112,15 @@ const todosSlice = createSlice({
             }
         },
         setLikePostActionCreator(state, action: PayloadAction<number>) {
-            debugger
             console.log(action.payload)
             return {
                 ...state,
-                users: state.posts.map(post => {
+                posts: state.posts.map(post => {
                         if (post.id == action.payload) {
-                            console.log({...post})
-                            return {...post, ownerLike: !post.ownerLike}
+                            return {...post,
+                                ownerLike: !post.ownerLike,
+                            likeCount: post.ownerLike ? post.likeCount - 1 : post.likeCount + 1
+                            }
                         }
                         return post
                     }
