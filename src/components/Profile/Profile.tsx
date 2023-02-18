@@ -13,11 +13,7 @@ type PropsType = {
     onPutDialogOnProfileChange: (userId: number) => void
 }
 
-let posts =[
-    {id: 1, message: 'Стена на бэкенде не предусмотрена, так что это просто болванка', likeCount: 23, ownerLike: false},
-    {id: 2, message: 'Yo', likeCount: 12, ownerLike: false},
-    {id: 3, message: 'My first post!', likeCount: 32, ownerLike: false},
-] as Array<postsType>
+
 
 const Profile: FC<PropsType> = (props) => {
     return <div className={s.profileContent}>

@@ -67,7 +67,11 @@ export type postsType = {
 const todosSlice = createSlice({
     name: 'profile',
     initialState: {
-        posts: [] as Array<postsType>,
+        posts: [
+                {id: 1, message: 'Стена на бэкенде не предусмотрена, так что это просто болванка', likeCount: 23, ownerLike: false},
+                {id: 2, message: 'Yo', likeCount: 12, ownerLike: false},
+                {id: 3, message: 'My first post!', likeCount: 32, ownerLike: false},
+        ] as Array<postsType>,
         newPostText: ' ' as string,
         profile: {
             userId: 0,
@@ -114,6 +118,7 @@ const todosSlice = createSlice({
                 ...state,
                 users: state.posts.map(post => {
                         if (post.id == action.payload) {
+                            console.log({...post})
                             return {...post, ownerLike: !post.ownerLike}
                         }
                         return post
