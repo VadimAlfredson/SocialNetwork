@@ -31,6 +31,7 @@ export type dialogsType = {
         small: string | null,
         large: string | null
     }
+    companionName: string
 }
 
 /*{"items":
@@ -64,7 +65,8 @@ const todosSlice = createSlice({
             dialogId: 0 as number,
             companionIcon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg' as string,
             companionId: null as number | null,
-            defaultPhoto: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg' as string
+            defaultPhoto: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg' as string,
+            companionName: ''
 
         },
         reducers: {
@@ -104,10 +106,18 @@ const todosSlice = createSlice({
                     companionId: action.payload
                 }
             },
-            setCompanionIconAC(state, action) {
+            setCompanionIconAndNameAC(state, action) {
+                debugger
                 return {
                     ...state,
-                    companionIcon: action.payload
+                    companionIcon: action.payload.photo,
+                    companionName: action.payload.userName
+                }
+            },
+            setCompanionNameAC(state, action) {
+                return {
+                    ...state,
+                    companionName: action.payload
                 }
             },
             deleteMessageAC(state, action) {
@@ -128,7 +138,7 @@ export const {
     setDialogIdAC,
     postMessagesToUserAC,
     setCompanionIdAC,
-    setCompanionIconAC,
+    setCompanionIconAndNameAC,
     deleteMessageAC,
 
 } = todosSlice.actions

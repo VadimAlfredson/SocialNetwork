@@ -10,7 +10,7 @@ import {
     getMessagesUserThunkCreator,
     messageType,
     postMessageToUserThunkCreator,
-    setCompanionIconAC,
+    setCompanionIconAndNameAC,
 } from "../../Redux/dialogs_reducer";
 import users from "../Users/Users";
 import {NavLink} from "react-router-dom";
@@ -25,6 +25,7 @@ const Dialogs = () => {
     const OwnerId: number = useAppSelector(state => state.auth.userId)
     const defaultPhoto: string = useAppSelector(state => state.dialogs.defaultPhoto)
     const companionIcon: string = useAppSelector(state => state.dialogs.companionIcon)
+    const companionName: string = useAppSelector(state => state.dialogs.companionName)
     const ownerPhoto: string = useAppSelector(state => state.auth.ownerPhoto)
 
     const dispatch = useAppDispatch()
@@ -40,16 +41,15 @@ const Dialogs = () => {
         dispatch(getDialogsThunkCreator())
     }, [])
 
-    let getCompanionIcon = (userId: number) => {
-        debugger
-        dialogs.find(i =>
-            i.id === userId ?
-                dispatch(setCompanionIconAC(i.photos.large ? i.photos.large : defaultPhoto)) :
-                console.log(i.id))
+    let getCompanionIconAndName = (userId: number) => {
+        dialogs.find(i => i.id === userId ?
+                dispatch(setCompanionIconAndNameAC({photo: i.photos.large ? i.photos.large : defaultPhoto, userName: i.userName})) :
+          console.log('sd')
+            )
     }
     const onGetMessagesUser = (userId: number) => {
         dispatch(getMessagesUserThunkCreator(userId))
-        getCompanionIcon(userId)
+        getCompanionIconAndName(userId)
 
     }
     const onMessageSentChange = (userId: number, bodyMessage: string) => {
@@ -61,7 +61,7 @@ const Dialogs = () => {
     useEffect(() => {
         let dialogsArr = [] as dialogsType[]
         if (dialogs.length > 0){
-        for (let i = 0; i < (dialogs.length> 10 ? 10 : dialogs.length); i++) {
+        for (let i = 0; i < (dialogs.length > 9 ? 9 : dialogs.length); i++) {
             dialogsArr.push(dialogs[i])
         }}
         setDialogsState(dialogsArr)
@@ -102,6 +102,7 @@ const Dialogs = () => {
             </div>
 
             <div className={s.messages}>
+                <div className={s.companionName}>{companionName}</div>
                 <div className={s.message}>
                     {messagesItem}
                 </div>

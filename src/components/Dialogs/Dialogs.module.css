@@ -234,6 +234,12 @@
     color: #000000;
 }
 
+.companionName {
+    align-content: center;
+    margin: 2% auto;
+    height: 11px;
+}
+
 @media (max-width: 999px) {
     .dialogs {
         display: grid;
