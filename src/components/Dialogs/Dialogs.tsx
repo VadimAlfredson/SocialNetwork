@@ -103,7 +103,7 @@ const Dialogs = () => {
             </div>
 
             <div className={s.messages}>
-                <div className={s.companionName}>{companionName}</div>
+                <NavLink to={`/profile/${companionId}`} className={s.companionName}>{companionName}</NavLink>
                 <div className={s.message}>
                     {messagesItem}
                 </div>

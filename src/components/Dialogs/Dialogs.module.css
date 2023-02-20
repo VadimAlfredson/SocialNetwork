@@ -237,7 +237,8 @@
 .companionName {
     align-content: center;
     margin: 2% auto;
-    height: 11px;
+    text-decoration: none;
+    color: azure;
 }
 
 @media (max-width: 999px) {
