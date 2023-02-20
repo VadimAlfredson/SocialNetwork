@@ -100,18 +100,12 @@ const todosSlice = createSlice({
                     ...action.payload
                 }
             },
-            setCompanionIdAC(state, action) {
-                return {
-                    ...state,
-                    companionId: action.payload
-                }
-            },
             setCompanionIconAndNameAC(state, action) {
-                debugger
                 return {
                     ...state,
                     companionIcon: action.payload.photo,
-                    companionName: action.payload.userName
+                    companionName: action.payload.userName,
+                    companionId: action.payload.companionId
                 }
             },
             setCompanionNameAC(state, action) {
@@ -137,7 +131,6 @@ export const {
     getMessagesUserAC,
     setDialogIdAC,
     postMessagesToUserAC,
-    setCompanionIdAC,
     setCompanionIconAndNameAC,
     deleteMessageAC,
 
@@ -166,7 +159,6 @@ export const getMessagesUserThunkCreator = (userId: number) => async (dispatch: 
     let response = await dialogsApi.getMessagesUser(userId)
     dispatch(getMessagesUserAC(response.items))
     dispatch(setDialogIdAC(userId))
-    dispatch(setCompanionIdAC(userId))
 }
 
 export const postMessageToUserThunkCreator = (userId: number, bodyMessage: string) => async (dispatch: Dispatch<any>) => {

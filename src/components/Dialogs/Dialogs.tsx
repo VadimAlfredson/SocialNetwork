@@ -26,6 +26,7 @@ const Dialogs = () => {
     const defaultPhoto: string = useAppSelector(state => state.dialogs.defaultPhoto)
     const companionIcon: string = useAppSelector(state => state.dialogs.companionIcon)
     const companionName: string = useAppSelector(state => state.dialogs.companionName)
+    const companionId: number | null = useAppSelector(state => state.dialogs.companionId)
     const ownerPhoto: string = useAppSelector(state => state.auth.ownerPhoto)
 
     const dispatch = useAppDispatch()
@@ -43,7 +44,7 @@ const Dialogs = () => {
 
     let getCompanionIconAndName = (userId: number) => {
         dialogs.find(i => i.id === userId ?
-                dispatch(setCompanionIconAndNameAC({photo: i.photos.large ? i.photos.large : defaultPhoto, userName: i.userName})) :
+                dispatch(setCompanionIconAndNameAC({photo: i.photos.large ? i.photos.large : defaultPhoto, userName: i.userName, companionId: i.id})) :
           console.log('sd')
             )
     }
