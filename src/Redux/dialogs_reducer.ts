@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {Dispatch} from "react";
 import {dialogsApi} from "../DAL/api/api";
 
@@ -66,41 +66,41 @@ const todosSlice = createSlice({
             companionIcon: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg' as string,
             companionId: null as number | null,
             defaultPhoto: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg' as string,
-            companionName: ''
+            companionName: '' as string
 
         },
         reducers: {
-            setDialogs(state, action) {
+            setDialogs(state, action: PayloadAction<dialogsType[]>) {
                 return {
                     ...state,
                     dialogs: action.payload
                 }
             },
-            putDialogUserAC(state, action) {
+            putDialogUserAC(state, action: PayloadAction<dialogsType>) {
                 return {
                     ...state,
                     ...action.payload
                 }
             },
-            getMessagesUserAC(state, action) {
+            getMessagesUserAC(state, action: PayloadAction<messageType[]>) {
                 return {
                     ...state,
                     messages: action.payload
                 }
             },
-            setDialogIdAC(state, action) {
+            setDialogIdAC(state, action: PayloadAction<number>) {
                 return {
                     ...state,
                     dialogId: action.payload
                 }
             },
-            postMessagesToUserAC(state, action) {
+            postMessagesToUserAC(state, action: PayloadAction<messageType>) {
                 return {
                     ...state,
                     ...action.payload
                 }
             },
-            setCompanionIconAndNameAC(state, action) {
+            setCompanionIconAndNameAC(state, action: PayloadAction<{photo: string, userName: string, companionId: number}>) {
                 return {
                     ...state,
                     companionIcon: action.payload.photo,
@@ -108,13 +108,13 @@ const todosSlice = createSlice({
                     companionId: action.payload.companionId
                 }
             },
-            setCompanionNameAC(state, action) {
+            setCompanionNameAC(state, action: PayloadAction<string>) {
                 return {
                     ...state,
                     companionName: action.payload
                 }
             },
-            deleteMessageAC(state, action) {
+            deleteMessageAC(state, action: PayloadAction<messageType[]>) {
                 return {
                     ...state,
                     messages: action.payload
