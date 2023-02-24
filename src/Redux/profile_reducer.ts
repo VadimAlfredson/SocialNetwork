@@ -99,7 +99,7 @@ const todosSlice = createSlice({
         defaultPhoto: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg',
     },
     reducers: {
-        AddPostActionCreator(state, action) {
+        AddPostActionCreator(state, action: PayloadAction<string>) {
             let newPost: postsType = {
                 id: post.length + 3,
                 message: action.payload,
@@ -127,32 +127,32 @@ const todosSlice = createSlice({
                 )
             }
         },
-        setUserProfile(state, action) {
+        setUserProfile(state, action: PayloadAction<any>) {
             return {
                 ...state,
                 profile: action.payload
             }
         },
-        setStatus(state, action) {
+        setStatus(state, action: PayloadAction<string>) {
             return {
                 ...state,
                 status: action.payload
             }
 
         },
-        savePhotoSuccess(state, action) {
+        savePhotoSuccess(state, action: PayloadAction<any>) {
             return {
                 ...state,
                 profile: {...state.profile, photos: action.payload}
             }
         },
-        setProfileInfo(state, action) {
+        setProfileInfo(state, action: PayloadAction<ProfileType>) {
             return {
                 ...state,
                 profile: {...state.profile, profile: action.payload}
             }
         },
-        setFollow(state, action) {
+        setFollow(state, action: PayloadAction<boolean>) {
             return {
                 ...state,
                 follow: action.payload
