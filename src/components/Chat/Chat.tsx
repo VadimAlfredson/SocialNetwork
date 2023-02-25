@@ -15,20 +15,30 @@ type MessagesChatType = {
 
 const Chat: React.FC = () => {
     const [webSocketChat, setWebSocketChat] = useState<WebSocket | null>(null)
-    useEffect(() => {
-        function connectWebSocket() {
-            let ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
-            ws.addEventListener('close', () => {
-                console.log('close ws')
-                setTimeout(connectWebSocket, 3000)
-            })
-            setWebSocketChat(ws)
-        }
-        connectWebSocket()
-    }, [])
 
     useEffect(() => {
-    }, [webSocketChat])
+        let ws: WebSocket
+        const wsCloseHandler = () => {
+            console.log('close ws')
+            setTimeout(connectWebSocket, 3000)
+        }
+
+        function connectWebSocket() {
+            ws?.removeEventListener('close', wsCloseHandler)
+            ws?.close()
+            ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
+            ws.addEventListener('close', wsCloseHandler)
+            setWebSocketChat(ws)
+        }
+
+        connectWebSocket()
+
+        return () => {
+            ws.removeEventListener('close', wsCloseHandler)
+            ws.close()
+        }
+    }, [])
+
     return <div>
         <MessagesChat webSocketChat={webSocketChat}/>
         <ChatForm webSocketChat={webSocketChat}/>
@@ -37,22 +47,27 @@ const Chat: React.FC = () => {
 
 export default withAuthNavigate(Chat)
 
-const MessagesChat: React.FC<{webSocketChat: WebSocket | null}> = (props) => {
+const MessagesChat: React.FC<{ webSocketChat: WebSocket | null }> = ({webSocketChat}) => {
     const messages = useAppSelector(state => state.chat.messages)
     let [messagesChat, setMessagesChat] = useState<MessagesChatType[]>(messages)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        props.webSocketChat?.addEventListener('message', (e) => {
+        let wsMessageHandler = (e: MessageEvent) => {
             let newMessagesChat = JSON.parse(e.data)
+            console.log(messagesChat)
             setMessagesChat((prev) => [...prev, ...newMessagesChat])
             dispatch(setMessagesChatActionCreator(newMessagesChat))
-        })
+        }
+        webSocketChat?.addEventListener('message', wsMessageHandler)
         console.log(messagesChat)
-    }, [messagesChat])
-    return <div  className={s.messagesChat}>{messagesChat.map((m: MessagesChatType, index) =>
+        return () => {
+            webSocketChat?.removeEventListener('message', wsMessageHandler)
+        }
+    }, [messagesChat, webSocketChat])
+    return <div className={s.messagesChat}>{messagesChat.map((m: MessagesChatType, index) =>
         <MessageChat
-            key = {index}
+            key={index}
             userId={m.userId}
             icon={m.photo}
             message={m.message}
@@ -70,26 +85,34 @@ type PropsType = {
 }
 const MessageChat: FC<PropsType> = (props) => {
     return <div className={s.messageBlock}>
-        <NavLink className={s.avatar} to={`/profile/${props.userId}`} ><img className={s.avatar} src={props.icon ? props.icon : 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'}/> </NavLink>
-        <NavLink className={s.name} to={`/profile/${props.userId}`} > <div className={s.name}>{props.name}</div> </NavLink>
+        <NavLink className={s.avatar} to={`/profile/${props.userId}`}><img className={s.avatar}
+                                                                           src={props.icon ? props.icon : 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'}/>
+        </NavLink>
+        <NavLink className={s.name} to={`/profile/${props.userId}`}>
+            <div className={s.name}>{props.name}</div>
+        </NavLink>
         <div className={s.message}>{props.message}</div>
     </div>
 }
 
-const ChatForm: React.FC<{webSocketChat: WebSocket | null}> = (props) => {
+const ChatForm: React.FC<{ webSocketChat: WebSocket | null }> = ({webSocketChat}) => {
     let [message, setMessage] = useState<string>('')
     let [readyStatus, setReadyStatus] = useState<'ready' | 'pending'>('pending')
 
     useEffect(() => {
-        props.webSocketChat?.addEventListener('open', () => {
-            setReadyStatus('pending')
-        })
-    }, [])
+        let wsOpenHandler = () => {
+            setReadyStatus('ready')
+        }
+        webSocketChat?.addEventListener('open', wsOpenHandler)
+        return () => {
+            webSocketChat?.removeEventListener('open', wsOpenHandler)
+        }
+    }, [webSocketChat])
     let sendMessageChat = () => {
-        if (!message){
+        if (!message) {
             return;
         }
-        props.webSocketChat?.send(message)
+        webSocketChat?.send(message)
         setMessage('')
     }
     return <div>
@@ -97,9 +120,12 @@ const ChatForm: React.FC<{webSocketChat: WebSocket | null}> = (props) => {
             onChange={e => setMessage(e.target.value)}
             value={message}>
         </textarea></div>
-        <div><button
-            onClick={sendMessageChat}
-            disabled={props.webSocketChat === null || readyStatus !== 'ready'}
-        >Send</button></div>
+        <div>
+            <button
+                onClick={sendMessageChat}
+                disabled={webSocketChat === null || readyStatus !== 'ready'}
+            >Send
+            </button>
+        </div>
     </div>
 }

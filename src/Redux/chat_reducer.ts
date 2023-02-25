@@ -18,7 +18,6 @@ const todosSlice = createSlice({
         },
         reducers: {
             setMessagesChatActionCreator(state, action) {
-                debugger
                 return {
                     messages: action.payload
                 }
