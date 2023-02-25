@@ -13,24 +13,37 @@ type MessagesChatType = {
     photo: string
 }
 
-const webSocketChat = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
-
 const Chat: React.FC = () => {
+    const [webSocketChat, setWebSocketChat] = useState<WebSocket | null>(null)
+    useEffect(() => {
+        function connectWebSocket() {
+            let ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
+            ws.addEventListener('close', () => {
+                console.log('close ws')
+                setTimeout(connectWebSocket, 3000)
+            })
+            setWebSocketChat(ws)
+        }
+        connectWebSocket()
+    }, [])
+
+    useEffect(() => {
+    }, [webSocketChat])
     return <div>
-        <MessagesChat />
-        <ChatForm />
+        <MessagesChat webSocketChat={webSocketChat}/>
+        <ChatForm webSocketChat={webSocketChat}/>
     </div>
 }
 
 export default withAuthNavigate(Chat)
 
-const MessagesChat: React.FC = (props) => {
+const MessagesChat: React.FC<{webSocketChat: WebSocket | null}> = (props) => {
     const messages = useAppSelector(state => state.chat.messages)
     let [messagesChat, setMessagesChat] = useState<MessagesChatType[]>(messages)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        webSocketChat.addEventListener('message', (e) => {
+        props.webSocketChat?.addEventListener('message', (e) => {
             let newMessagesChat = JSON.parse(e.data)
             setMessagesChat((prev) => [...prev, ...newMessagesChat])
             dispatch(setMessagesChatActionCreator(newMessagesChat))
@@ -63,12 +76,12 @@ const MessageChat: FC<PropsType> = (props) => {
     </div>
 }
 
-const ChatForm = () => {
+const ChatForm: React.FC<{webSocketChat: WebSocket | null}> = (props) => {
     let [message, setMessage] = useState<string>('')
     let [readyStatus, setReadyStatus] = useState<'ready' | 'pending'>('pending')
 
     useEffect(() => {
-        webSocketChat.addEventListener('open', () => {
+        props.webSocketChat?.addEventListener('open', () => {
             setReadyStatus('pending')
         })
     }, [])
@@ -76,7 +89,7 @@ const ChatForm = () => {
         if (!message){
             return;
         }
-        webSocketChat.send(message)
+        props.webSocketChat?.send(message)
         setMessage('')
     }
     return <div>
@@ -86,7 +99,7 @@ const ChatForm = () => {
         </textarea></div>
         <div><button
             onClick={sendMessageChat}
-            disabled={readyStatus !== 'ready'}
+            disabled={props.webSocketChat === null || readyStatus !== 'ready'}
         >Send</button></div>
     </div>
 }
