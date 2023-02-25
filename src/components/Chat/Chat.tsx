@@ -64,7 +64,14 @@ const MessageChat: FC<PropsType> = (props) => {
 }
 
 const ChatForm = () => {
-    let [message, setMessage] = useState('')
+    let [message, setMessage] = useState<string>('')
+    let [readyStatus, setReadyStatus] = useState<'ready' | 'pending'>('pending')
+
+    useEffect(() => {
+        webSocketChat.addEventListener('open', () => {
+            setReadyStatus('pending')
+        })
+    }, [])
     let sendMessageChat = () => {
         if (!message){
             return;
@@ -79,7 +86,7 @@ const ChatForm = () => {
         </textarea></div>
         <div><button
             onClick={sendMessageChat}
-            disabled={webSocketChat.readyState !== webSocketChat.OPEN}
+            disabled={readyStatus !== 'ready'}
         >Send</button></div>
     </div>
 }
