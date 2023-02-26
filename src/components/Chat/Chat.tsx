@@ -15,7 +15,6 @@ type MessagesChatType = {
 
 const Chat: React.FC = () => {
     const [webSocketChat, setWebSocketChat] = useState<WebSocket | null>(null)
-
     useEffect(() => {
         let ws: WebSocket
         const wsCloseHandler = () => {
@@ -24,6 +23,7 @@ const Chat: React.FC = () => {
         }
 
         function connectWebSocket() {
+            debugger
             ws?.removeEventListener('close', wsCloseHandler)
             ws?.close()
             ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
@@ -49,23 +49,20 @@ export default withAuthNavigate(Chat)
 
 const MessagesChat: React.FC<{ webSocketChat: WebSocket | null }> = ({webSocketChat}) => {
     const messages = useAppSelector(state => state.chat.messages)
-    let [messagesChat, setMessagesChat] = useState<MessagesChatType[]>(messages)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
         let wsMessageHandler = (e: MessageEvent) => {
             let newMessagesChat = JSON.parse(e.data)
-            console.log(messagesChat)
-            setMessagesChat((prev) => [...prev, ...newMessagesChat])
+            console.log(messages)
             dispatch(setMessagesChatActionCreator(newMessagesChat))
         }
         webSocketChat?.addEventListener('message', wsMessageHandler)
-        console.log(messagesChat)
         return () => {
             webSocketChat?.removeEventListener('message', wsMessageHandler)
         }
-    }, [messagesChat, webSocketChat])
-    return <div className={s.messagesChat}>{messagesChat.map((m: MessagesChatType, index) =>
+    }, [messages, webSocketChat])
+    return <div className={s.messagesChat}>{messages.map((m: MessagesChatType, index) =>
         <MessageChat
             key={index}
             userId={m.userId}

@@ -28,6 +28,9 @@ grid-area: avatar;
     border-radius: 0 10px 10px 10px;
     border: #0e2121 solid 2px;
     color: #0e2121;
+    align-content: center;
+    text-align: center;
+    height: min-content;
 }
 
 .name {
