@@ -49,20 +49,22 @@ export default withAuthNavigate(Chat)
 
 const MessagesChat: React.FC<{ webSocketChat: WebSocket | null }> = ({webSocketChat}) => {
     const messages = useAppSelector(state => state.chat.messages)
+    let [messagesChat, setMessagesChat] = useState(messages)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
         let wsMessageHandler = (e: MessageEvent) => {
             let newMessagesChat = JSON.parse(e.data)
-            console.log(messages)
+            console.log(messagesChat)
+            setMessagesChat([...newMessagesChat])
             dispatch(setMessagesChatActionCreator(newMessagesChat))
         }
         webSocketChat?.addEventListener('message', wsMessageHandler)
         return () => {
             webSocketChat?.removeEventListener('message', wsMessageHandler)
         }
-    }, [messages, webSocketChat])
-    return <div className={s.messagesChat}>{messages.map((m: MessagesChatType, index) =>
+    }, [messagesChat, webSocketChat])
+    return <div className={s.messagesChat}>{messagesChat.map((m: MessagesChatType, index) =>
         <MessageChat
             key={index}
             userId={m.userId}
