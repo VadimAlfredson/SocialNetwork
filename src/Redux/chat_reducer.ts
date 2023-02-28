@@ -16,7 +16,7 @@ const todosSlice = createSlice({
             setMessagesChatActionCreator(state, action) {
                 return {
                     ...state,
-                    messages: [...state.messages, ...action.payload]
+                    messages: action.payload
                 }
             },
         }
@@ -43,4 +43,7 @@ const newMessageHandlerCreator = (dispatch: Dispatch<any>) => {
 
 export const getMessagesChatThunkCreator = () => async (dispatch: Dispatch<any>) => {
     chatApi.subscribe(newMessageHandlerCreator(dispatch))
+}
+export const sendMessageChatThunkCreator = (message: string) => async (dispatch: Dispatch<any>) => {
+    chatApi.sendMessageChat(message)
 }

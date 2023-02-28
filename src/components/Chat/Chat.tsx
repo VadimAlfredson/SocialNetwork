@@ -2,7 +2,7 @@ import React, {FC, useEffect, useState} from "react";
 import s from './Chat.module.css'
 import {withAuthNavigate} from "../hoc/witAuthNavigate";
 import {useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
-import {setMessagesChatActionCreator} from "../../Redux/chat_reducer";
+import {getMessagesChatThunkCreator, setMessagesChatActionCreator} from "../../Redux/chat_reducer";
 import {NavLink} from "react-router-dom";
 
 
@@ -14,57 +14,27 @@ type MessagesChatType = {
 }
 
 const Chat: React.FC = () => {
-    const [webSocketChat, setWebSocketChat] = useState<WebSocket | null>(null)
+    const dispatch = useAppDispatch()
     useEffect(() => {
-        let ws: WebSocket
-        const wsCloseHandler = () => {
-            console.log('close ws')
-            setTimeout(connectWebSocket, 3000)
-        }
-
-        function connectWebSocket() {
-            debugger
-            ws?.removeEventListener('close', wsCloseHandler)
-            ws?.close()
-            ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
-            ws.addEventListener('close', wsCloseHandler)
-            setWebSocketChat(ws)
-        }
-
-        connectWebSocket()
-
+        dispatch(getMessagesChatThunkCreator())
         return () => {
-            ws.removeEventListener('close', wsCloseHandler)
-            ws.close()
+            dispatch(getMessagesChatThunkCreator())
         }
     }, [])
 
     return <div>
-        <MessagesChat webSocketChat={webSocketChat}/>
-        <ChatForm webSocketChat={webSocketChat}/>
+        <MessagesChat/>
+        <ChatForm/>
     </div>
 }
 
 export default withAuthNavigate(Chat)
 
-const MessagesChat: React.FC<{ webSocketChat: WebSocket | null }> = ({webSocketChat}) => {
+const MessagesChat: React.FC<{  }> = ({}) => {
     const messages = useAppSelector(state => state.chat.messages)
-    let [messagesChat, setMessagesChat] = useState(messages)
-    const dispatch = useAppDispatch()
-
     useEffect(() => {
-        let wsMessageHandler = (e: MessageEvent) => {
-            let newMessagesChat = JSON.parse(e.data)
-            console.log(messagesChat)
-            setMessagesChat([...newMessagesChat])
-            dispatch(setMessagesChatActionCreator(newMessagesChat))
-        }
-        webSocketChat?.addEventListener('message', wsMessageHandler)
-        return () => {
-            webSocketChat?.removeEventListener('message', wsMessageHandler)
-        }
-    }, [messagesChat, webSocketChat])
-    return <div className={s.messagesChat}>{messagesChat.map((m: MessagesChatType, index) =>
+    }, [messages])
+    return <div className={s.messagesChat}>{messages.map((m: MessagesChatType, index) =>
         <MessageChat
             key={index}
             userId={m.userId}
@@ -94,10 +64,12 @@ const MessageChat: FC<PropsType> = (props) => {
     </div>
 }
 
-const ChatForm: React.FC<{ webSocketChat: WebSocket | null }> = ({webSocketChat}) => {
+const ChatForm: React.FC<{}> = ({}) => {
     let [message, setMessage] = useState<string>('')
     let [readyStatus, setReadyStatus] = useState<'ready' | 'pending'>('pending')
 
+    const dispatch = useAppDispatch()
+/*
     useEffect(() => {
         let wsOpenHandler = () => {
             setReadyStatus('ready')
@@ -107,13 +79,13 @@ const ChatForm: React.FC<{ webSocketChat: WebSocket | null }> = ({webSocketChat}
             webSocketChat?.removeEventListener('open', wsOpenHandler)
         }
     }, [webSocketChat])
+
+    }*/
     let sendMessageChat = () => {
         if (!message) {
-            return;
+            dispatch(setMessagesChatActionCreator(message))
         }
-        webSocketChat?.send(message)
-        setMessage('')
-    }
+        setMessage('')}
     return <div>
         <div><textarea
             onChange={e => setMessage(e.target.value)}
@@ -122,7 +94,7 @@ const ChatForm: React.FC<{ webSocketChat: WebSocket | null }> = ({webSocketChat}
         <div>
             <button
                 onClick={sendMessageChat}
-                disabled={webSocketChat === null || readyStatus !== 'ready'}
+                disabled={false}
             >Send
             </button>
         </div>

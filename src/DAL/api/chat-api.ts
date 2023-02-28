@@ -11,7 +11,7 @@ export type SubscriberChatType = (messages: MessagesChatType[]) => void
 
 let subscribers = [] as SubscriberChatType[]
 
-let ws: WebSocket
+let ws: WebSocket | null = null
 const wsCloseHandler = () => {
     console.log('close ws')
     setTimeout(connectWebSocket, 3000)
@@ -28,13 +28,18 @@ function connectWebSocket() {
     ws?.close()
     ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
     ws.addEventListener('close', wsCloseHandler)
+    ws.addEventListener('message', wsMessageHandler)
 }
 
 export const chatApi = {
     subscribe(callback: SubscriberChatType) {
+        connectWebSocket()
         subscribers.push(callback)
         return () => {
             subscribers.filter(s => s !== callback)
         }
+    },
+    sendMessageChat(message: string){
+      ws?.send(message)
     }
 }
