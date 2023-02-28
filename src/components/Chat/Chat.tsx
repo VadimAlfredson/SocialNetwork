@@ -2,7 +2,11 @@ import React, {FC, useEffect, useState} from "react";
 import s from './Chat.module.css'
 import {withAuthNavigate} from "../hoc/witAuthNavigate";
 import {useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
-import {getMessagesChatThunkCreator, setMessagesChatActionCreator} from "../../Redux/chat_reducer";
+import {
+    startMessagesChatThunkCreator,
+    setMessagesChatActionCreator,
+    stopMessagesChatThunkCreator, sendMessageChatThunkCreator
+} from "../../Redux/chat_reducer";
 import {NavLink} from "react-router-dom";
 
 
@@ -16,9 +20,9 @@ type MessagesChatType = {
 const Chat: React.FC = () => {
     const dispatch = useAppDispatch()
     useEffect(() => {
-        dispatch(getMessagesChatThunkCreator())
+        dispatch(startMessagesChatThunkCreator())
         return () => {
-            dispatch(getMessagesChatThunkCreator())
+            dispatch(stopMessagesChatThunkCreator())
         }
     }, [])
 
@@ -82,8 +86,9 @@ const ChatForm: React.FC<{}> = ({}) => {
 
     }*/
     let sendMessageChat = () => {
-        if (!message) {
-            dispatch(setMessagesChatActionCreator(message))
+        debugger
+        if (message !== '') {
+            dispatch(sendMessageChatThunkCreator(message))
         }
         setMessage('')}
     return <div>

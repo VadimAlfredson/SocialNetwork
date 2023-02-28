@@ -16,7 +16,7 @@ const todosSlice = createSlice({
             setMessagesChatActionCreator(state, action) {
                 return {
                     ...state,
-                    messages: action.payload
+                    messages: [...state.messages, ...action.payload]
                 }
             },
         }
@@ -25,7 +25,7 @@ const todosSlice = createSlice({
 )
 
 export const {
-    setMessagesChatActionCreator
+    setMessagesChatActionCreator,
 } = todosSlice.actions
 export default todosSlice.reducer
 
@@ -41,9 +41,15 @@ const newMessageHandlerCreator = (dispatch: Dispatch<any>) => {
     return newMessageHandler
 }
 
-export const getMessagesChatThunkCreator = () => async (dispatch: Dispatch<any>) => {
+export const startMessagesChatThunkCreator = () => (dispatch: Dispatch<any>) => {
+    chatApi.start()
     chatApi.subscribe(newMessageHandlerCreator(dispatch))
 }
-export const sendMessageChatThunkCreator = (message: string) => async (dispatch: Dispatch<any>) => {
+
+export const stopMessagesChatThunkCreator = () => (dispatch: Dispatch<any>) => {
+    chatApi.stop()
+    chatApi.unsubscribe(newMessageHandlerCreator(dispatch))
+}
+export const sendMessageChatThunkCreator = (message: string) => (dispatch: Dispatch<any>) => {
     chatApi.sendMessageChat(message)
 }

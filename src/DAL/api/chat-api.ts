@@ -1,5 +1,3 @@
-
-
 export type MessagesChatType = {
     userId: number,
     userName: string,
@@ -20,10 +18,9 @@ const wsCloseHandler = () => {
 let wsMessageHandler = (e: MessageEvent) => {
     let newMessagesChat = JSON.parse(e.data)
     subscribers.forEach(s => s(newMessagesChat))
-    }
+}
 
 function connectWebSocket() {
-    debugger
     ws?.removeEventListener('close', wsCloseHandler)
     ws?.close()
     ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
@@ -32,14 +29,21 @@ function connectWebSocket() {
 }
 
 export const chatApi = {
-    subscribe(callback: SubscriberChatType) {
+    start() {
         connectWebSocket()
-        subscribers.push(callback)
-        return () => {
-            subscribers.filter(s => s !== callback)
-        }
     },
-    sendMessageChat(message: string){
-      ws?.send(message)
+    stop() {
+        ws?.removeEventListener('close', wsCloseHandler)
+        ws?.removeEventListener('message', wsMessageHandler)
+        ws?.close()
+    },
+    subscribe(callback: SubscriberChatType) {
+        subscribers.push(callback)
+    },
+    unsubscribe(callback: SubscriberChatType) {
+        subscribers.filter(s => s !== callback)
+    },
+    sendMessageChat(message: string) {
+        ws?.send(message)
     }
 }
