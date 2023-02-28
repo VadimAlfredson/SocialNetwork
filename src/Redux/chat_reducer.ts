@@ -1,13 +1,9 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {Dispatch} from "react";
 import {dialogsApi} from "../DAL/api/api";
+import {chatApi, MessagesChatType} from "../DAL/api/chat-api";
+import {InferThunkActionCreatorType} from "react-redux";
 
-export type MessagesChatType = {
-    userId: number,
-    userName: string,
-    message: string,
-    photo: string
-}
 
 
 const todosSlice = createSlice({
@@ -19,7 +15,8 @@ const todosSlice = createSlice({
         reducers: {
             setMessagesChatActionCreator(state, action) {
                 return {
-                    messages: action.payload
+                    ...state,
+                    messages: [...state.messages, ...action.payload]
                 }
             },
         }
@@ -32,9 +29,18 @@ export const {
 } = todosSlice.actions
 export default todosSlice.reducer
 
-/*
-export const getDialogsThunkCreator = () => async (dispatch: Dispatch<any>) => {
-    let response = await dialogsApi.getDialogs()
-    dispatch(setDialogs(response))
+
+
+let newMessageHandler: ((messages: MessagesChatType[]) => void) | null = null
+const newMessageHandlerCreator = (dispatch: Dispatch<any>) => {
+    if (newMessageHandler === null){
+        newMessageHandler = (messages) => {
+            dispatch(setMessagesChatActionCreator(messages))
+        }
+    }
+    return newMessageHandler
 }
-*/
+
+export const getMessagesChatThunkCreator = () => async (dispatch: Dispatch<any>) => {
+    chatApi.subscribe(newMessageHandlerCreator(dispatch))
+}
