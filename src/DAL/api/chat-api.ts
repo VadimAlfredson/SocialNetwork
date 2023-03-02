@@ -15,14 +15,19 @@ const wsCloseHandler = () => {
     setTimeout(connectWebSocket, 3000)
 }
 
+const cleanUp = () => {
+    ws?.removeEventListener('close', wsCloseHandler)
+    ws?.removeEventListener('message', wsMessageHandler)
+    ws?.close()
+}
+
 let wsMessageHandler = (e: MessageEvent) => {
     let newMessagesChat = JSON.parse(e.data)
     subscribers.forEach(s => s(newMessagesChat))
 }
 
 function connectWebSocket() {
-    ws?.removeEventListener('close', wsCloseHandler)
-    ws?.close()
+    cleanUp()
     ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
     ws.addEventListener('close', wsCloseHandler)
     ws.addEventListener('message', wsMessageHandler)
@@ -33,9 +38,8 @@ export const chatApi = {
         connectWebSocket()
     },
     stop() {
-        ws?.removeEventListener('close', wsCloseHandler)
-        ws?.removeEventListener('message', wsMessageHandler)
-        ws?.close()
+        subscribers = []
+        cleanUp()
     },
     subscribe(callback: SubscriberChatType) {
         subscribers.push(callback)
