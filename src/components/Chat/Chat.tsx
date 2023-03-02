@@ -5,7 +5,7 @@ import {useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
 import {
     startMessagesChatThunkCreator,
     setMessagesChatActionCreator,
-    stopMessagesChatThunkCreator, sendMessageChatThunkCreator
+    stopMessagesChatThunkCreator, sendMessageChatThunkCreator, statusWSType
 } from "../../Redux/chat_reducer";
 import {NavLink} from "react-router-dom";
 
@@ -70,8 +70,9 @@ const MessageChat: FC<PropsType> = (props) => {
 
 const ChatForm: React.FC<{}> = ({}) => {
     let [message, setMessage] = useState<string>('')
-    let [readyStatus, setReadyStatus] = useState<'ready' | 'pending'>('pending')
 
+const statusWS = useAppSelector(state => state.chat.status)
+    let [readyStatus, setReadyStatus] = useState<statusWSType>(statusWS)
     const dispatch = useAppDispatch()
 /*
     useEffect(() => {

@@ -4,12 +4,13 @@ import {dialogsApi} from "../DAL/api/api";
 import {chatApi, MessagesChatType} from "../DAL/api/chat-api";
 import {InferThunkActionCreatorType} from "react-redux";
 
-
+export type statusWSType = 'ready' | 'pending'
 
 const todosSlice = createSlice({
         name: 'chat',
         initialState: {
-            messages: [] as MessagesChatType[]
+            messages: [] as MessagesChatType[],
+            status: "pending" as statusWSType
 
         },
         reducers: {
@@ -19,6 +20,18 @@ const todosSlice = createSlice({
                     messages: [...state.messages, ...action.payload]
                 }
             },
+            deleteMessageAtUnmountAC(state, action){
+              return {
+                  ...state,
+                  messages: [...action.payload]
+              }
+            },
+            getStatusWS(state, action) {
+                return {
+                    ...state,
+                    status: action.payload
+                }
+            }
         }
 
     }
@@ -26,6 +39,8 @@ const todosSlice = createSlice({
 
 export const {
     setMessagesChatActionCreator,
+    deleteMessageAtUnmountAC,
+    getStatusWS,
 } = todosSlice.actions
 export default todosSlice.reducer
 
@@ -49,6 +64,7 @@ export const startMessagesChatThunkCreator = () => (dispatch: Dispatch<any>) => 
 export const stopMessagesChatThunkCreator = () => (dispatch: Dispatch<any>) => {
     chatApi.stop()
     chatApi.unsubscribe(newMessageHandlerCreator(dispatch))
+    dispatch(deleteMessageAtUnmountAC([]))
 }
 export const sendMessageChatThunkCreator = (message: string) => (dispatch: Dispatch<any>) => {
     chatApi.sendMessageChat(message)
