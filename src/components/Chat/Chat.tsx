@@ -34,7 +34,7 @@ const Chat: React.FC = () => {
 
 export default withAuthNavigate(Chat)
 
-const MessagesChat: React.FC<{  }> = ({}) => {
+const MessagesChat: React.FC<{}> = ({}) => {
     const messages = useAppSelector(state => state.chat.messages)
     useEffect(() => {
     }, [messages])
@@ -69,29 +69,17 @@ const MessageChat: FC<PropsType> = (props) => {
 }
 
 const ChatForm: React.FC<{}> = ({}) => {
-    let [message, setMessage] = useState<string>('')
 
-const statusWS = useAppSelector(state => state.chat.status)
-    let [readyStatus, setReadyStatus] = useState<statusWSType>(statusWS)
+    const statusWS = useAppSelector(state => state.chat.status)
     const dispatch = useAppDispatch()
-/*
-    useEffect(() => {
-        let wsOpenHandler = () => {
-            setReadyStatus('ready')
-        }
-        webSocketChat?.addEventListener('open', wsOpenHandler)
-        return () => {
-            webSocketChat?.removeEventListener('open', wsOpenHandler)
-        }
-    }, [webSocketChat])
-
-    }*/
+    let [message, setMessage] = useState<string>('')
     let sendMessageChat = () => {
         debugger
         if (message !== '') {
             dispatch(sendMessageChatThunkCreator(message))
         }
-        setMessage('')}
+        setMessage('')
+    }
     return <div>
         <div><textarea
             onChange={e => setMessage(e.target.value)}
@@ -100,7 +88,7 @@ const statusWS = useAppSelector(state => state.chat.status)
         <div>
             <button
                 onClick={sendMessageChat}
-                disabled={false}
+                disabled={statusWS !== 'ready'}
             >Send
             </button>
         </div>

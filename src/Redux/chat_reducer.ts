@@ -55,15 +55,26 @@ const newMessageHandlerCreator = (dispatch: Dispatch<any>) => {
     }
     return newMessageHandler
 }
-
-export const startMessagesChatThunkCreator = () => (dispatch: Dispatch<any>) => {
-    chatApi.start()
-    chatApi.subscribe(newMessageHandlerCreator(dispatch))
+let newStatusHandler: ((status: statusWSType) => void) | null = null
+const newStatusHandlerCreator = (dispatch: Dispatch<any>) => {
+    if (newStatusHandler === null){
+        newStatusHandler = (status) => {
+            dispatch(getStatusWS(status))
+        }
+    }
+    return newMessageHandler
 }
 
-export const stopMessagesChatThunkCreator = () => (dispatch: Dispatch<any>) => {
+export const startMessagesChatThunkCreator = () => async (dispatch: Dispatch<any>) => {
+    chatApi.start()
+    chatApi.subscribe('messages-received', newMessageHandlerCreator(dispatch))
+    chatApi.subscribe('status-changed', newStatusHandlerCreator(dispatch))
+}
+
+export const stopMessagesChatThunkCreator = () => async (dispatch: Dispatch<any>) => {
+    chatApi.unsubscribe('messages-received', newMessageHandlerCreator(dispatch))
+    chatApi.unsubscribe('status-changed', newStatusHandlerCreator(dispatch))
     chatApi.stop()
-    chatApi.unsubscribe(newMessageHandlerCreator(dispatch))
     dispatch(deleteMessageAtUnmountAC([]))
 }
 export const sendMessageChatThunkCreator = (message: string) => (dispatch: Dispatch<any>) => {
