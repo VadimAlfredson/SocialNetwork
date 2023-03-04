@@ -62,7 +62,7 @@ const newStatusHandlerCreator = (dispatch: Dispatch<any>) => {
             dispatch(getStatusWS(status))
         }
     }
-    return newMessageHandler
+    return newStatusHandler
 }
 
 export const startMessagesChatThunkCreator = () => async (dispatch: Dispatch<any>) => {
