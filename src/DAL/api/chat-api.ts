@@ -62,9 +62,11 @@ export const chatApi = {
         cleanUp()
     },
     subscribe(eventName: EventNameType, callback: SubscriberMessagesChatType | SubscriberStatusChatType) {
+        // @ts-ignore
         subscribers[eventName].push(callback)
     },
     unsubscribe(eventName: EventNameType, callback: SubscriberMessagesChatType | SubscriberStatusChatType) {
+        // @ts-ignore
         subscribers[eventName] = subscribers[eventName].filter(s => s !== callback)
     },
     sendMessageChat(message: string) {

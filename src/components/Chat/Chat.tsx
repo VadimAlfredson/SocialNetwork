@@ -38,9 +38,9 @@ const MessagesChat: React.FC<{}> = ({}) => {
     const refScrollBottom = useRef<HTMLDivElement>(null)
     const messages = useAppSelector(state => state.chat.messages)
     useEffect(() => {
-        refScrollBottom.current?.scrollIntoView({behavior: 'smooth'})
+        refScrollBottom.current?.scrollIntoView({behavior: 'smooth', block: 'end'})
     }, [messages])
-    return <div><div className={s.messagesChat}>{messages.map((m: MessagesChatType, index) =>
+    return <div className={s.messagesChat}><div>{messages.map((m: MessagesChatType, index) =>
         <MessageChat
             key={index}
             userId={m.userId}
