@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from "react";
+import React, {FC, useEffect, useRef, useState} from "react";
 import s from './Chat.module.css'
 import {withAuthNavigate} from "../hoc/witAuthNavigate";
 import {useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
@@ -35,10 +35,12 @@ const Chat: React.FC = () => {
 export default withAuthNavigate(Chat)
 
 const MessagesChat: React.FC<{}> = ({}) => {
+    const refScrollBottom = useRef<HTMLDivElement>(null)
     const messages = useAppSelector(state => state.chat.messages)
     useEffect(() => {
+        refScrollBottom.current?.scrollIntoView({behavior: 'smooth'})
     }, [messages])
-    return <div className={s.messagesChat}>{messages.map((m: MessagesChatType, index) =>
+    return <div><div className={s.messagesChat}>{messages.map((m: MessagesChatType, index) =>
         <MessageChat
             key={index}
             userId={m.userId}
@@ -47,6 +49,10 @@ const MessagesChat: React.FC<{}> = ({}) => {
             name={m.userName}
         />
     )}</div>
+        <div
+        ref={refScrollBottom}
+        ></div>
+    </div>
 }
 
 
