@@ -42,6 +42,7 @@ grid-area: name;
 .chatForm {
     display: grid;
     grid-gap: 10px;
+    margin: 0 3%;
     grid-template-areas: "input button";
     grid-template-columns: minmax(400px, min-content) 100px;
 }
@@ -76,4 +77,19 @@ grid-area: name;
     background-color: rgba(84, 84, 84, 0.24);
     color: #a9a9a9;
     border: #545454;
+}
+
+@media screen and (max-width: 500px) {
+    .chatForm {
+        grid-template-columns: 80% 14%;
+        margin: 0 3%;
+    }
+    .buttonSend {
+        padding: 10px 5px;
+    }
+}
+@media screen and (max-height: 500px) {
+    .messagesChat {
+        height: 300px;
+    }
 }
