@@ -126,6 +126,11 @@
     margin: auto;
 }
 
+.statusEditImg {
+    margin-left: 10px;
+    width: 20px;
+}
+
 @media screen and (max-width: 530px) {
     .profileClass {
         display: grid;
