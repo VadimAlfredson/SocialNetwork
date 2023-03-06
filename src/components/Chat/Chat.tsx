@@ -86,13 +86,15 @@ const ChatForm: React.FC<{}> = ({}) => {
         }
         setMessage('')
     }
-    return <div>
+    return <div className={s.chatForm}>
         <div><textarea
+            className={s.chatInput}
             onChange={e => setMessage(e.target.value)}
             value={message}>
         </textarea></div>
         <div>
             <button
+                className={statusWS === 'ready' ? s.buttonSend : s.buttonSendDisabled}
                 onClick={sendMessageChat}
                 disabled={statusWS !== 'ready'}
             >Send

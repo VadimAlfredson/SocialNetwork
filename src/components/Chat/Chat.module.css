@@ -37,5 +37,43 @@ grid-area: avatar;
 grid-area: name;
     text-decoration: none;
     color: rgba(169, 169, 169, 0.84);
+}
 
+.chatForm {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-areas: "input button";
+    grid-template-columns: minmax(400px, min-content) 100px;
+}
+
+.chatInput {
+    grid-area: input;
+    border-radius: 5px;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.buttonSend {
+    grid-area: button;
+    border-radius: 5px;
+    border: black 1px solid;
+    background-color: azure;
+    color: black;
+    padding: 10px;
+}
+
+.buttonSend:hover{
+    background-color: #530000;
+    color: azure;
+}
+.buttonSend:active{
+    background-color: #a9a9a9;
+    color: #530000;
+}
+
+.buttonSendDisabled {
+    grid-area: button;
+    background-color: rgba(84, 84, 84, 0.24);
+    color: #a9a9a9;
+    border: #545454;
 }
