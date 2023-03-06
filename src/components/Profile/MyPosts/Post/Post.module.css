@@ -3,7 +3,7 @@
     grid-template-areas:
 "img message ."
 "img message like";
-    grid-template-columns: min-content min-content min-content;
+    grid-template-columns: 100px minmax(min-content, 400px) 100px;
     grid-template-rows: 1fr 1fr;
     color: azure;
     margin: 0 auto auto auto;
@@ -21,13 +21,13 @@
 .messageBlock {
     display: inline-block;
     grid-area: message;
-    width: max-content;
     color: black;
     margin-top: 25px;
     margin-left: 1%;
 }
 
 .message {
+    display: inline-block;
     color: black;
     background-color: azure;
     border-radius: 0 10px 10px 10px;

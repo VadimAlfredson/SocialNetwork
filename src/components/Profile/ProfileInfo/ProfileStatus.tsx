@@ -16,7 +16,8 @@ export const ProfileStatus: FC<PropsType> = (props) => {
 
     let deactivateEditMode = () => {
         setEditMode(false)
-        dispatch(putStatusThunkCreator(status))
+        if (status !== props.status) {
+        dispatch(putStatusThunkCreator(status))}
     }
 
     let [status, setStatus] = useState(props.status)
