@@ -26,13 +26,6 @@
     grid-template-columns: 60px 1fr;
 }
 
-.header img {
-    height: 40px;
-    width: 40px;
-    float: left;
-    border-radius: 50%;
-    margin: auto;
-}
 
 .h2 {
     display: inline-block;
@@ -50,11 +43,17 @@
 }
 
 .loginBlock button {
+    background-color: rgba(84, 84, 84, 0);
+    border: rgba(84, 84, 84, 0);
     height: 50px;
     width: 50px;
-    background-color: rgba(0, 66, 66, 0.58);
-    color: azure;
     margin: auto;
+}
+
+.logoutIcon {
+    margin: auto;
+    height: 30px;
+    width: 30px;
 }
 
 .ownerInfo {
@@ -68,6 +67,10 @@
 }
 
 .ownerInfo img {
+    height: 40px;
+    width: 40px;
+    float: left;
+    border-radius: 50%;
     margin: auto;
     border: black solid 1px;
 }
@@ -97,14 +100,6 @@
         grid-template-columns: 60px 1fr;
     }
 
-    .header img {
-        height: 40px;
-        width: 40px;
-        float: left;
-        border-radius: 50%;
-        margin: auto;
-    }
-
     .h2 {
         display: none;
         margin: auto;
@@ -118,14 +113,6 @@
 
     .loginBlock div {
         margin: auto 10px auto auto;
-    }
-
-    .loginBlock button {
-        height: 50px;
-        width: 50px;
-        background-color: rgba(169, 169, 169, 0.43);
-        color: black;
-        margin: auto;
     }
 
     .ownerInfo {

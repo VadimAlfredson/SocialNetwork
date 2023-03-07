@@ -18,8 +18,12 @@ const Header: FC<PropsType> = (props) => {
         </div>
         <div className={s.log}>
             {props.isAuth ?
-                <div className={s.loginBlock}><div className={s.ownerInfo}><div>{props.login}</div><img src={ownerPhoto}/></div>
-                <button onClick={props.logoutThunkCreator}>Log out</button>
+                <div className={s.loginBlock}><div className={s.ownerInfo}><div>{props.login}</div>
+                    <img src={ownerPhoto} alt={'logout'}/>
+                </div>
+                <button onClick={props.logoutThunkCreator}>
+                    <img className={s.logoutIcon}  src={process.env.PUBLIC_URL + '/free-icon-exit-320140.png'}/>
+                </button>
                 </div> : <NavLink className={s.login} to={'/login'}>login</NavLink>}
         </div>
     </header>;
