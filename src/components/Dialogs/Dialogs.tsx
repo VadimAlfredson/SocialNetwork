@@ -29,6 +29,8 @@ const Dialogs = () => {
     const companionId: number | null = useAppSelector(state => state.dialogs.companionId)
     const ownerPhoto: string = useAppSelector(state => state.auth.ownerPhoto)
 
+    const [dialogsCount, setDialogsCount] = useState(10)
+
     const dispatch = useAppDispatch()
 
 
@@ -62,12 +64,12 @@ const Dialogs = () => {
     useEffect(() => {
         let dialogsArr = [] as dialogsType[]
         if (dialogs.length > 0){
-        for (let i = 0; i < (dialogs.length > 9 ? 9 : dialogs.length); i++) {
+        for (let i = 0; i < (dialogs.length > dialogsCount ? dialogsCount : dialogs.length); i++) {
             dialogsArr.push(dialogs[i])
         }}
         setDialogsState(dialogsArr)
         console.log(dialogsArr)
-    }, [dialogs, dialogId])
+    }, [dialogs, dialogId, dialogsCount])
 
     let dialogUsers =
         dialogs[0] ?
@@ -98,8 +100,12 @@ const Dialogs = () => {
             ) : <div><h3 className={s.h3text}>start chatting first</h3></div>
     return (
         <div className={s.dialogs}>
+            <div>
+                <NavLink to={'/users'} className={s.addDialog}>Add dialog</NavLink>
             <div className={s.dialogsUsers}>
                 {dialogUsers}
+            </div>{(dialogsCount < dialogs.length) &&
+                <div className={s.getMoreDialogs} onClick={() => setDialogsCount(dialogsCount => dialogsCount + 5)}>Get more dialogs</div>}
             </div>
 
             <div className={s.messages}>
