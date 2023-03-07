@@ -34,8 +34,8 @@ export const ProfileStatus: FC<PropsType> = (props) => {
         <div>  {
             !editMode &&
                 <div>
-            <span>{props.status || 'status'}</span>
-                    <span onClick={activeStatusInput} ><img className={s.statusEditImg} src={process.env.PUBLIC_URL + '/free-icon-edit-button-84380.png'}/></span>
+            <span>{props.status || ''}</span>
+                    <span onClick={activeStatusInput} >{!props.isOwner && <img className={s.statusEditImg} src={process.env.PUBLIC_URL + '/free-icon-edit-button-84380.png'}/>}</span>
                 </div>
             }
             {editMode &&
