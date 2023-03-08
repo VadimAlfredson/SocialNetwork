@@ -21,13 +21,14 @@ const Post = (props: { message: string, likeCount: number, ownerLike: boolean, i
                  src='https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'/>
             <div className={s.messageBlock}>
                 <div className={s.message}>{props.message}</div>
+                <div className={likeActive ? s.likeActive : s.like}>{likeCount}<img
+                    className={s.likeIcon}
+                    src={likeActive ? process.env.PUBLIC_URL + '/likeActive.png' : process.env.PUBLIC_URL + '/like.png'}
+                    onClick={() => onClickChange()}
+                    alt={'like'}/>
+                </div>
             </div>
-            <div className={likeActive ? s.likeActive : s.like}>{likeCount}<img
-                className={s.likeIcon}
-                src={likeActive ? process.env.PUBLIC_URL + '/likeActive.png' : process.env.PUBLIC_URL + '/like.png'}
-                onClick={() => onClickChange()}
-                alt={'like'}/>
-            </div>
+
         </div>
     )
 }

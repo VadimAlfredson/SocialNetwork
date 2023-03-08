@@ -1,13 +1,13 @@
 .post {
     display: grid;
     grid-template-areas:
-"img message ."
-"img message like";
-    grid-template-columns: 100px minmax(min-content, 400px) 100px;
+"img message"
+"img message";
+    grid-template-columns: 100px minmax(min-content, 400px);
     grid-template-rows: 1fr 1fr;
     color: azure;
-    margin: 0 auto auto auto;
     grid-gap: 10px;
+    margin: 0 0 15px 0;
 }
 
 .img {
@@ -22,7 +22,7 @@
     display: inline-block;
     grid-area: message;
     color: black;
-    margin-top: 25px;
+    margin-top: 15px;
     margin-left: 1%;
 }
 
@@ -39,6 +39,7 @@
     grid-area: like;
     width: max-content;
     margin-left: 0;
+    color: azure;
 }
 
 .likeActive {
