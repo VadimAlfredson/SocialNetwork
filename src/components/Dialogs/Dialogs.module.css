@@ -28,15 +28,16 @@
     text-decoration: none;
 }
 .getMoreDialogs {
+    display: block;
     padding: 5px;
     border: solid 1px rgba(0, 0, 0, 0.26);
     margin: 1px;
     border-radius: 5px 5px 80% 80%;
     text-align: center;
-    background-color: rgb(169, 169, 169);
-    color: #000000;
-    display: block;
+    background-color: rgb(0, 60, 60);
+    color: azure;
     text-decoration: none;
+    text-shadow: #0e2121 5px 5px 5px;
 }
 .addDialog {
     padding: 5px;
@@ -44,10 +45,11 @@
     margin: 1px;
     border-radius: 5px;
     text-align: center;
-    background-color: rgb(169, 169, 169);
-    color: #000000;
+    background-color: rgb(0, 60, 60);
+    color: azure;
     display: block;
     text-decoration: none;
+    text-shadow: #0e2121 5px 5px 5px;
 }
 
 .dialogItem:hover {
@@ -345,7 +347,7 @@
 @media screen and (max-width: 479px) {
     .dialogs {
         display: grid;
-        margin: 10px auto;
+        margin: 10px 2.5%;
         grid-area: content;
         align-content: center;
         grid-template-columns: 100%;
@@ -356,20 +358,33 @@
         border-radius: 10px;
         margin: 0 auto;
         height: auto;
-        width: 94%;
+        width: 100%;
+    }
+
+    .getMoreDialogs {
+        width: 95%;
+        margin: 0.2% 2.5%;
+        padding: 5px 0;
+        display: inline-block;
+    }
+    .addDialog {
+        width: 95%;
+        margin: 0.2% 2.5%;
+        padding: 5px 0;
+        display: inline-block;
     }
 
     .dialogItem {
         padding: 5px 0;
         border: solid 1px rgba(0, 0, 0, 0.26);
-        margin: 0.2% 1%;
+        margin: 0.2% 2.5%;
         border-radius: 5px;
         text-align: center;
         background-color: azure;
         color: #0e2121;
         display: inline-block;
         text-decoration: none;
-        width: 30%;
+        width: 95%;
     }
 
     .dialogItem:hover {
@@ -379,7 +394,7 @@
     .active {
         padding: 5px 0;
         border: solid 1px rgba(0, 0, 0, 0.26);
-        margin: 0.2% 1%;
+        margin: 0.2% 2.5%;
         border-radius: 5px;
         text-align: center;
         background-color: #5f0000;
@@ -387,7 +402,7 @@
         text-shadow: #0e2121;;
         display: inline-block;
         text-decoration: none;
-        width: 30%;
+        width: 95%;
     }
 
     .titleMessages {
