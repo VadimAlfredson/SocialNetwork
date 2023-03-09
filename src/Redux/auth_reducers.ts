@@ -20,6 +20,7 @@ type userDataType = {
     captchaURL: string
     messageError: string
     ownerPhoto: string
+    defaultPhoto: string
 }
 
 const todosSlice = createSlice({
@@ -31,7 +32,8 @@ const todosSlice = createSlice({
         isAuth: false,
         captchaURL: '',
         messageError: '',
-        ownerPhoto: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
+        ownerPhoto: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg',
+        defaultPhoto: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
     } as userDataType,
     reducers: {
         SetUserData(state: userDataType, action: PayloadAction<SetUserDataType>) {

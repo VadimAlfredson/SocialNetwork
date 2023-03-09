@@ -1,6 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import s from './Header.module.css';
 import {NavLink} from "react-router-dom";
+import {useAppSelector} from "../../Redux/reduxStore";
 
 type PropsType = {
     photo: string
@@ -10,8 +11,13 @@ type PropsType = {
 }
 
 const Header: FC<PropsType> = (props) => {
+    const defaultPhoto = useAppSelector(state => state.auth.defaultPhoto)
     let [ownerPhoto, setOwnerPhoto] = useState(props.photo)
-    useEffect( () => {setOwnerPhoto(props.photo)}, [props.photo])
+    useEffect( () => {
+        if (props.photo) {
+        setOwnerPhoto(props.photo)}
+        else {setOwnerPhoto(defaultPhoto)}
+    }, [props.photo])
     return <header className={s.header}>
         <div className={s.logoBlock}>
         <h2 className={s.h2}>Social Network</h2>

@@ -15,6 +15,7 @@ export const MessagesItem = (props: {
     messageId: string
     recipientId: number
 }) => {
+    const defaultPhoto = useAppSelector(state => state.auth.defaultPhoto)
     let [editMessage, setEditMessage] = useState(false)
     let [deleteMessage, setDeleteMessage] = useState(false)
     let message = props.message
@@ -23,7 +24,7 @@ export const MessagesItem = (props: {
         .replace(/&#187;/gi, `"`)
         .replace(/&#39;/gi, `'`)
     console.log(props.senderId)
-    let senderIcon = props.senderId === props.OwnerId ? props.ownerPhoto : props.companionIcon
+    let senderIcon = props.senderId === props.OwnerId ? (props.ownerPhoto || defaultPhoto) : props.companionIcon
 
 
     return <div className={editMessage || deleteMessage ? s.activeMessage : s.none}>
