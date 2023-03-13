@@ -1,10 +1,9 @@
 import React, {FC, useEffect, useState} from "react";
 import {Formik} from "formik";
 import * as yup from "yup";
-import {connect} from "react-redux";
 import {loginThunkCreator} from "../../Redux/reducers/auth_reducers";
 import {Navigate} from "react-router-dom";
-import {RootState, useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
+import {useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
 import s from './login.module.css';
 
 
@@ -16,7 +15,7 @@ const LoginForm: FC = (props) => {
     
     const [state, setState] = useState<string>('')
     useEffect(() => {
-        state != messageError ? setState(messageError) : console.log('useEffect')
+        state !== messageError ? setState(messageError) : console.log('useEffect')
     }, [messageError, captchaURL])
     if (isAuth) {
         return <Navigate to={"/profile/"}/>
@@ -97,8 +96,8 @@ const LoginForm: FC = (props) => {
                     </div>
                 }
                 <button
-                    className={(touched.email && !errors.email && touched.password && !errors.password) ? s.buttonLogin : s.buttonDisable}
-                    disabled={!isValid && !dirty}
+                    className={(!errors.email && !errors.password) ? s.buttonLogin : s.buttonDisable}
+                    disabled={!isValid}
                     onClick={() => {
                         handleSubmit()
                     }}

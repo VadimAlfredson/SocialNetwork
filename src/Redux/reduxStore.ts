@@ -9,7 +9,6 @@ import subscriptionsReducer from "./reducers/subscriptions_reducers"
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 
 
-
 let store = configureStore({
     reducer: {
         profile: profileReducer,
