@@ -7,10 +7,11 @@ import {
 } from "../../Redux/reducers/profile_reducer";
 import s from "./Setting.module.css"
 import {RootState, useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
+import {getProfile} from "../../Redux/selectors/profile_selectors";
 
 
 const ProfileInfoForm: React.FC<{}> = () => {
-    const profile = useAppSelector(state => state.profile.profile)
+    const profile = useAppSelector(getProfile)
     const dispatch = useAppDispatch()
     let [disabledSave, setDisabledSave] = useState(true)
 

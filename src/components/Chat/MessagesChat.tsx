@@ -3,10 +3,11 @@ import {useAppSelector} from "../../Redux/reduxStore";
 import s from "./Chat.module.css";
 import {MessagesChatType} from "../../DAL/api/chat-api";
 import MessageChat from "./Message";
+import {getMessages} from "../../Redux/selectors/chat_selectors";
 
 const MessagesChat: React.FC<{}> = ({}) => {
     const refScrollBottom = useRef<HTMLDivElement>(null)
-    const messages = useAppSelector(state => state.chat.messages)
+    const messages = useAppSelector(getMessages)
     useEffect(() => {
         refScrollBottom.current?.scrollIntoView({behavior: 'smooth', block: 'end'})
     }, [messages])

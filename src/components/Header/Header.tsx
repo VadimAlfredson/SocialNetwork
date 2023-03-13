@@ -2,6 +2,7 @@ import React, {FC, useEffect, useState} from 'react';
 import s from './Header.module.css';
 import {NavLink} from "react-router-dom";
 import {useAppSelector} from "../../Redux/reduxStore";
+import {getDefaultPhoto} from "../../Redux/selectors/auth_selectors";
 
 type PropsType = {
     photo: string
@@ -11,7 +12,7 @@ type PropsType = {
 }
 
 const Header: FC<PropsType> = (props) => {
-    const defaultPhoto = useAppSelector(state => state.auth.defaultPhoto)
+    const defaultPhoto = useAppSelector(getDefaultPhoto)
     let [ownerPhoto, setOwnerPhoto] = useState(props.photo)
     useEffect( () => {
         if (props.photo) {

@@ -1,26 +1,26 @@
 import {RootState} from "../reduxStore";
 
-export const users = (state: RootState) => {
+export const getUsers = (state: RootState) => {
     return state.users.users
 }
-export const pageSize = (state: RootState) => {
+export const getPageSize = (state: RootState) => {
     return state.users.pageSize
 }
-export const totalUsersCount = (state: RootState) => {
+export const getTotalUsersCount = (state: RootState) => {
     return state.users.totalUsersCount
 }
-export const currentPage = (state: RootState) => {
+export const getCurrentPage = (state: RootState) => {
     return state.users.currentPage
 }
-export const isFetching = (state: RootState) => {
+export const isFetchingSelector = (state: RootState) => {
     return state.users.isFetching
 }
-export const followingInProgress = (state: RootState) => {
+export const getFollowingInProgress = (state: RootState) => {
     return state.users.followingInProgress
 }
-export const term = (state: RootState) => {
+export const getTerm = (state: RootState) => {
     return state.users.term
 }
-export const friends = (state: RootState) => {
+export const getFriends = (state: RootState) => {
     return state.users.friends
 }

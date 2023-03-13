@@ -3,14 +3,14 @@ import s from './Setting.module.css';
 import ProfileInfoForm from "./formProfileInfo";
 import {useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
 import {savePhotoTC} from "../../Redux/reducers/profile_reducer";
+import {getProfile} from "../../Redux/selectors/profile_selectors";
 
 type PropsType = {
-    savePhotoTC: (photo: any) => void
     defaultPhoto: string
 }
 const Setting = (props: PropsType) => {
     const dispatch = useAppDispatch()
-    const profile =  useAppSelector(state => state.profile.profile)
+    const profile =  useAppSelector(getProfile)
     const onMainPhotoSelected = (e: any) => {
         if (e.target.files.length) {
             dispatch(savePhotoTC(e.target.files[0]))

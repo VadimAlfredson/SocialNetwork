@@ -1,24 +1,21 @@
 import {RootState} from "../reduxStore";
 
-export const dialogs = (state: RootState) => {
+export const getDialogs = (state: RootState) => {
     return state.dialogs.dialogs
 }
-export const messages = (state: RootState) => {
+export const getMessages = (state: RootState) => {
     return state.dialogs.messages
 }
-export const dialogId = (state: RootState) => {
+export const getDialogId = (state: RootState) => {
     return state.dialogs.dialogId
 }
-export const companionIcon = (state: RootState) => {
+export const getCompanionIcon = (state: RootState) => {
     return state.dialogs.companionIcon
 }
-export const companionId = (state: RootState) => {
+export const getCompanionId = (state: RootState) => {
     return state.dialogs.companionId
 }
-export const companionName = (state: RootState) => {
+export const getCompanionName = (state: RootState) => {
     return state.dialogs.companionName
-}
-export const defaultPhoto = (state: RootState) => {
-    return state.dialogs.defaultPhoto
 }
 

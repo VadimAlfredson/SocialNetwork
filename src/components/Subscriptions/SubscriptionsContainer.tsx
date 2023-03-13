@@ -7,6 +7,7 @@ import {
 } from "../../Redux/reducers/users_reducers";
 import Preloader from "../common/Preloader/Preloader";
 import {getSubscriptionsThunkCreator} from "../../Redux/reducers/subscriptions_reducers";
+import {getUpdateSubscriptions} from "../../Redux/selectors/subscriptions_selectors";
 
 type PropsType = {
     getSubscriptionsThunkCreator: (friend: boolean) => void
@@ -16,7 +17,7 @@ type PropsType = {
 
 const SubscriptionsContainer: FC<PropsType> = (props) => {
 
-    const updateSubscriptions = useAppSelector(state => state.subscriptions.updateSubscriptions)
+    const updateSubscriptions = useAppSelector(getUpdateSubscriptions)
     useEffect(() => {
         props.getSubscriptionsThunkCreator(true)
     }, [])

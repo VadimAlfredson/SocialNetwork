@@ -5,23 +5,19 @@ import {RootState, useAppDispatch, useAppSelector} from "../../Redux/reduxStore"
 import {savePhotoTC, userProfileThunkCreator} from "../../Redux/reducers/profile_reducer";
 import {compose} from "redux";
 import {withAuthNavigate} from "../hoc/witAuthNavigate";
+import {getDefaultPhoto, getOwnerId} from "../../Redux/selectors/auth_selectors";
+import {getProfile} from "../../Redux/selectors/profile_selectors";
 
-type PropsType = {
-    ownerId: number
-    userId: number
-    userProfileThunkCreator: (userId: number) => void
-    savePhotoTC: (photo: any) => void
-    defaultPhoto: string
-}
-const SettingContainer: FC<PropsType> = (props) => {
+const SettingContainer: FC<{}> = () => {
     const dispatch = useAppDispatch()
-    const ownerId = useAppSelector(state => state.auth.userId)
-    const userId = useAppSelector(state => state.profile.profile.userId)
+    const ownerId = useAppSelector(getOwnerId)
+    const profile = useAppSelector(getProfile)
+    const defaultPhoto = useAppSelector(getDefaultPhoto)
     useEffect(() => {
-        (ownerId !== userId) && dispatch(userProfileThunkCreator(props.ownerId))
+        (ownerId !== profile.userId) && dispatch(userProfileThunkCreator(ownerId))
     }, [])
     return (
-        <Setting savePhotoTC={props.savePhotoTC} defaultPhoto={props.defaultPhoto}/>
+        <Setting defaultPhoto={defaultPhoto}/>
     )
 }
 

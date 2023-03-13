@@ -1,26 +1,26 @@
 import {RootState} from "../reduxStore";
 
-export const userId = (state: RootState) => {
+export const getOwnerId = (state: RootState) => {
     return state.auth.userId
 }
-export const email = (state: RootState) => {
+export const getEmail = (state: RootState) => {
     return state.auth.email
 }
-export const defaultPhoto = (state: RootState) => {
+export const getDefaultPhoto = (state: RootState) => {
     return state.auth.defaultPhoto
 }
-export const login = (state: RootState) => {
+export const getLogin = (state: RootState) => {
     return state.auth.login
 }
-export const isAuth = (state: RootState) => {
+export const isAuthSelector = (state: RootState) => {
     return state.auth.isAuth
 }
-export const captchaURL = (state: RootState) => {
+export const getCaptchaURL = (state: RootState) => {
     return state.auth.captchaURL
 }
-export const messageError = (state: RootState) => {
+export const getMessageError = (state: RootState) => {
     return state.auth.messageError
 }
-export const ownerPhoto = (state: RootState) => {
+export const getOwnerPhoto = (state: RootState) => {
     return state.auth.ownerPhoto
 }

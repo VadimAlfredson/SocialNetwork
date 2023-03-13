@@ -1,8 +1,12 @@
 import React, {FC} from 'react';
 import s from './Subscriptions.module.css';
-import {setCurrentPage, setSearchFriends, UserType} from "../../Redux/reducers/users_reducers";
+import {UserType} from "../../Redux/reducers/users_reducers";
 import {NavLink} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
+import {
+    getSubscriptions,
+    totalCountSubscriptionsSelector
+} from "../../Redux/selectors/subscriptions_selectors";
 
 
 
@@ -10,12 +14,10 @@ let Subscriptions: FC<{}> = (props) => {
     const dispatch = useAppDispatch()
 
     let onClickSearchSubscriptions = () => {
-        /*return dispatch(setSearchFriends(true))
-        dispatch(setCurrentPage(1))*/
     }
 
-    const subscriptions = useAppSelector(state => state.subscriptions.subscriptions)
-    const totalCountSubscriptions = useAppSelector(state => state.subscriptions.totalCountSubscriptions)
+    const subscriptions = useAppSelector(getSubscriptions)
+    const totalCountSubscriptions = useAppSelector(totalCountSubscriptionsSelector)
 
 
     return <div className={s.friends}>

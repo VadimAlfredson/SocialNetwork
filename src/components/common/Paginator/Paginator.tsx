@@ -1,6 +1,13 @@
 import React, {FC, useEffect, useState} from "react";
 import s from "../Paginator/paginator.module.css"
 import {useAppSelector} from "../../../Redux/reduxStore";
+import {
+    getCurrentPage,
+    getFriends,
+    getPageSize,
+    getTerm,
+    getTotalUsersCount
+} from "../../../Redux/selectors/users_selectors";
 
 type PropsType = {
     onPageChange: (p: number, pageSize: number, term: string, friend?: boolean) => void
@@ -8,11 +15,11 @@ type PropsType = {
 
 let Paginator: FC<PropsType> = (props) => {
 
-    const pageSize = useAppSelector(state => state.users.pageSize)
-    const totalUsersCount = useAppSelector(state => state.users.totalUsersCount)
-    const currentPage = useAppSelector(state => state.users.currentPage)
-    const term = useAppSelector(state => state.users.term)
-    const friend = useAppSelector(state => state.users.friends)
+    const pageSize = useAppSelector(getPageSize)
+    const totalUsersCount = useAppSelector(getTotalUsersCount)
+    const currentPage = useAppSelector(getCurrentPage)
+    const term = useAppSelector(getTerm)
+    const friend = useAppSelector(getFriends)
 
     let [activePage, setActivePage] = useState(1)
     let firstPage = activePage > 2 ? activePage - 2 : activePage > 1 ? activePage -1 : 1

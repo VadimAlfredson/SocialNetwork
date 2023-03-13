@@ -14,19 +14,26 @@ import {
 } from "../../Redux/reducers/dialogs_reducer";
 import {NavLink} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
+import {
+    getCompanionIcon, getCompanionId,
+    getCompanionName,
+    getDialogId,
+    getDialogs,
+    getMessages
+} from "../../Redux/selectors/dialogs_selectors";
+import {getDefaultPhoto, getOwnerId, getOwnerPhoto} from "../../Redux/selectors/auth_selectors";
 
 
 const Dialogs = () => {
-    const dialogs: dialogsType[] = useAppSelector(state => state.dialogs.dialogs)
-    const messages: messageType[] = useAppSelector(state => state.dialogs.messages)
-    const isAuth: boolean = useAppSelector(state => state.auth.isAuth)
-    const dialogId: number = useAppSelector(state => state.dialogs.dialogId)
-    const OwnerId: number = useAppSelector(state => state.auth.userId)
-    const defaultPhoto: string = useAppSelector(state => state.dialogs.defaultPhoto)
-    const companionIcon: string = useAppSelector(state => state.dialogs.companionIcon)
-    const companionName: string = useAppSelector(state => state.dialogs.companionName)
-    const companionId: number | null = useAppSelector(state => state.dialogs.companionId)
-    const ownerPhoto: string = useAppSelector(state => state.auth.ownerPhoto)
+    const dialogs: dialogsType[] = useAppSelector(getDialogs)
+    const messages: messageType[] = useAppSelector(getMessages)
+    const dialogId: number = useAppSelector(getDialogId)
+    const OwnerId: number = useAppSelector(getOwnerId)
+    const defaultPhoto: string = useAppSelector(getDefaultPhoto)
+    const companionIcon: string = useAppSelector(getCompanionIcon)
+    const companionName: string = useAppSelector(getCompanionName)
+    const companionId: number | null = useAppSelector(getCompanionId)
+    const ownerPhoto: string = useAppSelector(getOwnerPhoto)
 
     const [dialogsCount, setDialogsCount] = useState(10)
 
@@ -95,6 +102,7 @@ const Dialogs = () => {
                         onDeleteMessageChange={onDeleteMessageChange}
                         messageId={m.id}
                         recipientId={m.recipientId}
+                        defaultPhoto={defaultPhoto}
                     />
             ) : <div><h3 className={s.h3text}>start chatting first</h3></div>
     return (

@@ -1,20 +1,17 @@
 import {RootState} from "../reduxStore";
 
-export const profile = (state: RootState) => {
+export const getProfile = (state: RootState) => {
     return state.profile.profile
 }
-export const posts = (state: RootState) => {
+export const getPosts = (state: RootState) => {
     return state.profile.posts
 }
-export const newPostText = (state: RootState) => {
+export const getNewPostText = (state: RootState) => {
     return state.profile.newPostText
 }
-export const status = (state: RootState) => {
+export const getStatusProfile = (state: RootState) => {
     return state.profile.status
 }
-export const follow = (state: RootState) => {
+export const getFollow = (state: RootState) => {
     return state.profile.follow
-}
-export const defaultPhoto = (state: RootState) => {
-    return state.profile.defaultPhoto
 }

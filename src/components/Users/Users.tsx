@@ -7,22 +7,26 @@ import Preloader from "../common/Preloader/Preloader";
 import {putDialogUserThunkCreator} from "../../Redux/reducers/dialogs_reducer";
 import FormSearchUsers from "./formSearchUsers";
 import {useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
-
-type paramsType = {
-    key: string
-    value: string
-}
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getFriends, getPageSize,
+    getTerm,
+    getUsers,
+    isFetchingSelector
+} from "../../Redux/selectors/users_selectors";
+import {isAuthSelector} from "../../Redux/selectors/auth_selectors";
 
 
 let Users: FC = (props) => {
-    const users = useAppSelector(state => state.users.users)
-    const followingInProgress = useAppSelector(state => state.users.followingInProgress)
-    const isAuth = useAppSelector(state => state.auth.isAuth)
-    const isFetching = useAppSelector(state => state.users.isFetching)
-    const term = useAppSelector(state => state.users.term)
-    const friends = useAppSelector(state => state.users.friends)
-    const pageSize = useAppSelector(state => state.users.pageSize)
-    const currentPage = useAppSelector(state => state.users.currentPage)
+    const users = useAppSelector(getUsers)
+    const followingInProgress = useAppSelector(getFollowingInProgress)
+    const isAuth = useAppSelector(isAuthSelector)
+    const isFetching = useAppSelector(isFetchingSelector)
+    const term = useAppSelector(getTerm)
+    const friends = useAppSelector(getFriends)
+    const pageSize = useAppSelector(getPageSize)
+    const currentPage = useAppSelector(getCurrentPage)
 
     let [pageNumber, setPageNumber] = useState(currentPage)
 

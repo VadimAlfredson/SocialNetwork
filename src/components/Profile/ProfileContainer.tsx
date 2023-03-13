@@ -20,6 +20,8 @@ import {compose} from "redux";
 import {withAuthNavigate} from "../hoc/witAuthNavigate";
 import {getSubscriptionsThunkCreator} from "../../Redux/reducers/subscriptions_reducers";
 import {putDialogUserThunkCreator} from "../../Redux/reducers/dialogs_reducer";
+import {getFollow, getProfile, getStatusProfile} from "../../Redux/selectors/profile_selectors";
+import {getOwnerId} from "../../Redux/selectors/auth_selectors";
 
 /*function withRouter(Component: FC) {
     function ComponentWithRouterProp(props: any) {
@@ -46,10 +48,10 @@ const ProfileContainer = () => {
     let id: number = Number(userId)
     console.log(useParams())
     const dispatch = useAppDispatch()
-    const profile = useAppSelector(state => state.profile.profile)
-    const status = useAppSelector(state => state.profile.status)
-    const follow = useAppSelector(state => state.profile.follow)
-    const authorizedUserId = useAppSelector((state => state.auth.userId))
+    const profile = useAppSelector(getProfile)
+    const status = useAppSelector(getStatusProfile)
+    const follow = useAppSelector(getFollow)
+    const authorizedUserId = useAppSelector((getOwnerId))
     console.log(userId)
     useEffect(() => {
         if (!id) {id = authorizedUserId}

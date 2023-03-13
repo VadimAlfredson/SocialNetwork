@@ -1,5 +1,4 @@
 import React, {useEffect} from "react";
-import s from './Chat.module.css'
 import {withAuthNavigate} from "../hoc/witAuthNavigate";
 import {useAppDispatch} from "../../Redux/reduxStore";
 import {
@@ -9,13 +8,6 @@ import {
 import MessagesChat from "./MessagesChat";
 import ChatForm from "./AddMessageFormChst";
 
-
-type MessagesChatType = {
-    userId: number,
-    userName: string,
-    message: string,
-    photo: string
-}
 
 const Chat: React.FC = () => {
     const dispatch = useAppDispatch()

@@ -1,11 +1,11 @@
 import {RootState} from "../reduxStore";
 
-export const subscriptions = (state: RootState) => {
+export const getSubscriptions = (state: RootState) => {
     return state.subscriptions.subscriptions
 }
-export const updateSubscriptions = (state: RootState) => {
+export const getUpdateSubscriptions = (state: RootState) => {
     return state.subscriptions.updateSubscriptions
 }
-export const totalCountSubscriptions = (state: RootState) => {
+export const totalCountSubscriptionsSelector = (state: RootState) => {
     return state.subscriptions.totalCountSubscriptions
 }

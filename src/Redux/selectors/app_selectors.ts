@@ -1,5 +1,5 @@
 import {RootState} from "../reduxStore";
 
-export const initialized = (state: RootState) => {
+export const initializedSelector = (state: RootState) => {
     return state.app.initialized
 }

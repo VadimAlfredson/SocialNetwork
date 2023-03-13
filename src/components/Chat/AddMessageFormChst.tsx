@@ -2,10 +2,11 @@ import React, {useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
 import {sendMessageChatThunkCreator} from "../../Redux/reducers/chat_reducer";
 import s from "./Chat.module.css";
+import {getStatus} from "../../Redux/selectors/chat_selectors";
 
 const ChatForm: React.FC<{}> = ({}) => {
 
-    const statusWS = useAppSelector(state => state.chat.status)
+    const statusWS = useAppSelector(getStatus)
     const dispatch = useAppDispatch()
     let [message, setMessage] = useState<string>('')
     let sendMessageChat = () => {
