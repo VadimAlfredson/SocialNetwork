@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {
     ProfileThunkCreator,
     userProfileThunkCreator,
-} from "../../Redux/profile_reducer";
+} from "../../Redux/reducers/profile_reducer";
 import s from "./Setting.module.css"
 import {RootState, useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
 

@@ -5,7 +5,7 @@ import {useAppDispatch} from "../../Redux/reduxStore";
 import {
     startMessagesChatThunkCreator,
     stopMessagesChatThunkCreator,
-} from "../../Redux/chat_reducer";
+} from "../../Redux/reducers/chat_reducer";
 import MessagesChat from "./MessagesChat";
 import ChatForm from "./AddMessageFormChst";
 

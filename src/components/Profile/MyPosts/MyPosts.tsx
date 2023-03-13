@@ -1,7 +1,7 @@
 import React, {Dispatch, FC, useEffect} from 'react'
 import Post from './Post/Post'
 import s from './MyPosts.module.css'
-import {postsType} from "../../../Redux/profile_reducer";
+import {postsType} from "../../../Redux/reducers/profile_reducer";
 import {MyPostsForm} from "./MyPostsForm";
 
 type PropsType = {

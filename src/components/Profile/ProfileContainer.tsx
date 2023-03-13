@@ -9,7 +9,7 @@ import {
     savePhotoTC,
     getFollowThunkCreator,
     onFollowProfileChangeThunkCreator,
-} from "../../Redux/profile_reducer";
+} from "../../Redux/reducers/profile_reducer";
 import {RootState, useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
 import {
     useLocation,
@@ -18,8 +18,8 @@ import {
 } from "react-router-dom";
 import {compose} from "redux";
 import {withAuthNavigate} from "../hoc/witAuthNavigate";
-import {getSubscriptionsThunkCreator} from "../../Redux/subscriptions_reducers";
-import {putDialogUserThunkCreator} from "../../Redux/dialogs_reducer";
+import {getSubscriptionsThunkCreator} from "../../Redux/reducers/subscriptions_reducers";
+import {putDialogUserThunkCreator} from "../../Redux/reducers/dialogs_reducer";
 
 /*function withRouter(Component: FC) {
     function ComponentWithRouterProp(props: any) {

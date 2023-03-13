@@ -11,7 +11,7 @@ import {
     messageType,
     postMessageToUserThunkCreator,
     setCompanionIconAndNameAC,
-} from "../../Redux/dialogs_reducer";
+} from "../../Redux/reducers/dialogs_reducer";
 import users from "../Users/Users";
 import {NavLink} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../Redux/reduxStore";

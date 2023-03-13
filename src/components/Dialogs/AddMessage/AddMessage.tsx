@@ -1,5 +1,5 @@
 import React from "react";
-import {dialogsPageType} from "../../../Redux/dialogs_reducer";
+import {dialogsPageType} from "../../../Redux/reducers/dialogs_reducer";
 import {AddMessageForm} from "./AddMessageForm";
 
 export const AddMessage = (props: {

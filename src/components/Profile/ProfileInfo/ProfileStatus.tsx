@@ -1,7 +1,7 @@
 import s from './../Profile.module.css';
 import React, {ChangeEvent, FC, useEffect, useState} from 'react';
 import {useAppDispatch} from "../../../Redux/reduxStore";
-import {putStatusThunkCreator} from "../../../Redux/profile_reducer";
+import {putStatusThunkCreator} from "../../../Redux/reducers/profile_reducer";
 
 type PropsType = {
     status: string

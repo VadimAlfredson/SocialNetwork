@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import s from './Post.module.css';
 import {useAppDispatch, useAppSelector} from "../../../../Redux/reduxStore";
-import {setLikePostActionCreator} from "../../../../Redux/profile_reducer";
+import {setLikePostActionCreator} from "../../../../Redux/reducers/profile_reducer";
 
 const Post = (props: { message: string, likeCount: number, ownerLike: boolean, id: number}) => {
     let [likeActive, setLikeActive] = useState<boolean>(props.ownerLike)

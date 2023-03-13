@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import s from "../Dialogs.module.css";
-import {dialogsType} from "../../../Redux/dialogs_reducer";
+import {dialogsType} from "../../../Redux/reducers/dialogs_reducer";
 import dialogs from "../Dialogs";
 import {useAppSelector} from "../../../Redux/reduxStore";
 

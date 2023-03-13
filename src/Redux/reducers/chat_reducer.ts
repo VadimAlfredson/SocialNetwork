@@ -1,7 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {Dispatch} from "react";
-import {dialogsApi} from "../DAL/api/api";
-import {chatApi, MessagesChatType} from "../DAL/api/chat-api";
+import {dialogsApi} from "../../DAL/api/api";
+import {chatApi, MessagesChatType} from "../../DAL/api/chat-api";
 import {InferThunkActionCreatorType} from "react-redux";
 
 export type statusWSType = 'ready' | 'pending'

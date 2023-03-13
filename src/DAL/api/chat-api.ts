@@ -1,4 +1,4 @@
-import {statusWSType} from "../../Redux/chat_reducer";
+import {statusWSType} from "../../Redux/reducers/chat_reducer";
 
 export type MessagesChatType = {
     userId: number,

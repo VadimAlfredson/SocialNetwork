@@ -1,10 +1,10 @@
 import React, {FC, useEffect, useState} from "react";
-import {onChangeUsersThunkCreator, onFollowChangeThunkCreator, UserType} from "../../Redux/users_reducers";
+import {onChangeUsersThunkCreator, onFollowChangeThunkCreator, UserType} from "../../Redux/reducers/users_reducers";
 import s from "../Users/users.module.css"
 import {NavLink, useLocation, useNavigate} from "react-router-dom";
 import Paginator from "../common/Paginator/Paginator";
 import Preloader from "../common/Preloader/Preloader";
-import {putDialogUserThunkCreator} from "../../Redux/dialogs_reducer";
+import {putDialogUserThunkCreator} from "../../Redux/reducers/dialogs_reducer";
 import FormSearchUsers from "./formSearchUsers";
 import {useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
 

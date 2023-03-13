@@ -1,7 +1,7 @@
 import React, {Dispatch} from 'react'
 import Post from './Post/Post'
 import s from './MyPosts.module.css'
-import {profilePageType} from "../../../Redux/profile_reducer";
+import {profilePageType} from "../../../Redux/reducers/profile_reducer";
 import {Formik} from "formik";
 
 export const MyPostsForm = React.memo((props: {

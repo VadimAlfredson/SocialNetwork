@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import Header from "./Header";
 import {connect} from "react-redux";
-import {logoutThunkCreator} from "../../Redux/auth_reducers";
+import {logoutThunkCreator} from "../../Redux/reducers/auth_reducers";
 import {RootState} from "../../Redux/reduxStore";
 
 type PropsType = {

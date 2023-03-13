@@ -4,9 +4,9 @@ import {connect} from "react-redux";
 import {RootState, useAppSelector} from "../../Redux/reduxStore";
 import {
     UserType,
-} from "../../Redux/users_reducers";
+} from "../../Redux/reducers/users_reducers";
 import Preloader from "../common/Preloader/Preloader";
-import {getSubscriptionsThunkCreator} from "../../Redux/subscriptions_reducers";
+import {getSubscriptionsThunkCreator} from "../../Redux/reducers/subscriptions_reducers";
 
 type PropsType = {
     getSubscriptionsThunkCreator: (friend: boolean) => void

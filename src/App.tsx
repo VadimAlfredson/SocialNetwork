@@ -4,7 +4,7 @@ import Navbar from './components/Navbar/Navbar';
 import {Routes, Route, Navigate} from 'react-router-dom';
 import HeaderContainer from "./components/Header/HeaderContainer";
 import {connect} from "react-redux";
-import {InitializeAppTC} from "./Redux/app_reducers";
+import {InitializeAppTC} from "./Redux/reducers/app_reducers";
 import Preloader from "./components/common/Preloader/Preloader";
 import {useAppDispatch, useAppSelector} from "./Redux/reduxStore";
 

@@ -2,7 +2,7 @@ import React, {FC, useEffect, useState} from 'react';
 import s from './../Profile.module.css';
 import Preloader from "../../common/Preloader/Preloader";
 import {ProfileStatus} from "./ProfileStatus";
-import {ProfileType} from "../../../Redux/profile_reducer";
+import {ProfileType} from "../../../Redux/reducers/profile_reducer";
 import {NavLink} from "react-router-dom";
 import profile from "../Profile";
 

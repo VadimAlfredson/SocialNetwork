@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import s from './Subscriptions.module.css';
-import {setCurrentPage, setSearchFriends, UserType} from "../../Redux/users_reducers";
+import {setCurrentPage, setSearchFriends, UserType} from "../../Redux/reducers/users_reducers";
 import {NavLink} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
 

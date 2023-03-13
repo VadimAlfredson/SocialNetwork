@@ -2,7 +2,7 @@ import React from "react";
 import s from './Setting.module.css';
 import ProfileInfoForm from "./formProfileInfo";
 import {useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
-import {savePhotoTC} from "../../Redux/profile_reducer";
+import {savePhotoTC} from "../../Redux/reducers/profile_reducer";
 
 type PropsType = {
     savePhotoTC: (photo: any) => void

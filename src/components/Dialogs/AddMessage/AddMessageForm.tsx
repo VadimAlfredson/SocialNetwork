@@ -1,5 +1,5 @@
 import React from "react";
-import {dialogsPageType} from "../../../Redux/dialogs_reducer";
+import {dialogsPageType} from "../../../Redux/reducers/dialogs_reducer";
 import s from "../Dialogs.module.css";
 import {Formik} from "formik";
 import * as yup from "yup";

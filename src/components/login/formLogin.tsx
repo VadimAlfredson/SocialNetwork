@@ -2,7 +2,7 @@ import React, {FC, useEffect, useState} from "react";
 import {Formik} from "formik";
 import * as yup from "yup";
 import {connect} from "react-redux";
-import {loginThunkCreator} from "../../Redux/auth_reducers";
+import {loginThunkCreator} from "../../Redux/reducers/auth_reducers";
 import {Navigate} from "react-router-dom";
 import {RootState, useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
 import s from './login.module.css';

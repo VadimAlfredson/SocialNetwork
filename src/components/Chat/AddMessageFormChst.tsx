@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
-import {sendMessageChatThunkCreator} from "../../Redux/chat_reducer";
+import {sendMessageChatThunkCreator} from "../../Redux/reducers/chat_reducer";
 import s from "./Chat.module.css";
 
 const ChatForm: React.FC<{}> = ({}) => {

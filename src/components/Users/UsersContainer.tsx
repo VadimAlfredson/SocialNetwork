@@ -12,9 +12,9 @@ import {
     getUsersThunkCreator,
     onChangeUsersThunkCreator,
     onFollowChangeThunkCreator, UserType,
-} from "../../Redux/users_reducers";
+} from "../../Redux/reducers/users_reducers";
 import {compose} from "redux";
-import {putDialogUserThunkCreator} from "../../Redux/dialogs_reducer";
+import {putDialogUserThunkCreator} from "../../Redux/reducers/dialogs_reducer";
 
 
 const UsersContainer: FC<{}> = (props) => {
