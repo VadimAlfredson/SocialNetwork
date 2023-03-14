@@ -4,6 +4,7 @@ import {DialogItem} from "./DialogItem/DialogItem";
 import {MessagesItem} from "./MessagesItem/MessagesItem";
 import {AddMessage} from "./AddMessage/AddMessage";
 import {
+    deleteMessagesUnmountThunkCreator,
     deleteMessageThunkCreator,
     dialogsType,
     getDialogsThunkCreator,
@@ -41,13 +42,13 @@ const Dialogs = () => {
 
 
     let onDeleteMessageChange = (messageId: string, userId: number) => {
-        debugger
         dispatch(deleteMessageThunkCreator(messageId, userId))
     }
 
 
     useEffect(() => {
         dispatch(getDialogsThunkCreator())
+        return () => {dispatch(deleteMessagesUnmountThunkCreator())}
     }, [])
 
     let getCompanionIconAndName = (userId: number) => {

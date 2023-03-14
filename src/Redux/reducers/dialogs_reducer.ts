@@ -88,6 +88,12 @@ const todosSlice = createSlice({
                     messages: action.payload
                 }
             },
+            delMessagesOnUnmountAC(state, action: PayloadAction<[]>) {
+                return {
+                    ...state,
+                    messages: action.payload
+                }
+            },
             setDialogIdAC(state, action: PayloadAction<number>) {
                 return {
                     ...state,
@@ -133,6 +139,7 @@ export const {
     postMessagesToUserAC,
     setCompanionIconAndNameAC,
     deleteMessageAC,
+    delMessagesOnUnmountAC,
 
 } = todosSlice.actions
 export default todosSlice.reducer
@@ -159,6 +166,9 @@ export const getMessagesUserThunkCreator = (userId: number) => async (dispatch: 
     let response = await dialogsApi.getMessagesUser(userId)
     dispatch(getMessagesUserAC(response.items))
     dispatch(setDialogIdAC(userId))
+}
+export const deleteMessagesUnmountThunkCreator = () => async (dispatch: Dispatch<any>) => {
+    dispatch(delMessagesOnUnmountAC([]))
 }
 
 export const postMessageToUserThunkCreator = (userId: number, bodyMessage: string) => async (dispatch: Dispatch<any>) => {
