@@ -5,6 +5,8 @@ import {ProfileStatus} from "./ProfileStatus";
 import {ProfileType} from "../../../Redux/reducers/profile_reducer";
 import {NavLink} from "react-router-dom";
 import profile from "../Profile";
+import {useAppSelector} from "../../../Redux/reduxStore";
+import {getOwnerId} from "../../../Redux/selectors/auth_selectors";
 
 type PropsType = {
     profile: ProfileType
@@ -16,6 +18,7 @@ type PropsType = {
 }
 
 const ProfileInfo: FC<PropsType> = (props) => {
+    const ownerId = useAppSelector(getOwnerId)
     let [showFullPhoto, setShowFullPhoto] = useState(false)
 
     useEffect(() => {setShowFullPhoto(false)}, [props.profile.userId])
@@ -36,14 +39,14 @@ const ProfileInfo: FC<PropsType> = (props) => {
         <div className={s.profileInfo}>
             <div className={s.name}><b>{props.profile.fullName}</b></div>
             <div className={s.status}>
-                <ProfileStatus status={props.status} isOwner={props.isOwner}/>
+                <ProfileStatus status={props.status} isOwner={props.isOwner} ownerId={ownerId} userId={props.profile.userId}/>
             </div>
-            <div className={s.editMode}>{props.isOwner &&
+            <div className={s.editMode}>{(ownerId !== props.profile.userId) && props.isOwner &&
                 <button className={props.follow ? s.buttonUnfollow : s.buttonFollow} onClick={() => {
                     props.onFollowProfileChange(props.profile.userId, props.follow)
                 }}>{props.follow ? 'Unfollow' : 'Follow'}</button>}
             </div>
-            <div className={s.editMode}>{props.isOwner &&
+            <div className={s.editMode}>{(ownerId !== props.profile.userId) && props.isOwner &&
                 <NavLink to={"/dialogs/" + props.profile.userId} className={s.buttonFollow} onClick={() => {
                     props.onPutDialogOnProfileChange(props.profile.userId)
                 }}>Send message</NavLink>}

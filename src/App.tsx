@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 import {InitializeAppTC} from "./Redux/reducers/app_reducers";
 import Preloader from "./components/common/Preloader/Preloader";
 import {useAppDispatch, useAppSelector} from "./Redux/reduxStore";
+import Footer from "./components/Footer/Footer";
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'))
@@ -56,6 +57,7 @@ const App = () => {
                         </div>
                     </div>
                 </div>
+                <Footer />
             </div>
         );
 }

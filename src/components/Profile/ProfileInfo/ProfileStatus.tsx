@@ -6,6 +6,8 @@ import {putStatusThunkCreator} from "../../../Redux/reducers/profile_reducer";
 type PropsType = {
     status: string
     isOwner: boolean
+    ownerId: number
+    userId: number
 }
 
 export const ProfileStatus: FC<PropsType> = (props) => {
@@ -17,7 +19,8 @@ export const ProfileStatus: FC<PropsType> = (props) => {
     let deactivateEditMode = () => {
         setEditMode(false)
         if (status !== props.status) {
-        dispatch(putStatusThunkCreator(status))}
+            dispatch(putStatusThunkCreator(status))
+        }
     }
 
     let [status, setStatus] = useState(props.status)
@@ -26,25 +29,30 @@ export const ProfileStatus: FC<PropsType> = (props) => {
         setStatus(e.currentTarget.value)
     };
 
-    useEffect( () => {
+    useEffect(() => {
         setStatus(props.status)
     }, [props.status]);
 
+    useEffect(() => {
+        console.log(props.ownerId === props.userId)
+    }, [props.userId])
     return (
         <div>  {
             !editMode &&
-                <div>
-            <span>{props.status || ''}</span>
-                    <span onClick={activeStatusInput} >{!props.isOwner && <img className={s.statusEditImg} src={process.env.PUBLIC_URL + '/free-icon-edit-button-84380.png'}/>}</span>
-                </div>
-            }
+            <div>
+                <span>{props.status || ''}</span>
+                <span onClick={activeStatusInput}>{(props.ownerId === props.userId) &&
+                    <img className={s.statusEditImg}
+                         src={process.env.PUBLIC_URL + '/free-icon-edit-button-84380.png'}/>}</span>
+            </div>
+        }
             {editMode &&
                 <div>
-            <input
-                onChange={onStatusChange}
-                autoFocus={true}
-                onBlur={deactivateEditMode}
-                value={status}/>
+                    <input
+                        onChange={onStatusChange}
+                        autoFocus={true}
+                        onBlur={deactivateEditMode}
+                        value={status}/>
                 </div>
             }
         </div>

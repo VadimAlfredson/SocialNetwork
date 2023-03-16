@@ -4,8 +4,9 @@
         display: grid;
         grid-template-areas:
             "header"
-            "bodySide";
-        grid-template-rows: 60px auto;
+            "bodySide"
+    "footer";
+        grid-template-rows: 60px auto 50px;
         font-family: Comic Sans;
         color: azure;
     }
@@ -55,19 +56,15 @@
 }
 
 
-
-
-
-
-
 @media (min-width: 1000px) {
     .app-wrapper {
         margin: auto;
         display: grid;
         grid-template-areas:
             "header"
-            "bodySide";
-        grid-template-rows: 60px auto;
+            "bodySide"
+            "footer";
+        grid-template-rows: 60px auto 50px;
         font-family: Comic Sans;
         color: azure;
         width: 100vw;
