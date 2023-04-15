@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from "react-router-dom";
 import SubscriptionsContainer from "../Subscriptions/SubscriptionsContainer";
