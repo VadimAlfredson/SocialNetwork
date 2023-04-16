@@ -26,7 +26,7 @@ const App = () => {
             <Stack display={'flex'} flexDirection={'column'}>
                 <HeaderContainer/>
                 <Container sx={{mt: '1rem'}}>
-                    <Stack display={'flex'} flexDirection={{md: 'row', xs: 'column'}}>
+                    <Stack display={'flex'} flexDirection={{md: 'row', xs: 'column'}} gap={2}>
                             <Navbar isAuth={isAuth}/>
                             <React.Suspense fallback={<div><Preloader/></div>}>
                                 <Routes>

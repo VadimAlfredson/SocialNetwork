@@ -16,7 +16,7 @@ let Subscriptions: FC<{}> = (props) => {
     const totalCountSubscriptions = useAppSelector(totalCountSubscriptionsSelector)
 
 
-    return <Box sx={{boxShadow: 'none', borderRadius: '20px', display: 'flex', justifyContent: 'center',
+    return <Box sx={{display: 'flex', justifyContent: 'center',
         alignItems: 'center', margin: 'auto', flexDirection: 'column'
     }}>
             <Typography
@@ -31,6 +31,7 @@ let Subscriptions: FC<{}> = (props) => {
             {
                 subscriptions.map((u: UserType) =>
                         <Avatar
+                            variant={'circular'}
                             alt={u.name}
                             src={u.photos.small ? u.photos.small : defaultPhoto
                             }

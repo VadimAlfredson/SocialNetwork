@@ -34,7 +34,7 @@ const Header: FC<PropsType> = (props) => {
                     >
 <Diversity3OutlinedIcon/>
                     </IconButton>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1}}>
+                    <Typography variant="h6" component="div" sx={{ flexGrow: 1}} color={'inherit'}>
                         Social Network
                     </Typography>
                     {props.isAuth ?
