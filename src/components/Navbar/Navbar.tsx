@@ -1,64 +1,51 @@
-import React from 'react';
+import React, {FC, useState} from 'react';
 import s from './Navbar.module.css';
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import SubscriptionsContainer from "../Subscriptions/SubscriptionsContainer";
+import {Box, Button, ButtonGroup} from "@mui/material";
 
 type propsType = {
     isAuth: boolean
 }
-const Navbar = (props: propsType) => {
-    return <nav className={s.nav}>
-        <NavLink to="/profile" className={navData => navData.isActive ? s.active : s.itemnav}>
-            <div className={s.item}>
-                Profile
-            </div>
-            <img className={s.iconItem} src={process.env.PUBLIC_URL + '/free-icon-user-2089773.png'} alt={'Profile'}/>
-        </NavLink>
-        <NavLink to="/Dialogs" className={navData => navData.isActive ? s.active : s.itemnav}>
-            <div className={s.item}>
-                Messages
-            </div>
-            <img className={s.iconItem} src={process.env.PUBLIC_URL + '/free-icon-speech-bubble-2496514.png'}
-                 alt={'Dialogs'}/>
-        </NavLink>
-        <NavLink to="/Chat" className={navData => navData.isActive ? s.active : s.itemnav}>
-            <div className={s.item}>
-                Chat
-            </div>
-            <img className={s.iconItem} src={process.env.PUBLIC_URL + '/free-icon-chat-bubble-2089142.png'}
-                 alt={'Dialogs'}/>
-        </NavLink>
-        <NavLink to="/Users" className={navData => navData.isActive ? s.active : s.itemnav}>
-            <div className={s.item}>
-                Users
-            </div>
-            <img className={s.iconItem} src={process.env.PUBLIC_URL + '/free-icon-group-2089672.png'} alt={'Users'}/>
-        </NavLink>
-        <NavLink to="/News" className={navData => navData.isActive ? s.active : s.itemnav}>
-            <div className={s.item}>
-                News
-            </div>
-            <img className={s.iconItem} src={process.env.PUBLIC_URL + '/free-icon-newspaper-2089343.png'} alt={'News'}/>
-        </NavLink>
-        {/*<NavLink to="/Music" className={navData => navData.isActive ? s.active : s.itemnav}>
-            <div className={s.item}>
-                Music
-            </div>
-            <img className={s.iconItem} src={process.env.PUBLIC_URL + '/free-icon-music-note-482046.png'}
-                 alt={'Music'}/>
-        </NavLink>*/}
-        <NavLink to="/Setting" className={navData => navData.isActive ? s.active : s.itemnav}>
-            <div className={s.item}>
-                Settings
-            </div>
-            <img className={s.iconItem} src={process.env.PUBLIC_URL + '/free-icon-settings-2089734.png'}
-                 alt={'Setting'}/>
-        </NavLink>
+
+type navCategoryType = 'Profile' | 'Dialogs' | 'Users' | 'Chat' | 'Setting' | 'News'
+
+const NavMUI: FC<propsType> = (props) => {
+    const [activeCategory, setActiveCategory] = useState<navCategoryType>('Profile')
+    const navCategory = ['Profile', 'Dialogs', 'Users', 'Chat', 'Setting', 'News'] as Array<navCategoryType>
+    const navigate = useNavigate()
+    let onClickNavChange = (category: navCategoryType) => {
+        setActiveCategory(category)
+        navigate(`/${category}`)
+    }
+
+
+    return <Box
+        display={'flex'}
+        flexGrow={1}
+        flexDirection={{xs: 'row', md: 'column'}}
+        minWidth={{xs: '100%', md: '250px'}}
+        maxWidth={{xs: 'auto', md: '250px'}}
+    >
+        {navCategory.map(category =>
+            <Button
+                sx={{flexGrow: {xs: 1, md: 0}}}
+                variant={activeCategory === category ? 'contained' : 'outlined'}
+                color={'info'}
+                onClick={() => onClickNavChange(category)}
+            >
+                {category}
+            </Button>
+        )}
         {props.isAuth &&
-            <div className={s.following}>
+            <Button
+                sx={{display: {md: 'block', xs: 'none'}}}
+                variant={'outlined'}
+                color={'info'}
+            >
                 <SubscriptionsContainer/>
-            </div>}
-    </nav>
+            </Button>}
+    </Box>
 }
 
-export default Navbar
+export default NavMUI

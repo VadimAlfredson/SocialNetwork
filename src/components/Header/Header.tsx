@@ -3,6 +3,9 @@ import s from './Header.module.css';
 import {NavLink} from "react-router-dom";
 import {useAppSelector} from "../../Redux/reduxStore";
 import {getDefaultPhoto} from "../../Redux/selectors/auth_selectors";
+import {AppBar, Avatar, Box, Button, IconButton, Stack, Toolbar, Typography} from "@mui/material";
+import Diversity3OutlinedIcon from '@mui/icons-material/Diversity3Outlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
 type PropsType = {
     photo: string
@@ -10,30 +13,52 @@ type PropsType = {
     login: string
     logoutThunkCreator: () => void
 }
-
 const Header: FC<PropsType> = (props) => {
     const defaultPhoto = useAppSelector(getDefaultPhoto)
     let [ownerPhoto, setOwnerPhoto] = useState(props.photo)
     useEffect( () => {
         if (props.photo) {
-        setOwnerPhoto(props.photo)}
+            setOwnerPhoto(props.photo)}
         else {setOwnerPhoto(defaultPhoto)}
     }, [props.photo])
-    return <header className={s.header}>
-        <div className={s.logoBlock}>
-        <h2 className={s.h2}>Social Network</h2>
-        </div>
-        <div className={s.log}>
-            {props.isAuth ?
-                <div className={s.loginBlock}><div className={s.ownerInfo}><div>{props.login}</div>
-                    <img src={ownerPhoto} alt={'logout'}/>
-                </div>
-                <button onClick={props.logoutThunkCreator}>
-                    <img className={s.logoutIcon}  src={process.env.PUBLIC_URL + '/free-icon-exit-320140.png'}/>
-                </button>
-                </div> : <NavLink className={s.login} to={'/login'}>login</NavLink>}
-        </div>
-    </header>;
+    return (
+        <Box sx={{ flexGrow: 1}}>
+            <AppBar position="static" color={'primary'}>
+                <Toolbar>
+                    <IconButton
+                        size="large"
+                        edge="start"
+                        color="inherit"
+                        aria-label="menu"
+                        sx={{ mr: 2}}
+                    >
+<Diversity3OutlinedIcon/>
+                    </IconButton>
+                    <Typography variant="h6" component="div" sx={{ flexGrow: 1}}>
+                        Social Network
+                    </Typography>
+                    {props.isAuth ?
+                        <Stack display={'flex'} flexDirection={'row'} m={'auto'}>
+                            <Typography
+                                textAlign={'center'}
+                                margin={'auto 10px auto auto'}
+                                variant={'subtitle2'}
+                            >{props.login}</Typography>
+                            <Avatar
+                            alt={props.login}
+                            src={ownerPhoto}
+                        />
+                            <Button onClick={props.logoutThunkCreator}>
+                                <LogoutOutlinedIcon sx={{fontSize: '30px'}} color={'info'}/>
+                            </Button>
+                        </Stack> : <NavLink className={s.login} to={'/login'}>
+                            <Button color={'secondary'}>Login</Button>
+                        </NavLink>}
+
+                </Toolbar>
+            </AppBar>
+        </Box>
+    )
 }
 
 export default Header
