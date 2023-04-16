@@ -41,7 +41,7 @@ export const usersApi = {
 
 export const subscriptionsApi = {
     getSubscriptions: (friend: boolean) => {
-        return instance.get(`users?friend=${friend}&count=9`)
+        return instance.get(`users?friend=${friend}&count=100`)
             .then(response => {
                 return response.data
             })

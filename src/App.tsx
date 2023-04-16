@@ -8,6 +8,7 @@ import {InitializeAppTC} from "./Redux/reducers/app_reducers";
 import Preloader from "./components/common/Preloader/Preloader";
 import {useAppDispatch, useAppSelector} from "./Redux/reduxStore";
 import Footer from "./components/Footer/Footer";
+import {Container, Stack} from "@mui/material";
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'))
@@ -22,16 +23,11 @@ const App = () => {
     const dispatch = useAppDispatch()
     useEffect(() => {dispatch(InitializeAppTC())}, [])
         return (
-            <div className='app-wrapper'>
+            <Stack display={'flex'} flexDirection={'column'}>
                 <HeaderContainer/>
-                <div className='bodySide'>
-                    <div className='navbar'>
-                        <div className='navbarLevel2'>
+                <Container sx={{mt: '1rem'}}>
+                    <Stack display={'flex'} flexDirection={{md: 'row', xs: 'column'}} gap={2}>
                             <Navbar isAuth={isAuth}/>
-                        </div>
-                    </div>
-                    <div className='app-wrapper-content'>
-                        <div className='content'>
                             <React.Suspense fallback={<div><Preloader/></div>}>
                                 <Routes>
                                     <Route path="/SocialNetwork" element={<Navigate to="/profile"/>}/>
@@ -54,11 +50,10 @@ const App = () => {
                                     />
                                 </Routes>
                             </React.Suspense>
-                        </div>
-                    </div>
-                </div>
+                    </Stack>
+                </Container>
                 <Footer />
-            </div>
+            </Stack>
         );
 }
 

@@ -1,45 +1,44 @@
 import React, {FC} from 'react';
-import s from './Subscriptions.module.css';
 import {UserType} from "../../Redux/reducers/users_reducers";
-import {NavLink} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
 import {
     getSubscriptions,
     totalCountSubscriptionsSelector
 } from "../../Redux/selectors/subscriptions_selectors";
-
+import {Avatar, AvatarGroup, Box, Paper, Typography} from "@mui/material";
 
 
 let Subscriptions: FC<{}> = (props) => {
     const dispatch = useAppDispatch()
-
-    let onClickSearchSubscriptions = () => {
-    }
+    const defaultPhoto = useAppSelector(state => state.auth.defaultPhoto)
 
     const subscriptions = useAppSelector(getSubscriptions)
     const totalCountSubscriptions = useAppSelector(totalCountSubscriptionsSelector)
 
 
-    return <div className={s.friends}>
-        <div className={s.h4}>Subscriptions (<NavLink to={"/users?pageNumber=1&friend=true"} onClick={onClickSearchSubscriptions}>{totalCountSubscriptions})</NavLink></div>
-            <div className={s.friendsList}>
-                {
-                    subscriptions.map((u: UserType) => <div key={u.id}>
-        <span>
-            <div>
-                <NavLink to={'/profile/' + u.id}>
-                <img src={u.photos.small !== null ? u.photos.small :
-                    'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
-                } className={s.iconFriend}/>
-                </NavLink>
-            </div>
-            {/*<span>
-    <div className={s.name}>{u.name}</div>
-</span>*/}
-        </span>
-                    </div>)}
-            </div>
-        </div>
+    return <Box sx={{display: 'flex', justifyContent: 'center',
+        alignItems: 'center', margin: 'auto', flexDirection: 'column'
+    }}>
+            <Typography
+                variant='subtitle1'
+                color={'info'}
+                m={'3px auto'}
+                sx={{textAlign: 'center', fontSize: '15px', textDecoration: 'none'}}
+            >
+                Subscriptions
+            </Typography>
+        <AvatarGroup sx={{justifyContent: 'center'}}>
+            {
+                subscriptions.map((u: UserType) =>
+                        <Avatar
+                            variant={'circular'}
+                            alt={u.name}
+                            src={u.photos.small ? u.photos.small : defaultPhoto
+                            }
+                        />
+                )}
+        </AvatarGroup>
+    </Box>
 }
 
 export default Subscriptions;

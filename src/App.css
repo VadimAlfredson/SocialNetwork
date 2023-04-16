@@ -1,14 +1,12 @@
 @media (max-width: 999px) {
     .app-wrapper {
-        margin: auto;
+        margin: 0 auto;
         display: grid;
         grid-template-areas:
             "header"
             "bodySide"
     "footer";
         grid-template-rows: 60px auto 50px;
-        font-family: Comic Sans;
-        color: azure;
     }
 
     .bodySide {

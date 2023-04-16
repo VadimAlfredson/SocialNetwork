@@ -23,8 +23,7 @@ const SubscriptionsContainer: FC<PropsType> = (props) => {
     }, [])
         return <>
             {updateSubscriptions ? <Preloader/> :
-                <Subscriptions
-                />
+                <Subscriptions />
             }
         </>
     }
