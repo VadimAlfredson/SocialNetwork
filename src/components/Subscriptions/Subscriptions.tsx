@@ -27,10 +27,11 @@ let Subscriptions: FC<{}> = (props) => {
             >
                 Subscriptions
             </Typography>
-        <AvatarGroup sx={{justifyContent: 'center'}}>
+        <AvatarGroup sx={{justifyContent: 'center', mb: '10px'}}>
             {
                 subscriptions.map((u: UserType) =>
                         <Avatar
+                            key={u.id}
                             variant={'circular'}
                             alt={u.name}
                             src={u.photos.small ? u.photos.small : defaultPhoto

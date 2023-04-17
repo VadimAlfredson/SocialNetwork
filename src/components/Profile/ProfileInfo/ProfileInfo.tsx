@@ -7,6 +7,7 @@ import {NavLink} from "react-router-dom";
 import profile from "../Profile";
 import {useAppSelector} from "../../../Redux/reduxStore";
 import {getOwnerId} from "../../../Redux/selectors/auth_selectors";
+import {Button} from "@mui/material";
 
 type PropsType = {
     profile: ProfileType

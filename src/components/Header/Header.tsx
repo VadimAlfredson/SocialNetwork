@@ -28,21 +28,30 @@ const Header: FC<PropsType> = (props) => {
                     <IconButton
                         size="large"
                         edge="start"
-                        color="inherit"
                         aria-label="menu"
                         sx={{ mr: 2}}
                     >
-<Diversity3OutlinedIcon/>
+<Diversity3OutlinedIcon sx={{color: '#D0D3D4'}}/>
                     </IconButton>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1}} color={'inherit'}>
+                    <Typography
+                        variant="h6"
+                        component="div"
+                        sx={{ flexGrow: 1, color: '#D0D3D4'}}
+                        display={{xs: 'none', sm: 'inline-block'}}
+                    >
                         Social Network
                     </Typography>
                     {props.isAuth ?
-                        <Stack display={'flex'} flexDirection={'row'} m={'auto'}>
+                        <Stack display={'flex'}
+                               flexDirection={'row'}
+                               m={'auto 0 auto auto'}
+                        >
                             <Typography
+                                display={{xs: 'none', sm: 'inline-block'}}
                                 textAlign={'center'}
                                 margin={'auto 10px auto auto'}
                                 variant={'subtitle2'}
+                                sx={{color: '#D0D3D4'}}
                             >{props.login}</Typography>
                             <Avatar
                             alt={props.login}
