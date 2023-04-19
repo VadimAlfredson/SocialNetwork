@@ -27,6 +27,11 @@ const NavMUI: FC<propsType> = (props) => {
         navigate(`/${category}`)
     }}
 
+    let onSubscriptionsChange = () => {
+    setActiveCategory('Users')
+        navigate('/users?pageNumber=1&friend=true')
+    }
+
     const handleChange = (e: React.MouseEvent<HTMLElement>, category: navCategoryType) => {
         if (activeCategory !== category){
             setActiveCategory(category)
@@ -87,9 +92,10 @@ const NavMUI: FC<propsType> = (props) => {
         )}
         {props.isAuth &&
             <Button
-                sx={{display: {md: 'block', xs: 'none'}}}
+                sx={{display: {md: 'block', xs: 'none'}, border: '1px solid #D0D3D4'}}
                 variant={'outlined'}
                 color={'info'}
+                onClick={() => onSubscriptionsChange()}
             >
                 <SubscriptionsContainer/>
             </Button>}

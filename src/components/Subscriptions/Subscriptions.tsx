@@ -6,11 +6,13 @@ import {
     totalCountSubscriptionsSelector
 } from "../../Redux/selectors/subscriptions_selectors";
 import {Avatar, AvatarGroup, Box, Paper, Typography} from "@mui/material";
+import {useNavigate} from "react-router-dom";
 
 
 let Subscriptions: FC<{}> = (props) => {
     const dispatch = useAppDispatch()
     const defaultPhoto = useAppSelector(state => state.auth.defaultPhoto)
+    const navigate = useNavigate()
 
     const subscriptions = useAppSelector(getSubscriptions)
     const totalCountSubscriptions = useAppSelector(totalCountSubscriptionsSelector)
