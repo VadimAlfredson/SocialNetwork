@@ -7,7 +7,7 @@ import {NavLink} from "react-router-dom";
 import profile from "../Profile";
 import {useAppSelector} from "../../../Redux/reduxStore";
 import {getOwnerId} from "../../../Redux/selectors/auth_selectors";
-import {Button} from "@mui/material";
+import {Box, Button, Card, CardMedia, Typography} from "@mui/material";
 
 type PropsType = {
     profile: ProfileType
@@ -20,28 +20,36 @@ type PropsType = {
 
 const ProfileInfo: FC<PropsType> = (props) => {
     const ownerId = useAppSelector(getOwnerId)
+    const defaultPhoto = useAppSelector(state => state.auth.defaultPhoto)
     let [showFullPhoto, setShowFullPhoto] = useState(false)
 
-    useEffect(() => {setShowFullPhoto(false)}, [props.profile.userId])
+    useEffect(() => {
+        setShowFullPhoto(false)
+    }, [props.profile.userId])
     if (!props.profile) {
         return <Preloader/>
     }
-    return <div className={s.profileClass}>
-        {showFullPhoto && props.profile.photos.large &&
-        <img className={s.fullPhoto} onClick={() => setShowFullPhoto(false)}
-        src={props.profile.photos.large}/>
-        }
-        <div className={s.avatarSide}>
-            <img className={s.avatarImg}
-                 src={props.profile.photos.large || 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'}
-            onClick={() => props.profile.photos.large ? setShowFullPhoto(true) : setShowFullPhoto(false)}
-            />
-        </div>
-        <div className={s.profileInfo}>
-            <div className={s.name}><b>{props.profile.fullName}</b></div>
-            <div className={s.status}>
-                <ProfileStatus status={props.status} isOwner={props.isOwner} ownerId={ownerId} userId={props.profile.userId}/>
-            </div>
+    return <Card sx={{
+        display: 'flex',
+        borderRadius: '5px',
+        flexDirection: {xs: 'column', sm: 'row'},
+        background: 'rgba(0, 0, 0, 0)'
+    }}>
+        <CardMedia component='img'
+                   image={props.profile.photos.large ? props.profile.photos.large : defaultPhoto}
+                   sx={{width: '300px', height: '300px',
+                   borderRadius: '5px', m: 'auto'
+                   }}
+        />
+        <Box display='flex' flexDirection='column'>
+            <Typography color='#D0D3D4'
+                        sx={{m: '10px auto'}}
+                        variant={'h4'}
+            >
+                {props.profile.fullName}
+            </Typography>
+                <ProfileStatus status={props.status} isOwner={props.isOwner} ownerId={ownerId}
+                               userId={props.profile.userId}/>
             <div className={s.editMode}>{(ownerId !== props.profile.userId) && props.isOwner &&
                 <button className={props.follow ? s.buttonUnfollow : s.buttonFollow} onClick={() => {
                     props.onFollowProfileChange(props.profile.userId, props.follow)
@@ -58,8 +66,8 @@ const ProfileInfo: FC<PropsType> = (props) => {
                     isOwner={props.isOwner}
                 />
             </div>
-        </div>
-    </div>
+        </Box>
+    </Card>
 }
 
 const Contact: FC<{ contactTitle: string, contactValue: string }> = ({contactTitle, contactValue}) => {
@@ -82,7 +90,8 @@ const Information: FC<InfoProps> = ({profile, isOwner}) => {
                 <div><b>looking for a job:</b> {profile.lookingForAJob ? "yes" : 'no'}</div>
                 {profile.lookingForAJob &&
                     <div><b>looking for a job description:</b> {profile.lookingForAJobDescription}</div>}
-            </div>{/*}*/}
+            </div>
+            {/*}*/}
             <div className={s.aboutMe}><b>About me:</b>{profile.aboutMe}</div>
         </div>
         <div className={s.contacts}>{(!isOwner && editMode) || Object.keys(profile.contacts).filter(i =>

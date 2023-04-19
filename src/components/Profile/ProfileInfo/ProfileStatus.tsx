@@ -2,6 +2,8 @@ import s from './../Profile.module.css';
 import React, {ChangeEvent, FC, useEffect, useState} from 'react';
 import {useAppDispatch} from "../../../Redux/reduxStore";
 import {putStatusThunkCreator} from "../../../Redux/reducers/profile_reducer";
+import {Box, TextField, Typography} from "@mui/material";
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
 
 type PropsType = {
     status: string
@@ -37,25 +39,39 @@ export const ProfileStatus: FC<PropsType> = (props) => {
         console.log(props.ownerId === props.userId)
     }, [props.userId])
     return (
-        <div>  {
-            !editMode &&
-            <div>
-                <span>{props.status || ''}</span>
+        <Box>  {
+            !editMode && <Box display={'flex'}
+                              flexDirection={'row'}
+                              alignItems='center'
+                              m={'0 auto'}
+                              justifyContent={'center'}
+            >
+                <Typography
+                    variant={'subtitle1'}
+                    color={'#D0D3D4'}
+
+                >{props.status || ''}</Typography>
+
                 <span onClick={activeStatusInput}>{(props.ownerId === props.userId) &&
-                    <img className={s.statusEditImg}
-                         src={process.env.PUBLIC_URL + '/free-icon-edit-button-84380.png'}/>}</span>
-            </div>
+                    <ModeEditIcon color={'info'} sx={{ml: '10px'}}/>}</span>
+            </Box>
         }
-            {editMode &&
-                <div>
-                    <input
+            <Box display={'flex'} justifyContent={'center'} margin={'auto'}>{editMode &&
+                    <TextField
+                        id="status"
+                        label="Status"
+                        variant="standard"
                         onChange={onStatusChange}
                         autoFocus={true}
+                        value={status}
                         onBlur={deactivateEditMode}
-                        value={status}/>
-                </div>
+                        color={'info'}
+                        fullWidth={true}
+                        sx={{m: '0 20px', maxWidth: '300px'}}
+                    />
             }
-        </div>
+            </Box>
+        </Box>
     )
 }
 

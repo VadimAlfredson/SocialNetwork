@@ -77,6 +77,10 @@ const NavMUI: FC<propsType> = (props) => {
                     color: activeCategory === category ? '#0a0d11' : '#D0D3D4',
                     '&:hover': {
                         backgroundColor: activeCategory === category ? '#D0D3D4' : 'rgba(208,211,212,0.3)',
+                    },
+                    borderRadius: {xs:
+                        index === 0 ? '5px 0 0 5px' : index === 5 ? '0 5px 5px 0' : '0',
+                        md: index === 0 ? '5px 5px 0 0' : '0'
                     }
                 }}
                 value={category}
@@ -92,7 +96,11 @@ const NavMUI: FC<propsType> = (props) => {
         )}
         {props.isAuth &&
             <Button
-                sx={{display: {md: 'block', xs: 'none'}, border: '1px solid #D0D3D4'}}
+                sx={{display: {md: 'block', xs: 'none'},
+                    border: '1px solid #D0D3D4',
+                    borderRadius: '0 0 5px 5px'
+
+            }}
                 variant={'outlined'}
                 color={'info'}
                 onClick={() => onSubscriptionsChange()}
