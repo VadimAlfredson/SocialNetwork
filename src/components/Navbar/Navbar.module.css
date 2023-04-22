@@ -1,3 +1,26 @@
+.activeNav {
+    display: block;
+    color: #0a0d11;
+    text-decoration: none;
+    background-color: #D0D3D4;
+    width: max-content;
+    text-align: center;
+    margin: auto;
+    padding: 10px;
+}
+.itemNav {
+    display: block;
+    color: #D0D3D4;
+    text-decoration: none;
+    background-color: #0a0d11;
+    width: auto;
+    text-align: center;
+    margin: auto;
+    padding: 10px;
+}
+
+
+/*
 @media (min-width: 1000px) {
     .nav {
         grid-area: nav;
@@ -150,3 +173,4 @@
     }
 }
 
+*/

@@ -8,6 +8,9 @@ import profile from "../Profile";
 import {useAppSelector} from "../../../Redux/reduxStore";
 import {getOwnerId} from "../../../Redux/selectors/auth_selectors";
 import {Box, Button, Card, CardMedia, Typography} from "@mui/material";
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
+import RateReviewIcon from '@mui/icons-material/RateReview';
 
 type PropsType = {
     profile: ProfileType
@@ -34,13 +37,37 @@ const ProfileInfo: FC<PropsType> = (props) => {
         borderRadius: '5px',
         flexDirection: {xs: 'column', sm: 'row'},
         background: 'rgba(0, 0, 0, 0)'
-    }}>
+    }}><Box display={'flex'} flexDirection={'column'}>
         <CardMedia component='img'
                    image={props.profile.photos.large ? props.profile.photos.large : defaultPhoto}
                    sx={{width: '300px', height: '300px',
                    borderRadius: '5px', m: 'auto'
                    }}
         />
+        <Box display={'flex'}
+             flexDirection={'row'}
+             m={'5px auto'} width={'300px'}
+             gap={'5px'}
+
+        >{(ownerId !== props.profile.userId) && props.isOwner &&
+            <Button
+                color={props.follow ? 'info' : 'warning'}
+                variant={props.follow ? 'outlined' : 'contained'}
+                onClick={() => {
+                    props.onFollowProfileChange(props.profile.userId, props.follow)
+                }}>{props.follow ? <PersonRemoveIcon /> : <PersonAddIcon />}</Button>}
+
+            {(ownerId !== props.profile.userId) && props.isOwner &&
+                <Button
+                    color={'info'}
+                    variant={'contained'}
+                    startIcon={<RateReviewIcon />}
+                    fullWidth={true}
+                    onClick={() => {
+                    props.onPutDialogOnProfileChange(props.profile.userId)
+                }}>Write new message</Button>}
+        </Box>
+    </Box>
         <Box display='flex' flexDirection='column'>
             <Typography color='#D0D3D4'
                         sx={{m: '10px auto'}}
@@ -50,16 +77,7 @@ const ProfileInfo: FC<PropsType> = (props) => {
             </Typography>
                 <ProfileStatus status={props.status} isOwner={props.isOwner} ownerId={ownerId}
                                userId={props.profile.userId}/>
-            <div className={s.editMode}>{(ownerId !== props.profile.userId) && props.isOwner &&
-                <button className={props.follow ? s.buttonUnfollow : s.buttonFollow} onClick={() => {
-                    props.onFollowProfileChange(props.profile.userId, props.follow)
-                }}>{props.follow ? 'Unfollow' : 'Follow'}</button>}
-            </div>
-            <div className={s.editMode}>{(ownerId !== props.profile.userId) && props.isOwner &&
-                <NavLink to={"/dialogs/" + props.profile.userId} className={s.buttonFollow} onClick={() => {
-                    props.onPutDialogOnProfileChange(props.profile.userId)
-                }}>Send message</NavLink>}
-            </div>
+
             <div className={s.informationUser}>
                 <Information
                     profile={props.profile}

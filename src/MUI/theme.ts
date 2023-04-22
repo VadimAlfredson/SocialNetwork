@@ -6,7 +6,7 @@ palette: {
     secondary: {main: '#1d2934'},
     success: {main: '#1F618D'},
     error: {main: '#922B21'},
-    warning: {main: '#85929E'},
+    warning: {main: '#c9a300'},
     info: {main: '#D0D3D4'},
 }
 })

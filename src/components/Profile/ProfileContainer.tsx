@@ -52,6 +52,9 @@ const ProfileContainer = () => {
     const status = useAppSelector(getStatusProfile)
     const follow = useAppSelector(getFollow)
     const authorizedUserId = useAppSelector((getOwnerId))
+
+    const navigate = useNavigate()
+
     console.log(userId)
     useEffect(() => {
         if (!id) {id = authorizedUserId}
@@ -70,6 +73,7 @@ const ProfileContainer = () => {
     }
 
     let onPutDialogOnProfileChange = (userId: number) => {
+        navigate(`/dialogs/${userId}`)
         dispatch(putDialogUserThunkCreator(userId))
     }
 
