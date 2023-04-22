@@ -3,6 +3,7 @@ import MyPostsContainer from './MyPosts/MyPostsContainer'
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {postsType, ProfileType} from "../../Redux/reducers/profile_reducer";
 import s from "./Profile.module.css"
+import { Box } from '@mui/material';
 
 type PropsType = {
     profile: ProfileType
@@ -16,8 +17,7 @@ type PropsType = {
 
 
 const Profile: FC<PropsType> = (props) => {
-    return <div className={s.profileContent}>
-        <div className={s.profileInfo}>
+    return <Box display={'flex'} flexGrow={1} flexDirection={'column'}>
         <ProfileInfo
                      isOwner={props.isOwner}
                      profile={props.profile}
@@ -26,11 +26,9 @@ const Profile: FC<PropsType> = (props) => {
                      onFollowProfileChange={props.onFollowProfileChange}
                      onPutDialogOnProfileChange={props.onPutDialogOnProfileChange}
         />
-        </div>
-        <div className={s.profilePost}>
+
         <MyPostsContainer />
-        </div>
-    </div>
+    </Box>
 }
 
 export default Profile

@@ -36,7 +36,9 @@ const ProfileInfo: FC<PropsType> = (props) => {
         display: 'flex',
         borderRadius: '5px',
         flexDirection: {xs: 'column', sm: 'row'},
-        background: 'rgba(0, 0, 0, 0)'
+        background: 'rgba(0, 0, 0, 0)',
+        gap: 1,
+        flexGrow: 1
     }}><Box display={'flex'} flexDirection={'column'}>
         <CardMedia component='img'
                    image={props.profile.photos.large ? props.profile.photos.large : defaultPhoto}
@@ -68,22 +70,21 @@ const ProfileInfo: FC<PropsType> = (props) => {
                 }}>Write new message</Button>}
         </Box>
     </Box>
-        <Box display='flex' flexDirection='column'>
+        <Box display='flex' flexDirection='column'
+             sx={{flexGrow: 1}} width={'100%'} >
             <Typography color='#D0D3D4'
                         sx={{m: '10px auto'}}
-                        variant={'h4'}
+                        variant={'h5'}
             >
                 {props.profile.fullName}
             </Typography>
                 <ProfileStatus status={props.status} isOwner={props.isOwner} ownerId={ownerId}
                                userId={props.profile.userId}/>
 
-            <div className={s.informationUser}>
                 <Information
                     profile={props.profile}
                     isOwner={props.isOwner}
                 />
-            </div>
         </Box>
     </Card>
 }
@@ -100,9 +101,7 @@ type InfoProps = {
 }
 
 const Information: FC<InfoProps> = ({profile, isOwner}) => {
-    let [editMode, setEditMode] = useState(false)
-    let editModeOnOff = (value: boolean) => setEditMode(value)
-    return <div>
+    return <Box color={'#D0D3D4'}>
         <div>
             <div>
                 <div><b>looking for a job:</b> {profile.lookingForAJob ? "yes" : 'no'}</div>
@@ -112,11 +111,11 @@ const Information: FC<InfoProps> = ({profile, isOwner}) => {
             {/*}*/}
             <div className={s.aboutMe}><b>About me:</b>{profile.aboutMe}</div>
         </div>
-        <div className={s.contacts}>{(!isOwner && editMode) || Object.keys(profile.contacts).filter(i =>
+        <div className={s.contacts}>{Object.keys(profile.contacts).filter(i =>
             profile.contacts[i]).map(i => {
             return <Contact key={i} contactTitle={i} contactValue={profile.contacts[i]}/>
         })}</div>
-    </div>
+    </Box>
 }
 
 export default ProfileInfo
