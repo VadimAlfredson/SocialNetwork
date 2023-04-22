@@ -9,6 +9,7 @@
     padding: 10px;
 }
 .itemNav {
+    border-radius: 5px;
     display: block;
     color: #D0D3D4;
     text-decoration: none;
@@ -17,6 +18,10 @@
     text-align: center;
     margin: auto;
     padding: 10px;
+}
+
+.itemNav:hover {
+    background-color: rgba(208, 211, 212, 0.05);
 }
 
 
