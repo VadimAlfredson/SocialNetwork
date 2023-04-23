@@ -3,11 +3,11 @@ import Post from './Post/Post'
 import s from './MyPosts.module.css'
 import {profilePageType} from "../../../Redux/reducers/profile_reducer";
 import {Formik} from "formik";
+import {Box, Button, TextField} from "@mui/material";
 
 export const MyPostsForm = React.memo((props: {
     createNewPost: (newPost: string) => void,
 }) => {
-    console.log('rerenderPost')
     return <Formik
         initialValues={{
             newPost: '' as string
@@ -15,7 +15,6 @@ export const MyPostsForm = React.memo((props: {
         validateOnBlur
         onSubmit={(values, {resetForm}) => {
             props.createNewPost(values.newPost)
-            console.log(values.newPost)
             resetForm({values: undefined})
         }}
     >
@@ -27,8 +26,29 @@ export const MyPostsForm = React.memo((props: {
               handleSubmit,
               dirty
           }) => (
-            <div /*className={s.addpost}*/>
-                <input
+            <Box display={"flex"} flexDirection={'row'} width={'100%'}
+                 maxWidth={'600px'} m={'auto'} sx={{flexGrow: 1,}}>
+                <TextField
+                    type={'input'}
+                    name={'newPost'}
+                    onChange={handleChange}
+                    value={values.newPost}
+                    onBlur={handleBlur}
+                    color={'info'}
+                    label={'Add post'}
+                    id={'newPost'}
+                    variant={'outlined'}
+                    fullWidth={true}
+                    sx={{
+                        "& .MuiOutlinedInput-root":{"& > fieldset": {border: '1px solid grey'}},
+                        input: {color: '#D0D3D4'}
+                }}
+                    InputLabelProps={{
+                        sx: { color: "grey"/*, "&.Mui-focused": { color: "green" } */},
+                    }}
+
+                />
+                {/*<input
                     type={'input'}
                     name={'newPost'}
                     onChange={handleChange}
@@ -36,15 +56,16 @@ export const MyPostsForm = React.memo((props: {
                     className={s.createText}
                     value={values.newPost}
                     onBlur={handleBlur}
-                />
-                <button
-                    className={s.buttonAddPost}
-                    disabled={!isValid && !dirty}
+                />*/}
+                <Button
+                    variant={!dirty ? 'outlined' : 'contained'}
+                    color={'warning'}
+                    disabled={!dirty}
                     onClick={() => {handleSubmit()}}
                     type={'submit'}
                 >Send
-                </button>
-            </div>
+                </Button>
+            </Box>
         )}
 
     </Formik>

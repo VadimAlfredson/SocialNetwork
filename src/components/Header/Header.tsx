@@ -22,7 +22,7 @@ const Header: FC<PropsType> = (props) => {
         else {setOwnerPhoto(defaultPhoto)}
     }, [props.photo])
     return (
-        <Box sx={{ flexGrow: 1}}>
+        <Box sx={{ flexGrow: 1, borderBottom: '1px solid #D0D3D4'}}>
             <AppBar position="static" color={'primary'}>
                 <Toolbar>
                     <IconButton

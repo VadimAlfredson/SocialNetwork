@@ -7,7 +7,7 @@ import {NavLink} from "react-router-dom";
 import profile from "../Profile";
 import {useAppSelector} from "../../../Redux/reduxStore";
 import {getOwnerId} from "../../../Redux/selectors/auth_selectors";
-import {Box, Button, Card, CardMedia, Typography} from "@mui/material";
+import {Box, Button, Card, CardMedia, TextField, Typography} from "@mui/material";
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import RateReviewIcon from '@mui/icons-material/RateReview';
@@ -90,9 +90,9 @@ const ProfileInfo: FC<PropsType> = (props) => {
 }
 
 const Contact: FC<{ contactTitle: string, contactValue: string }> = ({contactTitle, contactValue}) => {
-    return <div>
+    return <Typography>
         <b>{contactTitle}:</b> {contactValue}
-    </div>
+    </Typography>
 }
 
 type InfoProps = {
@@ -104,12 +104,11 @@ const Information: FC<InfoProps> = ({profile, isOwner}) => {
     return <Box color={'#D0D3D4'}>
         <div>
             <div>
-                <div><b>looking for a job:</b> {profile.lookingForAJob ? "yes" : 'no'}</div>
+                <div><b>looking for a job:</b> {profile.lookingForAJob ? " yes" : ' no'}</div>
                 {profile.lookingForAJob &&
                     <div><b>looking for a job description:</b> {profile.lookingForAJobDescription}</div>}
             </div>
-            {/*}*/}
-            <div className={s.aboutMe}><b>About me:</b>{profile.aboutMe}</div>
+            <div className={s.aboutMe}><b>About me:</b> {profile.aboutMe}</div>
         </div>
         <div className={s.contacts}>{Object.keys(profile.contacts).filter(i =>
             profile.contacts[i]).map(i => {

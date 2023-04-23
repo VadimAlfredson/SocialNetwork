@@ -97,11 +97,12 @@ const todosSlice = createSlice({
         status: '',
         follow: false,
         defaultPhoto: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg',
+        idPost: 4
     },
     reducers: {
         AddPostActionCreator(state, action: PayloadAction<string>) {
             let newPost: postsType = {
-                id: post.length + 3,
+                id: state.idPost,
                 message: action.payload,
                 likeCount: 0,
                 ownerLike: false
@@ -109,6 +110,7 @@ const todosSlice = createSlice({
             return {
                 ...state,
                 posts: [newPost, ...state.posts],
+                idPost: state.idPost + 1
             }
         },
         setLikePostActionCreator(state, action: PayloadAction<number>) {
