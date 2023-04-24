@@ -1,6 +1,6 @@
 .activeNav {
     display: block;
-    color: #0a0d11;
+    color: #151515;
     text-decoration: none;
     background-color: #D0D3D4;
     width: max-content;
@@ -13,7 +13,7 @@
     display: block;
     color: #D0D3D4;
     text-decoration: none;
-    background-color: #0a0d11;
+    background-color: #151515;
     width: auto;
     text-align: center;
     margin: auto;
