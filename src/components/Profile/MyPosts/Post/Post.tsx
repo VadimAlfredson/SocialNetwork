@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import s from './Post.module.css';
 import {useAppDispatch, useAppSelector} from "../../../../Redux/reduxStore";
 import {setLikePostActionCreator} from "../../../../Redux/reducers/profile_reducer";
+import {Card} from "@mui/material";
 
 const Post = (props: { message: string, likeCount: number, ownerLike: boolean, id: number}) => {
     let [likeActive, setLikeActive] = useState<boolean>(props.ownerLike)
@@ -16,7 +17,7 @@ const Post = (props: { message: string, likeCount: number, ownerLike: boolean, i
         dispatch(setLikePostActionCreator(props.id))
     }
     return (
-        <div className={s.post}>
+        <Card>
             <img className={s.img}
                  src='https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'/>
             <div className={s.messageBlock}>
@@ -29,7 +30,7 @@ const Post = (props: { message: string, likeCount: number, ownerLike: boolean, i
                 </div>
             </div>
 
-        </div>
+        </Card>
     )
 }
 

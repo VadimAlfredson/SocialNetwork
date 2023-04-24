@@ -27,7 +27,7 @@ export const MyPostsForm = React.memo((props: {
               dirty
           }) => (
             <Box display={"flex"} flexDirection={'row'} width={'100%'}
-                 maxWidth={'600px'} m={'auto'} sx={{flexGrow: 1,}}>
+                 maxWidth={'600px'} m={'auto'} sx={{flexGrow: 1,}} mb={3}>
                 <TextField
                     type={'input'}
                     name={'newPost'}

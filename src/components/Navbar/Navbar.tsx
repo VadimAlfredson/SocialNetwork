@@ -67,18 +67,19 @@ const NavMUI: FC<propsType> = (props) => {
                     flexGrow: {xs: 1, md: 0},
                     flexDirection: 'row',
                     padding: 'auto 0',
-                    backgroundColor: /*activeCategory === category ? '#D0D3D4' :*/ 'inherit',
-                    border: '1px solid #D0D3D4',
+                    backgroundColor: /*activeCategory === category ? '#D0D3D4' :*/ '#101010',
+                    border: '1px solid #353535',
                     /*color: activeCategory === category ? '#0a0d11' : '#D0D3D4',*/
-                    /*'&:hover': {
-                        backgroundColor: activeCategory === category ? '#D0D3D4' : 'rgba(208,211,212,0.3)',
-                    },*/
+                    '&:hover': {
+                        backgroundColor: 'rgba(50,125,155,0.1)',
+                        border: '1px solid rgba(50,125,155)'
+                    },
                     borderRadius: {
-                        xs:
-                            index === 0 ? '5px 0 0 5px' : index === 5 ? '0 5px 5px 0' : '0',
+                        xs: '0',
                         md: index === 0 ? '5px 5px 0 0' : '0'
                     },
                     pt: '0', pb: '0', pl: '0', pr: '0',
+                    m: '0'
                 }}
                 value={category}
                 aria-label={category}
@@ -102,8 +103,13 @@ const NavMUI: FC<propsType> = (props) => {
             <Button
                 sx={{
                     display: {md: 'block', xs: 'none'},
-                    border: '1px solid #D0D3D4',
-                    borderRadius: '0 0 5px 5px'
+                    border: '1px solid #353535',
+                    borderRadius: '0 0 5px 5px',
+                    backgroundColor: '#151515',
+                    '&:hover': {
+                        border: '1px solid rgba(50,125,155)',
+                        backgroundColor: 'rgba(50,125,155,0.1)'
+                    }
 
                 }}
                 variant={'outlined'}
