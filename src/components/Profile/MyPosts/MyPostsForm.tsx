@@ -48,15 +48,6 @@ export const MyPostsForm = React.memo((props: {
                     }}
 
                 />
-                {/*<input
-                    type={'input'}
-                    name={'newPost'}
-                    onChange={handleChange}
-                    placeholder={'Add text'}
-                    className={s.createText}
-                    value={values.newPost}
-                    onBlur={handleBlur}
-                />*/}
                 <Button
                     variant={!dirty ? 'outlined' : 'contained'}
                     color={'warning'}

@@ -73,7 +73,7 @@ const ProfileInfo: FC<PropsType> = (props) => {
         <Box display='flex' flexDirection='column'
              sx={{flexGrow: 1}} width={'100%'} >
             <Typography color='#D0D3D4'
-                        sx={{m: '10px auto'}}
+                        sx={{m: '10px auto 0 auto'}}
                         variant={'h5'}
             >
                 {props.profile.fullName}
@@ -91,7 +91,7 @@ const ProfileInfo: FC<PropsType> = (props) => {
 
 const Contact: FC<{ contactTitle: string, contactValue: string }> = ({contactTitle, contactValue}) => {
     return <Typography>
-        <b>{contactTitle}:</b> {contactValue}
+        <b style={{color: '#327d9b'}}>{contactTitle}:</b> {contactValue}
     </Typography>
 }
 
@@ -104,11 +104,11 @@ const Information: FC<InfoProps> = ({profile, isOwner}) => {
     return <Box color={'#D0D3D4'}>
         <div>
             <div>
-                <div><b>looking for a job:</b> {profile.lookingForAJob ? " yes" : ' no'}</div>
+                <div><b style={{color: '#327d9b'}}>looking for a job:</b> {profile.lookingForAJob ? " Yes" : ' No'}</div>
                 {profile.lookingForAJob &&
-                    <div><b>looking for a job description:</b> {profile.lookingForAJobDescription}</div>}
+                    <div><b style={{color: '#327d9b'}}>looking for a job description:</b> {profile.lookingForAJobDescription}</div>}
             </div>
-            <div className={s.aboutMe}><b>About me:</b> {profile.aboutMe}</div>
+            <div className={s.aboutMe}><b style={{color: '#327d9b'}}>About me:</b> {profile.aboutMe}</div>
         </div>
         <div className={s.contacts}>{Object.keys(profile.contacts).filter(i =>
             profile.contacts[i]).map(i => {

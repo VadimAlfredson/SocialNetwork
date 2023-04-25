@@ -21,9 +21,7 @@ const MessageChat: FC<PropsType> = (props) => {
     }
 
 
-    return <><ListItem alignItems="flex-start" sx={{backgroundColor: '#151515', mt: '1px',
-        boxShadow: '-3px -1px 5px 1px rgba(50, 125, 155, .1)'
-    }}>
+    return <ListItem alignItems="flex-start" sx={{backgroundColor: '#151515', mt: '1px'}}>
         <ListItemAvatar>
             <Avatar alt={props.name} src={props.icon ? props.icon : defaultIcon} onClick={() => {
                 onUserClick()
@@ -52,7 +50,7 @@ const MessageChat: FC<PropsType> = (props) => {
             }
         />
     </ListItem>
-    </>
+
 
 }
 

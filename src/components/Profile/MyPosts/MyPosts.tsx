@@ -3,7 +3,7 @@ import Post from './Post/Post'
 import s from './MyPosts.module.css'
 import {postsType} from "../../../Redux/reducers/profile_reducer";
 import {MyPostsForm} from "./MyPostsForm";
-import {Box} from "@mui/material";
+import {Box, Stack} from "@mui/material";
 
 type PropsType = {
     posts: Array<postsType>,
@@ -21,9 +21,9 @@ const MyPosts: FC<PropsType> = (props) => {
             <MyPostsForm
                 createNewPost={props.createNewPost}
             />
-            <div className={s.post}>
+            <Stack gap={1}>
                 {postElements}
-            </div>
+            </Stack>
         </Box>
     )
 }

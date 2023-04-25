@@ -8,6 +8,7 @@ import {
 import MessagesChat from "./MessagesChat";
 import ChatForm from "./AddMessageFormChst";
 import {getMessages} from "../../Redux/selectors/chat_selectors";
+import {Box} from "@mui/material";
 
 
 const Chat: React.FC = () => {
@@ -24,13 +25,13 @@ const Chat: React.FC = () => {
         }
     }, [])
 
-    return <div>
+    return <Box display={'flex'} flexDirection={'column'} gap={1}>
         <MessagesChat/>
         <ChatForm/>
         <div
             ref={refScrollBottom}
         ></div>
-    </div>
+    </Box>
 }
 
 export default withAuthNavigate(Chat)

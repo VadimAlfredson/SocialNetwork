@@ -14,8 +14,8 @@ const MessagesChat: React.FC<{}> = ({}) => {
         refScrollBottom.current?.scrollIntoView({behavior: 'smooth', block: 'end'})
     }, [messages])
 
-    return <List sx={{ width: '100%', maxHeight: 600, overflow: 'auto',
-        paddingRight: '1px', paddingLeft: '2px',
+    return <List sx={{ width: '100% - 5px', maxHeight: 600, overflow: 'auto',
+        paddingRight: '1px', mr: '5px',
         '&::-webkit-scrollbar': {
             width: '1em',
         },

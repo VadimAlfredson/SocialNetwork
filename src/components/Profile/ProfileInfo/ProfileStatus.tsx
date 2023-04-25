@@ -43,14 +43,14 @@ export const ProfileStatus: FC<PropsType> = (props) => {
             !editMode && <Box display={'flex'}
                               flexDirection={'row'}
                               alignItems='center'
-                              m={'0 auto'}
+                              m={'0 auto 15px auto'}
                               justifyContent={'center'}
             >
                 <Typography
                     variant={'subtitle1'}
                     color={'#D0D3D4'}
 
-                >{props.status || ''}</Typography>
+                ><em>{props.status || ''}</em></Typography>
 
                 <span onClick={activeStatusInput}>{(props.ownerId === props.userId) &&
                     <ModeEditIcon color={'info'} sx={{ml: '10px'}}/>}</span>
