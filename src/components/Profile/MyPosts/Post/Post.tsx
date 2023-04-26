@@ -2,7 +2,8 @@ import React, {useEffect, useState} from 'react';
 import s from './Post.module.css';
 import {useAppDispatch, useAppSelector} from "../../../../Redux/reduxStore";
 import {setLikePostActionCreator} from "../../../../Redux/reducers/profile_reducer";
-import {Avatar, Card, CardContent, CardMedia, Typography} from "@mui/material";
+import {Avatar, Box, Card, CardContent, CardMedia, Stack, Typography} from "@mui/material";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 const Post = (props: { message: string, likeCount: number, ownerLike: boolean, id: number}) => {
     const avatar = useAppSelector(state => state.profile.profile.photos.small)
@@ -25,16 +26,15 @@ const Post = (props: { message: string, likeCount: number, ownerLike: boolean, i
             <CardMedia >
                 <Avatar src={avatar ? avatar : defaultPhoto} />
             </CardMedia>
-            <CardContent sx={{p: '0'}}>
-                <Typography color={'#D0D3D4'}>{props.message}</Typography>
-                <div className={likeActive ? s.likeActive : s.like}>
-                    <img
-                    className={s.likeIcon}
-                    src={likeActive ? process.env.PUBLIC_URL + '/likeActive.png' : process.env.PUBLIC_URL + '/like.png'}
+            <CardContent sx={{p: '0', m: '0'}}>
+                <Typography color={'#D0D3D4'} sx={{p: '0', m: '0'}}>{props.message}</Typography>
+                <Stack display={'flex'} flexDirection={'row'}>
+                    <FavoriteBorderIcon
+                    color={likeActive ? 'error' : 'info'}
                     onClick={() => onClickChange()}
-                    alt={'like'}/>
-                    {likeCount}
-                </div>
+                    />
+                    <Typography color={likeActive ? 'error' : '#D0D3D4'}>{likeCount}</Typography>
+                </Stack>
             </CardContent>
         </Card>
     )

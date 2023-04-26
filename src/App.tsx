@@ -28,7 +28,6 @@ const App = () => {
                 <Container sx={{mt: {xs: '0', md: '1rem'}, padding: {xs: '0 0 10px 0', md: '10px'}}}>
                     <Stack display={'flex'} flexDirection={{md: 'row', xs: 'column'}} gap={2}>
                             <Navbar isAuth={isAuth}/>
-                        <Container sx={{p: '0', m: {xs: '1rem', md: '0'}}}>
                             <React.Suspense fallback={<div><Preloader/></div>}>
                                 <Routes>
                                     <Route path="/SocialNetwork" element={<Navigate to="/profile"/>}/>
@@ -51,7 +50,6 @@ const App = () => {
                                     />
                                 </Routes>
                             </React.Suspense>
-                        </Container>
                     </Stack>
                 </Container>
                 <Footer />

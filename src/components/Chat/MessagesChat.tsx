@@ -15,7 +15,7 @@ const MessagesChat: React.FC<{}> = ({}) => {
     }, [messages])
 
     return <List sx={{ width: '100% - 5px', maxHeight: 600, overflow: 'auto',
-        paddingRight: '1px', mr: '5px',
+        paddingRight: '2px',
         '&::-webkit-scrollbar': {
             width: '1em',
         },

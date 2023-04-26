@@ -17,7 +17,7 @@ type PropsType = {
 
 
 const Profile: FC<PropsType> = (props) => {
-    return <Box display={'flex'} flexGrow={1} flexDirection={'column'}>
+    return <Box display={'flex'} flexGrow={1} flexDirection={'column'} m={'0 5px'}>
         <ProfileInfo
                      isOwner={props.isOwner}
                      profile={props.profile}
