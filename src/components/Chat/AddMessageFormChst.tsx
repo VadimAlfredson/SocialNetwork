@@ -17,7 +17,7 @@ const ChatForm: React.FC<{}> = ({}) => {
         }
         setMessage('')
     }
-    return <Box display={'flex'} flexDirection={'row'} gap={0.5}>
+    return <Box display={'flex'} flexDirection={'row'} gap={0.5} position={'sticky'}>
         <TextField
             label={'message'}
             id={'chatMessage'}

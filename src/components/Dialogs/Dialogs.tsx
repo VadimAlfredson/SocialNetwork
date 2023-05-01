@@ -13,7 +13,7 @@ import {
     postMessageToUserThunkCreator,
     setCompanionIconAndNameAC,
 } from "../../Redux/reducers/dialogs_reducer";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
 import {
     getCompanionIcon, getCompanionId,
@@ -23,6 +23,9 @@ import {
     getMessages
 } from "../../Redux/selectors/dialogs_selectors";
 import {getDefaultPhoto, getOwnerId, getOwnerPhoto} from "../../Redux/selectors/auth_selectors";
+import {Box, List, ListItem, ListItemIcon, ListItemText, Stack, Typography} from "@mui/material";
+import AddCommentIcon from '@mui/icons-material/AddComment';
+import {theme} from "../../MUI/theme";
 
 
 const Dialogs = () => {
@@ -35,6 +38,7 @@ const Dialogs = () => {
     const companionName: string = useAppSelector(getCompanionName)
     const companionId: number | null = useAppSelector(getCompanionId)
     const ownerPhoto: string = useAppSelector(getOwnerPhoto)
+    const navigate = useNavigate()
 
     const [dialogsCount, setDialogsCount] = useState(10)
 
@@ -60,6 +64,7 @@ const Dialogs = () => {
     const onGetMessagesUser = (userId: number) => {
         dispatch(getMessagesUserThunkCreator(userId))
         getCompanionIconAndName(userId)
+        navigate("/dialogs/" + userId)
 
     }
     const onMessageSentChange = (userId: number, bodyMessage: string) => {
@@ -78,7 +83,7 @@ const Dialogs = () => {
         console.log(dialogsArr)
     }, [dialogs, dialogId, dialogsCount])
 
-    let dialogUsers =
+    /*let dialogUsers =
         dialogs[0] ?
         dialogsState.map(
         d => <DialogItem
@@ -86,6 +91,21 @@ const Dialogs = () => {
             id={d.id}
             key={d.id}
             onGetMessagesUser={onGetMessagesUser}/>
+        ) : <NavLink to={'/users'}>Search friends</NavLink>;*/
+
+    let dialogUsers =
+        dialogs[0] ?
+        dialogsState.map(
+        d => <ListItem onClick={() => {onGetMessagesUser(d.id)}}
+        sx={{backgroundColor: '#151515', m: '5px 0 0 0',
+            '&:hover': {
+                border: '1px solid rgba(200,150,0)',
+                backgroundColor: 'rgba(200,150,0,0.1)',
+                cursor: 'pointer'
+            }}}
+        >
+            <ListItemText primary={d.userName} />
+            </ListItem>
         ) : <NavLink to={'/users'}>Search friends</NavLink>;
 
     let messagesItem =
@@ -107,16 +127,26 @@ const Dialogs = () => {
                     />
             ) : <div><h3 className={s.h3text}>start chatting first</h3></div>
     return (
-        <div className={s.dialogs}>
-            <div>
-                <NavLink to={'/users'} className={s.addDialog}>Add dialog</NavLink>
-            <div className={s.dialogsUsers}>
+        <Box display={'flex'} flexDirection={{xs: 'column', sm: 'row'}}>
+            <Stack display={'flex'} width={{xs: '100%', sm: '250px'}} flexDirection={'column'}>
+                <List >
+                <ListItem onClick={() => {navigate('/users')}} sx={{backgroundColor: '#151515', borderRadius: '5px 5px 0 0',
+                    '&:hover': {
+                        border: '1px solid rgba(200,150,0)',
+                        backgroundColor: 'rgba(200,150,0,0.1)',
+                        cursor: 'pointer'
+                    }}}
+                >
+                        <AddCommentIcon color={'warning'} />
+                    <ListItemText primary={<Typography color={'#c89600'} textAlign={'center'}>add dialog</Typography>}/>
+                </ListItem>
                 {dialogUsers}
-            </div>{(dialogsCount < dialogs.length) &&
+                </List >
+            {(dialogsCount < dialogs.length) &&
                 <div className={s.getMoreDialogs} onClick={() => setDialogsCount(dialogsCount => dialogsCount + 5)}>Get more dialogs</div>}
-            </div>
+            </Stack>
 
-            <div className={s.messages}>
+            <Box display={'flex'} flexDirection={'column'} flexGrow={1}>
                 <NavLink to={`/profile/${companionId}`} className={s.companionName}>{companionName}</NavLink>
                 <div className={s.message}>
                     {messagesItem}
@@ -127,8 +157,8 @@ const Dialogs = () => {
                         onMessageSentChange={onMessageSentChange}
                     />
                 </div>
-            </div>
-        </div>
+            </Box>
+        </Box>
 
     )
 }

@@ -25,7 +25,7 @@ const Chat: React.FC = () => {
         }
     }, [])
 
-    return <Box display={'flex'} flexDirection={'column'} gap={1} m={'0 5px'} maxHeight={{xs: 'calc(100vh - 120px)', md: '800px'}}>
+    return <Box display={'flex'} flexDirection={'column'} gap={1} m={'0 5px'} maxHeight={{xs: 'calc(100vh - 120px)', md: '800px'}} width={{xs: 'auto', md: '100%'}}>
         <MessagesChat/>
         <ChatForm/>
         <div
