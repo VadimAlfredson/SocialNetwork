@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import s from './Dialogs.module.css';
-import {DialogItem} from "./DialogItem/DialogItem";
 import {MessagesItem} from "./MessagesItem/MessagesItem";
 import {AddMessage} from "./AddMessage/AddMessage";
 import {
@@ -23,9 +22,17 @@ import {
     getMessages
 } from "../../Redux/selectors/dialogs_selectors";
 import {getDefaultPhoto, getOwnerId, getOwnerPhoto} from "../../Redux/selectors/auth_selectors";
-import {Box, List, ListItem, ListItemIcon, ListItemText, Stack, Typography} from "@mui/material";
+import {
+    Box,
+    FormControl,
+    InputLabel,
+    List,
+    ListItem,
+    ListItemText, MenuItem, Select, SelectChangeEvent,
+    Stack,
+    Typography
+} from "@mui/material";
 import AddCommentIcon from '@mui/icons-material/AddComment';
-import {theme} from "../../MUI/theme";
 
 
 const Dialogs = () => {
@@ -41,6 +48,7 @@ const Dialogs = () => {
     const navigate = useNavigate()
 
     const [dialogsCount, setDialogsCount] = useState(10)
+    const [dialog, setDialog] = useState<string>('')
 
     const dispatch = useAppDispatch()
 
@@ -81,7 +89,12 @@ const Dialogs = () => {
         }}
         setDialogsState(dialogsArr)
         console.log(dialogsArr)
-    }, [dialogs, dialogId, dialogsCount])
+    }, [dialogs, dialogId, dialogsCount, dialog])
+
+    const handleChange = (event: SelectChangeEvent) => {
+        setDialog(event.target.value as string);
+        onGetMessagesUser(Number(event.target.value))
+    };
 
     /*let dialogUsers =
         dialogs[0] ?
@@ -128,8 +141,8 @@ const Dialogs = () => {
             ) : <div><h3 className={s.h3text}>start chatting first</h3></div>
     return (
         <Box display={'flex'} flexDirection={{xs: 'column', sm: 'row'}}>
-            <Stack display={'flex'} width={{xs: '100%', sm: '250px'}} flexDirection={'column'}>
-                <List >
+            <Stack display={{xs: 'none', sm: 'flex'}} width={{xs: '100%', sm: '250px'}} flexDirection={'column'}>
+                <List>
                 <ListItem onClick={() => {navigate('/users')}} sx={{backgroundColor: '#151515', borderRadius: '5px 5px 0 0',
                     '&:hover': {
                         border: '1px solid rgba(200,150,0)',
@@ -146,8 +159,34 @@ const Dialogs = () => {
                 <div className={s.getMoreDialogs} onClick={() => setDialogsCount(dialogsCount => dialogsCount + 5)}>Get more dialogs</div>}
             </Stack>
 
+            <FormControl color={'info'}
+                         sx={{
+                             width: '95%',
+                             m: '0 2.5%',
+                             display: {xs: 'auto', sm: 'none'},
+                             "& .MuiOutlinedInput-root":{"& > fieldset": {border: '1px solid #D0D3D4'}},
+                             input: {color: '#D0D3D4'},
+                             label: {color: '#D0D3D4'},
+                             value: {color: '#D0D3D4'},
+                         }}
+                         /*InputLabelProps={{
+                             sx: { color: "grey"/!*, "&.Mui-focused": { color: "green" } *!/},
+                         }}*/>
+                <InputLabel id="dialog-select-label">Dialog</InputLabel>
+                <Select
+                    color={'info'}
+                    labelId="dialog-select-label"
+                    id="dialog-select"
+                    value={dialog}
+                    label="Dialog"
+                    onChange={handleChange}
+                > {dialogs.map((dialog) => <MenuItem key={dialog.id} value={dialog.id} sx={{backgroundColor: '#151515'}}><Typography color={'#D0D3D4'}>{dialog.userName}</Typography></MenuItem>
+                )}
+                </Select>
+            </FormControl>
+
             <Box display={'flex'} flexDirection={'column'} flexGrow={1}>
-                <NavLink to={`/profile/${companionId}`} className={s.companionName}>{companionName}</NavLink>
+                {/*<NavLink to={`/profile/${companionId}`} className={s.companionName}>{companionName}</NavLink>*/}
                 <div className={s.message}>
                     {messagesItem}
                 </div>
