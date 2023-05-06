@@ -4,7 +4,7 @@ import s from './login.module.css';
 import {Box} from "@mui/material";
 
 const Login = () => {
-    return <Box>
+    return <Box m={'auto'}>
     <LoginForm />
     </Box>
 };
