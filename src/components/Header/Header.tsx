@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useState} from 'react';
 import s from './Header.module.css';
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import {useAppSelector} from "../../Redux/reduxStore";
 import {getDefaultPhoto} from "../../Redux/selectors/auth_selectors";
 import {AppBar, Avatar, Box, Button, IconButton, Stack, Toolbar, Typography} from "@mui/material";
@@ -15,6 +15,8 @@ type PropsType = {
 }
 const Header: FC<PropsType> = (props) => {
     const defaultPhoto = useAppSelector(getDefaultPhoto)
+    const navigate = useNavigate()
+
     let [ownerPhoto, setOwnerPhoto] = useState(props.photo)
     useEffect( () => {
         if (props.photo) {
@@ -31,7 +33,7 @@ const Header: FC<PropsType> = (props) => {
                         aria-label="menu"
                         sx={{ mr: 2}}
                     >
-<Diversity3OutlinedIcon sx={{color: '#D0D3D4'}}/>
+<Diversity3OutlinedIcon sx={{color: '#D0D3D4'}} onClick={() => {navigate('/profile')}} />
                     </IconButton>
                     <Typography
                         variant="h6"
@@ -60,8 +62,8 @@ const Header: FC<PropsType> = (props) => {
                             <Button onClick={props.logoutThunkCreator}>
                                 <LogoutOutlinedIcon sx={{fontSize: '30px'}} color={'info'}/>
                             </Button>
-                        </Stack> : <NavLink className={s.login} to={'/login'}>
-                            <Button color={'secondary'}>Login</Button>
+                        </Stack> : <NavLink to={'/login'}>
+                            <Button variant={'outlined'} color={'info'}>Login</Button>
                         </NavLink>}
 
                 </Toolbar>

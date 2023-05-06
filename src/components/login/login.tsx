@@ -1,18 +1,12 @@
 import React from 'react';
 import LoginForm from "./formLogin";
 import s from './login.module.css';
+import {Box} from "@mui/material";
 
 const Login = () => {
-    return <div className={s.loginBlock}>
-    <h3>Log in</h3>
+    return <Box>
     <LoginForm />
-        <br/>
-
-        <div>
-            <div>Email: free@samuraijs.com</div>
-            <div>Password: free</div>
-        </div>
-    </div>
+    </Box>
 };
 
 export default Login
