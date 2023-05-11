@@ -85,20 +85,34 @@ const LoginForm: FC = (props) => {
                     onBlur={handleBlur}
                     value={values.email}
                     sx={{
-                        mt: '15px',
+                        m: '15px 15px 0 15px',
                         width: '250px',
                         color: theme.palette.info.main,
-                        "& .MuiOutlinedInput-root": {"& > fieldset": {border: `1px solid ${theme.palette.info.main}`}},
-                        input: {color: theme.palette.info.main},
-                        '&:hover': {
-                                backgroundColor: 'rgba(50,125,155,0.05)',
-                                color: `${theme.palette.info.main}`,
+                        ".MuiOutlinedInput-root":
+                            {
+                                "fieldset": {
+                                    borderColor: theme.palette.info.main,
+                                },
                             },
+                        ".MuiOutlinedInput-root:hover":
+                            {
+                                "fieldset": {
+                                    backgroundColor: 'rgba(50,125,155,0.05)',
+                                    borderColor: !!(touched.email && errors.email) ? theme.palette.error.main : theme.palette.info.main
+                                },
+                            },
+                        ".MuiInputLabel-root": {
+                            color: theme.palette.secondary.main
+                        },
+                        ".Mui-focused": {
+                            color: !!(touched.email && errors.email) ? theme.palette.error.main : theme.palette.info.main
+                        },
+                        input: {color: !!(touched.email && errors.email) ? theme.palette.error.main : theme.palette.success.main},
                     }}
                 />
                 {touched.email && errors.email &&
                     <FormHelperText id="outlined-weight-helper-text">
-                        <Typography color={'#7d1919'}>{errors.email}</Typography>
+                        <Typography color={'#7d1919'} >{errors.email}</Typography>
                     </FormHelperText>}
                 <TextField
                     color={'info'}
@@ -110,24 +124,39 @@ const LoginForm: FC = (props) => {
                     onBlur={handleBlur}
                     value={values.password}
                     sx={{
-                        mt: '15px', width: '250px',
-                        "& .MuiOutlinedInput-root": {
-                            "& > fieldset": {border: '1px solid red'},
-                            '&:hover': {
-                                backgroundColor: 'rgba(50,125,155,0.05)'
-                            }
+                        m: '15px 15px 0 15px',
+                        width: '250px',
+                        color: theme.palette.info.main,
+                        ".MuiOutlinedInput-root":
+                            {
+                                "fieldset": {
+                                    borderColor: theme.palette.info.main,
+                                },
+                            },
+                        ".MuiOutlinedInput-root:hover":
+                            {
+                                "fieldset": {
+                                    backgroundColor: 'rgba(50,125,155,0.05)',
+                                    borderColor: !!(touched.email && errors.email) ? theme.palette.error.main : theme.palette.info.main
+                                },
+                            },
+                        ".MuiInputLabel-root": {
+                            color: theme.palette.secondary.main
                         },
-                        input: {color: '#D0D3D4'}
+                        ".Mui-focused": {
+                            color: !!(touched.email && errors.email) ? theme.palette.error.main : theme.palette.info.main
+                        },
+                        input: {color: !!(touched.email && errors.email) ? theme.palette.error.main : theme.palette.success.main},
                     }}
                     InputProps={{
                         endAdornment: <InputAdornment position="end">
-                        <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        edge="end"
-                        >
-                    {!showPassword ? <VisibilityOff color={'info'}/> : <Visibility color={'info'}/>}
-                        </IconButton>
+                            <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                                edge="end"
+                            >
+                                {!showPassword ? <VisibilityOff color={'info'}/> : <Visibility color={'info'}/>}
+                            </IconButton>
                         </InputAdornment>
                     }}
 
@@ -152,7 +181,6 @@ const LoginForm: FC = (props) => {
                     <div className={captchaURL && s.displayNone}>
                         <img className={s.imgCaptcha} src={captchaURL}/>
                         <input
-                            /*className={touched.captcha && errors.captcha ? s.errorsInput : s.inputLogin}*/
                             type={'text'}
                             name={'captcha'}
                             onChange={handleChange}
@@ -173,7 +201,7 @@ const LoginForm: FC = (props) => {
                     </Button>
                     <Button
                         variant={'outlined'}
-                        color={'inherit'}
+                        color={'success'}
                         disabled={!isValid}
                         onClick={() => {
                             handleSubmit()
@@ -188,9 +216,3 @@ const LoginForm: FC = (props) => {
 };
 
 export default LoginForm
-
-
-/*<div>
-<div>Email: free@samuraijs.com</div>
-<div>Password: free</div>
-</div>*/
