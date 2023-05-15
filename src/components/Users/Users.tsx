@@ -15,7 +15,8 @@ import {
     getUsers,
     isFetchingSelector
 } from "../../Redux/selectors/users_selectors";
-import {isAuthSelector} from "../../Redux/selectors/auth_selectors";
+import {getDefaultPhoto, isAuthSelector} from "../../Redux/selectors/auth_selectors";
+import {Box, Button, Card, CardContent, CardMedia, Stack, Typography} from "@mui/material";
 
 
 let Users: FC = (props) => {
@@ -27,6 +28,7 @@ let Users: FC = (props) => {
     const friends = useAppSelector(getFriends)
     const pageSize = useAppSelector(getPageSize)
     const currentPage = useAppSelector(getCurrentPage)
+    const defaultPhoto = useAppSelector(getDefaultPhoto)
 
     let [pageNumber, setPageNumber] = useState(currentPage)
 
@@ -57,6 +59,7 @@ let Users: FC = (props) => {
 
     let onDialogUserChange = (userId: number) => {
         dispatch(putDialogUserThunkCreator(userId))
+        navigate(`/dialogs/${userId}`)
     }
 
     useEffect(() => {
@@ -95,43 +98,49 @@ let Users: FC = (props) => {
                 onUsersChange={onUsersChange}
             />
             {isFetching ? <Preloader/> :
-                <div>
+                <Stack display={'flex'} flexDirection={'column'} gap={1}>
                     {
-                        users.map((u: UserType) => <div className={s.itemUser} key={u.id}>
-                            <div className={s.avatar}>
-                                <NavLink to={'/profile/' + u.id}>
-                                    <img src={u.photos.small !== null ? u.photos.small :
-                                        'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'
-                                    } alt={'картинка'}/>
-                                </NavLink>
-                            </div>
-                            <div className={s.followButton}>
-                                {isAuth ?
-                                    <button className={s.buttonStyle}
-                                            disabled={followingInProgress.includes(u.id)}
-                                            onClick={() => (onFollowChange(u.id, u.followed))
-                                            }>{u.followed ? 'Unfollow' : 'Follow'}
-                                    </button> : <NavLink className={s.navLinkToLogin} to={"../login"}>
-                                        Register to subscribe
-                                    </NavLink>}
-                            </div>
-                            <div className={s.massageButton}>
-                                {isAuth &&
-                                    <NavLink to={`/dialogs/${u.id}`}>
-                                        <button className={s.buttonStyle}
-                                                onClick={() => {
-                                                    onDialogUserChange(u.id)
-                                                }}>Message
-                                        </button>
-                                    </NavLink>}
-                            </div>
-
-                            <div className={s.infoUser}>
-                                <div className={s.nameUser}>{u.name}</div>
-                                <div className={s.statusUser}>{u.status}</div>
-                            </div>
-                        </div>)}
-                </div>}
+                        users.map((u: UserType) => <Card
+                            sx={{display: 'flex', backgroundColor: '#151515', width: {xs: '100%', sm: 'auto'}}}
+                            key={u.id} >
+                            <CardMedia component={'img'} sx={{width: '150px'}}
+                                       image={u.photos.small !== null ? u.photos.small : defaultPhoto}
+                                       onClick={() => {
+                                           navigate('/profile/' + u.id)
+                                       }}
+                            />
+                            <Box display={'flex'} flexDirection={'column'} alignItems={'center'} m={'0 auto'}>
+                                <CardContent sx={{display: 'flex',  flexDirection: 'column',alignItems: 'center',
+                                    justifyContent: 'center', flexGrow: 1}}>
+                                    <Typography m={'0 auto'} color={'#D0D3D4'} component="div" variant="h6">{u.name}</Typography>
+                                    <Typography variant="subtitle2" color={'#327d9b'}
+                                                component="div">{u.status}</Typography>
+                                </CardContent>
+                                <Box display={'flex'} flexDirection={'row'} mb={1} gap={1}>
+                                    {isAuth ?
+                                        <Button
+                                            variant={u.followed ? 'outlined' : 'contained'}
+                                            color={u.followed ? 'info' : 'success'}
+                                                disabled={followingInProgress.includes(u.id)}
+                                                onClick={() => (onFollowChange(u.id, u.followed))
+                                                }>{u.followed ? 'Unfollow' : 'Follow'}
+                                        </Button> : <Button onClick={()=>{navigate('../login')}}>
+                                            color={'info'}
+                                            Register to subscribe
+                                        </Button>}
+                                    {isAuth &&
+                                            <Button
+                                                variant={'contained'}
+                                                color={'success'}
+                                                    onClick={() => {
+                                                        onDialogUserChange(u.id)
+                                                    }}>Message
+                                            </Button>
+                                    }
+                                </Box>
+                            </Box>
+                        </Card>)}
+                </Stack>}
         </div>
     )
 }

@@ -7,7 +7,7 @@ import {useAppDispatch, useAppSelector} from "../../Redux/reduxStore";
 import s from './login.module.css';
 import {
     Box,
-    Button,
+    Button, Checkbox,
     FormHelperText,
     IconButton,
     InputAdornment,
@@ -167,12 +167,14 @@ const LoginForm: FC = (props) => {
                     </FormHelperText>}
                 <div className={s.checkboxBlock}>
                     <div className={s.checkbox}>
-                        <input
-                            type={'checkbox'}
+                        <Checkbox
                             name={'checkbox'}
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            /*value={values.checkbox}*/
+                            value={values.checkbox}
+                            sx={{color: theme.palette.success.main,
+                                '&.Mui-checked': {color: theme.palette.success.main}
+                            }}
                         />
                     </div>
                 </div>

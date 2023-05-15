@@ -33,6 +33,7 @@ import {
     Typography
 } from "@mui/material";
 import AddCommentIcon from '@mui/icons-material/AddComment';
+import { theme } from "../../MUI/theme";
 
 
 const Dialogs = () => {
@@ -156,7 +157,12 @@ const Dialogs = () => {
                 {dialogUsers}
                 </List >
             {(dialogsCount < dialogs.length) &&
-                <div className={s.getMoreDialogs} onClick={() => setDialogsCount(dialogsCount => dialogsCount + 5)}>Get more dialogs</div>}
+                <ListItem onClick={() => setDialogsCount(dialogsCount => dialogsCount + 5)}
+                          sx={{backgroundColor: '#151515', borderRadius: '0 0 5px 5px',
+                              justifyContent: 'center', cursor: 'pointer'}}
+                >
+                    <Typography color={theme.palette.warning.main}>more...</Typography>
+                </ListItem>}
             </Stack>
 
             <FormControl color={'info'}
